@@ -1,0 +1,35 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache/test artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# OS/editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Generated outputs/logs/data
+outputs/
+output/
+**/outputs/
+**/output/
+*.jsonl
+*.wav
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.log
+
+# Large/local data folders
+data/
+**/data/
