@@ -54,7 +54,7 @@ def integrate_gyro_axis(wide: pd.DataFrame, axis: str, bias_rad_s: float, expect
     dt = np.diff(time, prepend=time[0])
     gyro_calibrated = gyro_raw - bias_rad_s
 
-    # Angular velocity integration using cumulative trapezoidal rule
+    # Angular velocity integration using euler rule
     angle_rad = np.cumsum(gyro_calibrated * dt)
     angle_deg = np.degrees(angle_rad)
 
