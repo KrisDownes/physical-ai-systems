@@ -4,6 +4,7 @@ from pathlib import Path
 import argparse
 import json
 import numpy as np
+import matplotlib.pyplot as plt
 
 STANDARD_GRAVITY = 9.80665
 
@@ -294,6 +295,118 @@ def summarize_angle_ranges(df: pd.DataFrame) -> dict:
         "pitch_gravity_range_deg": float(df["pitch_deg"].max() - df["pitch_deg"].min()),
     }
 
+def add_complementary_filter(df: pd.DataFrame, alpha: float = 0.98) -> pd.DataFrame:
+    df = df.copy()
+    time = df["time_sec"].to_numpy()
+    dt = np.diff(time, prepend=time[0])
+
+    gyro_x = df["gyro_x_calibrated"].to_numpy()
+    gyro_y = df["gyro_y_calibrated"].to_numpy()
+
+    gravity_roll = df["roll_rad"].to_numpy()
+    gravity_pitch = df["pitch_rad"].to_numpy()
+
+    fused_roll = np.zeros(len(df))
+    fused_pitch = np.zeros(len(df))
+
+    fused_roll[0] = gravity_roll[0]
+    fused_pitch[0] = gravity_pitch[0]
+    
+    #Recursive complementary filter.
+    for k in range(1, len(df)):
+        # Gyro prediction step.
+        roll_prediction = fused_roll[k - 1] + gyro_x[k] * dt[k]
+        pitch_prediction = fused_pitch[k - 1] + gyro_y[k] * dt[k]
+
+        # Gravity correction step.
+        fused_roll[k] = (
+            alpha * roll_prediction
+            + (1.0 - alpha) * gravity_roll[k]
+        )
+
+        fused_pitch[k] = (
+            alpha * pitch_prediction
+            + (1.0 - alpha) * gravity_pitch[k]
+        )
+
+    df["fused_roll_rad"] = fused_roll
+    df["fused_pitch_rad"] = fused_pitch
+
+    df["fused_roll_deg"] = np.degrees(fused_roll)
+    df["fused_pitch_deg"] = np.degrees(fused_pitch)
+
+    return df
+def summarize_filter_performance(df: pd.DataFrame) -> dict:
+    """
+    Compare gravity reference, gyro-only integration, and fused estimate.
+
+    This treats gravity-derived roll/pitch as the long-term reference.
+    That is not perfect truth, but it is useful for this controlled tilt test.
+    """
+
+    roll_gravity = df["roll_deg"].to_numpy()
+    pitch_gravity = df["pitch_deg"].to_numpy()
+
+    roll_gyro = df["gyro_roll_deg"].to_numpy()
+    pitch_gyro = df["gyro_pitch_deg"].to_numpy()
+
+    roll_fused = df["fused_roll_deg"].to_numpy()
+    pitch_fused = df["fused_pitch_deg"].to_numpy()
+
+    roll_gyro_error = roll_gyro - roll_gravity
+    pitch_gyro_error = pitch_gyro - pitch_gravity
+
+    roll_fused_error = roll_fused - roll_gravity
+    pitch_fused_error = pitch_fused - pitch_gravity
+
+    return {
+        "roll_gravity_start_deg": float(roll_gravity[0]),
+        "roll_gravity_end_deg": float(roll_gravity[-1]),
+        "roll_gyro_end_deg": float(roll_gyro[-1]),
+        "roll_fused_end_deg": float(roll_fused[-1]),
+
+        "pitch_gravity_start_deg": float(pitch_gravity[0]),
+        "pitch_gravity_end_deg": float(pitch_gravity[-1]),
+        "pitch_gyro_end_deg": float(pitch_gyro[-1]),
+        "pitch_fused_end_deg": float(pitch_fused[-1]),
+
+        "roll_gyro_rmse_deg": float(np.sqrt(np.mean(roll_gyro_error ** 2))),
+        "roll_fused_rmse_deg": float(np.sqrt(np.mean(roll_fused_error ** 2))),
+
+        "pitch_gyro_rmse_deg": float(np.sqrt(np.mean(pitch_gyro_error ** 2))),
+        "pitch_fused_rmse_deg": float(np.sqrt(np.mean(pitch_fused_error ** 2))),
+    }
+def save_orientation_plots(df: pd.DataFrame, output_dir: Path, experiment_id: str) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    time = df["time_sec"]
+
+    # Plot x-axis tilt / roll
+    plt.figure(figsize=(12, 5))
+    plt.plot(time, df["roll_deg"], label="gravity roll")
+    plt.plot(time, df["gyro_roll_deg"], label="gyro-only roll")
+    plt.plot(time, df["fused_roll_deg"], label="fused roll")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Angle (deg)")
+    plt.title(f"{experiment_id}: Roll / X-axis Tilt")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(output_dir / f"{experiment_id}_roll_comparison.png")
+    plt.close()
+
+    # Plot y-axis tilt / pitch
+    plt.figure(figsize=(12, 5))
+    plt.plot(time, df["pitch_deg"], label="gravity pitch")
+    plt.plot(time, df["gyro_pitch_deg"], label="gyro-only pitch")
+    plt.plot(time, df["fused_pitch_deg"], label="fused pitch")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Angle (deg)")
+    plt.title(f"{experiment_id}: Pitch / Y-axis Tilt")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(output_dir / f"{experiment_id}_pitch_comparison.png")
+    plt.close()
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--db_path", type=Path, default="/mnt/d/PhoneTelemetry/db/telemetry.db", help="Path to the SQLite database")
@@ -301,6 +414,7 @@ def main():
     parser.add_argument("--run_id_gyro", type=str, required=True, help="Run ID to analyze for gyroscope data")
     parser.add_argument("--run_id_gravity", type=str, required=True, help="Run ID to analyze for gravity data")
     parser.add_argument("--output_dir", type=Path, default=Path("./output"), help="Directory to save output files")
+    parser.add_argument("--experiment_id", type=str, default="IMU_tilt_test", help="Name used for saved output files")
     args = parser.parse_args()
     #load data
     acc_df = load_measurements(args.db_path, args.run_id_acc)
@@ -336,10 +450,13 @@ def main():
     print(json.dumps(axis_mapping_summary, indent=2))
     #integrate gyro roll and pitch
     aligned_df = integrate_gyro(aligned_df)
-    #print orientation summary
-    orient_summary = summarize_orientation(aligned_df)
-    sum_of_angles = summarize_angle_ranges(aligned_df)
-    print(json.dumps(sum_of_angles, indent=2))
+    #complementary filter
+    aligned_df = add_complementary_filter(aligned_df, alpha =0.98)
+
+    filter_summary = summarize_filter_performance(aligned_df)
+    print(json.dumps(filter_summary, indent=2))
+
+    save_orientation_plots(aligned_df, output_dir =args.output_dir, experiment_id= args.experiment_id)
 
 
 if __name__ == "__main__":
