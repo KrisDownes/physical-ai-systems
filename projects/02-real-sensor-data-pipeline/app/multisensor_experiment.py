@@ -336,6 +336,77 @@ def add_complementary_filter(df: pd.DataFrame, alpha: float = 0.98) -> pd.DataFr
     df["fused_pitch_deg"] = np.degrees(fused_pitch)
 
     return df
+
+def add_adaptive_complementary_filter(
+    df: pd.DataFrame,
+    alpha_normal: float = 0.98,
+    alpha_high_accel: float = 0.995,
+    acc_threshold: float = 0.3,
+) -> pd.DataFrame:
+    """
+    Adaptive complementary filter for phone x/y tilt.
+
+    If acceleration magnitude is close to gravity, trust gravity correction normally.
+    If acceleration magnitude deviates from gravity, trust gyro more.
+    """
+
+    df = df.copy()
+
+    time = df["time_sec"].to_numpy()
+    dt = np.diff(time, prepend=time[0])
+
+    gyro_x = df["gyro_x_calibrated"].to_numpy()
+    gyro_y = df["gyro_y_calibrated"].to_numpy()
+
+    gravity_roll = df["roll_rad"].to_numpy()
+    gravity_pitch = df["pitch_rad"].to_numpy()
+
+    acc_mag = df["acc_mag"].to_numpy()
+    acc_error = np.abs(acc_mag - STANDARD_GRAVITY)
+
+    fused_roll = np.zeros(len(df))
+    fused_pitch = np.zeros(len(df))
+    alpha_used = np.zeros(len(df))
+
+    # Initial orientation comes from gravity.
+    fused_roll[0] = gravity_roll[0]
+    fused_pitch[0] = gravity_pitch[0]
+    alpha_used[0] = alpha_normal
+
+    for k in range(1, len(df)):
+        # If acceleration magnitude is far from gravity, the phone is likely
+        # translating/shaking, so gravity is less trustworthy.
+        if acc_error[k] < acc_threshold:
+            alpha = alpha_normal
+        else:
+            alpha = alpha_high_accel
+
+        roll_prediction = fused_roll[k - 1] + gyro_x[k] * dt[k]
+        pitch_prediction = fused_pitch[k - 1] + gyro_y[k] * dt[k]
+
+        fused_roll[k] = (
+            alpha * roll_prediction
+            + (1.0 - alpha) * gravity_roll[k]
+        )
+
+        fused_pitch[k] = (
+            alpha * pitch_prediction
+            + (1.0 - alpha) * gravity_pitch[k]
+        )
+
+        alpha_used[k] = alpha
+
+    df["adaptive_fused_roll_rad"] = fused_roll
+    df["adaptive_fused_pitch_rad"] = fused_pitch
+
+    df["adaptive_fused_roll_deg"] = np.degrees(fused_roll)
+    df["adaptive_fused_pitch_deg"] = np.degrees(fused_pitch)
+
+    df["adaptive_alpha"] = alpha_used
+    df["acc_error_from_g"] = acc_error
+
+    return df
+
 def summarize_filter_performance(df: pd.DataFrame) -> dict:
     """
     Compare gravity reference, gyro-only integration, and fused estimate.
@@ -353,11 +424,17 @@ def summarize_filter_performance(df: pd.DataFrame) -> dict:
     roll_fused = df["fused_roll_deg"].to_numpy()
     pitch_fused = df["fused_pitch_deg"].to_numpy()
 
+    adaptive_roll_fused = df["adaptive_fused_roll_deg"].to_numpy()
+    adaptive_pitch_fused = df["adaptive_fused_pitch_deg"].to_numpy()
+
     roll_gyro_error = roll_gyro - roll_gravity
     pitch_gyro_error = pitch_gyro - pitch_gravity
 
     roll_fused_error = roll_fused - roll_gravity
     pitch_fused_error = pitch_fused - pitch_gravity
+
+    adaptive_roll_fused_error = adaptive_roll_fused - roll_gravity
+    adaptive_pitch_fused_error = adaptive_pitch_fused - pitch_gravity
 
     return {
         "roll_gravity_start_deg": float(roll_gravity[0]),
@@ -372,9 +449,12 @@ def summarize_filter_performance(df: pd.DataFrame) -> dict:
 
         "roll_gyro_rmse_deg": float(np.sqrt(np.mean(roll_gyro_error ** 2))),
         "roll_fused_rmse_deg": float(np.sqrt(np.mean(roll_fused_error ** 2))),
+        "adaptive_roll_fused_rmse_deg": float(np.sqrt(np.mean(adaptive_roll_fused_error ** 2))),
+        
 
         "pitch_gyro_rmse_deg": float(np.sqrt(np.mean(pitch_gyro_error ** 2))),
         "pitch_fused_rmse_deg": float(np.sqrt(np.mean(pitch_fused_error ** 2))),
+        "adaptive_pitch_fused_rmse_deg": float(np.sqrt(np.mean(adaptive_pitch_fused_error ** 2))),
     }
 def save_orientation_plots(df: pd.DataFrame, output_dir: Path, experiment_id: str) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -452,6 +532,7 @@ def main():
     aligned_df = integrate_gyro(aligned_df)
     #complementary filter
     aligned_df = add_complementary_filter(aligned_df, alpha =0.98)
+    aligned_df = add_adaptive_complementary_filter(aligned_df)
 
     filter_summary = summarize_filter_performance(aligned_df)
     print(json.dumps(filter_summary, indent=2))
