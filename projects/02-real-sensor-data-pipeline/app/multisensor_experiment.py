@@ -339,9 +339,9 @@ def add_complementary_filter(df: pd.DataFrame, alpha: float = 0.98) -> pd.DataFr
 
 def add_adaptive_complementary_filter(
     df: pd.DataFrame,
-    alpha_normal: float = 0.98,
-    alpha_high_accel: float = 0.995,
-    acc_threshold: float = 0.3,
+    alpha_normal: float = 0.85,
+    alpha_high_accel: float = 0.98,
+    acc_threshold: float = 5.0,
 ) -> pd.DataFrame:
     """
     Adaptive complementary filter for phone x/y tilt.
@@ -406,7 +406,41 @@ def add_adaptive_complementary_filter(
     df["acc_error_from_g"] = acc_error
 
     return df
+def parameter_sweep_adaptive_filter(df: pd.DataFrame, alpha_normal_values: list[float], alpha_high_values: list[float], acc_threshold_values: list[float]) ->pd.DataFrame:
+    rows = []
+    for alpha_normal in alpha_normal_values:
+        for alpha_high in alpha_high_values:
+            for acc_threshold in acc_threshold_values:
+                trial_df = add_adaptive_complementary_filter(
+                    df,
+                    alpha_normal=alpha_normal,
+                    alpha_high_accel=alpha_high,
+                    acc_threshold=acc_threshold,
+                )
+                perf = summarize_filter_performance(trial_df)
+                adaptive= summarize_adaptive_filter(trial_df)
 
+                roll_rmse = perf["adaptive_roll_fused_rmse_deg"]
+                pitch_rmse = perf["adaptive_pitch_fused_rmse_deg"]
+                mean_rmse = (roll_rmse + pitch_rmse) / 2.0
+
+                rows.append({
+                    "alpha_normal": float(alpha_normal),
+                    "alpha_high_accel": float(alpha_high),
+                    "acc_threshold": float(acc_threshold),
+
+                    "roll_rmse_deg": float(roll_rmse),
+                    "pitch_rmse_deg": float(pitch_rmse),
+                    "mean_rmse_deg": float(mean_rmse),
+
+                    "adaptive_alpha_mean": adaptive["adaptive_alpha_mean"],
+                    "fraction_alpha_high_accel": adaptive["fraction_alpha_high_accel"],
+                    "acc_error_95th_percentile_mps2": adaptive["acc_error_95th_percentile_mps2"],
+                })
+    sweep_df = pd.DataFrame(rows)
+    sweep_df = sweep_df.sort_values("mean_rmse_deg").reset_index(drop=True)
+    return sweep_df
+          
 def summarize_filter_performance(df: pd.DataFrame) -> dict:
     """
     Compare gravity reference, gyro-only integration, and fused estimate.
@@ -456,6 +490,19 @@ def summarize_filter_performance(df: pd.DataFrame) -> dict:
         "pitch_fused_rmse_deg": float(np.sqrt(np.mean(pitch_fused_error ** 2))),
         "adaptive_pitch_fused_rmse_deg": float(np.sqrt(np.mean(adaptive_pitch_fused_error ** 2))),
     }
+def summarize_adaptive_filter(df: pd.DataFrame) -> dict:
+    alpha = df["adaptive_alpha"].to_numpy()
+    acc_error = df["acc_error_from_g"].to_numpy()
+
+    return {
+        "adaptive_alpha_min": float(alpha.min()),
+        "adaptive_alpha_max": float(alpha.max()),
+        "adaptive_alpha_mean": float(alpha.mean()),
+        "fraction_alpha_high_accel": float(np.mean(alpha > 0.98)),
+        "acc_error_mean_mps2": float(acc_error.mean()),
+        "acc_error_max_mps2": float(acc_error.max()),
+        "acc_error_95th_percentile_mps2": float(np.percentile(acc_error, 95)),
+    }
 def save_orientation_plots(df: pd.DataFrame, output_dir: Path, experiment_id: str) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -466,6 +513,7 @@ def save_orientation_plots(df: pd.DataFrame, output_dir: Path, experiment_id: st
     plt.plot(time, df["roll_deg"], label="gravity roll")
     plt.plot(time, df["gyro_roll_deg"], label="gyro-only roll")
     plt.plot(time, df["fused_roll_deg"], label="fused roll")
+    plt.plot(time, df["adaptive_fused_roll_deg"], label="adaptive fused roll")
     plt.xlabel("Time (s)")
     plt.ylabel("Angle (deg)")
     plt.title(f"{experiment_id}: Roll / X-axis Tilt")
@@ -479,6 +527,7 @@ def save_orientation_plots(df: pd.DataFrame, output_dir: Path, experiment_id: st
     plt.plot(time, df["pitch_deg"], label="gravity pitch")
     plt.plot(time, df["gyro_pitch_deg"], label="gyro-only pitch")
     plt.plot(time, df["fused_pitch_deg"], label="fused pitch")
+    plt.plot(time, df["adaptive_fused_pitch_deg"], label="adaptive fused pitch")
     plt.xlabel("Time (s)")
     plt.ylabel("Angle (deg)")
     plt.title(f"{experiment_id}: Pitch / Y-axis Tilt")
@@ -486,6 +535,31 @@ def save_orientation_plots(df: pd.DataFrame, output_dir: Path, experiment_id: st
     plt.tight_layout()
     plt.savefig(output_dir / f"{experiment_id}_pitch_comparison.png")
     plt.close()
+
+def save_adaptive_alpha_plot(df: pd.DataFrame, output_dir: Path, experiment_id: str) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    time = df["time_sec"]
+    alpha = df["adaptive_alpha"]
+
+    plt.figure(figsize=(12, 5))
+    plt.plot(time, alpha)
+    plt.xlabel("Time (s)")
+    plt.ylabel("Adaptive Alpha")
+    plt.title(f"{experiment_id}: Adaptive Filter Alpha Over Time")
+    plt.tight_layout()
+    plt.savefig(output_dir / f"{experiment_id}_adaptive_alpha.png")
+    plt.close()
+
+def save_experiment_outputs(df: pd.DataFrame, output_dir: Path, experiment_id: str, summary: dict) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = output_dir / f"{experiment_id}_summary.json"
+    df_path = output_dir / f"{experiment_id}_data.csv"
+    with open(summary_path, "w") as f:
+        json.dump(summary, f, indent=2)
+    df.to_csv(df_path, index=False)
+    save_orientation_plots(df, output_dir, experiment_id)
+    save_adaptive_alpha_plot(df, output_dir, experiment_id)
 
 def main():
     parser = argparse.ArgumentParser()
@@ -522,22 +596,49 @@ def main():
     aligned_df = detect_stationary_periods(aligned_df)
     #calibrate gyro bias
     aligned_df,bias_summary = calibrate_gyro_bias(aligned_df)
-    print(json.dumps(bias_summary, indent=2))
+    
     #compute roll and pitch from gravity vector
     aligned_df = compute_roll_pitch_from_gravity(aligned_df)
-    #diagnosing correct gyro axis to integrate
     axis_mapping_summary = diagnose_gyro_axis_mapping(aligned_df)
-    print(json.dumps(axis_mapping_summary, indent=2))
+
     #integrate gyro roll and pitch
     aligned_df = integrate_gyro(aligned_df)
     #complementary filter
     aligned_df = add_complementary_filter(aligned_df, alpha =0.98)
-    aligned_df = add_adaptive_complementary_filter(aligned_df)
+    #parameter sweep
+    sweep_df = parameter_sweep_adaptive_filter(
+        aligned_df,
+        alpha_normal_values=list(np.arange(0.85, 0.99, 0.01)),
+        alpha_high_values=list(np.arange(0.99, 0.999, 0.005)),
+        acc_threshold_values=list(np.arange(0.5, 5.5, 0.5)),
+
+    )
+    print(sweep_df.head(10))
+    best_params = sweep_df.iloc[0].to_dict()
+    print(json.dumps(best_params, indent=2))
+    #add adaptive complementary filter with best parameters
+    aligned_df = add_adaptive_complementary_filter(
+        aligned_df,
+        alpha_normal=best_params["alpha_normal"],
+        alpha_high_accel=best_params["alpha_high_accel"],
+        acc_threshold=best_params["acc_threshold"],
+    )
+
 
     filter_summary = summarize_filter_performance(aligned_df)
-    print(json.dumps(filter_summary, indent=2))
 
-    save_orientation_plots(aligned_df, output_dir =args.output_dir, experiment_id= args.experiment_id)
+    adaptive_summary = summarize_adaptive_filter(aligned_df)
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    summaries = {
+        "alignment_summary": summary,
+        "bias_summary": bias_summary,
+        "axis_mapping_summary": axis_mapping_summary,
+        "filter_summary": filter_summary,
+        "adaptive_summary": adaptive_summary,
+        "best_adaptive_params": best_params,}
+
+    save_experiment_outputs(aligned_df, args.output_dir, args.experiment_id, summaries)
+    
 
 
 if __name__ == "__main__":
