@@ -222,6 +222,55 @@ def summarize_quaternion_vs_gravity(df: pd.DataFrame) -> dict:
         "gravity_pitch_delta_end_deg": float(df["gravity_pitch_delta_deg"].iloc[-1]),
     }
 
+def quat_to_rotation_matrix(q: np.ndarray) -> np.ndarray:
+    q = quat_normalize(q)
+    w, x, y, z = q
+    return np.array([
+        [1 - 2*(y**2 + z**2),     2*(x*y - z*w),       2*(x*z + y*w)],
+        [    2*(x*y + z*w),   1 - 2*(x**2 + z**2),     2*(y*z - x*w)],
+        [    2*(x*z - y*w),       2*(y*z + x*w),   1 - 2*(x**2 + y**2)]
+    ])
+
+def add_world_frame_acceleration(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+
+    quats = df[["q_w", "q_x", "q_y", "q_z"]].to_numpy()
+    acc_phone = df[["acc_x", "acc_y", "acc_z"]].to_numpy()
+
+    acc_world = np.zeros_like(acc_phone)
+
+    for k in range(len(df)):
+        R = quat_to_rotation_matrix(quats[k])
+        acc_world[k] = R @ acc_phone[k]
+
+    df["acc_world_x"] = acc_world[:, 0]
+    df["acc_world_y"] = acc_world[:, 1]
+    df["acc_world_z"] = acc_world[:, 2]
+
+    df["linear_acc_world_x"] = df["acc_world_x"]
+    df["linear_acc_world_y"] = df["acc_world_y"]
+    df["linear_acc_world_z"] = df["acc_world_z"] - 9.80665
+
+    df["linear_acc_world_mag"] = np.sqrt(
+        df["linear_acc_world_x"]**2
+        + df["linear_acc_world_y"]**2
+        + df["linear_acc_world_z"]**2
+    )
+
+    return df
+
+def summarize_linear_acceleration(df: pd.DataFrame) -> dict:
+    lin_mag = df["linear_acc_world_mag"].to_numpy()
+
+    return {
+        "linear_acc_world_mag_mean_mps2": float(np.mean(lin_mag)),
+        "linear_acc_world_mag_std_mps2": float(np.std(lin_mag)),
+        "linear_acc_world_mag_max_mps2": float(np.max(lin_mag)),
+        "linear_acc_world_mag_95th_percentile_mps2": float(np.percentile(lin_mag, 95)),
+        "linear_acc_world_z_mean_mps2": float(df["linear_acc_world_z"].mean()),
+    }
+
+
 
 def main():
     df = pd.read_csv("output/IMU_tilt_test_data.csv")
@@ -241,6 +290,9 @@ def main():
     print(json.dumps(summary, indent=2))
     gravity_summary = summarize_quaternion_vs_gravity(df)
     print(json.dumps(gravity_summary, indent=2))
+    df = add_world_frame_acceleration(df)
+    acc_summary = summarize_linear_acceleration(df)
+    print(json.dumps(acc_summary, indent=2))
 
 if __name__ == "__main__":
     main()
