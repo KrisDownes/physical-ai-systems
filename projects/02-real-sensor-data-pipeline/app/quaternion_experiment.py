@@ -1,12 +1,23 @@
 import pandas as pd
-import sqlite3
 from pathlib import Path
-import argparse
 import json
 import numpy as np
 import matplotlib.pyplot as plt
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
+DATA_DIR = PROJECT_ROOT / "data"
+PROCESSED_DATA_DIR = DATA_DIR / "processed"
+
+OUTPUT_ROOT = PROJECT_ROOT / "outputs"
+
+EXPERIMENT_ID = "imu_tilt_test"
+EXPERIMENT_OUTPUT_DIR = OUTPUT_ROOT / EXPERIMENT_ID
+PLOTS_DIR = EXPERIMENT_OUTPUT_DIR / "plots"
+CSV_DIR = EXPERIMENT_OUTPUT_DIR / "csv"
+SUMMARY_DIR = EXPERIMENT_OUTPUT_DIR / "summaries"
+
+INPUT_CSV = PROCESSED_DATA_DIR / "IMU_tilt_test_data.csv"
 
 def quat_normalize(q: np.ndarray) -> np.ndarray:
     norm = np.linalg.norm(q)
@@ -231,7 +242,7 @@ def quat_to_rotation_matrix(q: np.ndarray) -> np.ndarray:
         [    2*(x*z - y*w),       2*(y*z + x*w),   1 - 2*(x**2 + y**2)]
     ])
 
-def add_world_frame_acceleration(df: pd.DataFrame) -> pd.DataFrame:
+def add_world_frame_acceleration(df: pd.DataFrame, use_transpose: bool = False) -> pd.DataFrame:
     df = df.copy()
 
     quats = df[["q_w", "q_x", "q_y", "q_z"]].to_numpy()
@@ -241,7 +252,10 @@ def add_world_frame_acceleration(df: pd.DataFrame) -> pd.DataFrame:
 
     for k in range(len(df)):
         R = quat_to_rotation_matrix(quats[k])
-        acc_world[k] = R @ acc_phone[k]
+        if use_transpose:
+            acc_world[k] = R.T @ acc_phone[k]
+        else:
+            acc_world[k] = R @ acc_phone[k]
 
     df["acc_world_x"] = acc_world[:, 0]
     df["acc_world_y"] = acc_world[:, 1]
@@ -259,6 +273,200 @@ def add_world_frame_acceleration(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+def add_motion_event_labels(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    df["event_label"] = "unknown"
+    
+    lin_acc = (
+        df["linear_acc_world_mag"]
+        .rolling(window=10, center=True, min_periods=1)
+        .mean()
+        )
+    gyro = (
+        df["gyro_mag"]
+        .rolling(window=10, center=True, min_periods=1)
+        .mean()
+    )
+    df["linear_acc_world_mag_smooth"] = lin_acc
+    df["gyro_mag_smooth"] = gyro
+
+    stationary = (lin_acc < 0.35) & (gyro < 0.05)
+    small_motion = (lin_acc >= 0.35) & (lin_acc < 1.0) & (gyro < 0.05)
+    rotation = (gyro >= 0.05) & (lin_acc < 1.0)
+    motion = (lin_acc >= 1.0) & (lin_acc < 4.0)
+    high_accel = (lin_acc >= 4.0) & (lin_acc < 8.0)
+    impact = lin_acc >= 8.0
+
+    df.loc[stationary, "event_label"] = "stationary"
+    df.loc[small_motion, "event_label"] = "small_motion"
+    df.loc[rotation, "event_label"] = "rotation"
+    df.loc[motion, "event_label"] = "motion"
+    df.loc[high_accel, "event_label"] = "high_accel"
+    df.loc[impact, "event_label"] = "impact_or_shake"
+
+    return df
+
+def add_event_groups(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+
+    group_map = {
+        "stationary": "stationary",
+        "small_motion": "small_motion",
+        "rotation": "rotation",
+        "motion": "active_motion",
+        "high_accel": "active_motion",
+        "impact_or_shake": "impact_or_shake",
+        "unknown": "unknown",
+    }
+
+    df["event_group"] = df["event_label"].map(group_map).fillna("unknown")
+    return df
+
+def merge_tiny_label_segments(
+    df: pd.DataFrame,
+    label_col: str,
+    time_col: str = "time_sec",
+    min_duration_sec: float = 0.15,
+    protected_labels: set[str] | None = None,
+    max_passes: int = 5,
+) -> pd.DataFrame:
+    df = df.copy()
+
+    if protected_labels is None:
+        protected_labels = {"impact_or_shake"}
+
+    mean_dt = df[time_col].diff().median()
+
+    for _ in range(max_passes):
+        segment_col = "_tmp_segment_id"
+
+        df[segment_col] = (
+            df[label_col] != df[label_col].shift()
+        ).cumsum()
+
+        segments = (
+            df.reset_index()
+            .groupby(segment_col)
+            .agg(
+                label=(label_col, "first"),
+                start_idx=("index", "first"),
+                end_idx=("index", "last"),
+                start_time_sec=(time_col, "first"),
+                end_time_sec=(time_col, "last"),
+                sample_count=(time_col, "count"),
+            )
+        )
+
+        segments["duration_sec"] = (
+            segments["end_time_sec"] - segments["start_time_sec"] + mean_dt
+        )
+
+        tiny_segments = segments[
+            (segments["duration_sec"] < min_duration_sec)
+            & (~segments["label"].isin(protected_labels))
+        ]
+
+        if tiny_segments.empty:
+            break
+
+        changed = False
+
+        for segment_id, segment in tiny_segments.iterrows():
+            prev_id = segment_id - 1
+            next_id = segment_id + 1
+
+            has_prev = prev_id in segments.index
+            has_next = next_id in segments.index
+
+            if not has_prev and not has_next:
+                continue
+
+            if has_prev and has_next:
+                prev_label = segments.loc[prev_id, "label"]
+                next_label = segments.loc[next_id, "label"]
+
+                prev_duration = segments.loc[prev_id, "duration_sec"]
+                next_duration = segments.loc[next_id, "duration_sec"]
+
+                # If both neighbors agree, merge into that label.
+                if prev_label == next_label:
+                    replacement_label = prev_label
+                # Otherwise merge into the longer neighbor.
+                elif prev_duration >= next_duration:
+                    replacement_label = prev_label
+                else:
+                    replacement_label = next_label
+
+            elif has_prev:
+                replacement_label = segments.loc[prev_id, "label"]
+            else:
+                replacement_label = segments.loc[next_id, "label"]
+
+            start_idx = segment["start_idx"]
+            end_idx = segment["end_idx"]
+
+            df.loc[start_idx:end_idx, label_col] = replacement_label
+            changed = True
+
+        df = df.drop(columns=[segment_col])
+
+        if not changed:
+            break
+
+    if "_tmp_segment_id" in df.columns:
+        df = df.drop(columns=["_tmp_segment_id"])
+
+    return df
+
+def summarize_event_segments(
+    df: pd.DataFrame,
+    label_col: str = "event_label",
+) -> pd.DataFrame:
+    df = df.copy()
+
+    segment_col = f"{label_col}_segment_id"
+
+    df[segment_col] = (
+        df[label_col] != df[label_col].shift()
+    ).cumsum()
+
+    segments = (
+        df.groupby([segment_col, label_col])
+        .agg(
+            start_time_sec=("time_sec", "first"),
+            end_time_sec=("time_sec", "last"),
+            sample_count=("time_sec", "count"),
+            max_linear_acc_mps2=("linear_acc_world_mag", "max"),
+            mean_linear_acc_mps2=("linear_acc_world_mag", "mean"),
+            max_linear_acc_smooth_mps2=("linear_acc_world_mag_smooth", "max"),
+            mean_linear_acc_smooth_mps2=("linear_acc_world_mag_smooth", "mean"),
+            max_gyro_mag_rad_s=("gyro_mag", "max"),
+            mean_gyro_mag_rad_s=("gyro_mag", "mean"),
+            max_gyro_mag_smooth_rad_s=("gyro_mag_smooth", "max"),
+            mean_gyro_mag_smooth_rad_s=("gyro_mag_smooth", "mean"),
+        )
+        .reset_index()
+    )
+
+    mean_dt = df["time_sec"].diff().median()
+
+    segments["duration_sec"] = (
+        segments["end_time_sec"] - segments["start_time_sec"] + mean_dt
+    )
+
+    segments["is_tiny_segment"] = segments["duration_sec"] < 0.15
+
+    return segments
+
+def summarize_motion_events(df: pd.DataFrame) -> dict:
+    counts = df["event_label"].value_counts().to_dict()
+    percentages = (df["event_label"].value_counts(normalize=True) * 100).to_dict()
+
+    return {
+        "event_counts": {k: int(v) for k, v in counts.items()},
+        "event_percentages": {k: float(v) for k, v in percentages.items()},
+    }
+
 def summarize_linear_acceleration(df: pd.DataFrame) -> dict:
     lin_mag = df["linear_acc_world_mag"].to_numpy()
 
@@ -270,29 +478,276 @@ def summarize_linear_acceleration(df: pd.DataFrame) -> dict:
         "linear_acc_world_z_mean_mps2": float(df["linear_acc_world_z"].mean()),
     }
 
+def save_linear_acceleration_plot(
+    df: pd.DataFrame,
+    output_dir: Path,
+    experiment_id: str,
+) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    time = df["time_sec"]
 
+    plt.figure(figsize=(12, 5))
+    plt.plot(time, df["linear_acc_world_mag"], label="linear acceleration magnitude")
+    plt.xlabel("Time (s)")
+    plt.ylabel("m/s²")
+    plt.title(f"{experiment_id}: Gravity-Removed Linear Acceleration")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(output_dir / f"{experiment_id}_linear_acc_world_mag.png")
+    plt.close()
+
+    plt.figure(figsize=(12, 5))
+    plt.plot(time, df["acc_world_z"], label="world z acceleration")
+    plt.plot(time, df["linear_acc_world_z"], label="world z after gravity removal")
+    plt.xlabel("Time (s)")
+    plt.ylabel("m/s²")
+    plt.title(f"{experiment_id}: World Z Acceleration Before/After Gravity Removal")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(output_dir / f"{experiment_id}_world_z_gravity_removal.png")
+    plt.close()
+
+def save_motion_event_threshold_plot(
+    df: pd.DataFrame,
+    output_dir: Path,
+    experiment_id: str,
+) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    time = df["time_sec"]
+
+    plt.figure(figsize=(12, 5))
+
+    plt.plot(
+        time,
+        df["linear_acc_world_mag_smooth"],
+        label="smoothed linear acceleration magnitude",
+        color="tab:blue",
+        linewidth=1.5,
+    )
+
+    thresholds = [
+        (0.35, "stationary / small motion"),
+        (1.0, "motion"),
+        (4.0, "high acceleration"),
+        (8.0, "impact / shake"),
+    ]
+
+    for value, label in thresholds:
+        plt.axhline(
+            value,
+            linestyle="--",
+            linewidth=1.0,
+            color="gray",
+            alpha=0.8,
+            label=label,
+        )
+
+    plt.xlabel("Time (s)")
+    plt.ylabel("m/s²")
+    plt.title(f"{experiment_id}: Motion Event Thresholds")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(output_dir / f"{experiment_id}_motion_event_thresholds.png")
+    plt.close()
+
+def save_json(data: dict, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+
+def build_run_summary(
+    experiment_id: str,
+    norm_summary: dict,
+    quat_vs_euler_summary: dict,
+    quat_vs_gravity_summary: dict,
+    acc_summary: dict,
+    event_summary: dict,
+    fine_segments: pd.DataFrame,
+    group_segments: pd.DataFrame,
+    clean_group_segments: pd.DataFrame,
+) -> dict:
+    return {
+        "experiment_id": experiment_id,
+        "sample_count": int(
+            event_summary["event_counts"]
+            and sum(event_summary["event_counts"].values())
+        ),
+        "quaternion_norm": norm_summary,
+        "quaternion_vs_euler_gyro": quat_vs_euler_summary,
+        "quaternion_vs_gravity": quat_vs_gravity_summary,
+        "linear_acceleration": acc_summary,
+        "motion_events": event_summary,
+        "segment_cleanup": {
+            "fine_label_segments": int(len(fine_segments)),
+            "fine_tiny_segments": int(fine_segments["is_tiny_segment"].sum()),
+            "group_segments": int(len(group_segments)),
+            "group_tiny_segments": int(group_segments["is_tiny_segment"].sum()),
+            "clean_group_segments": int(len(clean_group_segments)),
+            "clean_group_tiny_segments": int(clean_group_segments["is_tiny_segment"].sum()),
+        },
+    }
+
+
+def _display_path(path: Path) -> str:
+    """Return a project-relative path when possible, otherwise a normal string."""
+    try:
+        return str(path.relative_to(PROJECT_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def save_experiment_outputs(
+    df: pd.DataFrame,
+    fine_segments: pd.DataFrame,
+    group_segments: pd.DataFrame,
+    clean_group_segments: pd.DataFrame,
+    norm_summary: dict,
+    quat_vs_euler_summary: dict,
+    quat_vs_gravity_summary: dict,
+    acc_summary: dict,
+    event_summary: dict,
+    experiment_id: str,
+    csv_dir: Path = CSV_DIR,
+    summary_dir: Path = SUMMARY_DIR,
+) -> dict:
+    csv_dir.mkdir(parents=True, exist_ok=True)
+    summary_dir.mkdir(parents=True, exist_ok=True)
+
+    run_summary = build_run_summary(
+        experiment_id=experiment_id,
+        norm_summary=norm_summary,
+        quat_vs_euler_summary=quat_vs_euler_summary,
+        quat_vs_gravity_summary=quat_vs_gravity_summary,
+        acc_summary=acc_summary,
+        event_summary=event_summary,
+        fine_segments=fine_segments,
+        group_segments=group_segments,
+        clean_group_segments=clean_group_segments,
+    )
+
+    output_paths = {
+        "processed_events_csv": csv_dir / f"{experiment_id}_world_acc_events.csv",
+        "fine_segments_csv": csv_dir / f"{experiment_id}_fine_event_segments.csv",
+        "group_segments_csv": csv_dir / f"{experiment_id}_group_event_segments.csv",
+        "clean_group_segments_csv": csv_dir / f"{experiment_id}_clean_group_segments.csv",
+        "run_summary_json": summary_dir / f"{experiment_id}_run_summary.json",
+        "quat_norm_summary_json": summary_dir / f"{experiment_id}_quat_norm_summary.json",
+        "quat_vs_euler_summary_json": summary_dir / f"{experiment_id}_quat_vs_euler_summary.json",
+        "quat_vs_gravity_summary_json": summary_dir / f"{experiment_id}_quat_vs_gravity_summary.json",
+        "linear_acc_summary_json": summary_dir / f"{experiment_id}_linear_acc_summary.json",
+        "event_summary_json": summary_dir / f"{experiment_id}_event_summary.json",
+    }
+
+    df.to_csv(output_paths["processed_events_csv"], index=False)
+    fine_segments.to_csv(output_paths["fine_segments_csv"], index=False)
+    group_segments.to_csv(output_paths["group_segments_csv"], index=False)
+    clean_group_segments.to_csv(output_paths["clean_group_segments_csv"], index=False)
+
+    save_json(run_summary, output_paths["run_summary_json"])
+    save_json(norm_summary, output_paths["quat_norm_summary_json"])
+    save_json(quat_vs_euler_summary, output_paths["quat_vs_euler_summary_json"])
+    save_json(quat_vs_gravity_summary, output_paths["quat_vs_gravity_summary_json"])
+    save_json(acc_summary, output_paths["linear_acc_summary_json"])
+    save_json(event_summary, output_paths["event_summary_json"])
+
+    return {
+        name: _display_path(path)
+        for name, path in output_paths.items()
+    }
 
 def main():
-    df = pd.read_csv("output/IMU_tilt_test_data.csv")
+    for directory in (PLOTS_DIR, CSV_DIR, SUMMARY_DIR):
+        directory.mkdir(parents=True, exist_ok=True)
+
+    if not INPUT_CSV.exists():
+        raise FileNotFoundError(
+            f"Expected processed input CSV at {INPUT_CSV}. "
+            "Move or generate IMU_tilt_test_data.csv under data/processed/."
+        )
+
+    df = pd.read_csv(INPUT_CSV)
+
     initial_q = euler_to_quat(
-        roll = df["roll_rad"].iloc[0],
-        pitch = df["pitch_rad"].iloc[0],
-        yaw = 0.0,
+        roll=df["roll_rad"].iloc[0],
+        pitch=df["pitch_rad"].iloc[0],
+        yaw=0.0,
     )
+
+    # Orientation estimation
     df = integrate_quaternion_gyro(df, initial_quat=initial_q)
     df = add_quaternion_euler_columns(df)
     df = add_relative_orientation_columns(df)
     df = add_gravity_delta_columns(df)
+
     norm_summary = summarize_quat_norm(df)
-    print(json.dumps(norm_summary, indent=2))
-    save_quaternion_comparison_plots(df, output_dir=Path("output"), experiment_id="imu_tilt_test")
-    summary = summarize_quaternion_vs_euler_gyro(df)
-    print(json.dumps(summary, indent=2))
-    gravity_summary = summarize_quaternion_vs_gravity(df)
-    print(json.dumps(gravity_summary, indent=2))
+    quat_vs_euler_summary = summarize_quaternion_vs_euler_gyro(df)
+    quat_vs_gravity_summary = summarize_quaternion_vs_gravity(df)
+
+    # World-frame acceleration and event labeling
     df = add_world_frame_acceleration(df)
+    df = add_motion_event_labels(df)
+    df = add_event_groups(df)
+
+    df["event_group_clean"] = df["event_group"]
+    df = merge_tiny_label_segments(
+        df,
+        label_col="event_group_clean",
+        min_duration_sec=0.15,
+    )
+
+    fine_segments = summarize_event_segments(df, label_col="event_label")
+    group_segments = summarize_event_segments(df, label_col="event_group")
+    clean_group_segments = summarize_event_segments(df, label_col="event_group_clean")
+
     acc_summary = summarize_linear_acceleration(df)
+    event_summary = summarize_motion_events(df)
+
+    output_paths = save_experiment_outputs(
+        df=df,
+        fine_segments=fine_segments,
+        group_segments=group_segments,
+        clean_group_segments=clean_group_segments,
+        norm_summary=norm_summary,
+        quat_vs_euler_summary=quat_vs_euler_summary,
+        quat_vs_gravity_summary=quat_vs_gravity_summary,
+        acc_summary=acc_summary,
+        event_summary=event_summary,
+        experiment_id=EXPERIMENT_ID,
+        csv_dir=CSV_DIR,
+        summary_dir=SUMMARY_DIR,
+    )
+
+    save_quaternion_comparison_plots(
+        df,
+        output_dir=PLOTS_DIR,
+        experiment_id=EXPERIMENT_ID,
+    )
+    save_linear_acceleration_plot(
+        df,
+        output_dir=PLOTS_DIR,
+        experiment_id=EXPERIMENT_ID,
+    )
+    save_motion_event_threshold_plot(
+        df,
+        output_dir=PLOTS_DIR,
+        experiment_id=EXPERIMENT_ID,
+    )
+
+    print(json.dumps(norm_summary, indent=2))
+    print(json.dumps(quat_vs_euler_summary, indent=2))
+    print(json.dumps(quat_vs_gravity_summary, indent=2))
+    print("Fine label segments:", len(fine_segments))
+    print("Fine tiny segments:", int(fine_segments["is_tiny_segment"].sum()))
+    print("Group segments:", len(group_segments))
+    print("Group tiny segments:", int(group_segments["is_tiny_segment"].sum()))
+    print("Clean group segments:", len(clean_group_segments))
+    print("Clean group tiny segments:", int(clean_group_segments["is_tiny_segment"].sum()))
+    print(clean_group_segments.head(30).to_string(index=False))
     print(json.dumps(acc_summary, indent=2))
+    print(json.dumps(event_summary, indent=2))
+    print(json.dumps(output_paths, indent=2))
+
 
 if __name__ == "__main__":
     main()
