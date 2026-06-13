@@ -15,6 +15,7 @@ OUTPUTS_DIR = PROJECT_ROOT / "outputs"
 FETCH_SCRIPT = APP_DIR / "fetch_phyphox_run.py"
 BUILD_SCRIPT = APP_DIR / "build_processed_imu_dataset.py"
 ANALYSIS_SCRIPT = APP_DIR / "quaternion_experiment.py"
+VALIDATION_SCRIPT = APP_DIR / "validate_motion_segments.py"
 
 
 def parse_args() -> argparse.Namespace:
@@ -73,6 +74,19 @@ def parse_args() -> argparse.Namespace:
         help="Skip quaternion/event analysis step.",
     )
 
+    parser.add_argument(
+        "--protocol",
+        type=Path,
+        default=None,
+        help="Optional protocol CSV for validating clean event segments.",
+    )
+
+    parser.add_argument(
+        "--skip-validation",
+        action="store_true",
+        help="Skip protocol validation even if --protocol is provided.",
+    )
+
     return parser.parse_args()
 
 
@@ -112,6 +126,8 @@ def main() -> None:
     check_script_exists(FETCH_SCRIPT)
     check_script_exists(BUILD_SCRIPT)
     check_script_exists(ANALYSIS_SCRIPT)
+    if args.protocol is not None and not args.skip_validation:
+        check_script_exists(VALIDATION_SCRIPT)
 
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -187,12 +203,32 @@ def main() -> None:
         )
     else:
         print("\nSkipping analysis stage.")
+    
+    if args.protocol is not None and not args.skip_validation:
+        protocol_path = resolve_path(args.protocol)
+
+        run_command(
+            [
+                sys.executable,
+                str(VALIDATION_SCRIPT),
+                "--run-id",
+                run_id,
+                "--protocol",
+                str(protocol_path),
+            ]
+            )
+    else:
+        print("\nSkipping validation stage.")
 
     print("\n" + "=" * 80)
     print("Pipeline complete.")
     print(f"Raw files:       {raw_run_dir}")
     print(f"Processed CSV:   {processed_csv}")
     print(f"Outputs:         {output_run_dir}")
+
+    if args.protocol is not None and not args.skip_validation:
+        print(f"Validation:      {output_run_dir / 'validation'}")
+
     print("=" * 80)
 
 
