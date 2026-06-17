@@ -1,0 +1,11 @@
+duckdb
+pandas
+pyarrow
+requests
+pydantic
+pytest
+fastapi
+uvicorn
+pydeck
+geopandas
+shapely
