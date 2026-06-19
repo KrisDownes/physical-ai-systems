@@ -1,0 +1,11 @@
+duckdb
+pandas
+requests
+pyarrow
+geopandas
+shapely
+plotly
+pydeck
+pydantic
+pytest
+folium
