@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robot-mission-reliability"
+version = "0.1.0"
+description = "A small robotics mission replay and reliability lab"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+plots = ["matplotlib>=3.8"]
+
+[project.scripts]
+robot-lab = "robot_lab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
