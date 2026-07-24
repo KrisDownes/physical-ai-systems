@@ -35,6 +35,12 @@ class ExperimentTests(unittest.TestCase):
             self.assertLess(v2.localization_rmse_m, v1.localization_rmse_m)
             self.assertFalse(v1.mission_success)
             self.assertTrue(v2.mission_success)
+            self.assertIsNone(v1.completion_time_s)
+            self.assertIsNone(v1.path_efficiency)
+            self.assertGreater(v1.duration_s, 0.0)
+
+            self.assertEqual(v2.completion_time_s, v2.duration_s)
+            self.assertIsNotNone(v2.path_efficiency)
 
     def test_run_one_case_writes_and_evaluates_log(self) -> None:
         scenarios_by_name = {scenario.name: scenario for scenario in SCENARIOS}
@@ -48,11 +54,25 @@ class ExperimentTests(unittest.TestCase):
                 seed=2,
             )
             expected_log_path = (
-            output_dir
-            / "runs"
-            / "nominal"
-            / "v1_seed_2.jsonl"
+                output_dir
+                / "runs"
+                / "nominal"
+                / "v1_seed_2.jsonl"
             )
+            metrics = result.metrics
+            self.assertEqual(
+                metrics.completion_time_s,
+                metrics.duration_s,
+                )
+            self.assertGreater(metrics.path_length_m, 0.0)
+            self.assertIsNotNone(metrics.path_efficiency)
+            self.assertAlmostEqual(metrics.path_efficiency, 1.0, places=6)
+            self.assertAlmostEqual(metrics.cross_track_rmse_m, 0.0, places=6)
+            self.assertAlmostEqual(
+                metrics.cross_track_max_error_m,
+                0.0,
+                places=6,
+                )
             self.assertEqual(result.scenario_name, scenario.name)
             self.assertEqual(result.software_version, "v1")
             self.assertEqual(result.seed, 2)

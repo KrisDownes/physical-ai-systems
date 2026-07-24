@@ -15,6 +15,7 @@ class RunMetrics:
     mission_success: bool
     waypoints_reached: int
     duration_s: float
+    completion_time_s: float | None
     telemetry_samples: int
     localization_rmse_m: float
     localization_max_error_m: float
@@ -22,6 +23,10 @@ class RunMetrics:
     detector_false_positives: int
     detection_latency_s: float | None
     log_sequence_gaps: int
+    path_length_m: float
+    path_efficiency: float | None
+    cross_track_rmse_m: float
+    cross_track_max_error_m: float
 
 
 def evaluate_run(path: Path, threshold_m: float = 0.20, consecutive_samples: int = 2) -> RunMetrics:
@@ -89,15 +94,46 @@ def evaluate_run(path: Path, threshold_m: float = 0.20, consecutive_samples: int
     )
 
     terminal = mission[-1]["payload"]
+    mission_success = terminal["name"] == "mission_completed"
+    duration_s = events[-1]["event_time_s"]
+    completion_time_s = duration_s if mission_success else None
     sequences = sorted(event["sequence"] for event in events)
     gaps = sum(max(0, current - previous - 1) for previous, current in zip(sequences, sequences[1:]))
+    path_length_m = 0.0
+    prev_x = 0.0
+    prev_y = 0.0
+    cross_track_squared_sum = 0.0
+    cross_track_max_error_m = 0.0
+    for event in telemetry:
+        true_x = event["payload"]["truth"]["x_m"]
+        true_y = event["payload"]["truth"]["y_m"]
+        distance_m = sqrt((true_x - prev_x)**2 + (true_y - prev_y)**2)
+        path_length_m += distance_m
+
+        cross_track_error_m = abs(true_y)
+        cross_track_squared_sum += cross_track_error_m**2
+
+        if cross_track_error_m > cross_track_max_error_m:
+            cross_track_max_error_m = cross_track_error_m
+        prev_x = true_x
+        prev_y = true_y
+
+    cross_track_rmse_m = sqrt(cross_track_squared_sum/len(telemetry))
+    final_displacement_m = sqrt((prev_x - 0.0)**2 + (prev_y - 0.0)**2)
+    path_efficiency = (
+        final_displacement_m / path_length_m
+        if mission_success and path_length_m > 0.0
+        else None
+    )
+
 
     return RunMetrics(
         run_id=events[0]["run_id"],
         software_version=events[0]["software_version"],
-        mission_success=terminal["name"] == "mission_completed",
+        mission_success=mission_success,
         waypoints_reached=terminal["waypoints_reached"],
-        duration_s=events[-1]["event_time_s"],
+        duration_s=duration_s,
+        completion_time_s=completion_time_s,
         telemetry_samples=len(telemetry),
         localization_rmse_m=sqrt(sum(error * error for error in errors) / len(errors)),
         localization_max_error_m=max(errors),
@@ -105,6 +141,10 @@ def evaluate_run(path: Path, threshold_m: float = 0.20, consecutive_samples: int
         detector_false_positives=false_positives,
         detection_latency_s=detection_latency,
         log_sequence_gaps=gaps,
+        path_length_m=path_length_m,
+        path_efficiency=path_efficiency,
+        cross_track_rmse_m=cross_track_rmse_m,
+        cross_track_max_error_m=cross_track_max_error_m,
     )
 
 
