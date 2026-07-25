@@ -1,11 +1,12 @@
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
+import csv
 
 from robot_lab.evaluation import evaluate_run
 from robot_lab.replay import replay_events
 from robot_lab.simulation import RunConfig, run_simulation
-from robot_lab.experiment import run_one_case, run_experiment_matrix
+from robot_lab.experiment import run_one_case, run_experiment_matrix, result_to_row, write_results_csv, RESULT_COLUMNS
 from robot_lab.scenarios import SCENARIOS
 
 
@@ -60,6 +61,9 @@ class ExperimentTests(unittest.TestCase):
                 / "v1_seed_2.jsonl"
             )
             metrics = result.metrics
+
+            row = result_to_row(result)
+
             self.assertEqual(
                 metrics.completion_time_s,
                 metrics.duration_s,
@@ -81,6 +85,12 @@ class ExperimentTests(unittest.TestCase):
             self.assertGreater(result.metrics.telemetry_samples, 0)
             self.assertTrue(result.log_path.exists())
             self.assertGreater(result.log_path.stat().st_size, 0)
+            self.assertEqual(set(row), set(RESULT_COLUMNS))
+            self.assertEqual(row["scenario_name"], "nominal")
+            self.assertEqual(row["seed"], 2)
+            self.assertTrue(row["mission_success"])
+            self.assertIsInstance(row["log_path"], str)
+            self.assertEqual(row["left_wheel_traction"], 1.0)
 
     def test_run_experiment_matrix_covers_all_cases(self) -> None:
         software_versions = ("v1", "v2")
@@ -113,8 +123,41 @@ class ExperimentTests(unittest.TestCase):
                 for software_version in software_versions
             }
 
+            results_path = output_dir / "results.csv"
+
+            write_results_csv(results, results_path)
+            with open(results_path, mode="r", newline="", encoding="utf-8") as file:
+                reader = csv.DictReader(file)
+
+                rows = list(reader)
+
             self.assertEqual(len(results), 40)
             self.assertEqual(actual_cases, expected_cases)
             self.assertTrue(
                 all(result.log_path.exists() for result in results)
             )
+
+            self.assertEqual(reader.fieldnames, list(RESULT_COLUMNS))
+            self.assertEqual(len(rows), 40)
+            self.assertTrue(results_path.exists())
+
+            csv_cases = {
+                (
+                    row["scenario_name"],
+                    row["software_version"],
+                    int(row["seed"]),
+                )
+                for row in rows
+            }
+            self.assertEqual(csv_cases, expected_cases)
+
+            failed_row = next(
+                row
+                for row in rows
+                if row["scenario_name"] == "mild_slip"
+                and row["software_version"] == "v1"
+                and row["seed"] == "0"
+                )
+            self.assertEqual(failed_row["mission_success"], "False")
+            self.assertEqual(failed_row["completion_time_s"], "")
+            self.assertEqual(failed_row["path_efficiency"], "")

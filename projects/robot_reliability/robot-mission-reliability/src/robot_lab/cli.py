@@ -7,11 +7,13 @@ from .evaluation import comparison_markdown, evaluate_run, write_report
 from .plotting import plot_runs
 from .replay import replay_events
 from .simulation import RunConfig, run_simulation
-from .experiment import run_experiment_matrix
+from .experiment import run_experiment_matrix, write_results_csv
 
 
 def run_experiment(output_dir: Path) -> None:
     results = run_experiment_matrix(output_dir)
+    results_path = output_dir / "results.csv"
+    write_results_csv(results, results_path)
 
     for result in results:
         print(
@@ -24,6 +26,7 @@ def run_experiment(output_dir: Path) -> None:
             f"log={result.log_path}"
         )
 
+    print(f"results={results_path}")
     print(f"completed {len(results)} runs")
 
 
