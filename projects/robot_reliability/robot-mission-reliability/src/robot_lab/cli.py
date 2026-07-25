@@ -7,25 +7,25 @@ from .evaluation import comparison_markdown, evaluate_run, write_report
 from .plotting import plot_runs
 from .replay import replay_events
 from .simulation import RunConfig, run_simulation
+from .experiment import run_experiment_matrix
 
 
-def run_experiment(output_dir: Path, make_plot: bool) -> None:
-    runs_dir = output_dir / "runs"
-    paths: list[Path] = []
-    for version in ("v1", "v2"):
-        path = runs_dir / f"{version}.jsonl"
-        run_id = run_simulation(path, RunConfig(software_version=version))
-        paths.append(path)
-        print(f"simulated {version}: run_id={run_id} -> {path}")
+def run_experiment(output_dir: Path) -> None:
+    results = run_experiment_matrix(output_dir)
 
-    metrics = [evaluate_run(path) for path in paths]
-    write_report(metrics, output_dir / "report.json")
-    comparison = comparison_markdown(metrics)
-    (output_dir / "comparison.md").write_text(comparison, encoding="utf-8")
-    print("\n" + comparison)
-    if make_plot:
-        plot_runs(paths, output_dir / "trajectory.png")
-        print(f"plot -> {output_dir / 'trajectory.png'}")
+    for result in results:
+        print(
+            f"scenario={result.scenario_name} "
+            f"version={result.software_version} "
+            f"seed={result.seed} "
+            f"success={result.metrics.mission_success} "
+            f"waypoints={result.metrics.waypoints_reached} "
+            f"duration_s={result.metrics.duration_s:.1f} "
+            f"log={result.log_path}"
+        )
+
+    print(f"completed {len(results)} runs")
+
 
 
 def main() -> None:
@@ -34,7 +34,6 @@ def main() -> None:
 
     experiment = subparsers.add_parser("experiment", help="simulate and compare v1 with v2")
     experiment.add_argument("--output", type=Path, default=Path("artifacts"))
-    experiment.add_argument("--plot", action="store_true")
 
     evaluate = subparsers.add_parser("evaluate", help="evaluate one run log")
     evaluate.add_argument("path", type=Path)
@@ -44,7 +43,7 @@ def main() -> None:
 
     args = parser.parse_args()
     if args.command == "experiment":
-        run_experiment(args.output, args.plot)
+        run_experiment(args.output)
     elif args.command == "evaluate":
         print(evaluate_run(args.path))
     elif args.command == "replay":

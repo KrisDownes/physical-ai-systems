@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 from robot_lab.evaluation import evaluate_run
 from robot_lab.replay import replay_events
 from robot_lab.simulation import RunConfig, run_simulation
-from robot_lab.experiment import run_one_case
+from robot_lab.experiment import run_one_case, run_experiment_matrix
 from robot_lab.scenarios import SCENARIOS
 
 
@@ -81,3 +81,40 @@ class ExperimentTests(unittest.TestCase):
             self.assertGreater(result.metrics.telemetry_samples, 0)
             self.assertTrue(result.log_path.exists())
             self.assertGreater(result.log_path.stat().st_size, 0)
+
+    def test_run_experiment_matrix_covers_all_cases(self) -> None:
+        software_versions = ("v1", "v2")
+        scenarios = SCENARIOS
+        with TemporaryDirectory() as directory:
+            output_dir = Path(directory)
+            results = run_experiment_matrix(
+                output_dir=output_dir,
+                scenarios=scenarios,
+                software_versions=software_versions,
+            )
+
+            actual_cases = {
+                (
+                    result.scenario_name,
+                    result.software_version,
+                    result.seed,
+                )
+                for result in results
+            }
+
+            expected_cases = {
+                (
+                    scenario.name,
+                    software_version,
+                    seed,
+                )
+                for scenario in scenarios
+                for seed in scenario.seeds
+                for software_version in software_versions
+            }
+
+            self.assertEqual(len(results), 40)
+            self.assertEqual(actual_cases, expected_cases)
+            self.assertTrue(
+                all(result.log_path.exists() for result in results)
+            )

@@ -90,7 +90,7 @@ def run_simulation(output_path: Path, config: RunConfig) -> str:
     emit("mission.event", {"name": "mission_started", "waypoints": waypoints})
     fault_active_previous = False
 
-    while time_s <= config.max_time_s and waypoint_index < len(waypoints):
+    while time_s < config.max_time_s and waypoint_index < len(waypoints):
         target = waypoints[waypoint_index]
         commanded_left, commanded_right = point_controller(estimate, target, robot)
         fault_active = config.slip_start_s <= time_s < config.slip_end_s
