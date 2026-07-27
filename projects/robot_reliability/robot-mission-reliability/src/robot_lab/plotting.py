@@ -4,7 +4,7 @@ from pathlib import Path
 
 from .replay import replay_events
 from .experiment import ExperimentResult
-
+from .reporting import ScenarioSummary
 
 def plot_runs(paths: list[Path], output: Path) -> None:
     try:
@@ -258,5 +258,247 @@ def animate_run(
             output,
             writer=PillowWriter(fps=10),
         )
+    finally:
+        plt.close(figure)
+
+def plot_success_rates(
+    summaries: list[ScenarioSummary],
+    output: Path,
+) -> None:
+
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError as exc:
+        raise RuntimeError(
+            "Install plotting support with: pip install -e '.[plots]'"
+        ) from exc
+
+    if not summaries:
+        raise ValueError("Cannot build plot on empty summary list")
+
+    summaries_by_key = {
+        (
+            summary.scenario_name,
+            summary.software_version,
+        ): summary
+        for summary in summaries
+    }
+
+    scenario_names: list[str] = []
+
+    for summary in summaries:
+        if summary.scenario_name not in scenario_names:
+            scenario_names.append(summary.scenario_name)
+
+    v1_success_rates = [
+        summaries_by_key[(scenario_name, "v1")].success_rate * 100
+        for scenario_name in scenario_names
+    ]
+
+    v2_success_rates = [
+        summaries_by_key[(scenario_name, "v2")].success_rate * 100
+        for scenario_name in scenario_names
+    ]
+
+    x_positions = list(range(len(scenario_names)))
+
+    bar_width = 0.36
+
+    v1_positions = [
+        position - bar_width / 2
+        for position in x_positions
+    ]
+
+    v2_positions = [
+        position + bar_width / 2
+        for position in x_positions
+    ]
+
+    figure, axis = plt.subplots(figsize=(9, 5.5))
+
+    v1_bars = axis.bar(
+        v1_positions,
+        v1_success_rates,
+        width=bar_width,
+        label="v1",
+        color="tab:blue",
+    )
+
+    v2_bars = axis.bar(
+        v2_positions,
+        v2_success_rates,
+        width=bar_width,
+        label="v2",
+        color="tab:orange",
+    )
+
+    axis.set_title("Mission Success Across Deterministic Seeds")
+    axis.set_xlabel("Scenario")
+    axis.set_ylabel("Mission success rate (%)")
+    axis.set_ylim(0, 110)
+
+    axis.set_xticks(
+        x_positions,
+        [
+            scenario_name.replace("_", " ")
+            for scenario_name in scenario_names
+        ],
+    )
+
+    axis.bar_label(
+        v1_bars,
+        labels=[
+            f"{rate:.0f}%"
+            for rate in v1_success_rates
+        ],
+        padding=3,
+    )
+
+    axis.bar_label(
+        v2_bars,
+        labels=[
+            f"{rate:.0f}%"
+            for rate in v2_success_rates
+        ],
+        padding=3,
+    )
+
+    axis.grid(axis="y", alpha=0.25)
+    axis.set_axisbelow(True)
+    axis.legend()
+    figure.tight_layout()
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        figure.savefig(output, format="svg")
+    finally:
+        plt.close(figure)
+
+def plot_cross_track_rmse(
+    summaries: list[ScenarioSummary],
+    output: Path,
+) -> None:
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError as exc:
+        raise RuntimeError(
+            "Install plotting support with: pip install -e '.[plots]'"
+        ) from exc
+
+    if not summaries:
+        raise ValueError("Cannot plot an empty summary list")
+
+    summaries_by_key = {
+        (
+            summary.scenario_name,
+            summary.software_version,
+        ): summary
+        for summary in summaries
+    }
+
+    scenario_names: list[str] = []
+    for summary in summaries:
+        if summary.scenario_name not in scenario_names:
+            scenario_names.append(summary.scenario_name)
+
+    for scenario_name in scenario_names:
+        for software_version in ("v1", "v2"):
+            key = (scenario_name, software_version)
+            if key not in summaries_by_key:
+                raise ValueError(
+                    f"Missing summary for scenario/version: {key}"
+                )
+
+    v1_errors = [
+        summaries_by_key[
+            (scenario_name, "v1")
+        ].mean_cross_track_rmse_m
+        for scenario_name in scenario_names
+    ]
+
+    v2_errors = [
+        summaries_by_key[
+            (scenario_name, "v2")
+        ].mean_cross_track_rmse_m
+        for scenario_name in scenario_names
+    ]
+
+    x_positions = list(range(len(scenario_names)))
+    bar_width = 0.36
+
+    v1_positions = [
+        position - bar_width / 2
+        for position in x_positions
+    ]
+
+    v2_positions = [
+        position + bar_width / 2
+        for position in x_positions
+    ]
+
+    figure, axis = plt.subplots(figsize=(9, 5.5))
+
+    v1_bars = axis.bar(
+        v1_positions,
+        v1_errors,
+        width=bar_width,
+        label="v1",
+        color="tab:blue",
+    )
+
+    v2_bars = axis.bar(
+        v2_positions,
+        v2_errors,
+        width=bar_width,
+        label="v2",
+        color="tab:orange",
+    )
+
+    axis.set_title(
+        "Mean Cross-Track Error Across Deterministic Seeds"
+    )
+    axis.set_xlabel("Scenario")
+    axis.set_ylabel("Mean cross-track RMSE (m)")
+
+    axis.set_xticks(
+        x_positions,
+        [
+            scenario_name.replace("_", " ")
+            for scenario_name in scenario_names
+        ],
+    )
+
+    axis.bar_label(
+        v1_bars,
+        labels=[
+            f"{error:.3f}"
+            for error in v1_errors
+        ],
+        padding=3,
+    )
+
+    axis.bar_label(
+        v2_bars,
+        labels=[
+            f"{error:.3f}"
+            for error in v2_errors
+        ],
+        padding=3,
+    )
+
+    maximum_error = max(v1_errors + v2_errors)
+    upper_limit = maximum_error * 1.15 if maximum_error > 0 else 1.0
+    axis.set_ylim(0, upper_limit)
+
+    axis.grid(axis="y", alpha=0.25)
+    axis.set_axisbelow(True)
+    axis.legend()
+    figure.tight_layout()
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        figure.savefig(output, format="svg")
     finally:
         plt.close(figure)
