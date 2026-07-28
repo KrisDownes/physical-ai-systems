@@ -7,9 +7,12 @@ artifacts/runs/
 artifacts/report.json
 artifacts/comparison.md
 artifacts/trajectory.png
-/README.md
+/README.learning-notes.md
 /docs/repository_baseline.md
 /docs/LEARNING_PATH.md
+/docs/baseline_report.md
+/build/
+/dist/
 .env
 .env.*
 !.env.example
