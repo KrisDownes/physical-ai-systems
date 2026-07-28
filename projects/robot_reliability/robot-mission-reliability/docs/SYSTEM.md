@@ -75,3 +75,30 @@ A useful release gate could be:
 - no event sequence gaps in a local run.
 
 The current single-seed experiment demonstrates the measurement method, not those population-level claims.
+
+## Running the Complete Benchmark
+
+From the `robot-mission-reliability` project directory, with the Python environment active, run:
+
+```bash
+make benchmark
+```
+This command:
+
+1. Executes all 40 scenario, software-version, and seed combinations.
+2. Writes one replayable JSONL log per execution.
+3. Writes the 40-row machine-readable CSV.
+4. Aggregates results across the five deterministic seeds.
+5. Generates the scenario comparison report.
+6. Generates the mission-success and cross-track-error plots.
+7. Generates the representative `severe_slip`, `v2`, seed `0` replay GIF.
+
+Generated outputs:
+
+- `artifacts/runs/`
+- `artifacts/results.csv`
+- `docs/scenario_comparison.md`
+- `docs/assets/success_rate.svg`
+- `docs/assets/cross_track_rmse.svg`
+- `docs/assets/severe_slip_v2_seed_0.gif`
+

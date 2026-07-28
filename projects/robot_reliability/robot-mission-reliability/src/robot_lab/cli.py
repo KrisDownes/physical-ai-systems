@@ -3,17 +3,54 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from .evaluation import comparison_markdown, evaluate_run, write_report
-from .plotting import plot_runs
-from .replay import replay_events
-from .simulation import RunConfig, run_simulation
+from .evaluation import evaluate_run
 from .experiment import run_experiment_matrix, write_results_csv
+from .plotting import (
+    animate_run,
+    plot_cross_track_rmse,
+    plot_success_rates,
+)
+from .replay import replay_events
+from .reporting import (
+    summarize_results,
+    write_scenario_comparison,
+)
 
 
-def run_experiment(output_dir: Path) -> None:
+def run_experiment(output_dir: Path, docs_dir: Path,) -> None:
     results = run_experiment_matrix(output_dir)
     results_path = output_dir / "results.csv"
     write_results_csv(results, results_path)
+
+    summaries = summarize_results(results)
+
+    report_path = docs_dir / "scenario_comparison.md"
+    success_plot_path = docs_dir / "assets" / "success_rate.svg"
+    cross_track_plot_path = docs_dir / "assets" / "cross_track_rmse.svg"
+    replay_path = docs_dir / "assets" / "severe_slip_v2_seed_0.gif"
+
+    write_scenario_comparison(summaries, report_path)
+    plot_success_rates(summaries, success_plot_path)
+    plot_cross_track_rmse(summaries, cross_track_plot_path)
+
+    replay_result = next(
+        (
+            result
+            for result in results
+            if result.scenario_name == "severe_slip"
+            and result.software_version == "v2"
+            and result.seed == 0
+        ),
+        None,
+    )
+
+    if replay_result is None:
+        raise ValueError("severe_slip/v2/seed 0 run was not found")
+
+    animate_run(
+        result=replay_result,
+        output=replay_path,
+    )
 
     for result in results:
         print(
@@ -27,6 +64,10 @@ def run_experiment(output_dir: Path) -> None:
         )
 
     print(f"results={results_path}")
+    print(f"comparison report={report_path}")
+    print(f"success plot={success_plot_path}")
+    print(f"cross-track plot={cross_track_plot_path}")
+    print(f"replay={replay_path}")
     print(f"completed {len(results)} runs")
 
 
@@ -37,6 +78,11 @@ def main() -> None:
 
     experiment = subparsers.add_parser("experiment", help="simulate and compare v1 with v2")
     experiment.add_argument("--output", type=Path, default=Path("artifacts"))
+    experiment.add_argument(
+        "--docs-output",
+        type=Path,
+        default=Path("docs"),
+    )
 
     evaluate = subparsers.add_parser("evaluate", help="evaluate one run log")
     evaluate.add_argument("path", type=Path)
@@ -46,7 +92,7 @@ def main() -> None:
 
     args = parser.parse_args()
     if args.command == "experiment":
-        run_experiment(args.output)
+        run_experiment(args.output, args.docs_output)
     elif args.command == "evaluate":
         print(evaluate_run(args.path))
     elif args.command == "replay":
