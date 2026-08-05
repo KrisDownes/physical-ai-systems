@@ -8,6 +8,9 @@
   <xacro:property name="ground_clearance" value="0.05"/>
   <xacro:property name="base_mass" value="8.0"/>
   <xacro:property name="base_link_height" value="${ground_clearance + base_height / 2.0}"/>
+  <xacro:property name="wheel_radius" value="0.075"/>
+  <xacro:property name="wheel_width" value="0.04"/>
+  <xacro:property name="wheel_mass" value="0.5"/>
 
 
   <xacro:property
