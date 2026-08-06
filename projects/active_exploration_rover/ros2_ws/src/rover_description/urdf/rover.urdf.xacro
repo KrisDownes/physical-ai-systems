@@ -24,6 +24,18 @@
   <xacro:property
   name="base_izz"
   value="${base_mass / 12.0 * (base_length * base_length + base_width * base_width)}"/>
+
+  <xacro:property
+  name="wheel_iyy"
+  value="${wheel_mass / 2.0 * (wheel_radius * wheel_radius)}"/>
+
+  <xacro:property
+  name="wheel_ixx"
+  value="${wheel_mass / 12.0 * (3.0*(wheel_radius * wheel_radius) + (wheel_width * wheel_width))}"/>
+
+  <xacro:property
+  name="wheel_izz"
+  value="${wheel_mass / 12.0 * (3.0*(wheel_radius * wheel_radius) + (wheel_width * wheel_width))}"/>
   
 
   <!-- Robot Base -->
@@ -63,5 +75,48 @@
     <child link="base_link"/>
     <origin xyz="0.0 0.0 ${base_link_height}" rpy="0 0 0"/>
   </joint>
+
+  <xacro:macro name="wheel" params="name x y">
+     <link name="${name}_wheel_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+            <material name="dark gray">
+                <color rgba="0.15 0.15 0.15 1.0"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="${wheel_mass}"/>
+            <inertia
+                ixx="${wheel_ixx}"
+                ixy="0.0"
+                ixz="0.0"
+                iyy="${wheel_iyy}"
+                iyz="0.0"
+                izz="${wheel_izz}"/>
+        </inertial>
+     </link>
+
+    <joint name="${name}_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="${name}_wheel_link"/>
+        <origin xyz="${x} ${y} -0.05" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+  </xacro:macro>
+  <xacro:wheel name="front_left" x="0.15" y="0.17"/>
+  <xacro:wheel name="front_right" x="0.15" y="-0.17"/>
+  <xacro:wheel name="rear_right" x="-0.15" y="-0.17"/>
+  <xacro:wheel name="rear_left" x="-0.15" y="0.17"/>
 
 </robot>
