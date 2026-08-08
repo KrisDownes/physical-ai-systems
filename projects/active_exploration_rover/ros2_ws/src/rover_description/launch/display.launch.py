@@ -40,15 +40,7 @@ def generate_launch_description() -> LaunchDescription:
         executable="robot_state_publisher",
         name="robot_state_publisher",
         output="screen",
-        parameters=[robot_description],
-    )
-
-    joint_state_publisher_node = Node(
-        package="joint_state_publisher",
-        executable="joint_state_publisher",
-        name="joint_state_publisher",
-        output="screen",
-        parameters=[robot_description],
+        parameters=[robot_description, {"use_sim_time": True}],
     )
 
     rviz_node = Node(
@@ -60,12 +52,32 @@ def generate_launch_description() -> LaunchDescription:
             "-d",
             rviz_config_file,
         ],
+        parameters=[{"use_sim_time": True}]
+    )
+
+    bridge_node = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        name="bridge",
+        output="screen",
+        arguments=[
+            "/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist",
+            "/model/kd_bot/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry",
+            "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+            "/model/kd_bot/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V",
+            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+            "/world/kd_world/model/kd_bot/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model",
+        ],
+        remappings=[
+            ("/model/kd_bot/tf", "/tf"),
+            ("/world/kd_world/model/kd_bot/joint_state", "/joint_states")
+        ],
     )
 
     return LaunchDescription(
         [
-            joint_state_publisher_node,
             robot_state_publisher_node,
             rviz_node,
+            bridge_node,
         ]
     )

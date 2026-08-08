@@ -25,11 +25,18 @@ def generate_launch_description() -> LaunchDescription:
             "display.launch.py",
         ]
     )
+    world_file = PathJoinSubstitution(
+        [
+            package_share,
+            "worlds",
+            "kd_world.sdf",
+        ]
+    )
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gazebo_file),
         launch_arguments={
-            "gz_args": "-r empty.sdf",
+            "gz_args": ["-r ", world_file],
         }.items(),
     )
 
