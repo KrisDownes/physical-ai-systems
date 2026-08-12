@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'obstacle_guard = rover_control.obstacle_guard:main',
         ],
     },
 )

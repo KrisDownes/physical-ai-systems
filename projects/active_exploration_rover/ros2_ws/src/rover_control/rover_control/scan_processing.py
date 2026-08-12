@@ -1,5 +1,6 @@
 import math
 
+
 def nearest_valid_range_in_sector(
     ranges,
     angle_min,
@@ -18,7 +19,7 @@ def nearest_valid_range_in_sector(
 
         if not (lower <= angle <= upper):
             continue
-        
+
         if not math.isfinite(distance):
             continue
 
@@ -27,6 +28,5 @@ def nearest_valid_range_in_sector(
 
         if closest is None or distance < closest:
             closest = distance
-        
+
     return closest
-        

@@ -2,6 +2,7 @@ import math
 
 from rover_control.scan_processing import nearest_valid_range_in_sector
 
+
 def test_returns_nearest_range_inside_forward_sector():
     ranges = [
         0.05,
@@ -23,6 +24,7 @@ def test_returns_nearest_range_inside_forward_sector():
 
     assert result == 0.7
 
+
 def test_ignores_invalid_ranges():
     ranges = [
         math.nan,
@@ -43,6 +45,7 @@ def test_ignores_invalid_ranges():
     )
 
     assert result == 0.8
+
 
 def test_returns_none_when_no_valid_range_exists():
     ranges = [

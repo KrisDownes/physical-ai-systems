@@ -42,6 +42,7 @@ def test_front_blocked_state_uses_hysteresis():
     )
     assert blocked is False
 
+
 def test_none_distance_is_treated_as_clear():
     blocked = update_front_blocked_state(
         nearest_distance=None,

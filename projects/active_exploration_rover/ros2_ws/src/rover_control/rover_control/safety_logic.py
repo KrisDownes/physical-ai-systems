@@ -14,5 +14,5 @@ def update_front_blocked_state(
 
     if not was_blocked:
         return nearest_distance <= stop_distance
-    
+
     return nearest_distance <= stop_distance
