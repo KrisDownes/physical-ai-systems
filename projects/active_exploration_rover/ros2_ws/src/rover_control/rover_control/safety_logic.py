@@ -7,7 +7,7 @@ def update_front_blocked_state(
     resume_distance,
 ):
     if nearest_distance is None:
-        return False
+        return True
 
     if was_blocked:
         return nearest_distance < resume_distance

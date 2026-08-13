@@ -50,7 +50,7 @@ def test_ignores_invalid_ranges():
 def test_returns_none_when_no_valid_range_exists():
     ranges = [
         math.nan,
-        math.inf,
+        -math.inf,
         0.01,
         14.0,
         0.05,
@@ -67,3 +67,23 @@ def test_returns_none_when_no_valid_range_exists():
     )
 
     assert result is None
+
+
+def test_positive_infinity_represents_clear_space():
+    ranges = [
+        math.inf,
+        math.inf,
+        math.inf,
+    ]
+
+    result = nearest_valid_range_in_sector(
+        ranges=ranges,
+        angle_min=math.radians(-20),
+        angle_increment=math.radians(20),
+        range_min=0.1,
+        range_max=10.0,
+        sector_center=0.0,
+        sector_half_width=math.radians(20),
+    )
+
+    assert result == 10.0

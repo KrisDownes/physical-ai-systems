@@ -1,3 +1,5 @@
+import math
+
 from geometry_msgs.msg import Twist
 import rclpy
 from rclpy.duration import Duration
@@ -177,6 +179,85 @@ def test_watchdog_does_not_republish_stop_while_already_stale():
 
         assert published_command.linear.x == 0.0
         assert published_command.angular.z == 0.0
+
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+
+def test_invalid_scan_immediately_publishes_stop():
+    rclpy.init()
+    node = ObstacleGuard()
+    recorder = RecordingPublisher()
+
+    node.command_publisher = recorder
+
+    try:
+        scan = LaserScan()
+        scan.angle_min = -0.35
+        scan.angle_increment = 0.35
+        scan.range_min = 0.1
+        scan.range_max = 10.0
+        scan.ranges = [math.nan, math.nan, math.nan]
+
+        node.scan_callback(scan)
+
+        assert node.scan_is_stale is False
+        assert node.front_blocked is True
+        assert len(recorder.messages) == 1
+
+        published_command = recorder.messages[0]
+
+        assert published_command.linear.x == 0.0
+        assert published_command.angular.z == 0.0
+
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+
+def test_clear_scan_recovers_after_invalid_scan():
+    rclpy.init()
+    node = ObstacleGuard()
+    recorder = RecordingPublisher()
+
+    node.command_publisher = recorder
+
+    try:
+        scan = LaserScan()
+        scan.angle_min = -0.35
+        scan.angle_increment = 0.35
+        scan.range_min = 0.1
+        scan.range_max = 10.0
+        scan.ranges = [math.nan, math.nan, math.nan]
+
+        node.scan_callback(scan)
+
+        assert node.front_blocked is True
+        assert len(recorder.messages) == 1
+
+        scan.ranges = [math.inf, math.inf, math.inf]
+
+        node.scan_callback(scan)
+
+        assert node.scan_is_stale is False
+        assert node.front_blocked is False
+
+        # Clearing the blocked state does not itself publish a motion command.
+        assert len(recorder.messages) == 1
+
+        requested_command = Twist()
+        requested_command.linear.x = 0.25
+        requested_command.angular.z = 0.4
+
+        node.command_callback(requested_command)
+
+        assert len(recorder.messages) == 2
+
+        published_command = recorder.messages[1]
+
+        assert published_command.linear.x == 0.25
+        assert published_command.angular.z == 0.4
 
     finally:
         node.destroy_node()

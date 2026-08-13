@@ -20,7 +20,9 @@ def nearest_valid_range_in_sector(
         if not (lower <= angle <= upper):
             continue
 
-        if not math.isfinite(distance):
+        if distance == math.inf:
+            distance = range_max
+        elif not math.isfinite(distance):
             continue
 
         if not (range_min <= distance <= range_max):
