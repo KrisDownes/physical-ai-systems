@@ -28,3 +28,16 @@ def find_frontier_cells(data, width, height) -> set[tuple[int, int]]:
                         coordinates.add((row, column))
                         break
     return coordinates
+
+
+def grid_cell_center(
+    row,
+    column,
+    resolution,
+    origin_x,
+    origin_y,
+) -> tuple[float, float]:
+
+    pos_x = origin_x + (column + 0.5) * resolution
+    pos_y = origin_y + (row + 0.5) * resolution
+    return pos_x, pos_y
