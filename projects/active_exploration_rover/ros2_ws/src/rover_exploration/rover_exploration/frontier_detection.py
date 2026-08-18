@@ -1,9 +1,16 @@
+from collections import deque
 
 neighbor_offsets = (
     (-1, 0),  # north
     (1, 0),   # south
     (0, -1),  # west
     (0, 1),   # east
+)
+
+cluster_neighbor_offsets = (
+    (-1, -1), (-1, 0), (-1, 1),
+    (0, -1), (0, 1),
+    (1, -1), (1, 0), (1, 1),
 )
 
 
@@ -41,3 +48,71 @@ def grid_cell_center(
     pos_x = origin_x + (column + 0.5) * resolution
     pos_y = origin_y + (row + 0.5) * resolution
     return pos_x, pos_y
+
+
+def cluster_frontier_cells(
+    frontier_cells,
+    min_cluster_size=5,
+) -> list[set[tuple[int, int]]]:
+
+    if min_cluster_size <= 0:
+        raise ValueError('Minimum cluster size must be positive')
+
+    unvisited = set(frontier_cells)
+    clusters = []
+
+    while unvisited:
+        start = unvisited.pop()
+        cluster = {start}
+        queue = deque([start])
+
+        while queue:
+            row, column = queue.popleft()
+            for row_offset, column_offset in cluster_neighbor_offsets:
+                neighbor = (row + row_offset, column + column_offset)
+                if neighbor in unvisited:
+                    unvisited.remove(neighbor)
+                    cluster.add(neighbor)
+                    queue.append(neighbor)
+
+        if len(cluster) >= min_cluster_size:
+            clusters.append(cluster)
+
+    return clusters
+
+
+def frontier_cluster_centroid(
+    cluster,
+) -> tuple[float, float]:
+
+    if not cluster:
+        raise ValueError('Cannot calcualte the centroid of an empty cluster')
+
+    row_total = 0
+    column_total = 0
+
+    for row, column in cluster:
+        row_total += row
+        column_total += column
+    avg_row = row_total / len(cluster)
+    avg_col = column_total / len(cluster)
+    return avg_row, avg_col
+
+
+def representative_frontier_cell(
+    cluster,
+) -> tuple[int, int]:
+
+    centroid_row, centroid_column = frontier_cluster_centroid(cluster)
+
+    representative = min(
+        cluster,
+        key=lambda cell: (
+            (cell[0] - centroid_row) ** 2
+            + (cell[1] - centroid_column) ** 2,
+            cell[0],
+            cell[1],
+        ),
+    )
+
+    return representative
