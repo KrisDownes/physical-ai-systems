@@ -26,6 +26,14 @@ def generate_launch_description() -> LaunchDescription:
         ]
     )
 
+    slam_config_file = PathJoinSubstitution(
+        [
+            FindPackageShare('rover_exploration'),
+            'config',
+            'slam_toolbox.yaml',
+        ]
+    )
+
     simulation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(simulation_file)
     )
@@ -33,6 +41,7 @@ def generate_launch_description() -> LaunchDescription:
     slam = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(slam_file),
         launch_arguments={
+            'slam_params_file': slam_config_file,
             'use_sim_time': 'true',
         }.items(),
     )

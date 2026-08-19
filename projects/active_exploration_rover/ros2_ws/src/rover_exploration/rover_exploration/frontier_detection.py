@@ -1,4 +1,5 @@
 from collections import deque
+import math
 
 neighbor_offsets = (
     (-1, 0),  # north
@@ -116,3 +117,42 @@ def representative_frontier_cell(
     )
 
     return representative
+
+
+def world_point_to_grid_cell(
+    world_x,
+    world_y,
+    resolution,
+    origin_x,
+    origin_y,
+) -> tuple[int, int]:
+
+    if resolution <= 0:
+        raise ValueError('Resolution has to be positive')
+
+    grid_column = (world_x - origin_x) / resolution
+    grid_row = (world_y - origin_y) / resolution
+
+    nearest_column = round(grid_column)
+    nearest_row = round(grid_row)
+
+    if math.isclose(
+        grid_column,
+        nearest_column,
+        rel_tol=0.0,
+        abs_tol=1e-9,
+    ):
+        grid_column = nearest_column
+
+    if math.isclose(
+        grid_row,
+        nearest_row,
+        rel_tol=0.0,
+        abs_tol=1e-9,
+    ):
+        grid_row = nearest_row
+
+    column = math.floor(grid_column)
+    row = math.floor(grid_row)
+
+    return row, column

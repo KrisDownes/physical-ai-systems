@@ -63,6 +63,7 @@ def generate_launch_description() -> LaunchDescription:
         arguments=[
             "/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist",
             "/model/kd_bot/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry",
+            "/ground_truth/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry",
             "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
             "/model/kd_bot/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V",
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
@@ -70,7 +71,7 @@ def generate_launch_description() -> LaunchDescription:
         ],
         remappings=[
             ("/model/kd_bot/tf", "/tf"),
-            ("/world/kd_world/model/kd_bot/joint_state", "/joint_states")
+            ("/world/kd_world/model/kd_bot/joint_state", "/joint_states"),
         ],
     )
 

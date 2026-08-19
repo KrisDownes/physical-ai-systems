@@ -15,6 +15,8 @@ class ExplorationController(Node):
         self.forward_speed = 0.20
         self.turn_trigger_distance = 0.80
         self.turn_speed = 0.60
+        self.turn_direction = None
+        self.turn_clear_distance = 1.0
 
         self.front_distance = None
         self.left_distance = None
@@ -44,21 +46,41 @@ class ExplorationController(Node):
 
     def control_callback(self):
         command = Twist()
+
         if self.front_distance is None:
             pass
+
+        elif self.turn_direction is not None:
+            if self.front_distance <= self.turn_clear_distance:
+                command.angular.z = (
+                    self.turn_direction * self.turn_speed
+                )
+            else:
+                self.turn_direction = None
+                command.linear.x = self.forward_speed
+
         elif self.front_distance > self.turn_trigger_distance:
             command.linear.x = self.forward_speed
+
         else:
-            if self.left_distance is None and self.right_distance is None:
+            if (
+                self.left_distance is None
+                and self.right_distance is None
+            ):
                 pass
             elif self.right_distance is None:
-                command.angular.z = self.turn_speed
+                self.turn_direction = 1.0
             elif self.left_distance is None:
-                command.angular.z = -self.turn_speed
+                self.turn_direction = -1.0
             elif self.left_distance >= self.right_distance:
-                command.angular.z = self.turn_speed
+                self.turn_direction = 1.0
             else:
-                command.angular.z = -self.turn_speed
+                self.turn_direction = -1.0
+
+            if self.turn_direction is not None:
+                command.angular.z = (
+                    self.turn_direction * self.turn_speed
+                )
 
         self.command_publisher.publish(command)
 
