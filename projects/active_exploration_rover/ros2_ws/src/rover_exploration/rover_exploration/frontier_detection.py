@@ -156,3 +156,29 @@ def world_point_to_grid_cell(
     row = math.floor(grid_row)
 
     return row, column
+
+
+def select_nearest_frontier_candidate(
+    frontier_clusters,
+    robot_grid_cell,
+) -> tuple[int, int] | None:
+
+    if robot_grid_cell is None or not frontier_clusters:
+        return None
+
+    robot_row, robot_column = robot_grid_cell
+
+    candidate_cells = (
+        representative_frontier_cell(cluster)
+        for cluster in frontier_clusters
+    )
+
+    return min(
+        candidate_cells,
+        key=lambda cell: (
+            (cell[0] - robot_row) ** 2
+            + (cell[1] - robot_column) ** 2,
+            cell[0],
+            cell[1],
+        ),
+    )

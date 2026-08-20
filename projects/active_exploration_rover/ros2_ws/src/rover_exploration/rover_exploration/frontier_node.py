@@ -1,5 +1,7 @@
-from geometry_msgs.msg import Point
-from nav_msgs.msg import OccupancyGrid
+import math
+
+from geometry_msgs.msg import Point, PoseStamped
+from nav_msgs.msg import OccupancyGrid, Path
 import rclpy
 from rclpy.node import Node
 from rclpy.time import Time
@@ -8,7 +10,12 @@ from rover_exploration.frontier_detection import (
     find_frontier_cells,
     grid_cell_center,
     representative_frontier_cell,
+    select_nearest_frontier_candidate,
     world_point_to_grid_cell,
+)
+from rover_exploration.grid_planning import (
+    find_grid_path,
+    inflate_occupancy_grid,
 )
 from tf2_ros import TransformException
 from tf2_ros.buffer import Buffer
@@ -23,6 +30,12 @@ class FrontierDetector(Node):
         self.frontier_cells = set()
         self.frontier_clusters = []
         self.robot_grid_cell = None
+        self.selected_frontier_cell = None
+        self.current_grid_path = None
+
+        self.rover_length_m = 0.45
+        self.rover_width_m = 0.30
+        self.path_clearance_m = 0.05
 
         self.frontier_publisher = self.create_publisher(
             Marker,
@@ -40,6 +53,12 @@ class FrontierDetector(Node):
             OccupancyGrid,
             '/map',
             self.map_callback,
+            10,
+        )
+
+        self.path_publisher = self.create_publisher(
+            Path,
+            '/planned_path',
             10,
         )
 
@@ -103,6 +122,62 @@ class FrontierDetector(Node):
                     f'grid_float=({grid_y:.12f}, {grid_x:.12f}) '
                     f'grid=({robot_row}, {robot_column})'
                 )
+        self.selected_frontier_cell = (
+            select_nearest_frontier_candidate(
+                frontier_clusters=self.frontier_clusters,
+                robot_grid_cell=self.robot_grid_cell,
+            )
+        )
+
+        rover_radius_m = math.hypot(
+            self.rover_length_m / 2.0,
+            self.rover_width_m / 2.0,
+        )
+
+        inflation_radius_cells = math.ceil(
+            (rover_radius_m + self.path_clearance_m)
+            / map_message.info.resolution
+        )
+
+        inflated_data = inflate_occupancy_grid(
+            data=map_message.data,
+            width=map_message.info.width,
+            height=map_message.info.height,
+            inflation_radius_cells=inflation_radius_cells,
+        )
+
+        self.current_grid_path = find_grid_path(
+            data=inflated_data,
+            width=map_message.info.width,
+            height=map_message.info.height,
+            start=self.robot_grid_cell,
+            goal=self.selected_frontier_cell,
+        )
+
+        path_message = Path()
+        path_message.header = map_message.header
+
+        if self.current_grid_path is not None:
+            for row, column in self.current_grid_path:
+                world_x, world_y = grid_cell_center(
+                    row=row,
+                    column=column,
+                    resolution=map_message.info.resolution,
+                    origin_x=map_message.info.origin.position.x,
+                    origin_y=map_message.info.origin.position.y,
+                )
+
+                path_pose = PoseStamped()
+                path_pose.header = map_message.header
+
+                path_pose.pose.position.x = world_x
+                path_pose.pose.position.y = world_y
+                path_pose.pose.position.z = 0.0
+                path_pose.pose.orientation.w = 1.0
+
+                path_message.poses.append(path_pose)
+
+        self.path_publisher.publish(path_message)
 
         marker = Marker()
         marker.header = map_message.header
@@ -138,6 +213,78 @@ class FrontierDetector(Node):
         candidate_marker.color.g = 1.0
         candidate_marker.color.b = 0.0
         candidate_marker.color.a = 1.0
+
+        selected_marker = Marker()
+        selected_marker.header = map_message.header
+        selected_marker.ns = 'selected_frontier'
+        selected_marker.id = 0
+
+        if self.selected_frontier_cell is None:
+            selected_marker.action = Marker.DELETE
+        else:
+            selected_row, selected_column = (
+                self.selected_frontier_cell
+            )
+
+            selected_x, selected_y = grid_cell_center(
+                row=selected_row,
+                column=selected_column,
+                resolution=map_message.info.resolution,
+                origin_x=map_message.info.origin.position.x,
+                origin_y=map_message.info.origin.position.y,
+            )
+
+            selected_marker.type = Marker.SPHERE
+            selected_marker.action = Marker.ADD
+
+            selected_marker.pose.position.x = selected_x
+            selected_marker.pose.position.y = selected_y
+            selected_marker.pose.position.z = 0.15
+            selected_marker.pose.orientation.w = 1.0
+
+            selected_marker.scale.x = 0.25
+            selected_marker.scale.y = 0.25
+            selected_marker.scale.z = 0.25
+
+            selected_marker.color.r = 0.0
+            selected_marker.color.g = 0.0
+            selected_marker.color.b = 1.0
+            selected_marker.color.a = 1.0
+
+        path_marker = Marker()
+        path_marker.header = map_message.header
+        path_marker.ns = 'planned_path'
+        path_marker.id = 0
+        path_marker.type = Marker.LINE_STRIP
+        path_marker.pose.orientation.w = 1.0
+
+        path_marker.scale.x = 0.04
+
+        path_marker.color.r = 1.0
+        path_marker.color.g = 1.0
+        path_marker.color.b = 0.0
+        path_marker.color.a = 1.0
+
+        if self.current_grid_path is None:
+            path_marker.action = Marker.DELETE
+        else:
+            path_marker.action = Marker.ADD
+
+            for row, column in self.current_grid_path:
+                world_x, world_y = grid_cell_center(
+                    row=row,
+                    column=column,
+                    resolution=map_message.info.resolution,
+                    origin_x=map_message.info.origin.position.x,
+                    origin_y=map_message.info.origin.position.y,
+                )
+
+                path_point = Point()
+                path_point.x = world_x
+                path_point.y = world_y
+                path_point.z = 0.20
+
+                path_marker.points.append(path_point)
 
         for cluster in self.frontier_clusters:
             representative_row, representative_column = (
@@ -176,12 +323,22 @@ class FrontierDetector(Node):
 
         self.frontier_publisher.publish(marker)
         self.frontier_publisher.publish(candidate_marker)
+        self.frontier_publisher.publish(selected_marker)
+        self.frontier_publisher.publish(path_marker)
+
+        path_cells = (
+            0 if self.current_grid_path is None
+            else len(self.current_grid_path)
+        )
 
         self.get_logger().info(
             f'map={map_message.info.width}x{map_message.info.height} '
             f'frontier_cells={len(self.frontier_cells)} '
             f'frontier_clusters={len(self.frontier_clusters)} '
-            f'robot_grid_cell={self.robot_grid_cell}'
+            f'robot_grid_cell={self.robot_grid_cell} '
+            f'selected_frontier_cell={self.selected_frontier_cell} '
+            f'path_cells={path_cells} '
+            f'inflation_radius_cells={inflation_radius_cells}'
         )
 
 
