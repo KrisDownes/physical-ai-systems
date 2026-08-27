@@ -32,6 +32,8 @@ setup(
     entry_points={
         'console_scripts': [
             'frontier_detector = rover_exploration.frontier_node:main',
+            'evaluate_mission_bag = '
+            'rover_exploration.mission_evaluator:main',
         ],
     },
 )

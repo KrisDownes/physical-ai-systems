@@ -307,6 +307,25 @@ class DebounceHarness:
         detector.completion_debounce_period_s = period_s
         detector.visited_goal_regions = []
         detector.permanent_failed_regions = []
+        detector.goals_assigned = 0
+        detector.goals_reached = 0
+        detector.failure_events = 0
+        detector.temporary_failure_events = 0
+        detector.recovery_requests = 0
+        detector.frontier_cells = set()
+        detector.frontier_clusters = []
+        detector.exploration_complete = False
+        detector.exploration_complete_publisher = type(
+            'Pub', (), {'publish': lambda self, m: None}
+        )()
+        detector.exploration_result_publisher = type(
+            'Pub', (), {'publish': lambda self, m: None}
+        )()
+        detector.recovery_cycle = __import__(
+            'rover_exploration.recovery_coordination',
+            fromlist=['RecoveryCoordinationState'],
+        ).RecoveryCoordinationState()
+        detector.committed_goal_world = None
 
         self.clock_s = 0.0
         detector.node_time_s = lambda: self.clock_s

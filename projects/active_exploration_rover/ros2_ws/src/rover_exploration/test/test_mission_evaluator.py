@@ -1,0 +1,905 @@
+"""
+Test the V15 mission evaluator (receipt-time / simulation-time fixes).
+
+Bag reading is exercised separately; here we test the pure metric, clock
+mapping, completion-validation, and pass/fail logic directly with synthetic
+ROS messages so no large bag is required.
+"""
+
+import inspect
+import math
+
+from rover_exploration import mission_evaluator as me
+from rover_exploration.frontier_node import FrontierDetector
+
+
+def make_bool(value):
+    from std_msgs.msg import Bool
+    m = Bool()
+    m.data = value
+    return m
+
+
+def make_string(text):
+    from std_msgs.msg import String
+    m = String()
+    m.data = text
+    return m
+
+
+def make_clock(receipt_ns, sim_s):
+    from rosgraph_msgs.msg import Clock
+    m = Clock()
+    m.clock.sec = int(sim_s)
+    m.clock.nanosec = int((sim_s - int(sim_s)) * 1e9)
+    return receipt_ns, m
+
+
+def make_map(percent_known=99.0, size=10):
+    from nav_msgs.msg import OccupancyGrid
+    m = OccupancyGrid()
+    m.info.width = size
+    m.info.height = size
+    known = int(percent_known / 100.0 * (size * size))
+    m.data = [0] * known + [-1] * (size * size - known)
+    return m
+
+
+def make_odom(receipt_ns, sim_s, x, y, yaw, frame='odom'):
+    from geometry_msgs.msg import Quaternion
+    from nav_msgs.msg import Odometry
+    m = Odometry()
+    m.header.stamp.sec = int(sim_s)
+    m.header.stamp.nanosec = int((sim_s - int(sim_s)) * 1e9)
+    m.header.frame_id = frame
+    m.pose.pose.position.x = x
+    m.pose.pose.position.y = y
+    qz = math.sin(yaw / 2.0)
+    qw = math.cos(yaw / 2.0)
+    m.pose.pose.orientation = Quaternion(x=0.0, y=0.0, z=qz, w=qw)
+    return receipt_ns, m
+
+
+def make_tf(receipt_ns, sim_s, tx, ty, yaw, frame='map', child='odom'):
+    from geometry_msgs.msg import Quaternion, TransformStamped
+    from geometry_msgs.msg import Vector3
+    from tf2_msgs.msg import TFMessage
+    tr = TransformStamped()
+    tr.header.stamp.sec = int(sim_s)
+    tr.header.stamp.nanosec = int((sim_s - int(sim_s)) * 1e9)
+    tr.header.frame_id = frame
+    tr.child_frame_id = child
+    tr.transform.translation = Vector3(x=tx, y=ty, z=0.0)
+    qz = math.sin(yaw / 2.0)
+    qw = math.cos(yaw / 2.0)
+    tr.transform.rotation = Quaternion(x=0.0, y=0.0, z=qz, w=qw)
+    msg = TFMessage()
+    msg.transforms.append(tr)
+    return receipt_ns, msg
+
+
+def make_path(receipt_ns, poses):
+    from geometry_msgs.msg import PoseStamped
+    from nav_msgs.msg import Path
+    p = Path()
+    for _ in range(poses):
+        p.poses.append(PoseStamped())
+    return receipt_ns, p
+
+
+def make_twist(x=0.0, z=0.0):
+    from geometry_msgs.msg import Twist
+    t = Twist()
+    t.linear.x = x
+    t.angular.z = z
+    return t
+
+
+def result_payload(**overrides):
+    payload = {
+        'schema_version': 1,
+        'completed': True,
+        'completion_time_s': 100.0,
+        'goals_assigned': 3,
+        'goals_reached': 3,
+        'failure_events': 0,
+        'temporary_failure_events': 0,
+        'permanent_failed_regions': 0,
+        'recovery_requests': 0,
+        'visited_regions': 3,
+        'frontier_cells': 0,
+        'frontier_clusters': 0,
+    }
+    payload.update(overrides)
+    return payload
+
+
+# Realistic receipt timestamps (Unix epoch ~1.787e18 ns) while /clock carries
+# small simulation seconds (0-150). This exposes receipt/sim-time mixing.
+RECEIPT_BASE = 1_787_000_000_000_000_000
+
+
+def build_successful_mission():
+    """
+    Build a passing mission with realistic receipt/sim time separation.
+
+    Bag receipt timestamps use the Unix epoch (~1.787e18 ns) while /clock
+    carries small simulation seconds (0-150), exposing any receipt/sim
+    time mixing in the evaluator.
+    """
+    collected = {topic: [] for topic in me.REQUIRED_TOPICS}
+    # /clock: receipt ns maps to small sim seconds via the mapper.
+    collected['/clock'] = [
+        make_clock(RECEIPT_BASE + 0, 0.0),
+        make_clock(RECEIPT_BASE + 10_000_000_000, 150.0),
+    ]
+    # Completion: false then true, with realistic receipt timestamps.
+    collected['/exploration_complete'] = [
+        (RECEIPT_BASE + 1_000_000_000, make_bool(False)),
+        (RECEIPT_BASE + 5_000_000_000, make_bool(True)),
+    ]
+    # The completion receipt (5e9) maps through the /clock pair
+    # (0->0, 1e10->150) to sim time 75.0, so the result must carry the
+    # matching completion_time_s to be associated by evaluate_mission.
+    collected['/exploration_result'] = [
+        (
+            RECEIPT_BASE + 5_000_000_001,
+            make_string(
+                __import__('json').dumps(
+                    result_payload(completion_time_s=75.0)
+                )
+            ),
+        )
+    ]
+    collected['/map'] = [(RECEIPT_BASE + 2_000_000_000, make_map(99.0))]
+    collected['/cmd_vel'] = [
+        (RECEIPT_BASE + 3_000_000_000, make_twist(0.0, 0.0))
+    ]
+    collected['/cmd_vel_raw'] = [
+        (RECEIPT_BASE + 3_000_000_000, make_twist(0.0, 0.0))
+    ]
+    collected['/planned_path'] = [
+        make_path(RECEIPT_BASE + 3_000_000_000, 0)
+    ]
+    # Stationary (filtered and ground truth agree, rover stopped).
+    # Two samples straddle completion (at sim 80 and 140) so the
+    # after-completion ground-truth window has >= 2 samples.
+    collected['/odometry/filtered'] = [
+        make_odom(RECEIPT_BASE + 3_000_000_000, 80.0, 0.0, 0.0, 0.0),
+        make_odom(RECEIPT_BASE + 6_000_000_000, 140.0, 0.0, 0.0, 0.0),
+    ]
+    collected['/ground_truth/odometry'] = [
+        make_odom(
+            RECEIPT_BASE + 3_000_000_000, 80.0, 0.0, 0.0, 0.0,
+            frame='base_footprint',
+        ),
+        make_odom(
+            RECEIPT_BASE + 5_500_000_000, 110.0, 0.0, 0.0, 0.0,
+            frame='base_footprint',
+        ),
+        make_odom(
+            RECEIPT_BASE + 6_000_000_000, 140.0, 0.0, 0.0, 0.0,
+            frame='base_footprint',
+        ),
+    ]
+    # Two map->odom transforms (>= 2 required) so the correction-step
+    # telemetry check passes.
+    collected['/tf'] = [
+        make_tf(RECEIPT_BASE + 3_000_000_000, 80.0, 0.01, 0.0, 0.01),
+        make_tf(RECEIPT_BASE + 6_000_000_000, 140.0, 0.02, 0.0, 0.02),
+    ]
+    collected['/recovery_request'] = []
+    return collected
+
+
+# ---------------------------------------------------------------------------
+# Clock mapping (receipt ns -> simulation seconds)
+# ---------------------------------------------------------------------------
+
+def test_receipt_to_sim_clamps_below_and_above():
+    pairs = [
+        (RECEIPT_BASE + 0, 0.0),
+        (RECEIPT_BASE + 10_000_000_000, 100.0),
+        (RECEIPT_BASE + 20_000_000_000, 200.0),
+    ]
+    assert me.receipt_to_sim(RECEIPT_BASE - 5, pairs) == 0.0
+    assert me.receipt_to_sim(RECEIPT_BASE + 99_000_000_000, pairs) == 200.0
+
+
+def test_receipt_to_sim_interpolates_linearly():
+    pairs = [
+        (RECEIPT_BASE + 0, 0.0),
+        (RECEIPT_BASE + 10_000_000_000, 100.0),
+    ]
+    got = me.receipt_to_sim(RECEIPT_BASE + 5_000_000_000, pairs)
+    assert abs(got - 50.0) < 1e-6
+
+
+def test_receipt_to_sim_never_mixes_domains():
+    # Realistic receipt ns with tiny sim values: a direct subtraction would
+    # give ~ -1.787e9. The mapper must return the small sim value.
+    pairs = [
+        (RECEIPT_BASE + 0, 0.0),
+        (RECEIPT_BASE + 10_000_000_000, 150.0),
+    ]
+    got = me.receipt_to_sim(RECEIPT_BASE + 5_000_000_000, pairs)
+    assert 0.0 < got < 200.0
+
+
+# ---------------------------------------------------------------------------
+# Completion time + final-state validation
+# ---------------------------------------------------------------------------
+
+def test_completion_time_s_is_nonzero_and_correct():
+    collected = build_successful_mission()
+    result, _, _ = me.evaluate_mission(collected)
+    # Completing transition receipt ns = RECEIPT_BASE + 5e9 maps between
+    # clock(0 -> 0s) and clock(10e9 -> 150s): 75s.
+    assert abs(result['completion_time_s'] - 75.0) < 1e-6
+    assert result['completion_time_s'] > 0.0
+
+
+def test_post_completion_duration_uses_sim_domain():
+    collected = build_successful_mission()
+    result, _, _ = me.evaluate_mission(collected)
+    # final clock sim = 150; completion sim = 75 => 75s observation.
+    assert abs(result['post_completion_observation_s'] - 75.0) < 1e-6
+
+
+def test_false_true_false_fails_final_state_false():
+    collected = build_successful_mission()
+    collected['/exploration_complete'].append(
+        (RECEIPT_BASE + 7_000_000_000, make_bool(False))
+    )
+    collected['/exploration_result'] = []  # no result after reversion
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('final' in r.lower() for r in reasons)
+
+
+def test_true_false_true_fails_first_state_not_false():
+    # true -> false -> true: a passing final state, but the FIRST recorded
+    # state was not false, so it must fail on that rule specifically.
+    collected = build_successful_mission()
+    collected['/exploration_complete'] = [
+        (RECEIPT_BASE + 1_000_000_000, make_bool(True)),
+        (RECEIPT_BASE + 3_000_000_000, make_bool(False)),
+        (RECEIPT_BASE + 5_000_000_000, make_bool(True)),
+    ]
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(
+            __import__('json').dumps(result_payload())))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('first recorded' in r.lower() for r in reasons)
+
+
+def test_zero_transitions_fails():
+    collected = build_successful_mission()
+    # Only a single false (no transition at all).
+    collected['/exploration_complete'] = [
+        (RECEIPT_BASE + 1_000_000_000, make_bool(False))
+    ]
+    collected['/exploration_result'] = []
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('transition' in r.lower() for r in reasons)
+
+
+def test_multiple_transitions_fails():
+    collected = build_successful_mission()
+    # false -> true -> false -> true : two false->true transitions.
+    collected['/exploration_complete'] = [
+        (RECEIPT_BASE + 1_000_000_000, make_bool(False)),
+        (RECEIPT_BASE + 3_000_000_000, make_bool(True)),
+        (RECEIPT_BASE + 5_000_000_000, make_bool(False)),
+        (RECEIPT_BASE + 7_000_000_000, make_bool(True)),
+    ]
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 7_000_000_001, make_string(
+            __import__('json').dumps(result_payload())))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('one false' in r.lower() for r in reasons)
+
+
+def test_true_without_recorded_false_fails():
+    collected = build_successful_mission()
+    collected['/exploration_complete'] = [
+        (RECEIPT_BASE + 5_000_000_000, make_bool(True))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('first recorded' in r.lower() for r in reasons)
+
+
+def test_synthetic_successful_mission_passes():
+    collected = build_successful_mission()
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert passed, reasons
+
+
+# ---------------------------------------------------------------------------
+# Result validation
+# ---------------------------------------------------------------------------
+
+def test_empty_result_string_fails():
+    collected = build_successful_mission()
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(''))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('result' in r.lower() for r in reasons)
+
+
+def test_malformed_json_result_fails():
+    collected = build_successful_mission()
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string('{not json'))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_missing_key_result_fails():
+    collected = build_successful_mission()
+    payload = result_payload()
+    del payload['goals_assigned']
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(__import__('json').dumps(payload)))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_extra_key_result_fails():
+    collected = build_successful_mission()
+    payload = result_payload()
+    payload['bonus'] = 1
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(__import__('json').dumps(payload)))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_wrong_schema_version_fails():
+    collected = build_successful_mission()
+    payload = result_payload(schema_version=2)
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(__import__('json').dumps(payload)))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_completed_false_result_fails():
+    collected = build_successful_mission()
+    payload = result_payload(completed=False)
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(__import__('json').dumps(payload)))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+# ---------------------------------------------------------------------------
+# Strengthened structured-result validation
+# ---------------------------------------------------------------------------
+
+def _set_result(collected, **overrides):
+    payload = result_payload(**overrides)
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(
+            __import__('json').dumps(payload)))
+    ]
+
+
+def test_result_boolean_completion_time_fails():
+    collected = build_successful_mission()
+    _set_result(collected, completion_time_s=True)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_result_nan_completion_time_fails():
+    collected = build_successful_mission()
+    _set_result(collected, completion_time_s=float('nan'))
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_result_inf_completion_time_fails():
+    collected = build_successful_mission()
+    _set_result(collected, completion_time_s=float('inf'))
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_result_negative_completion_time_fails():
+    collected = build_successful_mission()
+    _set_result(collected, completion_time_s=-1.0)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_result_boolean_counter_fails():
+    collected = build_successful_mission()
+    _set_result(collected, goals_assigned=True)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_result_negative_counter_fails():
+    collected = build_successful_mission()
+    _set_result(collected, recovery_requests=-1)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+
+
+def test_result_timestamp_inconsistent_with_transition_fails():
+    # Result completion_time_s must agree with the mapped transition time
+    # (75s in build_successful_mission) within 0.5s.
+    collected = build_successful_mission()
+    _set_result(collected, completion_time_s=200.0)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('result' in r.lower() for r in reasons)
+
+
+# ---------------------------------------------------------------------------
+# Telemetry sufficiency
+# ---------------------------------------------------------------------------
+
+def test_insufficient_clock_messages_fails():
+    collected = build_successful_mission()
+    collected['/clock'] = [make_clock(RECEIPT_BASE + 0, 0.0)]  # only one
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('clock' in r.lower() for r in reasons)
+
+
+def test_no_final_map_fails():
+    collected = build_successful_mission()
+    collected['/map'] = []
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('map' in r.lower() for r in reasons)
+
+
+def test_insufficient_filtered_odometry_fails():
+    collected = build_successful_mission()
+    collected['/odometry/filtered'] = [
+        make_odom(RECEIPT_BASE + 3_000_000_000, 80.0, 0.0, 0.0, 0.0)
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('odometry/filtered' in r.lower() for r in reasons)
+
+
+def test_insufficient_ground_truth_fails():
+    collected = build_successful_mission()
+    collected['/ground_truth/odometry'] = [
+        make_odom(RECEIPT_BASE + 3_000_000_000, 80.0, 0.0, 0.0, 0.0,
+                  frame='base_footprint')
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('ground_truth' in r.lower() for r in reasons)
+
+
+def test_insufficient_map_to_odom_transforms_fails():
+    collected = build_successful_mission()
+    collected['/tf'] = [
+        make_tf(RECEIPT_BASE + 3_000_000_000, 80.0, 0.01, 0.0, 0.01)
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('map->odom' in r.lower() for r in reasons)
+
+
+def test_insufficient_ground_truth_after_completion_fails():
+    collected = build_successful_mission()
+    # Only one ground-truth sample after completion.
+    collected['/ground_truth/odometry'] = [
+        make_odom(RECEIPT_BASE + 6_000_000_000, 140.0, 0.0, 0.0, 0.0,
+                  frame='base_footprint')
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('after completion' in r.lower() for r in reasons)
+
+
+# ---------------------------------------------------------------------------
+# Frontier component reporting (residual components + selectable count)
+# ---------------------------------------------------------------------------
+
+def test_residual_frontier_components_reported_selectable_zero():
+    # A map that is >= 98% known but contains small residual frontier
+    # clusters (each < 5 cells), so selectable count stays zero.
+    from nav_msgs.msg import OccupancyGrid
+    collected = build_successful_mission()
+    size = 15
+    m = OccupancyGrid()
+    m.info.width = size
+    m.info.height = size
+    # All free (known), then carve a few isolated unknown pockets.
+    data = [0] * (size * size)
+    # Three separate single unknown cells (interior) -> each yields a
+    # small (<=4 cell) frontier cluster around it.
+    for idx in (11, 44, 77):
+        data[idx] = -1
+    m.data = data
+    collected['/map'] = [(RECEIPT_BASE + 2_000_000_000, m)]
+    result, passed, reasons = me.evaluate_mission(collected)
+    # All residual sizes reported, none >= 5 -> selectable == 0.
+    assert result['final_frontier_component_sizes']
+    assert all(s < 5 for s in result['final_frontier_component_sizes'])
+    assert result['selectable_frontier_components'] == 0
+    assert passed, reasons
+
+
+def test_five_cell_component_fails():
+    from nav_msgs.msg import OccupancyGrid
+    collected = build_successful_mission()
+    m = OccupancyGrid()
+    size = 9
+    m.info.width = size
+    m.info.height = size
+    data = [-1] * (size * size)
+    # A horizontal run of 5 free cells (one cluster >= 5).
+    for i in range(5):
+        data[i] = 0
+    m.data = data
+    collected['/map'] = [(RECEIPT_BASE + 2_000_000_000, m)]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert any(s >= 5 for s in result['final_frontier_component_sizes'])
+    assert not passed
+    assert any('>= 5' in r for r in reasons)
+
+
+# ---------------------------------------------------------------------------
+# Post-completion displacement (max excursion, not endpoint delta)
+# ---------------------------------------------------------------------------
+
+def test_move_away_and_return_reports_max_excursion():
+    collected = build_successful_mission()
+    # After completion (receipt > RECEIPT_BASE + 5e9), rover leaves and
+    # returns to start: endpoint delta is ~0 but max excursion is not.
+    post = [
+        make_odom(
+            RECEIPT_BASE + 6_000_000_000, 140.0, 1.0, 0.0, 0.0,
+            frame='base_footprint'),
+        make_odom(
+            RECEIPT_BASE + 8_000_000_000, 145.0, 0.0, 0.0, 0.0,
+            frame='base_footprint'),
+    ]
+    collected['/ground_truth/odometry'] = post
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert abs(result['ground_truth_motion_after_completion_m'] - 1.0) < 1e-6
+    assert not passed
+    assert any('0.01' in r for r in reasons)
+
+
+# ---------------------------------------------------------------------------
+# Yaw unwrapping across multiple rotations (>720 deg)
+# ---------------------------------------------------------------------------
+
+def test_yaw_unwrap_beyond_720_degrees():
+    # Monotonic steps of 1.0 rad avoid the +/-pi ambiguity; 14 points
+    # span 13.0 rad (~745 deg) > 720 deg and must stay continuous.
+    angles = [float(k) for k in range(14)]
+    out = me.unwrap_sequence(angles)
+    assert out[-1] == 13.0
+    assert out[-1] > 4.0 * math.pi
+
+
+def test_alignment_handles_multirotation_yaw():
+    # Filtered and ground truth both rotate >720 deg; yaw error ~ 0.
+    # Consecutive samples differ by < pi so unwrapping is unambiguous.
+    filtered, gt = [], []
+    for k in range(13):
+        s = k * 1.0
+        yaw = k * (4 * math.pi / 12.0)  # up to 4pi over the sequence
+        filtered.append((s, math.cos(yaw), math.sin(yaw), yaw))
+        gt.append((s, math.cos(yaw), math.sin(yaw), yaw))
+    max_yaw, max_pos = me.align_trajectories(filtered, gt)
+    assert max_yaw < 1e-6
+    assert max_pos < 1e-6
+
+
+# ---------------------------------------------------------------------------
+# Cumulative relative-yaw error (no re-wrap into +/-180 deg)
+# ---------------------------------------------------------------------------
+
+def test_cumulative_yaw_error_both_rotate_720():
+    # Both complete >720 deg of rotation; reported error ~ 0 (not wrapped).
+    filtered, gt = [], []
+    for k in range(13):
+        s = k * 1.0
+        yaw = k * (4 * math.pi / 12.0)
+        filtered.append((s, 0.0, 0.0, yaw))
+        gt.append((s, 0.0, 0.0, yaw))
+    max_yaw, _ = me.align_trajectories(filtered, gt)
+    assert max_yaw < 1e-6
+
+
+def test_cumulative_yaw_error_relative_720():
+    # Filtered rotates 720 deg relative to STATIONARY ground truth.
+    # Reported maximum error must be ~720 deg, not clamped to 180 deg.
+    filtered, gt = [], []
+    for k in range(13):
+        s = k * 1.0
+        yaw = k * (4 * math.pi / 12.0)
+        filtered.append((s, 0.0, 0.0, yaw))
+        gt.append((s, 0.0, 0.0, 0.0))  # stationary
+    max_yaw, _ = me.align_trajectories(filtered, gt)
+    assert abs(max_yaw - 4 * math.pi) < 1e-6
+
+
+# ---------------------------------------------------------------------------
+# Rigid trajectory-frame alignment (odom vs Gazebo world frames)
+# ---------------------------------------------------------------------------
+
+def _traj(initial, final, n=11):
+    """Linear motion from initial (x, y, yaw) to final (x, y, yaw)."""
+    pts = []
+    for k in range(n):
+        f = k / (n - 1)
+        x = initial[0] + f * (final[0] - initial[0])
+        y = initial[1] + f * (final[1] - initial[1])
+        yaw = initial[2] + f * (final[2] - initial[2])
+        pts.append((float(k), x, y, yaw))
+    return pts
+
+
+def test_alignment_cardinal_frame_offset():
+    # Filtered odom and ground truth represent the SAME one-metre forward
+    # motion but in frames offset by (5, 2) and 90 deg. Errors ~ 0.
+    filtered = _traj((0.0, 0.0, 0.0), (1.0, 0.0, 0.0))
+    gt = _traj((5.0, 2.0, math.pi / 2), (5.0, 3.0, math.pi / 2))
+    max_yaw, max_pos = me.align_trajectories(filtered, gt)
+    assert max_pos < 1e-6
+    assert max_yaw < 1e-6
+
+
+def test_alignment_arbitrary_frame_offset():
+    # Same motion, arbitrary non-cardinal frame offset (37 deg).
+    offset = math.radians(37.0)
+    filtered = _traj((0.0, 0.0, 0.0), (1.0, 0.0, 0.0))
+    # Ground truth shares the initial 37 deg yaw offset and a translation.
+    gt = _traj(
+        (4.0, -1.0, offset),
+        (4.0 + math.cos(offset), -1.0 + math.sin(offset), offset),
+    )
+    max_yaw, max_pos = me.align_trajectories(filtered, gt)
+    assert max_pos < 1e-6
+    assert max_yaw < 1e-6
+
+
+def test_alignment_is_not_quadratic():
+    # Two-pointer + binary search: O(n log m), not nested full scan.
+    import time
+    filtered = [(float(k), float(k), 0.0, 0.0) for k in range(2000)]
+    gt = [(float(k) + 0.5, float(k), 0.0, 0.0) for k in range(2000)]
+    t0 = time.perf_counter()
+    me.align_trajectories(filtered, gt)
+    elapsed = time.perf_counter() - t0
+    # Should finish in well under a second (linear-ish, not n^2).
+    assert elapsed < 1.0
+
+
+# ---------------------------------------------------------------------------
+# Node-side: QoS, initial latched false, lifecycle counter ownership
+# ---------------------------------------------------------------------------
+
+def _make_node():
+    """Construct a FrontierDetector with stubbed ROS plumbing only."""
+    from unittest.mock import MagicMock
+    from rover_exploration.frontier_node import FrontierDetector
+
+    node = FrontierDetector.__new__(FrontierDetector)
+    node.get_logger = lambda: MagicMock()
+    node.get_clock = lambda: MagicMock()
+    node.exploration_complete = False
+    node.exploration_complete_publisher = MagicMock()
+    node.exploration_result_publisher = MagicMock()
+    node.recovery_cycle = MagicMock()
+    node.recovery_request_publisher = MagicMock()
+    node.committed_goal_world = None
+    node.goals_assigned = 0
+    node.goals_reached = 0
+    node.failure_events = 0
+    node.temporary_failure_events = 0
+    node.recovery_requests = 0
+    node.permanent_failed_regions = []
+    node.visited_goal_regions = []
+    node.frontier_cells = []
+    node.frontier_clusters = []
+    node.permanent_after_failures = 3
+    node.node_time_s = lambda: 100.0
+    return node
+
+
+def test_completion_qos_is_reliable_transient_local_keep_last_1():
+    """Verify completion publishers use reliable + transient-local + keep-last depth-1 QoS."""
+    import ast
+
+    source = inspect.getsource(FrontierDetector)
+    tree = ast.parse(source)
+
+    # Find the completion_qos = QoSProfile(...) assignment and its kwargs.
+    qos_kwargs = None
+    publisher_topics = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name) and \
+                        target.id == 'completion_qos':
+                    if isinstance(node.value, ast.Call):
+                        qos_kwargs = {
+                            kw.arg: kw.value
+                            for kw in node.value.keywords
+                        }
+        if isinstance(node, ast.Call):
+            func = node.func
+            if isinstance(func, ast.Attribute) and \
+                    func.attr == 'create_publisher':
+                # create_publisher(Type, topic, qos)
+                if len(node.args) >= 3:
+                    topic_arg = node.args[1]
+                    if isinstance(topic_arg, ast.Constant):
+                        publisher_topics.append(topic_arg.value)
+
+    assert qos_kwargs is not None, 'completion_qos not found in source'
+    # ReliabilityPolicy.RELIABLE
+    rel = qos_kwargs.get('reliability')
+    assert isinstance(rel, ast.Attribute) and rel.attr == 'RELIABLE', \
+        'completion_qos reliability must be RELIABLE'
+    # DurabilityPolicy.TRANSIENT_LOCAL
+    dur = qos_kwargs.get('durability')
+    assert isinstance(dur, ast.Attribute) and \
+        dur.attr == 'TRANSIENT_LOCAL', \
+        'completion_qos durability must be TRANSIENT_LOCAL'
+    # HistoryPolicy.KEEP_LAST
+    hist = qos_kwargs.get('history')
+    assert isinstance(hist, ast.Attribute) and hist.attr == 'KEEP_LAST', \
+        'completion_qos history must be KEEP_LAST'
+    # depth = 1
+    depth = qos_kwargs.get('depth')
+    assert isinstance(depth, ast.Constant) and depth.value == 1, \
+        'completion_qos depth must be 1'
+
+    assert '/exploration_complete' in publisher_topics
+    assert '/exploration_result' in publisher_topics
+
+
+def test_initial_latched_false_published():
+    """Verify the production __init__ publishes the initial latched false state."""
+    import ast
+
+    source = inspect.getsource(FrontierDetector)
+    tree = ast.parse(source)
+
+    # Find publish(...) calls whose argument is a bare Bool() name.
+    published_bool_names = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call) and isinstance(
+            node.func, ast.Attribute
+        ) and node.func.attr == 'publish':
+            for arg in node.args:
+                if (isinstance(arg, ast.Name)
+                        and isinstance(arg.ctx, ast.Load)):
+                    published_bool_names.add(arg.id)
+
+    # A ``.data = False`` assignment to a Bool we publish proves the
+    # initial latched-false state is published during __init__.
+    found = False
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            target = node.targets[0]
+            if (isinstance(target, ast.Attribute)
+                    and target.attr == 'data'
+                    and isinstance(target.value, ast.Name)
+                    and target.value.id in published_bool_names
+                    and isinstance(node.value, ast.Constant)
+                    and node.value.value is False):
+                found = True
+    assert found, (
+        '__init__ must publish an initial Bool with data set to False'
+    )
+
+
+def test_result_topic_never_publishes_empty_string():
+    """Structurally verify the production result topic never publishes an empty string."""
+    import ast
+
+    source = inspect.getsource(FrontierDetector)
+    tree = ast.parse(source)
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            func = node.func
+            if isinstance(func, ast.Attribute) and \
+                    func.attr == 'publish':
+                # An empty String() publish on the result topic is forbidden.
+                for arg in node.args:
+                    if isinstance(arg, ast.Call) and \
+                            isinstance(arg.func, ast.Name) and \
+                            arg.func.id == 'String' and not arg.args and \
+                            not arg.keywords:
+                        # String() with no args -> empty publication.
+                        # Confirm it is NOT the result publisher.
+                        assert getattr(func.value, 'id', '') != \
+                            'exploration_result_publisher', \
+                            'result topic must not publish empty String()'
+
+
+def test_transition_to_true_publishes_valid_result_only():
+    from std_msgs.msg import String
+    import json as _json
+    node = _make_node()
+    node.set_exploration_complete(True)
+    # Exactly one completion-state publish (true), and one result publish.
+    assert node.exploration_complete_publisher.publish.call_count == 1
+    assert node.exploration_result_publisher.publish.call_count == 1
+    result_msg = node.exploration_result_publisher.publish.call_args[0][0]
+    assert isinstance(result_msg, String)
+    payload = _json.loads(result_msg.data)
+    assert payload['schema_version'] == 1
+    assert payload['completed'] is True
+    # No empty-string publication on the result topic.
+    assert result_msg.data != ''
+
+
+def test_transition_back_to_false_leaves_result_untouched():
+    node = _make_node()
+    node.set_exploration_complete(True)
+    node.exploration_result_publisher.reset_mock()
+    node.set_exploration_complete(False)
+    # Result topic must NOT be published again (no empty string).
+    assert node.exploration_result_publisher.publish.call_count == 0
+
+
+def test_recovery_count_only_when_published():
+    node = _make_node()
+    node.recovery_cycle.publish_request.return_value = True
+    before = node.recovery_requests
+    node.request_recovery()
+    assert node.recovery_request_publisher.publish.call_count == 1
+    assert node.recovery_requests == before + 1
+
+    node.recovery_request_publisher.reset_mock()
+    node.recovery_cycle.publish_request.return_value = False
+    node.request_recovery()
+    assert node.recovery_request_publisher.publish.call_count == 0
+    assert node.recovery_requests == before + 1  # unchanged
+
+
+def test_failure_registration_through_real_stuck_path():
+    from collections import deque
+    node = _make_node()
+    node.recovery_cycle.planning_blocked = False
+    node.committed_goal_world = (5.0, 5.0)
+    node.latest_pose = (0.0, 0.0, 0.0)
+    node.node_time_s = lambda: 12.6
+    # Two samples spanning > 2.5 s, both far from the goal -> stuck.
+    node.progress_samples = deque([
+        (10.0, 0.0, 0.0, 0.0),
+        (12.6, 0.0, 0.0, 0.0),
+    ])
+    node.stuck_window_s = 4.0
+    node.stuck_progress_threshold_m = 0.05
+    node.stuck_alignment_threshold_rad = 0.2
+    node.blacklist_radius_m = 0.5
+    node.blacklist_duration_s = 10.0
+    node.map_resolution = 0.05
+    node.failure_records = []
+    node.map_origin = (0.0, 0.0)
+    before = node.failure_events
+    node.stuck_check_callback()
+    assert node.failure_events == before + 1
+    assert node.temporary_failure_events == before + 1

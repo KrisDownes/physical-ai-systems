@@ -9,6 +9,10 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description() -> LaunchDescription:
     enable_motion = LaunchConfiguration('enable_motion')
+    spawn_x = LaunchConfiguration('spawn_x')
+    spawn_y = LaunchConfiguration('spawn_y')
+    spawn_z = LaunchConfiguration('spawn_z')
+    spawn_yaw = LaunchConfiguration('spawn_yaw')
 
     simulation_file = PathJoinSubstitution(
         [
@@ -43,7 +47,13 @@ def generate_launch_description() -> LaunchDescription:
     )
 
     simulation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(simulation_file)
+        PythonLaunchDescriptionSource(simulation_file),
+        launch_arguments={
+            'spawn_x': spawn_x,
+            'spawn_y': spawn_y,
+            'spawn_z': spawn_z,
+            'spawn_yaw': spawn_yaw,
+        }.items(),
     )
 
     slam = IncludeLaunchDescription(
@@ -104,6 +114,26 @@ def generate_launch_description() -> LaunchDescription:
                 'enable_motion',
                 default_value='false',
                 description='Start autonomous rover motion',
+            ),
+            DeclareLaunchArgument(
+                'spawn_x',
+                default_value='0.0',
+                description='Robot spawn X position (meters)',
+            ),
+            DeclareLaunchArgument(
+                'spawn_y',
+                default_value='0.0',
+                description='Robot spawn Y position (meters)',
+            ),
+            DeclareLaunchArgument(
+                'spawn_z',
+                default_value='0.02',
+                description='Robot spawn Z height (meters)',
+            ),
+            DeclareLaunchArgument(
+                'spawn_yaw',
+                default_value='0.0',
+                description='Robot spawn yaw (radians)',
             ),
             simulation,
             slam,

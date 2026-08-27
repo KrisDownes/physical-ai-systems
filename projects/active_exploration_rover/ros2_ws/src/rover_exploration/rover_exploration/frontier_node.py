@@ -1,4 +1,5 @@
 from collections import deque
+import json
 import math
 
 from geometry_msgs.msg import Point, PoseStamped
@@ -42,7 +43,7 @@ from rover_exploration.stuck_detection import (
     is_stuck,
     quaternion_yaw,
 )
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String
 from tf2_ros import TransformException
 from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener
@@ -172,6 +173,19 @@ class FrontierDetector(Node):
         self.permanent_failed_regions = []
         self.visited_goal_regions = []
 
+        # Machine-readable mission counters. Increment exactly once
+        # at the real lifecycle event (see update_goal_and_path,
+        # stuck_check_callback, request_recovery) so the
+        # /exploration_result JSON reflects true autonomy behavior.
+        self.goals_assigned = 0
+        self.goals_reached = 0
+        self.failure_events = 0
+        self.temporary_failure_events = 0
+        self.recovery_requests = 0
+
+        # Explicit completion state, published on /exploration_complete.
+        self.exploration_complete = False
+
         # Progress samples for the committed goal only:
         # (time_s, x, y, yaw).
         self.progress_samples = deque()
@@ -282,6 +296,40 @@ class FrontierDetector(Node):
                 status_qos,
             )
         )
+
+        # Explicit exploration completion state and structured result.
+        # Both use transient-local + reliable + keep-last depth 1 so a
+        # late subscriber (e.g. the mission evaluator or an RViz panel)
+        # immediately receives the latched final state without waiting
+        # for the next transition. These are state topics, not event
+        # streams: they are published only on transition / completion.
+        completion_qos = QoSProfile(
+            reliability=QoSReliabilityPolicy.RELIABLE,
+            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
+            history=QoSHistoryPolicy.KEEP_LAST,
+            depth=1,
+        )
+
+        self.exploration_complete_publisher = (
+            self.create_publisher(
+                Bool,
+                '/exploration_complete',
+                completion_qos,
+            )
+        )
+        self.exploration_result_publisher = (
+            self.create_publisher(
+                String,
+                '/exploration_result',
+                completion_qos,
+            )
+        )
+
+        # Publish the initial latched completion state (false) so the
+        # topic is never empty before exploration finishes.
+        initial_state = Bool()
+        initial_state.data = False
+        self.exploration_complete_publisher.publish(initial_state)
 
         self.stuck_timer = self.create_timer(
             1.0,
@@ -704,6 +752,7 @@ class FrontierDetector(Node):
         request.data = True
 
         self.recovery_request_publisher.publish(request)
+        self.recovery_requests += 1
 
     def pose_timer_callback(self):
         try:
@@ -731,6 +780,60 @@ class FrontierDetector(Node):
 
     def node_time_s(self):
         return self.get_clock().now().nanoseconds / 1_000_000_000
+
+    def set_exploration_complete(self, value):
+        """
+        Centralized completion-state transition.
+
+        Publishes /exploration_complete only on a change, and emits the
+        one-shot /exploration_result JSON when transitioning to True.
+        Never issues velocity commands or touches the planner.
+        """
+        if bool(value) == self.exploration_complete:
+            return
+
+        self.exploration_complete = bool(value)
+
+        state = Bool()
+        state.data = self.exploration_complete
+        self.exploration_complete_publisher.publish(state)
+
+        if self.exploration_complete:
+            self.publish_mission_result(
+                completion_time_s=self.node_time_s()
+            )
+        # Transition back to an incomplete state: the latched result from
+        # the prior completion is simply left in place (out of date). The
+        # authoritative current state is /exploration_complete (now false);
+        # /exploration_result is only ever a successful-completion snapshot,
+        # so it must not be overwritten with an invalid empty message.
+
+    def publish_mission_result(self, completion_time_s):
+        """Emit the deterministic mission-result JSON once at completion."""
+        result = {
+            'schema_version': 1,
+            'completed': True,
+            'completion_time_s': completion_time_s,
+            'goals_assigned': self.goals_assigned,
+            'goals_reached': self.goals_reached,
+            'failure_events': self.failure_events,
+            'temporary_failure_events': self.temporary_failure_events,
+            'permanent_failed_regions': (
+                len(self.permanent_failed_regions)
+            ),
+            'recovery_requests': self.recovery_requests,
+            'visited_regions': len(self.visited_goal_regions),
+            'frontier_cells': len(self.frontier_cells),
+            'frontier_clusters': len(self.frontier_clusters),
+        }
+
+        message = String()
+        message.data = json.dumps(result, sort_keys=True)
+        self.exploration_result_publisher.publish(message)
+
+        self.get_logger().info(
+            f'Exploration result: {message.data}'
+        )
 
     def reset_candidate_funnel(self):
         """Zero all per-cycle candidate funnel diagnostics."""
@@ -811,6 +914,11 @@ class FrontierDetector(Node):
             promotion_failures=self.permanent_after_failures,
         )
         self.log_failure(outcome, goal_x, goal_y)
+
+        # One failure registered at this exact lifecycle point.
+        self.failure_events += 1
+        if outcome != 'promoted':
+            self.temporary_failure_events += 1
 
         self.committed_goal_world = None
         self.goal_path_failure_count = 0
@@ -996,6 +1104,7 @@ class FrontierDetector(Node):
                 self.visited_goal_regions.append(
                     (goal_world_x, goal_world_y)
                 )
+                self.goals_reached += 1
                 self.get_logger().info(
                     f'Goal reached at '
                     f'({goal_world_x:.2f}, {goal_world_y:.2f}); '
@@ -1075,6 +1184,11 @@ class FrontierDetector(Node):
                 self.log_failure(
                     outcome, goal_world_x, goal_world_y
                 )
+
+                # One failure registered at this exact lifecycle point.
+                self.failure_events += 1
+                if outcome != 'promoted':
+                    self.temporary_failure_events += 1
 
                 self.committed_goal_world = None
                 self.goal_path_failure_count = 0
@@ -1219,6 +1333,14 @@ class FrontierDetector(Node):
             selected_x,
             selected_y,
         )
+        self.goals_assigned += 1
+
+        # A valid goal was assigned: exploration is demonstrably not
+        # complete. If we had previously declared completion (e.g. a
+        # new selectable frontier appeared after a map update),
+        # transition the state back to false.
+        if self.exploration_complete:
+            self.set_exploration_complete(False)
         self.goal_path_failure_count = 0
         self.reset_goal_progress()
         self.last_selected_cluster_size = (
@@ -1358,6 +1480,17 @@ class FrontierDetector(Node):
                 f'permanent_failed='
                 f'{len(self.permanent_failed_regions)})'
             )
+
+        # Declare machine-readable completion only when exploration is
+        # genuinely finished. Never declare completion merely because
+        # recovery is active/pending or a committed goal still exists;
+        # those states mean the rover is still working, not done.
+        if (
+            not self.recovery_cycle.recovery_active
+            and not self.recovery_cycle.request_pending
+            and self.committed_goal_world is None
+        ):
+            self.set_exploration_complete(True)
 
     def log_failure(self, outcome, goal_x, goal_y):
         """Emit lifecycle logging for a registered failure."""
