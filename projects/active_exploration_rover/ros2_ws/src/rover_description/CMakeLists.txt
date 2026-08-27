@@ -17,18 +17,26 @@ if(BUILD_TESTING)
   # comment the line when a copyright and license is added to all source files
   set(ament_cmake_copyright_FOUND TRUE)
   # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
+  # comment the line when this is in a git repo and when
   # a copyright and license is added to all source files
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
+
+  find_package(ament_cmake_pytest REQUIRED)
+
+  ament_add_pytest_test(
+    test_urdf_imu
+    test/test_urdf_imu.py
+  )
+
+  ament_add_pytest_test(
+    test_world_imu_system
+    test/test_world_imu_system.py
+  )
 endif()
 
 install(
-  DIRECTORY 
-    launch
-    rviz
-    urdf
-    DIRECTORY launch urdf rviz worlds
+  DIRECTORY launch urdf rviz worlds
   DESTINATION share/${PROJECT_NAME}
 )
 ament_package()

@@ -1,0 +1,112 @@
+# Robot-localization EKF configuration for kd_bot.
+#
+# Purpose: fuse wheel odometry (forward velocity only) with IMU angular velocity
+# (yaw rate only) to produce a corrected odom -> base_footprint transform. This
+# replaces the raw Gazebo DiffDrive odom->base_footprint transform, which used
+# unreliable wheel odometry yaw and produced the rotated/duplicated SLAM map.
+#
+# The EKF publishes odom -> base_footprint (publish_tf: true).
+# SLAM Toolbox continues to publish map -> odom.
+#
+# IMU fusion mode (imu0_config) -- ACTIVE MODE: yaw-rate-only.
+#   Gazebo supplies a valid quaternion orientation but an unknown / all-zero
+#   orientation covariance. We intentionally do NOT fuse orientation (yaw index 5
+#   is false). Instead the EKF integrates the IMU's covariance-backed angular
+#   velocity about z (vyaw, index 11), which Gazebo reports with a valid
+#   diagonal covariance. Linear acceleration is not fused.
+#
+#   IMPORTANT: there is no automatic runtime switch. robot_localization does NOT
+#   ignore an all-zero orientation covariance -- an all-zero covariance means
+#   "variance unknown", and r_l substitutes a small positive variance and still
+#   fuses the yaw if index 5 is enabled. Because we set index 5 to false, the
+#   EKF is explicitly yaw-rate-only and will not ingest the unreliable yaw.
+#
+# Ground truth (/ground_truth/odometry) is intentionally NOT an input and must
+# never be.
+
+ekf_filter_node:
+  ros__parameters:
+
+    # Core timing / frames
+    frequency: 50.0
+    sensor_timeout: 0.2
+    two_d_mode: true
+    publish_tf: true
+    print_diagnostics: true
+    debug: false
+
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_footprint
+    world_frame: odom
+
+    # --- Wheel odometry (forward velocity only) ---
+    odom0: /model/kd_bot/odometry
+    odom0_frame: odom
+    odom0_differential: false
+    odom0_relative: false
+    odom0_queue_size: 10
+    # Order: x, y, z, roll, pitch, yaw,
+    #        vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az
+    # Only forward linear velocity (vx) is fused. Wheel pose x/y, wheel yaw, and
+    # wheel yaw rate are deliberately NOT fused (bag showed wheel yaw unreliable).
+    odom0_config:
+      [false, false, false,
+       false, false, false,
+       true,  false, false,
+       false, false, false,
+       false, false, false]
+
+    # --- IMU (yaw-rate-only; orientation not fused) ---
+    imu0: /imu/data_raw
+    imu0_frame: imu_link
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    # Order: x, y, z, roll, pitch, yaw,
+    #        vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az
+    # Active mode fuses ONLY IMU angular velocity about z (vyaw, index 11).
+    # Orientation yaw (index 5) is false: Gazebo reports an all-zero orientation
+    # covariance, so we do not fuse orientation. Linear acceleration is not fused.
+    imu0_config:
+      [false, false, false,
+       false, false, false,
+       false, false, false,
+       false, false, true,
+       false, false, false]
+
+    # Process noise covariance (tuned lightly for a small indoor rover, 2D).
+    process_noise_covariance:
+      [0.05, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.05, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.06, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.03, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.03, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.06, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.025, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.025, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.04, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.01, 0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.01, 0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.02, 0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.01, 0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.01, 0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.015]
+
+    # Initial estimate covariance (small, seeded from zero pose).
+    initial_estimate_covariance:
+      [1e-3, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  1e-3, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  1e-3, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  1e-3, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  1e-3, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  1e-2, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-2, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-2, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-2, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-2, 0.0,  0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-2, 0.0,  0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-2, 0.0,  0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-3, 0.0,  0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-3, 0.0,
+       0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-3]

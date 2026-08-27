@@ -110,6 +110,40 @@
         <origin xyz="0 0 ${base_height / 2.0 + lidar_height / 2.0}" rpy="0 0 0"/>
     </joint>
 
+    <!-- IMU sensor link, fixed to base_link -->
+    <link name="imu_link">
+        <visual>
+            <geometry>
+                <box size="0.02 0.02 0.02"/>
+            </geometry>
+            <material name="Orange">
+                <color rgba="1.0 0.5 0.0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.02 0.02 0.02"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.01"/>
+            <inertia
+                ixx="0.000001"
+                ixy="0.0"
+                ixz="0.0"
+                iyy="0.000001"
+                iyz="0.0"
+                izz="0.000001"/>
+        </inertial>
+    </link>
+
+    <joint name="imu_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="imu_link"/>
+        <origin xyz="0 0 ${base_height / 2.0 + 0.02}" rpy="0 0 0"/>
+    </joint>
+
   
   <gazebo reference="lidar_link">
     <sensor name="lidar" type="gpu_lidar">
@@ -135,6 +169,58 @@
                 <resolution>0.01</resolution>
             </range>
         </ray>
+    </sensor>
+</gazebo>
+
+  <!-- Gazebo IMU sensor attached to imu_link; publishes /imu/data_raw -->
+  <gazebo reference="imu_link">
+    <sensor name="imu" type="imu">
+        <topic>/imu/data_raw</topic>
+        <gz_frame_id>imu_link</gz_frame_id>
+        <update_rate>100</update_rate>
+        <always_on>true</always_on>
+        <imu>
+            <angular_velocity>
+                <x>
+                    <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>0.0005</stddev>
+                    </noise>
+                </x>
+                <y>
+                    <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>0.0005</stddev>
+                    </noise>
+                </y>
+                <z>
+                    <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>0.0008</stddev>
+                    </noise>
+                </z>
+            </angular_velocity>
+            <linear_acceleration>
+                <x>
+                    <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>0.01</stddev>
+                    </noise>
+                </x>
+                <y>
+                    <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>0.01</stddev>
+                    </noise>
+                </y>
+                <z>
+                    <noise type="gaussian">
+                        <mean>0.0</mean>
+                        <stddev>0.02</stddev>
+                    </noise>
+                </z>
+            </linear_acceleration>
+        </imu>
     </sensor>
 </gazebo>
 

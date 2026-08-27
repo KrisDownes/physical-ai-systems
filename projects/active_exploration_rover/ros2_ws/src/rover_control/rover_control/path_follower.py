@@ -14,15 +14,43 @@ class PathFollower(Node):
     def __init__(self):
         super().__init__('path_follower')
 
+        self.declare_parameter('forward_speed', 0.15)
+        self.declare_parameter('maximum_turn_speed', 0.60)
+        self.declare_parameter('heading_gain', 1.5)
+        self.declare_parameter('lookahead_distance', 0.30)
+        self.declare_parameter('goal_tolerance', 0.15)
+        self.declare_parameter(
+            'maximum_forward_heading_error_deg',
+            35.0,
+        )
+        self.declare_parameter('path_timeout_s', 2.5)
+
+        self.forward_speed = (
+            self.get_parameter('forward_speed').value
+        )
+        self.maximum_turn_speed = (
+            self.get_parameter('maximum_turn_speed').value
+        )
+        self.heading_gain = (
+            self.get_parameter('heading_gain').value
+        )
+        self.lookahead_distance = (
+            self.get_parameter('lookahead_distance').value
+        )
+        self.goal_tolerance = (
+            self.get_parameter('goal_tolerance').value
+        )
+        self.maximum_forward_heading_error = math.radians(
+            self.get_parameter(
+                'maximum_forward_heading_error_deg'
+            ).value
+        )
+        self.path_timeout_s = (
+            self.get_parameter('path_timeout_s').value
+        )
+
         self.latest_path = None
-        self.forward_speed = 0.15
-        self.maximum_turn_speed = 0.60
-        self.heading_gain = 1.5
-        self.lookahead_distance = 0.30
-        self.goal_tolerance = 0.15
-        self.maximum_forward_heading_error = math.radians(35.0)
         self.latest_path_time = None
-        self.path_timeout_s = 2.5
 
         self.path_subscription = self.create_subscription(
             Path,

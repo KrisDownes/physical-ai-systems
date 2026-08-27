@@ -25,7 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'obstacle_guard = rover_control.obstacle_guard:main',
-            'exploration_controller = rover_control.exploration_controller:main',
+            'path_follower = rover_control.path_follower:main',
         ],
     },
 )
