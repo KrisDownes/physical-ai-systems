@@ -162,6 +162,11 @@ class FrontierDetector(Node):
         self.completion_debounce_active = False
         self.completion_debounce_started_s = 0.0
         self.exploration_complete_logged = False
+        # True while completion is held open specifically because a
+        # reachable frontier candidate is waiting out an active
+        # temporary cooldown. Lets the deferral warning fire once on
+        # entry rather than every cycle.
+        self.completion_deferred_by_cooldown = False
 
         # Spatial goal memory (map-frame world coordinates):
         # temporary failed regions expire, permanent failed and
@@ -208,6 +213,12 @@ class FrontierDetector(Node):
         self.last_unreachable_cluster_count = 0
         self.last_approach_cells = []
         self.last_selected_cluster_size = 0
+        # Separate temporary vs permanent rejection accounting so a
+        # candidate excluded only by an active temporary cooldown is
+        # distinguished from one permanently blacklisted. A temporary
+        # rejection means "pending retry", never "exploration done".
+        self.last_temporary_rejected_count = 0
+        self.last_permanent_rejected_count = 0
 
         # Latest deployable pose (map -> base_footprint TF) used by
         # the stuck detector. Ground truth is never consumed here.
@@ -703,6 +714,8 @@ class FrontierDetector(Node):
             f'approach_candidates={len(self.last_approach_cells)} '
             f'visited_rejected={self.last_visited_rejected_count} '
             f'failed_rejected={self.last_failed_rejected_count} '
+            f'temporary_rejected={self.last_temporary_rejected_count} '
+            f'permanent_rejected={self.last_permanent_rejected_count} '
             f'unreachable_clusters={self.last_unreachable_cluster_count} '
             f'duplicate_candidates={self.last_duplicate_count} '
             f'goal_distance_rejected={self.last_goal_distance_rejected_count} '
@@ -846,6 +859,8 @@ class FrontierDetector(Node):
         self.last_eligible_count = 0
         self.last_approach_cells = []
         self.last_selected_cluster_size = 0
+        self.last_temporary_rejected_count = 0
+        self.last_permanent_rejected_count = 0
 
     def reset_goal_progress(self):
         """Clear the progress window for the committed goal."""
@@ -1200,6 +1215,8 @@ class FrontierDetector(Node):
         eligible_candidates = []
         visited_rejected_count = 0
         failed_rejected_count = 0
+        temporary_rejected_count = 0
+        permanent_rejected_count = 0
         goal_distance_rejected_count = 0
 
         unique_candidates = list(
@@ -1232,10 +1249,12 @@ class FrontierDetector(Node):
 
             if exclusion == 'permanent':
                 failed_rejected_count += 1
+                permanent_rejected_count += 1
                 continue
 
             if exclusion == 'temporary':
                 failed_rejected_count += 1
+                temporary_rejected_count += 1
                 continue
 
             if exclusion == 'visited':
@@ -1272,6 +1291,12 @@ class FrontierDetector(Node):
         self.last_failed_rejected_count = (
             failed_rejected_count
         )
+        self.last_temporary_rejected_count = (
+            temporary_rejected_count
+        )
+        self.last_permanent_rejected_count = (
+            permanent_rejected_count
+        )
         self.last_duplicate_count = duplicate_candidate_count
         self.last_goal_distance_rejected_count = (
             goal_distance_rejected_count
@@ -1302,13 +1327,38 @@ class FrontierDetector(Node):
         )
 
         if selection_result is None:
-            # Frontiers exist but none is selectable: either every
-            # remaining candidate was excluded (visited/failed), was
-            # too close to the rover, or no cluster had a reachable
-            # approach. Enter the completion debounce (a deliberate
-            # planner stop -- it issues no commands); only declare
-            # exploration complete after the debounce also yields
-            # no goal.
+            # No cluster produced a selectable goal this cycle. Whether
+            # this means exploration is genuinely finished depends on
+            # WHY nothing was selectable. A candidate rejected only by
+            # an active temporary cooldown is merely pending retry, not
+            # permanently done: it must never count as completion.
+            if self.last_temporary_rejected_count > 0:
+                # Defer completion: a reachable frontier candidate is
+                # still waiting for its temporary cooldown to expire.
+                # Cancel any in-flight debounce and keep
+                # /exploration_complete false. Publish no command.
+                self.completion_debounce_active = False
+                self.completion_debounce_started_s = 0.0
+                self.exploration_complete_logged = False
+                if self.exploration_complete:
+                    self.set_exploration_complete(False)
+                if not self.completion_deferred_by_cooldown:
+                    self.completion_deferred_by_cooldown = True
+                    self.get_logger().warning(
+                        'Completion deferred: reachable frontier '
+                        f'candidate(s) rejected by active temporary '
+                        f'cooldown '
+                        f'(temp_rejected='
+                        f'{self.last_temporary_rejected_count}); '
+                        'awaiting cooldown expiry, planner holding, '
+                        'no commands issued'
+                    )
+                return
+
+            # No temporary-blocking candidate and none selectable: the
+            # ordinary terminal completion path. Debounce, then declare
+            # completion only after the debounce also yields no goal.
+            self.completion_deferred_by_cooldown = False
             self.completion_debounce_tick()
             return
 
@@ -1339,6 +1389,7 @@ class FrontierDetector(Node):
         # complete. If we had previously declared completion (e.g. a
         # new selectable frontier appeared after a map update),
         # transition the state back to false.
+        self.completion_deferred_by_cooldown = False
         if self.exploration_complete:
             self.set_exploration_complete(False)
         self.goal_path_failure_count = 0
