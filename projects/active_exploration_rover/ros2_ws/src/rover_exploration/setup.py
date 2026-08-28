@@ -34,6 +34,8 @@ setup(
             'frontier_detector = rover_exploration.frontier_node:main',
             'evaluate_mission_bag = '
             'rover_exploration.mission_evaluator:main',
+            'run_mission_benchmark = '
+            'rover_exploration.mission_benchmark:main',
         ],
     },
 )

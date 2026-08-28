@@ -9,6 +9,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description() -> LaunchDescription:
     enable_motion = LaunchConfiguration('enable_motion')
+    enable_rviz = LaunchConfiguration('enable_rviz')
     spawn_x = LaunchConfiguration('spawn_x')
     spawn_y = LaunchConfiguration('spawn_y')
     spawn_z = LaunchConfiguration('spawn_z')
@@ -53,6 +54,7 @@ def generate_launch_description() -> LaunchDescription:
             'spawn_y': spawn_y,
             'spawn_z': spawn_z,
             'spawn_yaw': spawn_yaw,
+            'enable_rviz': enable_rviz,
         }.items(),
     )
 
@@ -114,6 +116,11 @@ def generate_launch_description() -> LaunchDescription:
                 'enable_motion',
                 default_value='false',
                 description='Start autonomous rover motion',
+            ),
+            DeclareLaunchArgument(
+                'enable_rviz',
+                default_value='true',
+                description='Start RViz visualization (owned by display.launch.py)',
             ),
             DeclareLaunchArgument(
                 'spawn_x',

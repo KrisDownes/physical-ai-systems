@@ -19,6 +19,8 @@
   <depend>rosidl_runtime_py</depend>
   <depend>rosgraph_msgs</depend>
   <depend>tf2_msgs</depend>
+  <depend>ament_index_python</depend>
+  <depend>python3-yaml</depend>
 
     <exec_depend>launch</exec_depend>
     <exec_depend>launch_ros</exec_depend>

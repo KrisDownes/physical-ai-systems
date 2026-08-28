@@ -1,11 +1,20 @@
 from launch import LaunchDescription
-from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
+from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
+from launch.substitutions import (
+    Command,
+    FindExecutable,
+    LaunchConfiguration,
+    PathJoinSubstitution,
+)
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description() -> LaunchDescription:
     package_share = FindPackageShare('rover_description')
+
+    enable_rviz = LaunchConfiguration('enable_rviz')
 
     xacro_file = PathJoinSubstitution(
         [
@@ -52,7 +61,8 @@ def generate_launch_description() -> LaunchDescription:
             '-d',
             rviz_config_file,
         ],
-        parameters=[{'use_sim_time': True}]
+        parameters=[{'use_sim_time': True}],
+        condition=IfCondition(enable_rviz),
     )
 
     bridge_node = Node(
@@ -76,6 +86,11 @@ def generate_launch_description() -> LaunchDescription:
 
     return LaunchDescription(
         [
+            DeclareLaunchArgument(
+                'enable_rviz',
+                default_value='true',
+                description='Start RViz visualization',
+            ),
             robot_state_publisher_node,
             rviz_node,
             bridge_node,

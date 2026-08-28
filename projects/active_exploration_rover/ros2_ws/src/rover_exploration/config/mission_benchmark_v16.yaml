@@ -1,0 +1,38 @@
+# V16 multi-start mission benchmark configuration.
+#
+# Fixed, repeatable pose matrix for the active-exploration rover.
+# No randomized poses are used in V16. These poses are evaluation
+# infrastructure only and must not be used to tune the rover.
+schema_version: 1
+
+defaults:
+  # Wall-clock budget per single mission (hung-simulation guard).
+  wall_timeout_s: 600
+  # Simulated seconds of continued recording after the false->true
+  # completion transition, before the recorder is stopped.
+  post_completion_sim_s: 5.0
+
+poses:
+  - name: nominal
+    spawn_x: 0.0
+    spawn_y: 0.0
+    spawn_z: 0.02
+    spawn_yaw: 0.0
+
+  - name: translated_south
+    spawn_x: 0.0
+    spawn_y: -2.0
+    spawn_z: 0.02
+    spawn_yaw: 0.0
+
+  - name: translated_north
+    spawn_x: 0.0
+    spawn_y: 2.0
+    spawn_z: 0.02
+    spawn_yaw: 0.0
+
+  - name: translated_south_yaw90
+    spawn_x: 0.0
+    spawn_y: -2.0
+    spawn_z: 0.02
+    spawn_yaw: 1.5707963267948966

@@ -40,6 +40,10 @@ def generate_launch_description() -> LaunchDescription:
     spawn_y = LaunchConfiguration('spawn_y')
     spawn_z = LaunchConfiguration('spawn_z')
     spawn_yaw = LaunchConfiguration('spawn_yaw')
+    # enable_rviz is forwarded into display.launch.py, which owns the
+    # single RViz node and conditions it. Nothing else in the simulation
+    # launch consumes the value.
+    enable_rviz = LaunchConfiguration('enable_rviz')
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gazebo_file),
@@ -49,7 +53,10 @@ def generate_launch_description() -> LaunchDescription:
     )
 
     display = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(display_file)
+        PythonLaunchDescriptionSource(display_file),
+        launch_arguments={
+            'enable_rviz': enable_rviz,
+        }.items(),
     )
     spawn_robot = Node(
         package='ros_gz_sim',
@@ -86,6 +93,11 @@ def generate_launch_description() -> LaunchDescription:
                 'spawn_yaw',
                 default_value='0.0',
                 description='Robot spawn yaw (radians)',
+            ),
+            DeclareLaunchArgument(
+                'enable_rviz',
+                default_value='true',
+                description='RViz visualization toggle (owned by exploration.launch.py)',
             ),
             gazebo,
             display,
