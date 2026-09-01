@@ -81,6 +81,10 @@ class CompletionHarness:
         detector.escape_corridor_cells = []
         detector.committed_goal_world = None
         detector.goal_path_failure_count = 0
+        detector.active_frontier_target_anchor = None
+        detector.attempted_approach_cells = set()
+        detector.attempted_approach_paths = set()
+        detector.fresh_approach_count = 0
         detector.last_selected_cluster_size = 0
         detector.progress_samples = deque()
 
@@ -94,6 +98,7 @@ class CompletionHarness:
         detector.blacklist_duration_s = 30.0
         detector.distance_slack_m = 0.10
         detector.maximum_goal_path_failures = 3
+        detector.maximum_fresh_approaches_per_target = 3
         detector.wall_closing_radius_m = 0.0
         detector.unknown_clearance_m = 0.0
         detector.rover_length_m = 0.30
@@ -351,3 +356,106 @@ def test_promotion_to_permanent_behavior_preserved():
         )
         == 'permanent'
     )
+
+
+def test_large_target_hits_fresh_approach_cap_in_production_flow():
+    """update_goal_and_path registers failure after two fresh routes."""
+    harness = CompletionHarness()
+    detector = harness.detector
+    detector.maximum_goal_path_failures = 1
+    detector.maximum_fresh_approaches_per_target = 2
+    cluster = {(10, column) for column in range(10, 17)}
+    detector.frontier_clusters = [cluster]
+    detector.committed_goal_world = _cell_world(10, 10)
+    detector.start_frontier_target_attempt(
+        anchor=(10, 10), approach_cell=(10, 10),
+        path=[(1, 1), (10, 10)],
+    )
+
+    width = height = 20
+    raw = [UNKNOWN] * (width * height)
+    for row, column in cluster:
+        raw[row * width + column] = FREE
+    map_message = _make_grid(width, height, raw)
+
+    # Each cycle invalidates the currently committed approach. The first two
+    # cycles use distinct real approaches; the third hits the explicit cap,
+    # registers the scoped failure, and holds for its cooldown despite four
+    # further valid cluster approaches being available.
+    for _ in range(3):
+        planning = [FREE] * (width * height)
+        row = int(detector.committed_goal_world[1] / RESOLUTION)
+        column = int(detector.committed_goal_world[0] / RESOLUTION)
+        planning[row * width + column] = OCCUPIED
+        detector.robot_grid_cell = (1, 1)
+        detector.update_goal_and_path(
+            map_message, raw_data=raw, planning_data=planning,
+            robot_x=_cell_world(1, 1)[0],
+            robot_y=_cell_world(1, 1)[1],
+        )
+
+    assert detector.fresh_approach_count == 2
+    assert detector.failure_events == 1
+    assert detector.completion_deferred_by_cooldown is True
+    assert len(detector.attempted_approach_cells) == 3
+
+
+def _ordinary_selection_call(harness, clusters):
+    width = height = 30
+    raw = [FREE] * (width * height)
+    harness.detector.frontier_clusters = clusters
+    harness.detector.robot_grid_cell = (1, 1)
+    harness.detector.update_goal_and_path(
+        _make_grid(width, height, raw), raw_data=raw,
+        planning_data=list(raw), robot_x=_cell_world(1, 1)[0],
+        robot_y=_cell_world(1, 1)[1],
+    )
+
+
+def test_cooldown_expiry_cannot_commit_fourth_target_approach():
+    harness = CompletionHarness()
+    detector = harness.detector
+    cluster = {(10, column) for column in range(10, 17)}
+    detector.active_frontier_target_anchor = (10, 10)
+    detector.attempted_approach_cells = {(10, 10), (10, 11), (10, 12)}
+    detector.fresh_approach_count = 3
+    detector.failure_records = [{
+        'x': _cell_world(10, 10)[0], 'y': _cell_world(10, 10)[1],
+        'failure_count': 1, 'blocked_until_s': 30.0,
+    }]
+
+    harness.clock_s = 10.0
+    _ordinary_selection_call(harness, [cluster])
+    assert detector.last_temporary_rejected_count == 1
+    harness.clock_s = 31.0
+    _ordinary_selection_call(harness, [cluster])
+    assert detector.goals_assigned == 0
+    assert detector.last_retry_exhausted_count == 1
+    assert 'retry cap' in (detector.terminal_blocked_reason or '')
+
+
+def test_cluster_growth_preserves_anchor_and_retry_budget():
+    harness = CompletionHarness()
+    detector = harness.detector
+    detector.active_frontier_target_anchor = (10, 11)
+    detector.attempted_approach_cells = {(10, 11), (10, 12)}
+    detector.fresh_approach_count = 2
+    # Growth adds a lexically earlier cell; it must not replace the anchor.
+    grown_cluster = {(10, column) for column in range(9, 17)}
+    _ordinary_selection_call(harness, [grown_cluster])
+    assert detector.active_frontier_target_anchor == (10, 11)
+    assert detector.fresh_approach_count == 3
+
+
+def test_different_target_remains_selectable_after_active_cap_exhaustion():
+    harness = CompletionHarness()
+    detector = harness.detector
+    exhausted = {(10, column) for column in range(10, 17)}
+    different = {(20, column) for column in range(10, 18)}
+    detector.active_frontier_target_anchor = (10, 10)
+    detector.attempted_approach_cells = {(10, 10), (10, 11), (10, 12)}
+    detector.fresh_approach_count = 3
+    _ordinary_selection_call(harness, [exhausted, different])
+    assert detector.goals_assigned == 1
+    assert detector.active_frontier_target_anchor == min(different)
+    assert detector.fresh_approach_count == 0

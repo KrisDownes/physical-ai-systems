@@ -7,6 +7,7 @@ frontier" from being reported as successful completion, and make the
 terminal outcome truthful (success vs blocked).
 """
 
+from collections import deque
 from unittest.mock import MagicMock
 
 from rover_exploration.frontier_memory import (
@@ -57,6 +58,8 @@ def make_detector():
     detector.active_frontier_target_anchor = None
     detector.attempted_approach_cells = set()
     detector.attempted_approach_paths = set()
+    detector.fresh_approach_count = 0
+    detector.maximum_fresh_approaches_per_target = 3
     detector.last_selected_cluster_size = 0
     detector.terminal_outcome = None
     detector.terminal_blocked_reason = None
@@ -402,6 +405,16 @@ def test_alternative_cycle_is_finite_and_target_state_clears_on_change():
     assert detector.goal_path_failure_count == 0
 
 
+def test_explicit_fresh_approach_limit_rejects_remaining_alternatives():
+    detector = make_detector()
+    detector.maximum_fresh_approaches_per_target = 2
+    detector.fresh_approach_count = 2
+    detector.active_frontier_target_anchor = (1, 20)
+    # This target has six valid alternatives, but the explicit cap wins.
+    cluster = {(1, column) for column in range(20, 27)}
+    assert _fresh(detector, cluster) is None
+
+
 def test_exhaustion_registers_scoped_failure_and_reaches_blocked_flow():
     detector = make_detector()
     detector.committed_goal_world = (1.025, 1.025)
@@ -426,6 +439,31 @@ def test_exhaustion_registers_scoped_failure_and_reaches_blocked_flow():
         permanent_rejected=1,
     )
     assert detector.terminal_outcome == 'blocked'
+
+
+def test_temporary_stuck_recovery_keeps_target_retry_budget():
+    detector = make_detector()
+    detector.progress_samples = deque()
+    detector.latest_pose = (0.0, 0.0, 0.0)
+    detector.recovery_cycle.planning_blocked = False
+    detector.committed_goal_world = (1.0, 1.0)
+    detector.stuck_window_s = 6.0
+    detector.stuck_progress_threshold_m = 0.05
+    detector.stuck_alignment_threshold_rad = 0.4
+    detector.start_frontier_target_attempt(
+        anchor=(10, 10), approach_cell=(10, 10), path=[(10, 10)],
+    )
+    detector.fresh_approach_count = 2
+    detector.request_recovery = MagicMock()
+    original = frontier_node_module.is_stuck
+    frontier_node_module.is_stuck = lambda **_: True
+    try:
+        detector.stuck_check_callback()
+    finally:
+        frontier_node_module.is_stuck = original
+    assert detector.fresh_approach_count == 2
+    assert detector.active_frontier_target_anchor == (10, 10)
+    assert detector.failure_records[0]['blocked_until_s'] == 30.0
 
 
 # ---- helper ----

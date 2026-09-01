@@ -56,6 +56,9 @@ class FrontierDetector(Node):
 
         self.declare_parameter('goal_reached_distance_m', 0.25)
         self.declare_parameter('maximum_goal_path_failures', 3)
+        self.declare_parameter(
+            'maximum_fresh_approaches_per_target', 3
+        )
         self.declare_parameter('stuck.window_s', 6.0)
         self.declare_parameter(
             'stuck.progress_threshold_m',
@@ -103,6 +106,11 @@ class FrontierDetector(Node):
         self.maximum_goal_path_failures = (
             self.get_parameter(
                 'maximum_goal_path_failures'
+            ).value
+        )
+        self.maximum_fresh_approaches_per_target = (
+            self.get_parameter(
+                'maximum_fresh_approaches_per_target'
             ).value
         )
         self.stuck_window_s = (
@@ -228,6 +236,7 @@ class FrontierDetector(Node):
         # rejection means "pending retry", never "exploration done".
         self.last_temporary_rejected_count = 0
         self.last_permanent_rejected_count = 0
+        self.last_retry_exhausted_count = 0
 
         # Terminal-outcome classification (truthful completion vs
         # blocked). Populated by decide_terminal_outcome before the
@@ -242,6 +251,7 @@ class FrontierDetector(Node):
         self.terminal_post_exclusion_eligible = 0
         self.terminal_temporary_rejected = 0
         self.terminal_permanent_rejected = 0
+        self.terminal_retry_exhausted = 0
 
         # Latest deployable pose (map -> base_footprint TF) used by
         # the stuck detector. Ground truth is never consumed here.
@@ -265,6 +275,7 @@ class FrontierDetector(Node):
         self.active_frontier_target_anchor = None
         self.attempted_approach_cells = set()
         self.attempted_approach_paths = set()
+        self.fresh_approach_count = 0
 
         self.rover_length_m = 0.45
         self.rover_width_m = 0.30
@@ -911,6 +922,7 @@ class FrontierDetector(Node):
         self.last_selected_cluster_size = 0
         self.last_temporary_rejected_count = 0
         self.last_permanent_rejected_count = 0
+        self.last_retry_exhausted_count = 0
 
     def reset_goal_progress(self):
         """Clear the progress window for the committed goal."""
@@ -921,6 +933,7 @@ class FrontierDetector(Node):
         self.active_frontier_target_anchor = None
         self.attempted_approach_cells = set()
         self.attempted_approach_paths = set()
+        self.fresh_approach_count = 0
         self.goal_path_failure_count = 0
 
     def start_frontier_target_attempt(self, anchor, approach_cell, path):
@@ -928,6 +941,7 @@ class FrontierDetector(Node):
         self.active_frontier_target_anchor = anchor
         self.attempted_approach_cells = {approach_cell}
         self.attempted_approach_paths = {tuple(path)}
+        self.fresh_approach_count = 0
         self.goal_path_failure_count = 0
 
     def fresh_approach_for_failed_goal(
@@ -954,6 +968,11 @@ class FrontierDetector(Node):
 
         target_anchor = self.active_frontier_target_anchor
         if target_anchor is None:
+            return None
+        if (
+            self.fresh_approach_count
+            >= self.maximum_fresh_approaches_per_target
+        ):
             return None
 
         max_approach_radius = max(
@@ -1017,7 +1036,11 @@ class FrontierDetector(Node):
         if outcome != 'promoted':
             self.temporary_failure_events += 1
         self.committed_goal_world = None
-        self.clear_frontier_target_retry_state()
+        # A temporary scoped cooldown is not permanent abandonment of this
+        # target. Keep its retry budget so a later eligible approach cannot
+        # restart the fresh-approach cap; promotion ends the target attempt.
+        if outcome == 'promoted':
+            self.clear_frontier_target_retry_state()
         self.reset_goal_progress()
 
     def stuck_check_callback(self):
@@ -1091,7 +1114,10 @@ class FrontierDetector(Node):
             self.temporary_failure_events += 1
 
         self.committed_goal_world = None
-        self.clear_frontier_target_retry_state()
+        # A temporary stuck cooldown leaves this target's bounded retry
+        # state intact. Only permanent promotion abandons the target.
+        if outcome == 'promoted':
+            self.clear_frontier_target_retry_state()
         self.reset_goal_progress()
 
         # Ask obstacle_guard to run an escape maneuver for this
@@ -1216,6 +1242,19 @@ class FrontierDetector(Node):
         unreachable_cluster_count = 0
 
         for cluster in self.frontier_clusters:
+            # Keep the original anchor whenever the map's updated cluster
+            # still contains it. Cluster growth/reordering must not create a
+            # new target identity or reset its retry budget.
+            target_anchor = (
+                self.active_frontier_target_anchor
+                if self.active_frontier_target_anchor in cluster
+                else (min(cluster) if cluster else None)
+            )
+            excluded_approaches = (
+                self.attempted_approach_cells
+                if target_anchor == self.active_frontier_target_anchor
+                else None
+            )
             approach_cell = (
                 find_cluster_approach_cell_reachable(
                     raw_data=raw_data,
@@ -1227,6 +1266,7 @@ class FrontierDetector(Node):
                     max_search_radius_cells=(
                         max_approach_radius
                     ),
+                    excluded_approach_cells=excluded_approaches,
                 )
             )
 
@@ -1247,7 +1287,7 @@ class FrontierDetector(Node):
                 # The anchor is deliberately a frontier cell, separate from
                 # the free-space approach, so recovery cannot drift to a
                 # merely nearby cluster.
-                candidate_target_anchors[approach_cell] = min(cluster)
+                candidate_target_anchors[approach_cell] = target_anchor
 
         unique_candidates = list(
             candidate_cluster_sizes.keys()
@@ -1365,6 +1405,7 @@ class FrontierDetector(Node):
                     self.goals_assigned += 1
                     self.attempted_approach_cells.add(approach_cell)
                     self.attempted_approach_paths.add(tuple(path))
+                    self.fresh_approach_count += 1
                     self.reset_goal_progress()
                     self.completion_debounce_active = False
                     if self.exploration_complete:
@@ -1393,6 +1434,7 @@ class FrontierDetector(Node):
         failed_rejected_count = 0
         temporary_rejected_count = 0
         permanent_rejected_count = 0
+        retry_exhausted_count = 0
         goal_distance_rejected_count = 0
 
         unique_candidates = list(
@@ -1442,6 +1484,18 @@ class FrontierDetector(Node):
                 )
                 continue
 
+            if (
+                candidate_target_anchors[candidate_row, candidate_column]
+                == self.active_frontier_target_anchor
+                and self.fresh_approach_count
+                >= self.maximum_fresh_approaches_per_target
+            ):
+                # Cap exhaustion is a truthful, target-scoped rejection. Do
+                # not let it fall through to the misleading visited/too-close
+                # terminal reason; unrelated targets remain eligible below.
+                retry_exhausted_count += 1
+                continue
+
             candidate_distance = math.hypot(
                 candidate_x - robot_x,
                 candidate_y - robot_y,
@@ -1474,6 +1528,7 @@ class FrontierDetector(Node):
         self.last_permanent_rejected_count = (
             permanent_rejected_count
         )
+        self.last_retry_exhausted_count = retry_exhausted_count
         self.last_duplicate_count = duplicate_candidate_count
         self.last_goal_distance_rejected_count = (
             goal_distance_rejected_count
@@ -1551,6 +1606,7 @@ class FrontierDetector(Node):
                 post_exclusion_eligible=self.last_eligible_count,
                 temporary_rejected=self.last_temporary_rejected_count,
                 permanent_rejected=self.last_permanent_rejected_count,
+                retry_exhausted=self.last_retry_exhausted_count,
             )
             self.completion_debounce_tick()
             return
@@ -1585,13 +1641,23 @@ class FrontierDetector(Node):
         self.completion_deferred_by_cooldown = False
         if self.exploration_complete:
             self.set_exploration_complete(False)
-        self.start_frontier_target_attempt(
-            anchor=candidate_target_anchors[
-                self.selected_frontier_cell
-            ],
-            approach_cell=self.selected_frontier_cell,
-            path=self.current_grid_path,
-        )
+        selected_anchor = candidate_target_anchors[
+            self.selected_frontier_cell
+        ]
+        if selected_anchor == self.active_frontier_target_anchor:
+            # This is a post-cooldown approach to the same target. Preserve
+            # its cap and append the new approach instead of restarting it.
+            self.attempted_approach_cells.add(self.selected_frontier_cell)
+            self.attempted_approach_paths.add(
+                tuple(self.current_grid_path)
+            )
+            self.fresh_approach_count += 1
+        else:
+            self.start_frontier_target_attempt(
+                anchor=selected_anchor,
+                approach_cell=self.selected_frontier_cell,
+                path=self.current_grid_path,
+            )
         self.reset_goal_progress()
         self.last_selected_cluster_size = (
             candidate_cluster_sizes.get(
@@ -1707,6 +1773,7 @@ class FrontierDetector(Node):
         post_exclusion_eligible,
         temporary_rejected,
         permanent_rejected,
+        retry_exhausted=0,
     ):
         """
         Classify the terminal state truthfully from the three facts.
@@ -1742,6 +1809,7 @@ class FrontierDetector(Node):
         )
         self.terminal_temporary_rejected = temporary_rejected
         self.terminal_permanent_rejected = permanent_rejected
+        self.terminal_retry_exhausted = retry_exhausted
 
         # Genuine success: no residual >= 5-cell component at all.
         if geometric_frontier_clusters == 0:
@@ -1752,7 +1820,13 @@ class FrontierDetector(Node):
         # A meaningful (>= 5 cell) frontier component remains and nothing is
         # eligible. This is stopped-with-unresolved-frontiers, never success.
         # Distinguish the rejection cause only for the human-readable reason.
-        if permanent_rejected > 0:
+        if retry_exhausted > 0:
+            reason = (
+                'geometric frontier remains (>= 5 cells in a '
+                'component) but the active target exhausted its '
+                'fresh-approach retry cap'
+            )
+        elif permanent_rejected > 0:
             reason = (
                 'geometric frontier remains (>= 5 cells in a '
                 'component) but all candidates are permanently '
