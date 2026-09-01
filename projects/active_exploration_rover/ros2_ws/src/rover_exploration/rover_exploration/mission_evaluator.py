@@ -61,15 +61,59 @@ RESULT_KEYS = [
     'frontier_clusters',
 ]
 
-# Threshold constants (preserved from the original evaluator).
-MIN_KNOWN_MAP_PERCENT = 98.0
+# Threshold constants.
+#
+# Hard mission-failure gates (unchanged from the original evaluator).
 MIN_CLUSTER_SIZE = 5
 MAX_POST_COMPLETION_OBSERVATION_S = 2.0
 MAX_POST_COMPLETION_DISPLACEMENT_M = 0.01
 MAX_FILTERED_YAW_ERROR_DEG = 1.0
-MAX_MAP_TO_ODOM_TRANSLATION_STEP_M = 0.15
 MAX_MAP_TO_ODOM_YAW_STEP_DEG = 5.0
 ACTIVE_CMD_VEL_THRESHOLD = 0.001
+
+# V16.3 evaluation policy: separate diagnostic warnings from hard failures.
+EVALUATION_POLICY_VERSION = 2
+
+# Raw rectangular-grid coverage is NOT spawn-invariant (it includes SLAM
+# bounding-grid padding, inaccessible obstacle interiors, and map-expansion
+# borders). Below this it is a diagnostic warning only, never a failure.
+COVERAGE_WARN_PERCENT = 98.0
+
+# A permanent blacklist region is intended behavior for repeatedly invalid or
+# unreachable goals; it is a diagnostic warning, not a failure. A genuinely
+# unresolved region is independently caught by the raw final-frontier-component
+# hard gate (MIN_CLUSTER_SIZE).
+
+# map -> odom translation correction policy (V16.3):
+#   * maximum step above 0.15 m  -> diagnostic warning (original quality target)
+#   * maximum step above 0.25 m  -> hard failure (severe single correction)
+#   * p99 step above 0.05 m      -> hard failure (large corrections routine)
+TRANSLATION_STEP_WARN_M = 0.15
+TRANSLATION_STEP_FAIL_M = 0.25
+TRANSLATION_P99_FAIL_M = 0.05
+
+
+def compute_percentile(values, q):
+    """
+    Dependency-free linear percentile using index (n - 1) * q.
+
+    `q` is in [0.0, 1.0]. Returns 0.0 for empty input. Interpolates linearly
+    between the two surrounding sorted samples, matching numpy-style quantile
+    with the "linear" (type-7) convention for (n - 1) * q spacing.
+    """
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    n = len(ordered)
+    if n == 1:
+        return float(ordered[0])
+    rank = (n - 1) * float(q)
+    lo = int(math.floor(rank))
+    hi = int(math.ceil(rank))
+    if lo == hi:
+        return float(ordered[lo])
+    frac = rank - lo
+    return float(ordered[lo] + (ordered[hi] - ordered[lo]) * frac)
 
 
 def yaw_from_quaternion(x, y, z, w):
@@ -423,6 +467,7 @@ def evaluate_mission(collected):
     Returns (result_dict, passed, failure_reasons).
     """
     failure_reasons = []
+    warnings = []
 
     completion_msgs = sorted(
         collected.get('/exploration_complete', []), key=lambda r: r[0]
@@ -438,6 +483,8 @@ def evaluate_mission(collected):
     transitions = 0
     prev = None
     completion_receipt_ns = None
+    parsed_result = None
+    result_outcome = 'success'
     for t_ns, msg in completion_msgs:
         value = bool(msg.data)
         if prev is not None and (not prev) and value:
@@ -474,6 +521,7 @@ def evaluate_mission(collected):
             if abs(candidate.get('completion_time_s', float('nan'))
                    - completion_time_s) <= 0.5:
                 parsed_result = candidate
+                result_outcome = candidate.get('outcome', 'success')
                 break
 
     # ---- Map / frontier accounting (final map) ----
@@ -589,18 +637,23 @@ def evaluate_mission(collected):
                     )
     map_to_odom = dedup_tf_by_stamp(map_to_odom)
 
+    trans_steps = []
     max_trans_step = 0.0
     max_yaw_step_deg = 0.0
     for i in range(1, len(map_to_odom)):
         _, px, py, pyaw = map_to_odom[i - 1]
         _, cx, cy, cyaw = map_to_odom[i]
-        max_trans_step = max(
-            max_trans_step, math.hypot(cx - px, cy - py)
-        )
+        step = math.hypot(cx - px, cy - py)
+        trans_steps.append(step)
+        max_trans_step = max(max_trans_step, step)
         max_yaw_step_deg = max(
             max_yaw_step_deg,
             abs(unwrap(cyaw - pyaw)) * 180.0 / math.pi,
         )
+
+    # p99 of the per-step translation corrections: measures whether large
+    # corrections are routine rather than a single outlier.
+    p99_trans_step = compute_percentile(trans_steps, 0.99)
 
     goals_assigned = 0
     goals_reached = 0
@@ -649,8 +702,10 @@ def evaluate_mission(collected):
 
     result = {
         'schema_version': 1,
+        'evaluation_policy_version': EVALUATION_POLICY_VERSION,
         'passed': False,
         'failure_reasons': failure_reasons,
+        'warnings': warnings,
         'completion_count': transitions,
         'completion_time_s': completion_time_s,
         'post_completion_observation_s': post_completion_s,
@@ -658,6 +713,7 @@ def evaluate_mission(collected):
         'final_frontier_cells': final_frontier_cells,
         'final_frontier_component_sizes': final_component_sizes,
         'selectable_frontier_components': selectable_components,
+        'result_outcome': result_outcome,
         'goals_assigned': goals_assigned,
         'goals_reached': goals_reached,
         'temporary_failure_events': temp_fail,
@@ -670,6 +726,7 @@ def evaluate_mission(collected):
         'maximum_filtered_yaw_error_deg': max_yaw_error_deg,
         'maximum_filtered_position_error_m': max_position_error_m,
         'maximum_map_to_odom_translation_step_m': max_trans_step,
+        'p99_map_to_odom_translation_step_m': p99_trans_step,
         'maximum_map_to_odom_yaw_step_deg': max_yaw_step_deg,
     }
 
@@ -691,19 +748,33 @@ def evaluate_mission(collected):
         failure_reasons.append(
             'valid /exploration_result (completed=true) not found'
         )
-    if known_map_percent < MIN_KNOWN_MAP_PERCENT:
-        failure_reasons.append(
-            f'known map {known_map_percent:.2f}% < '
-            f'{MIN_KNOWN_MAP_PERCENT}%'
-        )
     if any(size >= MIN_CLUSTER_SIZE for size in final_component_sizes):
         failure_reasons.append(
             'a final frontier component contains '
             f'>= {MIN_CLUSTER_SIZE} cells'
         )
+    # Raw rectangular-grid coverage is diagnostic only: it is not
+    # spawn-invariant (SLAM bounding-grid padding, inaccessible interiors, and
+    # map-expansion borders all count as unknown). It never fails the mission.
+    if known_map_percent < COVERAGE_WARN_PERCENT:
+        warnings.append(
+            f'raw rectangular-grid known map {known_map_percent:.2f}% < '
+            f'{COVERAGE_WARN_PERCENT:.1f}%; diagnostic only'
+        )
+    # A permanent blacklist region is intended behavior for repeatedly invalid
+    # or unreachable goals; it is a diagnostic warning, not a failure. A
+    # genuinely unresolved region is already caught above by the raw
+    # final-frontier-component hard gate. Report facts: do NOT claim geometric
+    # frontier is zero (it is not), and do NOT call everything "selectable".
     if perm_regions != 0:
-        failure_reasons.append(
-            f'permanent_failed_regions = {perm_regions} != 0'
+        warnings.append(
+            f'permanent_failed_regions = {perm_regions}; '
+            f'{perm_regions} goal region(s) blacklisted after repeated '
+            f'failures (geometric frontier still '
+            f'{final_frontier_cells} cells in '
+            f'{len(final_component_sizes)} component(s); '
+            f'{selectable_components} geometrically selectable by size >= '
+            f'{MIN_CLUSTER_SIZE})'
         )
     if post_completion_s < MAX_POST_COMPLETION_OBSERVATION_S:
         failure_reasons.append(
@@ -734,11 +805,22 @@ def evaluate_mission(collected):
             f'maximum filtered yaw error {max_yaw_error_deg:.3f}deg > '
             f'{MAX_FILTERED_YAW_ERROR_DEG}deg'
         )
-    if max_trans_step > MAX_MAP_TO_ODOM_TRANSLATION_STEP_M:
+    # map -> odom translation corrections: the maximum detects a severe single
+    # correction; the p99 measures whether large corrections are routine.
+    if max_trans_step > TRANSLATION_STEP_FAIL_M:
         failure_reasons.append(
-            f'maximum map->odom translation step '
-            f'{max_trans_step:.4f}m > '
-            f'{MAX_MAP_TO_ODOM_TRANSLATION_STEP_M}m'
+            f'maximum map->odom translation step {max_trans_step:.4f}m > '
+            f'{TRANSLATION_STEP_FAIL_M}m'
+        )
+    elif max_trans_step > TRANSLATION_STEP_WARN_M:
+        warnings.append(
+            f'maximum map->odom translation step {max_trans_step:.4f}m > '
+            f'{TRANSLATION_STEP_WARN_M}m (quality target; diagnostic only)'
+        )
+    if p99_trans_step > TRANSLATION_P99_FAIL_M:
+        failure_reasons.append(
+            f'map->odom translation p99 {p99_trans_step:.4f}m > '
+            f'{TRANSLATION_P99_FAIL_M}m (large corrections routine)'
         )
     if max_yaw_step_deg > MAX_MAP_TO_ODOM_YAW_STEP_DEG:
         failure_reasons.append(

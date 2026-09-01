@@ -807,6 +807,7 @@ def find_cluster_approach_cell_reachable(
     cluster,
     bfs,
     max_search_radius_cells,
+    excluded_approach_cells=None,
 ) -> tuple[int, int] | None:
     """Pick a reachable standoff approach cell for a cluster."""
     # Frontier cells normally sit inside unknown-space padding, so
@@ -824,6 +825,7 @@ def find_cluster_approach_cell_reachable(
     if not cluster or bfs is None:
         return None
 
+    excluded_approach_cells = excluded_approach_cells or set()
     reachable = bfs['reachable']
     width = bfs['width']
 
@@ -848,6 +850,7 @@ def find_cluster_approach_cell_reachable(
             and reachable[
                 cell[0] * width + cell[1]
             ]
+            and cell not in excluded_approach_cells
         )
 
     # The representative itself: valid when planning-free and

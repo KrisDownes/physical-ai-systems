@@ -37,7 +37,7 @@ def fail(memory, x, y, now_s):
     )
 
 
-def excluded(memory, x, y, now_s):
+def excluded(memory, x, y, now_s, temporary_radius_m=None):
     return is_excluded(
         x=x, y=y,
         failure_records=memory['records'],
@@ -45,6 +45,7 @@ def excluded(memory, x, y, now_s):
         visited_regions=memory['visited'],
         now_s=now_s,
         exclusion_radius_m=0.75,
+        temporary_radius_m=temporary_radius_m,
         visited_radius_m=0.60,
     )
 
@@ -252,3 +253,109 @@ def test_overlapping_cooldowns_any_active_excludes():
     exclusion = excluded(memory, 0.7, 0.0, 50.0)
 
     assert exclusion == 'temporary'
+
+
+# --- V16.4: scoped permanent exclusion (defect: a failed approach must
+# not blanket the whole frontier cluster it belonged to) ---
+
+def test_permanent_exclusion_is_scoped_not_cluster_blanket():
+    """
+    Promoted failure stores a small (0.20 m) scoped footprint.
+
+    A candidate 0.5 m away inside the same large cluster stays eligible.
+    """
+    memory = make_memory()
+
+    # Promote a failure at (5.0, 5.0) with the V16.4 scoped radius.
+    assert record_failure(
+        failure_records=memory['records'],
+        permanent_regions=memory['permanent'],
+        x=5.0, y=5.0, now_s=0.0,
+        match_radius_m=0.75,
+        blacklist_duration_s=30.0,
+        promotion_failures=2,
+        promote_radius_m=0.20,
+    ) == 'new'
+    outcome = record_failure(
+        failure_records=memory['records'],
+        permanent_regions=memory['permanent'],
+        x=5.05, y=5.02, now_s=10.0,
+        match_radius_m=0.75,
+        blacklist_duration_s=30.0,
+        promotion_failures=2,
+        promote_radius_m=0.20,
+    )
+    assert outcome == 'promoted'
+    # Stored as (x, y, radius).
+    assert memory['permanent'] == [(5.0, 5.0, 0.20)]
+
+    # Candidate 0.5 m away (still same cluster) is NOT excluded.
+    assert excluded(memory, 5.5, 5.0, 20.0,
+                    temporary_radius_m=0.20) is None
+    # Candidate 0.1 m away (the actual failed approach) IS excluded.
+    assert excluded(memory, 5.1, 5.0, 20.0,
+                    temporary_radius_m=0.20) == 'permanent'
+
+
+def test_legacy_promote_radius_defaults_to_match():
+    """
+    Legacy promote radius defaults to the match radius.
+
+    Backward-compatible: without promote_radius_m the footprint equals the
+    lifetime-record grouping radius (legacy blanket behavior).
+    """
+    memory = make_memory()
+    record_failure(
+        failure_records=memory['records'],
+        permanent_regions=memory['permanent'],
+        x=5.0, y=5.0, now_s=0.0,
+        match_radius_m=0.75,
+        blacklist_duration_s=30.0,
+        promotion_failures=2,
+    )
+    record_failure(
+        failure_records=memory['records'],
+        permanent_regions=memory['permanent'],
+        x=5.05, y=5.02, now_s=10.0,
+        match_radius_m=0.75,
+        blacklist_duration_s=30.0,
+        promotion_failures=2,
+    )
+    # Legacy 2-tuple form -> infinite footprint via min(inf, radius).
+    assert memory['permanent'] == [(5.0, 5.0)]
+    assert excluded(memory, 5.5, 5.0, 10.0) == 'permanent'
+
+
+def test_one_approach_failure_keeps_alternative_eligible():
+    """
+    One approach failure must not suppress a valid alternative.
+
+    Failure of one approach cell must not suppress a valid alternative in the
+    same cluster. Two candidates 0.5 m apart: failing the first at 0.20 m
+    scope leaves the second eligible.
+    """
+    memory = make_memory()
+    record_failure(
+        failure_records=memory['records'],
+        permanent_regions=memory['permanent'],
+        x=2.0, y=2.0, now_s=0.0,
+        match_radius_m=0.75,
+        blacklist_duration_s=30.0,
+        promotion_failures=2,
+        promote_radius_m=0.20,
+    )
+    record_failure(
+        failure_records=memory['records'],
+        permanent_regions=memory['permanent'],
+        x=2.05, y=2.02, now_s=10.0,
+        match_radius_m=0.75,
+        blacklist_duration_s=30.0,
+        promotion_failures=2,
+        promote_radius_m=0.20,
+    )
+    # The other candidate sits 0.5 m away; it must remain selectable.
+    assert excluded(memory, 2.5, 2.0, 20.0,
+                    temporary_radius_m=0.20) is None
+    # The failed approach itself stays excluded.
+    assert excluded(memory, 2.05, 2.0, 20.0,
+                    temporary_radius_m=0.20) == 'permanent'

@@ -9,6 +9,7 @@ aggregation are exercised deterministically.
 
 import collections
 import importlib.util
+import json
 import os
 import signal
 
@@ -1476,3 +1477,499 @@ def _dump(obj):
     with open(path, 'w') as handle:
         yaml.safe_dump(obj, handle)
     return path
+
+
+# --------------------------------------------------------------------------
+# V16.3 offline re-evaluation mode
+# --------------------------------------------------------------------------
+
+def _make_fake_matrix(output_dir, pose_names):
+    """
+    Create an on-disk V16.2 matrix stub for re-evaluation.
+
+    Writes runs/<pose>/bag, runs/<pose>/manifest.json, a V16.2
+    evaluator_result.json, and a top-level benchmark_summary.json so the
+    re-evaluation must avoid overwriting them.
+    """
+    import json
+    runs_root = os.path.join(output_dir, 'runs')
+    os.makedirs(runs_root, exist_ok=True)
+    for name in pose_names:
+        run_dir = os.path.join(runs_root, name)
+        os.makedirs(os.path.join(run_dir, 'bag'), exist_ok=True)
+        manifest = {
+            'pose_name': name,
+            'spawn': {
+                'spawn_x': 0.0, 'spawn_y': 0.0,
+                'spawn_z': 0.02, 'spawn_yaw': 0.0,
+            },
+            'launch_args': ['ros2', 'launch', 'x'],
+            'recorder_args': ['ros2', 'bag', 'record'],
+            'topics': [],
+            'wall_timeout_s': 600.0,
+            'post_completion_sim_s': 5.0,
+            'start_time': 0.0,
+        }
+        with open(os.path.join(run_dir, 'manifest.json'), 'w') as handle:
+            json.dump(manifest, handle)
+        v16_2_result = {
+            'schema_version': 1,
+            'passed': False,  # the old policy mislabeled these
+            'failure_reasons': ['known map 97.93% < 98.0%'],
+            'known_map_percent': 97.93,
+        }
+        with open(
+            os.path.join(run_dir, 'evaluator_result.json'), 'w'
+        ) as handle:
+            json.dump(v16_2_result, handle)
+    # Pre-existing V16.2 aggregate summary: must remain byte-for-byte.
+    v16_2_summary = {
+        'schema_version': 1,
+        'overall_pass': False,
+        'runs_passed': 1,
+        'runs_failed': 3,
+    }
+    summary_path = os.path.join(output_dir, 'benchmark_summary.json')
+    with open(summary_path, 'w') as handle:
+        json.dump(v16_2_summary, handle)
+    return summary_path
+
+
+def _v16_3_result(name, warnings):
+    return (
+        {
+            'schema_version': 1,
+            'evaluation_policy_version': 2,
+            'passed': True,
+            'failure_reasons': [],
+            'warnings': list(warnings),
+            'completion_time_s': 120.0,
+            'post_completion_observation_s': 5.0,
+            'known_map_percent': 98.5,
+            'goals_assigned': 4,
+            'goals_reached': 4,
+            'temporary_failure_events': 0,
+            'permanent_failed_regions': 0,
+            'recovery_requests': 0,
+            'maximum_filtered_position_error_m': 0.05,
+            'maximum_filtered_yaw_error_deg': 0.4,
+            'maximum_map_to_odom_translation_step_m': 0.10,
+            'p99_map_to_odom_translation_step_m': 0.04,
+            'maximum_map_to_odom_yaw_step_deg': 0.2,
+            'ground_truth_motion_after_completion_m': 0.0,
+        },
+        True,
+        [],
+    )
+
+
+def test_reevaluate_writes_versioned_artifacts_only(tmp_path):
+    poses = ['nominal', 'translated_south']
+    summary_path = _make_fake_matrix(str(tmp_path), poses)
+    with open(summary_path) as handle:
+        before = handle.read()
+    # nominal -> permanent blacklist warning; translated_south -> trans warn.
+    results = [
+        _v16_3_result('nominal', [
+            'permanent_failed_regions = 1; no selectable final '
+            'frontier remains',
+        ]),
+        _v16_3_result('translated_south', [
+            'maximum map->odom translation step 0.1638m > 0.15m '
+            '(quality target; diagnostic only)',
+        ]),
+    ]
+
+    def fake_read(bag_dir):
+        return {}
+
+    def fake_eval(collected):
+        return next(_iter_eval())
+
+    _eval_queue = iter(results)
+
+    def _iter_eval():
+        return _eval_queue
+
+    monkeypatch_local = _Monkey()
+    monkeypatch_local.apply(mb.me, 'read_bag', fake_read)
+    monkeypatch_local.apply(mb.me, 'evaluate_mission', fake_eval)
+    try:
+        runner = mb.BenchmarkRunner(
+            config=VALID_CONFIG,
+            output_dir=str(tmp_path),
+            selected=poses,
+            reevaluate=True,
+            make_provider=None,
+        )
+        code = runner.run()
+    finally:
+        monkeypatch_local.undo()
+    assert code == 0
+    # Versioned artifacts exist; V16.2 artifacts untouched.
+    for name in poses:
+        assert os.path.isfile(
+            os.path.join(str(tmp_path), 'runs', name,
+                         'evaluator_result_v16_3.json')
+        )
+    assert os.path.isfile(
+        os.path.join(str(tmp_path), 'benchmark_summary_v16_3.json')
+    )
+    assert os.path.isfile(
+        os.path.join(str(tmp_path), 'benchmark_summary_v16_3.md')
+    )
+    # Original V16.2 summary byte-for-byte preserved.
+    with open(summary_path) as handle:
+        assert handle.read() == before
+    # Original V16.2 per-pose result untouched.
+    nom_legacy = json.load(open(
+        os.path.join(str(tmp_path), 'runs', 'nominal',
+                     'evaluator_result.json')
+    ))
+    assert nom_legacy['passed'] is False
+
+
+class _Monkey:
+    """Minimal monkeypatch helper (no pytest fixture dependency)."""
+
+    def __init__(self):
+        self._patches = []
+
+    def apply(self, obj, name, value):
+        import unittest.mock
+        patcher = unittest.mock.patch.object(obj, name, value)
+        patcher.start()
+        self._patches.append(patcher)
+
+    def undo(self):
+        for patcher in reversed(self._patches):
+            patcher.stop()
+
+
+def test_reevaluate_never_creates_popen_provider_or_signal(tmp_path):
+    poses = ['nominal']
+    _make_fake_matrix(str(tmp_path), poses)
+    popen_spy = _PopenSpy()
+    # Provide a provider factory that must NOT be called in re-evaluate mode.
+    provider_calls = {'count': 0}
+
+    def provider_factory():
+        provider_calls['count'] += 1
+        raise AssertionError('provider must not be created in re-eval')
+
+    results = [_v16_3_result('nominal', [])]
+
+    def fake_read(bag_dir):
+        return {}
+
+    def fake_eval(collected):
+        return next(_q())
+
+    _q_iter = iter(results)
+
+    def _q():
+        return _q_iter
+
+    monkey = _Monkey()
+    monkey.apply(mb.me, 'read_bag', fake_read)
+    monkey.apply(mb.me, 'evaluate_mission', fake_eval)
+    try:
+        runner = mb.BenchmarkRunner(
+            config=VALID_CONFIG,
+            output_dir=str(tmp_path),
+            selected=poses,
+            reevaluate=True,
+            popen=popen_spy,
+            make_provider=provider_factory,
+        )
+        code = runner.run()
+    finally:
+        monkey.undo()
+    assert code == 0
+    # No subprocess creation, no signals, no killpg.
+    assert popen_spy.calls == [], popen_spy.calls
+    assert provider_calls['count'] == 0
+    # The cleanup / group-stop seams are never exercised.
+    assert runner.run_records[0]['status'] == 'passed'
+
+
+def test_reevaluate_missing_bag_reports_error_and_nonzero(tmp_path):
+    poses = ['nominal']
+    _make_fake_matrix(str(tmp_path), poses)
+    # read_bag raises for the (intentionally absent) synthetic path.
+    missing_logged = {'read_called': False}
+
+    def fake_read(bag_dir):
+        missing_logged['read_called'] = True
+        raise FileNotFoundError(f'no bag at {bag_dir}')
+
+    def fake_eval(collected):
+        return _v16_3_result('nominal', [])
+
+    monkey = _Monkey()
+    monkey.apply(mb.me, 'read_bag', fake_read)
+    monkey.apply(mb.me, 'evaluate_mission', fake_eval)
+    try:
+        runner = mb.BenchmarkRunner(
+            config=VALID_CONFIG,
+            output_dir=str(tmp_path),
+            selected=poses,
+            reevaluate=True,
+        )
+        code = runner.run()
+    finally:
+        monkey.undo()
+    assert missing_logged['read_called'] is True
+    assert code != 0
+    rec = runner.run_records[0]
+    assert rec['status'] == 'eval_error'
+    assert rec.get('passed') is False
+    assert rec.get('evaluation_error')
+
+
+def test_reevaluate_and_execute_mutually_exclusive():
+    # Enforced in main(): combining --execute and --reevaluate returns 2.
+    import tempfile
+    d = tempfile.mkdtemp()
+    code = mb.main(['--output-dir', d, '--execute', '--reevaluate'])
+    assert code == 2
+
+
+def test_reevaluate_marks_warnings_in_summary(tmp_path):
+    poses = ['nominal', 'translated_south']
+    _make_fake_matrix(str(tmp_path), poses)
+    results = [
+        _v16_3_result('nominal', [
+            'permanent_failed_regions = 1; no selectable final '
+            'frontier remains',
+        ]),
+        _v16_3_result('translated_south', [
+            'maximum map->odom translation step 0.1638m > 0.15m '
+            '(quality target; diagnostic only)',
+        ]),
+    ]
+    _q_iter = iter(results)
+
+    def fake_read(bag_dir):
+        return {}
+
+    def fake_eval(collected):
+        return next(_q_iter)
+
+    monkey = _Monkey()
+    monkey.apply(mb.me, 'read_bag', fake_read)
+    monkey.apply(mb.me, 'evaluate_mission', fake_eval)
+    try:
+        runner = mb.BenchmarkRunner(
+            config=VALID_CONFIG,
+            output_dir=str(tmp_path),
+            selected=poses,
+            reevaluate=True,
+        )
+        code = runner.run()
+    finally:
+        monkey.undo()
+    assert code == 0
+    import json
+    summary = json.load(open(
+        os.path.join(str(tmp_path), 'benchmark_summary_v16_3.json')
+    ))
+    assert summary['evaluation_policy_version'] == 2
+    # Aggregate warning count must equal the sum of per-run warnings.
+    per_run_warnings = sum(
+        len(r.get('warnings') or []) for r in summary['per_run']
+    )
+    assert per_run_warnings == summary['aggregate_metrics'][
+        'total_diagnostic_warnings'
+    ]
+    assert per_run_warnings == 2
+    # The markdown summary surfaces warnings and does not claim failure.
+    md = open(
+        os.path.join(str(tmp_path), 'benchmark_summary_v16_3.md')
+    ).read()
+    assert '## Diagnostic warnings' in md
+    assert 'Overall pass: **True**' in md
+
+
+def test_reevaluate_preserves_completion_time_s(tmp_path):
+    # Offline completion time from the evaluator must reach per-run and
+    # aggregate report fields (V16.3.1 defect).
+    poses = ['nominal', 'translated_south']
+    _make_fake_matrix(str(tmp_path), poses)
+    results = [
+        _v16_3_result('nominal', []),
+        _v16_3_result('translated_south', []),
+    ]
+    # Force a known, identical completion time for deterministic asserts.
+    for res in results:
+        res[0]['completion_time_s'] = 123.5
+    _q_iter = iter(results)
+
+    def fake_read(bag_dir):
+        return {}
+
+    def fake_eval(collected):
+        return next(_q_iter)
+
+    monkey = _Monkey()
+    monkey.apply(mb.me, 'read_bag', fake_read)
+    monkey.apply(mb.me, 'evaluate_mission', fake_eval)
+    try:
+        runner = mb.BenchmarkRunner(
+            config=VALID_CONFIG,
+            output_dir=str(tmp_path),
+            selected=poses,
+            reevaluate=True,
+        )
+        code = runner.run()
+    finally:
+        monkey.undo()
+    assert code == 0
+    import json
+    summary = json.load(open(
+        os.path.join(str(tmp_path), 'benchmark_summary_v16_3.json')
+    ))
+    for per in summary['per_run']:
+        assert per['completion_time_s'] == 123.5
+    assert summary['aggregate_metrics']['mean_completion_time_s'] == 123.5
+    assert summary['aggregate_metrics']['max_completion_time_s'] == 123.5
+
+
+def test_reevaluate_exposes_p99_first_class(tmp_path):
+    poses = ['nominal', 'translated_south']
+    _make_fake_matrix(str(tmp_path), poses)
+    results = [
+        _v16_3_result('nominal', []),
+        _v16_3_result('translated_south', []),
+    ]
+    # Distinct p99 values so the first-class field is individually checkable.
+    results[0][0]['p99_map_to_odom_translation_step_m'] = 0.0200
+    results[1][0]['p99_map_to_odom_translation_step_m'] = 0.04176
+    _q_iter = iter(results)
+
+    def fake_read(bag_dir):
+        return {}
+
+    def fake_eval(collected):
+        return next(_q_iter)
+
+    monkey = _Monkey()
+    monkey.apply(mb.me, 'read_bag', fake_read)
+    monkey.apply(mb.me, 'evaluate_mission', fake_eval)
+    try:
+        runner = mb.BenchmarkRunner(
+            config=VALID_CONFIG,
+            output_dir=str(tmp_path),
+            selected=poses,
+            reevaluate=True,
+        )
+        code = runner.run()
+    finally:
+        monkey.undo()
+    assert code == 0
+    import json
+    summary = json.load(open(
+        os.path.join(str(tmp_path), 'benchmark_summary_v16_3.json')
+    ))
+    seen = {r['pose_name']: r['p99_map_to_odom_translation_step_m']
+            for r in summary['per_run']}
+    assert seen['nominal'] == 0.0200
+    assert seen['translated_south'] == 0.04176
+    # The embedded evaluator result must still carry p99 too.
+    embedded = {r['pose_name']: r['evaluator_result']['p99_map_to_odom_translation_step_m']
+                for r in summary['per_run']}
+    assert embedded == seen
+
+
+def test_reevaluate_without_runs_attempts_all_configured_poses(tmp_path):
+    # No --runs selected: re-evaluate every configured pose in VALID_CONFIG.
+    poses = ['nominal', 'translated_south']
+    _make_fake_matrix(str(tmp_path), poses)
+    results = [_v16_3_result('nominal', []), _v16_3_result('translated_south', [])]
+    _q_iter = iter(results)
+
+    def fake_read(bag_dir):
+        return {}
+
+    def fake_eval(collected):
+        return next(_q_iter)
+
+    monkey = _Monkey()
+    monkey.apply(mb.me, 'read_bag', fake_read)
+    monkey.apply(mb.me, 'evaluate_mission', fake_eval)
+    try:
+        runner = mb.BenchmarkRunner(
+            config=VALID_CONFIG,
+            output_dir=str(tmp_path),
+            selected=None,  # no --runs
+            reevaluate=True,
+        )
+        code = runner.run()
+    finally:
+        monkey.undo()
+    assert code == 0
+    attempted = {r['pose_name'] for r in runner.run_records}
+    assert attempted == {'nominal', 'translated_south'}
+
+
+def test_reevaluate_missing_configured_bag_eval_error(tmp_path):
+    # A configured pose whose bag is absent must become eval_error and a
+    # nonzero exit code, never silently omitted.
+    _make_fake_matrix(str(tmp_path), ['nominal'])
+    # Add a configured pose (from VALID_CONFIG) with a run dir but no bag.
+    missing_dir = os.path.join(str(tmp_path), 'runs', 'translated_south')
+    os.makedirs(missing_dir, exist_ok=True)
+    with open(os.path.join(missing_dir, 'manifest.json'), 'w') as handle:
+        import json
+        json.dump({'pose_name': 'translated_south'}, handle)
+    results = [_v16_3_result('nominal', [])]
+    _q_iter = iter(results)
+
+    def fake_read(bag_dir):
+        if not os.path.isdir(bag_dir):
+            raise FileNotFoundError(f'no bag at {bag_dir}')
+        return {}
+
+    def fake_eval(collected):
+        return next(_q_iter)
+
+    monkey = _Monkey()
+    monkey.apply(mb.me, 'read_bag', fake_read)
+    monkey.apply(mb.me, 'evaluate_mission', fake_eval)
+    try:
+        runner = mb.BenchmarkRunner(
+            config=VALID_CONFIG,
+            output_dir=str(tmp_path),
+            selected=None,
+            reevaluate=True,
+        )
+        code = runner.run()
+    finally:
+        monkey.undo()
+    # Nonzero because one configured bag is missing.
+    assert code != 0
+    by_pose = {r['pose_name']: r for r in runner.run_records}
+    assert by_pose['translated_south']['status'] == 'eval_error'
+    assert by_pose['translated_south'].get('passed') is False
+    assert by_pose['translated_south'].get('evaluation_error')
+    # The present pose still evaluated.
+    assert by_pose['nominal']['status'] == 'passed'
+
+
+class _PopenSpy:
+    """Records any subprocess creation attempt; none should occur."""
+
+    def __init__(self):
+        self.calls = []
+
+    def __call__(self, *args, **kwargs):
+        self.calls.append(('Popen', args, kwargs))
+        raise AssertionError('subprocess.Popen must not be called in re-eval')
+
+    def killpg(self, pgid, sig):
+        self.calls.append(('killpg', pgid, sig))
+        raise AssertionError('killpg must not be called in re-eval')
+
+    def getpgid(self, pid):
+        self.calls.append(('getpgid', pid))
+        return pid

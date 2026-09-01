@@ -90,6 +90,7 @@ class CompletionHarness:
         detector.visited_radius_m = 0.60
         detector.goal_reached_distance_m = 0.30
         detector.permanent_after_failures = 2
+        detector.permanent_exclusion_radius_m = 0.20
         detector.blacklist_duration_s = 30.0
         detector.distance_slack_m = 0.10
         detector.maximum_goal_path_failures = 3

@@ -73,6 +73,10 @@ class FrontierDetector(Node):
         )
         self.declare_parameter('visited.radius_m', 0.60)
         self.declare_parameter(
+            'permanent_exclusion_radius_m',
+            0.20,
+        )
+        self.declare_parameter(
             'selection.distance_slack_m',
             2.0,
         )
@@ -127,6 +131,11 @@ class FrontierDetector(Node):
         )
         self.visited_radius_m = (
             self.get_parameter('visited.radius_m').value
+        )
+        self.permanent_exclusion_radius_m = (
+            self.get_parameter(
+                'permanent_exclusion_radius_m'
+            ).value
         )
         self.distance_slack_m = (
             self.get_parameter(
@@ -220,6 +229,20 @@ class FrontierDetector(Node):
         self.last_temporary_rejected_count = 0
         self.last_permanent_rejected_count = 0
 
+        # Terminal-outcome classification (truthful completion vs
+        # blocked). Populated by decide_terminal_outcome before the
+        # completion debounce fires; read by publish_mission_result and
+        # the terminal log. Defaults describe an unknown terminal state
+        # so a missing decision can never masquerade as success.
+        self.terminal_outcome = None
+        self.terminal_blocked_reason = None
+        self.terminal_geometric_frontier_cells = 0
+        self.terminal_geometric_frontier_clusters = 0
+        self.terminal_reachable_candidate_clusters = 0
+        self.terminal_post_exclusion_eligible = 0
+        self.terminal_temporary_rejected = 0
+        self.terminal_permanent_rejected = 0
+
         # Latest deployable pose (map -> base_footprint TF) used by
         # the stuck detector. Ground truth is never consumed here.
         self.latest_pose = None
@@ -236,6 +259,12 @@ class FrontierDetector(Node):
         self.current_grid_path = None
         self.committed_goal_world = None
         self.goal_path_failure_count = 0
+        # Retry state belongs to one selected *frontier target*, not to its
+        # current free-space approach. It is cleared only when that target's
+        # lifecycle ends or a genuinely different target is selected.
+        self.active_frontier_target_anchor = None
+        self.attempted_approach_cells = set()
+        self.attempted_approach_paths = set()
 
         self.rover_length_m = 0.45
         self.rover_width_m = 0.30
@@ -812,20 +841,29 @@ class FrontierDetector(Node):
         self.exploration_complete_publisher.publish(state)
 
         if self.exploration_complete:
+            self.clear_frontier_target_retry_state()
             self.publish_mission_result(
                 completion_time_s=self.node_time_s()
             )
-        # Transition back to an incomplete state: the latched result from
-        # the prior completion is simply left in place (out of date). The
-        # authoritative current state is /exploration_complete (now false);
-        # /exploration_result is only ever a successful-completion snapshot,
-        # so it must not be overwritten with an invalid empty message.
 
     def publish_mission_result(self, completion_time_s):
-        """Emit the deterministic mission-result JSON once at completion."""
+        """
+        Emit the deterministic mission-result JSON once at completion.
+
+        The ``completed`` flag stays True whenever the rover reaches a
+        terminal stop (it reflects that the run ended, not that every
+        frontier was resolved). ``outcome`` disambiguates genuine success
+        from a blocked terminal state: 'success' means no geometric
+        frontier remained; 'blocked' means substantial frontier remained
+        but bounded recovery was exhausted (no valid approach survived).
+        Existing readers that only check ``completed`` keep working; new
+        readers should consult ``outcome``.
+        """
         result = {
             'schema_version': 1,
             'completed': True,
+            'outcome': self.terminal_outcome or 'success',
+            'blocked_reason': self.terminal_blocked_reason,
             'completion_time_s': completion_time_s,
             'goals_assigned': self.goals_assigned,
             'goals_reached': self.goals_reached,
@@ -838,6 +876,18 @@ class FrontierDetector(Node):
             'visited_regions': len(self.visited_goal_regions),
             'frontier_cells': len(self.frontier_cells),
             'frontier_clusters': len(self.frontier_clusters),
+            'geometric_frontier_cells': (
+                self.terminal_geometric_frontier_cells
+            ),
+            'geometric_frontier_clusters': (
+                self.terminal_geometric_frontier_clusters
+            ),
+            'reachable_candidate_clusters': (
+                self.terminal_reachable_candidate_clusters
+            ),
+            'post_exclusion_eligible': (
+                self.terminal_post_exclusion_eligible
+            ),
         }
 
         message = String()
@@ -865,6 +915,110 @@ class FrontierDetector(Node):
     def reset_goal_progress(self):
         """Clear the progress window for the committed goal."""
         self.progress_samples.clear()
+
+    def clear_frontier_target_retry_state(self):
+        """Forget retry evidence after this target's lifecycle ends."""
+        self.active_frontier_target_anchor = None
+        self.attempted_approach_cells = set()
+        self.attempted_approach_paths = set()
+        self.goal_path_failure_count = 0
+
+    def start_frontier_target_attempt(self, anchor, approach_cell, path):
+        """Start retry accounting for a genuinely newly selected target."""
+        self.active_frontier_target_anchor = anchor
+        self.attempted_approach_cells = {approach_cell}
+        self.attempted_approach_paths = {tuple(path)}
+        self.goal_path_failure_count = 0
+
+    def fresh_approach_for_failed_goal(
+        self,
+        map_message,
+        raw_data,
+        planning_data,
+        bfs,
+        width,
+        height,
+    ):
+        """
+        Retry a fresh collision-checked plan to the same cluster.
+
+        A committed goal can fail its reconstruction either because the
+        destination is genuinely unreachable or because the path was
+        computed against a map that has since changed. Before treating
+        the cluster as exhausted, look for an unattempted reachable approach
+        for the exact selected target anchor. An approach or reconstructed
+        path already tried for this target is never accepted again.
+        """
+        if bfs is None or not self.frontier_clusters:
+            return None
+
+        target_anchor = self.active_frontier_target_anchor
+        if target_anchor is None:
+            return None
+
+        max_approach_radius = max(
+            1,
+            int(round(
+                self.approach_search_radius_m
+                / map_message.info.resolution
+            )),
+        )
+
+        target_cluster = next(
+            (cluster for cluster in self.frontier_clusters
+             if target_anchor in cluster),
+            None,
+        )
+        if target_cluster is None:
+            return None
+
+        excluded_cells = set(self.attempted_approach_cells)
+        while len(excluded_cells) < width * height:
+            approach_cell = find_cluster_approach_cell_reachable(
+                raw_data=raw_data,
+                planning_data=planning_data,
+                width=width,
+                height=height,
+                cluster=target_cluster,
+                bfs=bfs,
+                max_search_radius_cells=max_approach_radius,
+                excluded_approach_cells=excluded_cells,
+            )
+
+            if approach_cell is None:
+                return None
+
+            path = reconstruct_grid_path(
+                bfs['came_from'], approach_cell
+            )
+            if path is not None and tuple(path) not in (
+                self.attempted_approach_paths
+            ):
+                return approach_cell, path
+            excluded_cells.add(approach_cell)
+
+        return None
+
+    def abandon_path_invalid_target(self, goal_x, goal_y, now_s):
+        """Register an exhausted target through the scoped failure path."""
+        outcome = record_failure(
+            failure_records=self.failure_records,
+            permanent_regions=self.permanent_failed_regions,
+            x=goal_x,
+            y=goal_y,
+            now_s=now_s,
+            match_radius_m=self.blacklist_radius_m,
+            blacklist_duration_s=self.blacklist_duration_s,
+            promotion_failures=self.permanent_after_failures,
+            promote_radius_m=self.permanent_exclusion_radius_m,
+        )
+        self.log_failure(outcome, goal_x, goal_y)
+        self.failure_events += 1
+        if outcome != 'promoted':
+            self.temporary_failure_events += 1
+        self.committed_goal_world = None
+        self.clear_frontier_target_retry_state()
+        self.reset_goal_progress()
 
     def stuck_check_callback(self):
         # While a recovery request is pending or a maneuver runs,
@@ -927,6 +1081,7 @@ class FrontierDetector(Node):
             match_radius_m=self.blacklist_radius_m,
             blacklist_duration_s=self.blacklist_duration_s,
             promotion_failures=self.permanent_after_failures,
+            promote_radius_m=self.permanent_exclusion_radius_m,
         )
         self.log_failure(outcome, goal_x, goal_y)
 
@@ -936,7 +1091,7 @@ class FrontierDetector(Node):
             self.temporary_failure_events += 1
 
         self.committed_goal_world = None
-        self.goal_path_failure_count = 0
+        self.clear_frontier_target_retry_state()
         self.reset_goal_progress()
 
         # Ask obstacle_guard to run an escape maneuver for this
@@ -1056,6 +1211,7 @@ class FrontierDetector(Node):
         )
 
         candidate_cluster_sizes = {}
+        candidate_target_anchors = {}
         duplicate_candidate_count = 0
         unreachable_cluster_count = 0
 
@@ -1083,12 +1239,15 @@ class FrontierDetector(Node):
             if approach_cell in candidate_cluster_sizes:
                 duplicate_candidate_count += 1
 
-            candidate_cluster_sizes[approach_cell] = max(
-                candidate_cluster_sizes.get(
-                    approach_cell, 0
-                ),
-                len(cluster),
+            previous_size = candidate_cluster_sizes.get(
+                approach_cell, 0
             )
+            if len(cluster) > previous_size:
+                candidate_cluster_sizes[approach_cell] = len(cluster)
+                # The anchor is deliberately a frontier cell, separate from
+                # the free-space approach, so recovery cannot drift to a
+                # merely nearby cluster.
+                candidate_target_anchors[approach_cell] = min(cluster)
 
         unique_candidates = list(
             candidate_cluster_sizes.keys()
@@ -1126,7 +1285,7 @@ class FrontierDetector(Node):
                     f'region marked visited'
                 )
                 self.committed_goal_world = None
-                self.goal_path_failure_count = 0
+                self.clear_frontier_target_retry_state()
                 self.reset_goal_progress()
             else:
                 goal_row, goal_column = world_point_to_grid_cell(
@@ -1159,7 +1318,6 @@ class FrontierDetector(Node):
                         goal_column,
                     )
                     self.current_grid_path = committed_path
-                    self.goal_path_failure_count = 0
                     return
 
                 self.goal_path_failure_count += 1
@@ -1177,37 +1335,55 @@ class FrontierDetector(Node):
                 ):
                     return
 
-                # Path-invalid abandonment: register a failed
-                # attempt but do NOT request physical recovery; the
-                # stuck detector owns recovery requests.
-                outcome = record_failure(
-                    failure_records=self.failure_records,
-                    permanent_regions=(
-                        self.permanent_failed_regions
-                    ),
-                    x=goal_world_x,
-                    y=goal_world_y,
-                    now_s=now_s,
-                    match_radius_m=self.blacklist_radius_m,
-                    blacklist_duration_s=(
-                        self.blacklist_duration_s
-                    ),
-                    promotion_failures=(
-                        self.permanent_after_failures
-                    ),
+                # Bounded recovery: retry the exact SAME target anchor.
+                # Every accepted approach/path remains excluded and this
+                # target-wide failure count is deliberately not reset. The
+                # finite grid therefore yields only finitely many retries;
+                # exhausted alternatives fall through to scoped failure
+                # registration and the normal terminal-decision flow.
+                fresh = self.fresh_approach_for_failed_goal(
+                    map_message=map_message,
+                    raw_data=raw_data,
+                    planning_data=planning_data,
+                    bfs=bfs,
+                    width=width,
+                    height=height,
                 )
-                self.log_failure(
-                    outcome, goal_world_x, goal_world_y
+                if fresh is not None:
+                    approach_cell, path = fresh
+                    self.selected_frontier_cell = approach_cell
+                    self.current_grid_path = path
+                    self.committed_goal_world = (
+                        grid_cell_center(
+                            row=approach_cell[0],
+                            column=approach_cell[1],
+                            resolution=map_message.info.resolution,
+                            origin_x=map_message.info.origin.position.x,
+                            origin_y=map_message.info.origin.position.y,
+                        )
+                    )
+                    self.goals_assigned += 1
+                    self.attempted_approach_cells.add(approach_cell)
+                    self.attempted_approach_paths.add(tuple(path))
+                    self.reset_goal_progress()
+                    self.completion_debounce_active = False
+                    if self.exploration_complete:
+                        self.set_exploration_complete(False)
+                    self.get_logger().info(
+                        f'Fresh approach committed for failed goal '
+                        f'({goal_world_x:.2f}, {goal_world_y:.2f}); '
+                        f'retrying same cluster via new route'
+                    )
+                    return
+
+                # Path-invalid abandonment: register a failed attempt but
+                # do NOT request physical recovery; the stuck detector owns
+                # recovery requests. Scope the permanent exclusion to the
+                # actual failed approach (0.20 m) so it cannot blanket the
+                # whole frontier cluster and eliminate its other approaches.
+                self.abandon_path_invalid_target(
+                    goal_world_x, goal_world_y, now_s
                 )
-
-                # One failure registered at this exact lifecycle point.
-                self.failure_events += 1
-                if outcome != 'promoted':
-                    self.temporary_failure_events += 1
-
-                self.committed_goal_world = None
-                self.goal_path_failure_count = 0
-                self.reset_goal_progress()
 
         # Candidates are already unique and reachable: approach
         # selection ran against the shared BFS component and
@@ -1244,6 +1420,7 @@ class FrontierDetector(Node):
                 visited_regions=self.visited_goal_regions,
                 now_s=now_s,
                 exclusion_radius_m=self.blacklist_radius_m,
+                temporary_radius_m=self.permanent_exclusion_radius_m,
                 visited_radius_m=self.visited_radius_m,
             )
 
@@ -1355,10 +1532,26 @@ class FrontierDetector(Node):
                     )
                 return
 
-            # No temporary-blocking candidate and none selectable: the
-            # ordinary terminal completion path. Debounce, then declare
-            # completion only after the debounce also yields no goal.
+            # No temporary-blocking candidate and none selectable: decide
+            # the terminal outcome truthfully. Distinguish genuinely
+            # finished exploration (no geometric frontier remains) from
+            # stopped-with-unresolved-frontiers (frontier remains but every
+            # candidate is permanently/temporarily blacklisted and bounded
+            # recovery is exhausted). These are three distinct facts and
+            # must not all be called "selectable".
             self.completion_deferred_by_cooldown = False
+            self.decide_terminal_outcome(
+                geometric_frontier_cells=len(self.frontier_cells),
+                geometric_frontier_clusters=len(
+                    self.frontier_clusters
+                ),
+                reachable_candidate_clusters=len(
+                    unique_candidates
+                ),
+                post_exclusion_eligible=self.last_eligible_count,
+                temporary_rejected=self.last_temporary_rejected_count,
+                permanent_rejected=self.last_permanent_rejected_count,
+            )
             self.completion_debounce_tick()
             return
 
@@ -1392,7 +1585,13 @@ class FrontierDetector(Node):
         self.completion_deferred_by_cooldown = False
         if self.exploration_complete:
             self.set_exploration_complete(False)
-        self.goal_path_failure_count = 0
+        self.start_frontier_target_attempt(
+            anchor=candidate_target_anchors[
+                self.selected_frontier_cell
+            ],
+            approach_cell=self.selected_frontier_cell,
+            path=self.current_grid_path,
+        )
         self.reset_goal_progress()
         self.last_selected_cluster_size = (
             candidate_cluster_sizes.get(
@@ -1500,6 +1699,75 @@ class FrontierDetector(Node):
 
         return markers
 
+    def decide_terminal_outcome(
+        self,
+        geometric_frontier_cells,
+        geometric_frontier_clusters,
+        reachable_candidate_clusters,
+        post_exclusion_eligible,
+        temporary_rejected,
+        permanent_rejected,
+    ):
+        """
+        Classify the terminal state truthfully from the three facts.
+
+        * genuine success: no MEANINGFUL geometric frontier remains, i.e.
+          no residual component contains >= 5 cells (small stray cells are
+          within contract and do not block completion).
+        * blocked: a meaningful (>= 5 cell) frontier component remains, yet
+          no candidate is selectable. The reason refines the report:
+            - every candidate is permanently/temporarily blacklisted
+              (bounded recovery exhausted); or
+            - the only rejects are visited / too-close cells, which are
+              stable, non-transient rejections of an unresolved frontier
+              and must NOT be dismissed as success.
+          A pending temporary cooldown is handled upstream (the run is
+          deferred, not terminated), so by the time this runs
+          temporary_rejected is already 0.
+
+        Stores the decision plus the raw counts so the result message and
+        the terminal log report facts, never a blanket "selectable" claim.
+        """
+        self.terminal_geometric_frontier_cells = (
+            geometric_frontier_cells
+        )
+        self.terminal_geometric_frontier_clusters = (
+            geometric_frontier_clusters
+        )
+        self.terminal_reachable_candidate_clusters = (
+            reachable_candidate_clusters
+        )
+        self.terminal_post_exclusion_eligible = (
+            post_exclusion_eligible
+        )
+        self.terminal_temporary_rejected = temporary_rejected
+        self.terminal_permanent_rejected = permanent_rejected
+
+        # Genuine success: no residual >= 5-cell component at all.
+        if geometric_frontier_clusters == 0:
+            self.terminal_outcome = 'success'
+            self.terminal_blocked_reason = None
+            return
+
+        # A meaningful (>= 5 cell) frontier component remains and nothing is
+        # eligible. This is stopped-with-unresolved-frontiers, never success.
+        # Distinguish the rejection cause only for the human-readable reason.
+        if permanent_rejected > 0:
+            reason = (
+                'geometric frontier remains (>= 5 cells in a '
+                'component) but all candidates are permanently '
+                'blacklisted; bounded recovery exhausted'
+            )
+        else:
+            reason = (
+                'geometric frontier remains (>= 5 cells in a '
+                'component) but no candidate is eligible; remaining '
+                'rejects are visited / too-close cells, which are '
+                'stable and do not resolve on retry'
+            )
+        self.terminal_outcome = 'blocked'
+        self.terminal_blocked_reason = reason
+
     def completion_debounce_tick(self):
         """Advance the completion debounce state machine."""
         now_s = self.node_time_s()
@@ -1524,12 +1792,33 @@ class FrontierDetector(Node):
         if not self.exploration_complete_logged:
             self.exploration_complete_logged = True
 
+            # Report FACTUAL counts, never a claim that geometric
+            # frontier is zero. Three distinct facts are reported
+            # separately so a reader can tell genuine completion from
+            # stopped-with-unresolved-frontiers.
             self.get_logger().warning(
-                'Exploration complete: no selectable frontier '
-                f'remains after debounce '
-                f'(visited={len(self.visited_goal_regions)}, '
+                'Exploration complete (terminal decision after debounce): '
+                f'outcome={self.terminal_outcome} '
+                f'(geometric_frontier_cells='
+                f'{self.terminal_geometric_frontier_cells}, '
+                f'geometric_frontier_clusters='
+                f'{self.terminal_geometric_frontier_clusters}, '
+                f'reachable_candidate_clusters='
+                f'{self.terminal_reachable_candidate_clusters}, '
+                f'post_exclusion_eligible='
+                f'{self.terminal_post_exclusion_eligible}, '
+                f'temporary_rejected='
+                f'{self.terminal_temporary_rejected}, '
+                f'permanent_rejected='
+                f'{self.terminal_permanent_rejected}, '
+                f'visited={len(self.visited_goal_regions)}, '
                 f'permanent_failed='
                 f'{len(self.permanent_failed_regions)})'
+                + (
+                    f'; blocked_reason={self.terminal_blocked_reason}'
+                    if self.terminal_outcome == 'blocked'
+                    else ''
+                )
             )
 
         # Declare machine-readable completion only when exploration is

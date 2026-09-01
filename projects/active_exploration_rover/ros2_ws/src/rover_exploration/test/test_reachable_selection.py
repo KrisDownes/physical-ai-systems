@@ -314,6 +314,15 @@ class DebounceHarness:
         detector.recovery_requests = 0
         detector.frontier_cells = set()
         detector.frontier_clusters = []
+        detector.permanent_exclusion_radius_m = 0.20
+        detector.terminal_outcome = None
+        detector.terminal_blocked_reason = None
+        detector.terminal_geometric_frontier_cells = 0
+        detector.terminal_geometric_frontier_clusters = 0
+        detector.terminal_reachable_candidate_clusters = 0
+        detector.terminal_post_exclusion_eligible = 0
+        detector.terminal_temporary_rejected = 0
+        detector.terminal_permanent_rejected = 0
         detector.exploration_complete = False
         detector.exploration_complete_publisher = type(
             'Pub', (), {'publish': lambda self, m: None}

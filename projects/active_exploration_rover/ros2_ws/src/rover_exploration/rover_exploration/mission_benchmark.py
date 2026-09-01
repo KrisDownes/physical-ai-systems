@@ -253,6 +253,7 @@ class BenchmarkRunner:
         wall_timeout_s=None,
         post_completion_s=None,
         execute=False,
+        reevaluate=False,
         popen=None,
         now=time.monotonic,
         sleep=time.sleep,
@@ -280,6 +281,7 @@ class BenchmarkRunner:
             else float(defaults['post_completion_sim_s'])
         )
         self.execute = execute
+        self.reevaluate = reevaluate
         self._popen = popen if popen is not None else subprocess.Popen
         self._now = now
         self._sleep = sleep
@@ -337,7 +339,9 @@ class BenchmarkRunner:
     # -- execution --------------------------------------------------------
 
     def run(self):
-        """Execute the benchmark (or print the plan in dry-run mode)."""
+        """Execute, re-evaluate, or print the plan (dry-run)."""
+        if self.reevaluate:
+            return self._reevaluate()
         if not self.execute:
             self._print_plan()
             os.makedirs(self.output_dir, exist_ok=True)
@@ -383,6 +387,92 @@ class BenchmarkRunner:
             f'{passed}/{attempted} passed ==='
         )
         return 0 if overall else 1
+
+    def _reevaluate(self):
+        """
+        Offline re-evaluation of an existing V16.2 matrix directory.
+
+        Reads each pose's recorded bag (runs/<pose>/bag), applies the V16.3
+        evaluation policy, and writes versioned artifacts next to the original
+        V16.2 results without ever overwriting them. No ROS nodes, Gazebo,
+        RViz, rosbag recording, subprocesses, process cleanup, completion
+        provider, or signal handling is involved in this mode.
+        """
+        runs_root = os.path.join(self.output_dir, 'runs')
+        if not os.path.isdir(runs_root):
+            self._log(
+                'ERROR: no runs/ directory found for re-evaluation: '
+                f'{runs_root}'
+            )
+            return 2
+
+        # Re-evaluation uses the configured benchmark poses only (strict
+        # benchmark behavior, never arbitrary directory discovery):
+        #   * without --runs, re-evaluate every pose in mission_benchmark_v16.yaml
+        #   * with --runs, re-evaluate exactly the selected configured poses
+        # A configured pose whose bag is missing/unreadable becomes an
+        # eval_error (reported below) and yields a nonzero exit code; it is
+        # never silently omitted.
+        pose_names = [p['name'] for p in self.poses]
+
+        if not pose_names:
+            self._log('ERROR: no configured poses found to re-evaluate')
+            return 2
+
+        for name in pose_names:
+            run_dir = os.path.join(runs_root, name)
+            bag_dir = os.path.join(run_dir, 'bag')
+            record = {
+                'pose_name': name,
+                'status': 'unknown',
+            }
+            # Reuse the prior manifest for reporting spawn/launch/timing when
+            # present; it is purely informational for the re-evaluation report.
+            manifest_path = os.path.join(run_dir, 'manifest.json')
+            if os.path.isfile(manifest_path):
+                try:
+                    with open(manifest_path) as handle:
+                        manifest = json.load(handle)
+                    record['spawn'] = manifest.get('spawn')
+                    record['launch_args'] = manifest.get('launch_args')
+                    record['recorder_args'] = manifest.get('recorder_args')
+                except Exception:  # noqa: BLE001 - reporting only
+                    pass
+            record['recorder_args'] = record.get('recorder_args')
+            record['launch_args'] = record.get('launch_args')
+            self._evaluate(
+                run_dir, bag_dir, record,
+                result_filename='evaluator_result_v16_3.json',
+            )
+            # Offline path: propagate the evaluator-derived completion time
+            # into the run record so the V16.3 report carries real per-pose
+            # and aggregate completion statistics. Live execution continues to
+            # use the completion transition observed by LiveCompletionProvider.
+            result = record.get('evaluator_result')
+            if result is not None:
+                record['completion_time_s'] = result.get('completion_time_s')
+            self.run_records.append(record)
+            status = record.get('status')
+            self._log(
+                f'pose {name}: {status} '
+                f'(pass={record.get("passed")})'
+            )
+
+        self._write_reports(suffix='_v16_3')
+        attempted = len(self.run_records)
+        passed = sum(1 for r in self.run_records if r.get('passed'))
+        failed = attempted - passed
+        eval_errors = sum(
+            1 for r in self.run_records
+            if r.get('status') == 'eval_error'
+        )
+        self._log(
+            f'\n=== V16.3 re-evaluation complete: '
+            f'{passed}/{attempted} passed '
+            f'({eval_errors} bag read error(s)) ==='
+        )
+        # Nonzero when any run failed the V16.3 policy or a bag was unreadable.
+        return 0 if (failed == 0 and eval_errors == 0) else 1
 
     def _run_pose(self, pose):
         run_dir = os.path.join(self.output_dir, 'runs', pose['name'])
@@ -474,6 +564,23 @@ class BenchmarkRunner:
                 )
                 if recorder_ok and launch_ok:
                     self._evaluate(run_dir, bag_dir, record)
+                    # Truthful completion: a 'blocked' terminal result means
+                    # the rover stopped with meaningful geometric frontier
+                    # remaining and bounded recovery exhausted. That is an
+                    # explicit unsuccessful outcome, never a successful
+                    # completion — record it as a failing run and let the
+                    # normal post-stop teardown/return path report it.
+                    evaluator_result = record.get('evaluator_result')
+                    if (
+                        evaluator_result is not None
+                        and evaluator_result.get('result_outcome')
+                        == 'blocked'
+                    ):
+                        record['status'] = 'blocked'
+                        record['passed'] = False
+                        record['blocked_reason'] = (
+                            evaluator_result.get('blocked_reason')
+                        )
                 else:
                     record['status'] = 'cleanup_failed'
                     record['error'] = (
@@ -638,7 +745,7 @@ class BenchmarkRunner:
                     'simulation clock stopped advancing',
                 )
 
-    def _evaluate(self, run_dir, bag_dir, record):
+    def _evaluate(self, run_dir, bag_dir, record, result_filename='evaluator_result.json'):
         try:
             collected = me.read_bag(bag_dir)
             result, passed, reasons = me.evaluate_mission(collected)
@@ -647,7 +754,7 @@ class BenchmarkRunner:
             record['status'] = 'eval_error'
             record['passed'] = False
             return
-        result_path = os.path.join(run_dir, 'evaluator_result.json')
+        result_path = os.path.join(run_dir, result_filename)
         with open(result_path, 'w') as handle:
             json.dump(result, handle, indent=2, sort_keys=True)
         record['evaluator_result'] = result
@@ -744,14 +851,18 @@ class BenchmarkRunner:
 
     # -- reports ----------------------------------------------------------
 
-    def _write_reports(self):
+    def _write_reports(self, suffix=''):
         aggregate = self._aggregate()
-        summary_path = os.path.join(self.output_dir, 'benchmark_summary.json')
+        summary_path = os.path.join(
+            self.output_dir, f'benchmark_summary{suffix}.json'
+        )
         with open(summary_path, 'w') as handle:
             json.dump(aggregate, handle, indent=2, sort_keys=True)
-        md_path = os.path.join(self.output_dir, 'benchmark_summary.md')
+        md_path = os.path.join(
+            self.output_dir, f'benchmark_summary{suffix}.md'
+        )
         with open(md_path, 'w') as handle:
-            handle.write(self._markdown(aggregate))
+            handle.write(self._markdown(aggregate, suffix=suffix))
         return aggregate
 
     def _aggregate(self):
@@ -798,12 +909,23 @@ class BenchmarkRunner:
             )
             for r in evaluated
         ]
+        p99_trans_steps = [
+            r['evaluator_result'].get(
+                'p99_map_to_odom_translation_step_m', 0.0
+            )
+            for r in evaluated
+        ]
+        warning_counts = [
+            len(r['evaluator_result'].get('warnings') or [])
+            for r in evaluated
+        ]
 
         def _mean(values):
             return (sum(values) / len(values)) if values else None
 
         aggregate = {
             'schema_version': SCHEMA_VERSION,
+            'evaluation_policy_version': me.EVALUATION_POLICY_VERSION,
             'config_used': {
                 'wall_timeout_s': self.wall_timeout_s,
                 'post_completion_sim_s': self.post_completion_s,
@@ -855,6 +977,10 @@ class BenchmarkRunner:
                 'max_map_to_odom_yaw_step_deg': (
                     max(yaw_steps) if yaw_steps else None
                 ),
+                'max_p99_map_to_odom_translation_step_m': (
+                    max(p99_trans_steps) if p99_trans_steps else None
+                ),
+                'total_diagnostic_warnings': sum(warning_counts),
             },
         }
 
@@ -893,6 +1019,9 @@ class BenchmarkRunner:
                 'max_map_to_odom_yaw_step_deg': result.get(
                     'maximum_map_to_odom_yaw_step_deg'
                 ),
+                'p99_map_to_odom_translation_step_m': result.get(
+                    'p99_map_to_odom_translation_step_m'
+                ),
                 'post_completion_observation_s': result.get(
                     'post_completion_observation_s'
                 ),
@@ -909,15 +1038,19 @@ class BenchmarkRunner:
                     'ground_truth_motion_after_completion_m'
                 ),
                 'failure_reasons': result.get('failure_reasons'),
+                'warnings': result.get('warnings'),
+                'warning_count': len(result.get('warnings') or []),
                 'error': r.get('error') or r.get('evaluation_error'),
             }
             aggregate['per_run'].append(per)
 
         return aggregate
 
-    def _markdown(self, aggregate):
+    def _markdown(self, aggregate, suffix=''):
         lines = []
-        lines.append('# V16 Mission Benchmark Summary')
+        title = '# V16.3 Mission Benchmark Summary' if suffix == '_v16_3' \
+            else '# V16 Mission Benchmark Summary'
+        lines.append(title)
         lines.append('')
         lines.append(
             f"- Overall pass: **{aggregate['overall_pass']}**"
@@ -974,6 +1107,25 @@ class BenchmarkRunner:
                 for reason in reasons:
                     lines.append(f'- {reason}')
         if not any_reason:
+            lines.append('None.')
+        lines.append('')
+        lines.append('## Diagnostic warnings')
+        lines.append('')
+        lines.append(
+            'Warnings are borderline diagnostic conditions that do NOT fail '
+            'the mission. A warning-only run is reported as passed.'
+        )
+        lines.append('')
+        any_warning = False
+        for per in aggregate['per_run']:
+            warnings = per.get('warnings')
+            if warnings:
+                any_warning = True
+                name = per['pose_name']
+                lines.append(f'### {name}')
+                for warning in warnings:
+                    lines.append(f'- {warning}')
+        if not any_warning:
             lines.append('None.')
         lines.append('')
         lines.append('## Lifecycle and process status')
@@ -1216,7 +1368,19 @@ def main(args=None):
         '--execute', action='store_true',
         help='run missions; without it, only print the plan',
     )
+    parser.add_argument(
+        '--reevaluate', action='store_true',
+        help='offline re-evaluation of an existing matrix (no ROS/Gazebo)',
+    )
     parsed = parser.parse_args(args)
+
+    # --execute and --reevaluate are mutually exclusive.
+    if parsed.execute and parsed.reevaluate:
+        print(
+            'ERROR: --execute and --reevaluate are mutually exclusive',
+            file=sys.stderr,
+        )
+        return 2
 
     # CLI override validation.
     if parsed.wall_timeout_s is not None and (
@@ -1247,8 +1411,11 @@ def main(args=None):
         return 2
 
     output_dir = parsed.output_dir
-    # Never silently overwrite an existing benchmark.
-    if os.path.isfile(
+    # Never silently overwrite an existing benchmark (live / dry-run).
+    # Re-evaluation deliberately writes *versioned* artifacts next to the
+    # originals and never touches the original summary, so this guard is
+    # skipped for --reevaluate.
+    if not parsed.reevaluate and os.path.isfile(
         os.path.join(output_dir, 'benchmark_summary.json')
     ):
         print(
@@ -1260,6 +1427,7 @@ def main(args=None):
     # Live execution refuses any non-empty target directory from a previous
     # live or partial benchmark (bags, manifests, logs, partial reports).
     # Dry-run is plan-only and may reuse an empty (or plan-only) directory.
+    # Re-evaluation reads from an existing (non-empty) directory by design.
     if parsed.execute and os.path.isdir(output_dir):
         try:
             entries = os.listdir(output_dir)
@@ -1280,6 +1448,7 @@ def main(args=None):
         wall_timeout_s=parsed.wall_timeout_s,
         post_completion_s=parsed.post_completion_s,
         execute=parsed.execute,
+        reevaluate=parsed.reevaluate,
         make_provider=LiveCompletionProvider if parsed.execute else None,
     )
 

@@ -585,6 +585,291 @@ def test_move_away_and_return_reports_max_excursion():
 
 
 # ---------------------------------------------------------------------------
+# V16.3 evaluation policy: warnings vs hard failures
+# ---------------------------------------------------------------------------
+
+def _tf_seq(steps, base_t_ns=RECEIPT_BASE + 3_000_000_000,
+            sim_start=80.0, dt_sim=5.0, base_x=0.01, base_y=0.0, yaw=0.0):
+    """
+    Build map->odom transforms with the given per-step deltas.
+
+    `steps` is a list of (dx, dy, dyaw_deg) applied successively. The initial
+    base pose is recorded first, then each step is applied and the resulting
+    pose recorded, so N steps yield N+1 transforms and N real correction
+    steps (the largest one a true step between two recorded transforms).
+    """
+    from geometry_msgs.msg import Quaternion, TransformStamped
+    from geometry_msgs.msg import Vector3
+    from tf2_msgs.msg import TFMessage
+    transforms = []
+    yaw = float(yaw)
+
+    def _append(x, y, yaw_deg, t, t_ns):
+        qz = math.sin(math.radians(yaw_deg) / 2.0)
+        qw = math.cos(math.radians(yaw_deg) / 2.0)
+        tr = TransformStamped()
+        tr.header.stamp.sec = int(t)
+        tr.header.stamp.nanosec = int((t - int(t)) * 1e9)
+        tr.header.frame_id = 'map'
+        tr.child_frame_id = 'odom'
+        tr.transform.translation = Vector3(x=x, y=y, z=0.0)
+        tr.transform.rotation = Quaternion(x=0.0, y=0.0, z=qz, w=qw)
+        msg = TFMessage()
+        msg.transforms.append(tr)
+        transforms.append((t_ns, msg))
+
+    x, y = base_x, base_y
+    t, t_ns = sim_start, base_t_ns
+    _append(x, y, math.degrees(yaw), t, t_ns)
+    for dx, dy, dyaw_deg in steps:
+        x += dx
+        y += dy
+        yaw += math.radians(dyaw_deg)
+        t += dt_sim
+        t_ns += 1_000_000_000
+        _append(x, y, math.degrees(yaw), t, t_ns)
+    return transforms
+
+
+def test_evaluation_policy_version_is_two():
+    collected = build_successful_mission()
+    result, _, _ = me.evaluate_mission(collected)
+    assert result['evaluation_policy_version'] == 2
+
+
+def test_warnings_and_failure_reasons_are_separate_lists():
+    collected = build_successful_mission()
+    result, _, reasons = me.evaluate_mission(collected)
+    assert isinstance(result['warnings'], list)
+    assert isinstance(result['failure_reasons'], list)
+    assert result['warnings'] is not result['failure_reasons']
+    assert reasons == result['failure_reasons']
+
+
+def test_coverage_below_98_passes_with_warning():
+    collected = build_successful_mission()
+    collected['/map'] = [
+        (RECEIPT_BASE + 2_000_000_000, make_map(97.93))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert passed, reasons
+    assert not reasons
+    assert any('known map' in w and '< 98' in w
+               for w in result['warnings'])
+    assert result['known_map_percent'] < 98.0
+
+
+def test_coverage_above_98_no_warning():
+    collected = build_successful_mission()
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert passed
+    coverage_warnings = [w for w in result['warnings']
+                         if 'known map' in w]
+    assert not coverage_warnings
+
+
+def test_permanent_region_without_selectable_frontier_passes():
+    collected = build_successful_mission()
+    result = __import__('json').dumps(
+        result_payload(completion_time_s=75.0, permanent_failed_regions=1)
+    )
+    collected['/exploration_result'] = [
+        (
+            RECEIPT_BASE + 5_000_000_001,
+            make_string(result),
+        )
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert result['permanent_failed_regions'] == 1
+    assert result['selectable_frontier_components'] == 0
+    assert passed, reasons
+    assert any('permanent_failed_regions' in w
+               for w in result['warnings'])
+
+
+def test_five_cell_frontier_component_still_fails():
+    from nav_msgs.msg import OccupancyGrid
+    collected = build_successful_mission()
+    m = OccupancyGrid()
+    size = 9
+    m.info.width = size
+    m.info.height = size
+    data = [-1] * (size * size)
+    for i in range(5):
+        data[i] = 0
+    m.data = data
+    collected['/map'] = [(RECEIPT_BASE + 2_000_000_000, m)]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert any(s >= 5 for s in result['final_frontier_component_sizes'])
+    assert not passed
+    assert any('>= 5' in r for r in reasons)
+
+
+def test_max_translation_0_1638_p99_0_0418_yaw_0_4_passes_with_warning():
+    collected = build_successful_mission()
+    # ~100 small steps of 0.04 m / 0.0 deg, then one outlier 0.1638 m / 0.4 deg.
+    # A large sample keeps the p99 of the small routine steps below 0.05 m
+    # while the lone outlier is the maximum translation step.
+    steps = [(0.04, 0.0, 0.0)] * 100 + [(0.1638, 0.0, 0.4)]
+    collected['/tf'] = _tf_seq(steps)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert abs(result['maximum_map_to_odom_translation_step_m'] - 0.1638) < 1e-6
+    assert abs(result['maximum_map_to_odom_yaw_step_deg'] - 0.4) < 1e-6
+    assert result['p99_map_to_odom_translation_step_m'] < 0.05
+    assert passed, reasons
+    assert any('> 0.15' in w for w in result['warnings'])
+    assert not reasons
+
+
+def test_max_translation_above_0_25_fails():
+    collected = build_successful_mission()
+    steps = [(0.3, 0.0, 0.0), (0.01, 0.0, 0.0)]
+    collected['/tf'] = _tf_seq(steps)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert abs(result['maximum_map_to_odom_translation_step_m'] - 0.3) < 1e-6
+    assert not passed
+    assert any('0.25' in r for r in reasons)
+
+
+def test_translation_p99_above_0_05_fails():
+    collected = build_successful_mission()
+    steps = [(0.10, 0.0, 0.0)] * 20
+    collected['/tf'] = _tf_seq(steps)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert result['p99_map_to_odom_translation_step_m'] > 0.05
+    assert result['maximum_map_to_odom_translation_step_m'] <= 0.25
+    assert not passed
+    assert any('p99' in r for r in reasons)
+
+
+def test_max_yaw_step_above_5_fails():
+    collected = build_successful_mission()
+    steps = [(0.01, 0.0, 6.0)]
+    collected['/tf'] = _tf_seq(steps)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert abs(result['maximum_map_to_odom_yaw_step_deg'] - 6.0) < 1e-6
+    assert not passed
+    assert any('5.0' in r for r in reasons)
+
+
+def test_historical_map_splitting_fails():
+    collected = build_successful_mission()
+    steps = [(0.72, 0.0, 14.4)]
+    collected['/tf'] = _tf_seq(steps)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert any('0.25' in r for r in reasons)
+    assert any('5.0' in r for r in reasons)
+
+
+def test_percentile_helper_covers_edge_cases():
+    assert me.compute_percentile([], 0.99) == 0.0
+    assert me.compute_percentile([5.0], 0.5) == 5.0
+    assert me.compute_percentile([1.0, 2.0, 3.0], 0.5) == 2.0
+    assert me.compute_percentile([1.0, 2.0, 3.0, 4.0], 0.5) == 2.5
+    assert abs(me.compute_percentile([10.0, 20.0], 0.99) - 19.9) < 1e-9
+    assert me.compute_percentile([7.0, 7.0, 7.0], 0.99) == 7.0
+
+
+def test_final_component_size_five_fails_boundary():
+    # A single final component of exactly 5 cells is a hard failure
+    # (unresolved region). Four cells is NOT.
+    result_5 = _build_evaluator_with_components([5])
+    assert result_5['passed'] is False
+    assert any('>= 5 cells' in r for r in result_5['failure_reasons'])
+
+    result_4 = _build_evaluator_with_components([4])
+    assert result_4['passed'] is True
+    assert not any('>= 5 cells' in r for r in result_4['failure_reasons'])
+
+
+def test_permanent_warning_reports_factual_counts():
+    # The permanent-region warning must NOT claim geometric frontier is
+    # zero, and must NOT use the obsolete 'no selectable final frontier
+    # remains' text. It reports the real remaining frontier counts.
+    result = _build_evaluator_with_components(
+        [10, 3], perm_regions=1
+    )
+    assert result['passed'] is False  # 10-cell component still fails
+    perm_warns = [
+        w for w in result['warnings']
+        if 'permanent_failed_regions' in w
+    ]
+    assert perm_warns, 'expected a permanent-region warning'
+    text = perm_warns[0]
+    assert 'no selectable final frontier remains' not in text
+    assert 'geometric frontier still' in text
+    assert '13 cells' in text
+    assert '1 geometrically selectable' in text
+
+
+def _build_evaluator_with_components(sizes, perm_regions=0):
+    """
+    Evaluate a synthetic mission with pinned frontier component sizes.
+
+    The final map reports exactly the requested disconnected frontier
+    component sizes, with the requested permanent-region count. The base
+    scenario is otherwise clean (valid completion transition, no
+    motion/odometry faults), so the only gates exercised are the
+    independent geometric final-frontier-component hard check and the
+    permanent-region warning text. Component sizes are pinned directly
+    (the map clustering is an implementation detail irrelevant to the
+    pass/fail policy being tested).
+    """
+    from unittest.mock import patch
+
+    collected = build_successful_mission()
+
+    # Pin the final-frontier component accounting deterministically.
+    total_cells = sum(sizes)
+    with patch.object(
+        me, 'count_frontier_components',
+        lambda data, w, h: (total_cells, list(sizes)),
+    ):
+        # When permanent regions are requested, embed the count in the
+        # /exploration_result JSON the evaluator reads.
+        if perm_regions:
+            payload = result_payload(
+                completion_time_s=75.0,
+                permanent_failed_regions=perm_regions,
+            )
+            collected['/exploration_result'] = [
+                (
+                    RECEIPT_BASE + 5_000_000_001,
+                    make_string(__import__('json').dumps(payload)),
+                ),
+            ]
+        result, passed, reasons = me.evaluate_mission(collected)
+    result['passed'] = passed
+    result['failure_reasons'] = reasons
+    return result
+
+
+def test_coverage_warning_uses_single_constant():
+    # COVERAGE_WARN_PERCENT is the single source of truth for the diagnostic
+    # coverage warning; MIN_KNOWN_MAP_PERCENT must no longer exist.
+    assert hasattr(me, 'COVERAGE_WARN_PERCENT')
+    assert not hasattr(me, 'MIN_KNOWN_MAP_PERCENT')
+    # Just below the threshold -> warning only (still passes).
+    collected = build_successful_mission()
+    collected['/map'] = [
+        (RECEIPT_BASE + 2_000_000_000, make_map(97.93))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert passed, reasons
+    assert not reasons
+    assert any(
+        'known map' in w and f'< {me.COVERAGE_WARN_PERCENT}' in w
+        for w in result['warnings']
+    )
+    # At/above the threshold -> no coverage warning.
+    collected2 = build_successful_mission()
+    r2, passed2, _ = me.evaluate_mission(collected2)
+    assert passed2
+    assert not any('known map' in w for w in r2['warnings'])
+
+
+# ---------------------------------------------------------------------------
 # Yaw unwrapping across multiple rotations (>720 deg)
 # ---------------------------------------------------------------------------
 
@@ -720,7 +1005,17 @@ def _make_node():
     node.frontier_cells = []
     node.frontier_clusters = []
     node.permanent_after_failures = 3
+    node.permanent_exclusion_radius_m = 0.20
     node.node_time_s = lambda: 100.0
+    # V16.4 terminal-outcome attributes (truthful completion vs blocked).
+    node.terminal_outcome = None
+    node.terminal_blocked_reason = None
+    node.terminal_geometric_frontier_cells = 0
+    node.terminal_geometric_frontier_clusters = 0
+    node.terminal_reachable_candidate_clusters = 0
+    node.terminal_post_exclusion_eligible = 0
+    node.terminal_temporary_rejected = 0
+    node.terminal_permanent_rejected = 0
     return node
 
 

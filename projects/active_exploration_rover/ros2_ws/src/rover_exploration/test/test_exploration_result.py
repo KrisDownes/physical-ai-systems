@@ -35,6 +35,15 @@ def make_detector():
     detector.clock_s = 100.0
     detector.node_time_s = lambda: detector.clock_s
     detector.get_logger = lambda: MagicMock()
+    # V16.4 terminal-outcome attributes (truthful completion vs blocked).
+    detector.terminal_outcome = None
+    detector.terminal_blocked_reason = None
+    detector.terminal_geometric_frontier_cells = 0
+    detector.terminal_geometric_frontier_clusters = 0
+    detector.terminal_reachable_candidate_clusters = 0
+    detector.terminal_post_exclusion_eligible = 0
+    detector.terminal_temporary_rejected = 0
+    detector.terminal_permanent_rejected = 0
     # Attributes the real stuck_check_callback / request_recovery paths
     # touch, so make_detector can exercise those methods directly.
     detector.recovery_request_publisher = MagicMock()
@@ -49,6 +58,8 @@ def make_detector():
 EXPECTED_KEYS = [
     'schema_version',
     'completed',
+    'outcome',
+    'blocked_reason',
     'completion_time_s',
     'goals_assigned',
     'goals_reached',
@@ -59,6 +70,10 @@ EXPECTED_KEYS = [
     'visited_regions',
     'frontier_cells',
     'frontier_clusters',
+    'geometric_frontier_cells',
+    'geometric_frontier_clusters',
+    'reachable_candidate_clusters',
+    'post_exclusion_eligible',
 ]
 
 
@@ -133,6 +148,7 @@ def test_failure_registration_through_real_stuck_path():
     detector.blacklist_radius_m = 0.5
     detector.blacklist_duration_s = 10.0
     detector.map_resolution = 0.05
+    detector.permanent_exclusion_radius_m = 0.20
     detector.failure_records = []
     detector.map_origin = (0.0, 0.0)
     before = detector.failure_events
