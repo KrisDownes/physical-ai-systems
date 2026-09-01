@@ -45,8 +45,9 @@ REQUIRED_TOPICS = [
     '/recovery_request',
 ]
 
-# Result schema: exact keys and their expected JSON types.
-RESULT_KEYS = [
+# Result schemas: V1 is the original historical payload; V2 adds the V16.4
+# truthful terminal-outcome fields. Both remain exact, closed schemas.
+RESULT_KEYS_V1 = [
     'schema_version',
     'completed',
     'completion_time_s',
@@ -59,6 +60,14 @@ RESULT_KEYS = [
     'visited_regions',
     'frontier_cells',
     'frontier_clusters',
+]
+RESULT_KEYS_V2 = RESULT_KEYS_V1 + [
+    'outcome',
+    'blocked_reason',
+    'geometric_frontier_cells',
+    'geometric_frontier_clusters',
+    'reachable_candidate_clusters',
+    'post_exclusion_eligible',
 ]
 
 # Threshold constants.
@@ -423,10 +432,17 @@ def validate_result(parsed):
     """
     if not isinstance(parsed, dict):
         return False, 'result is not a JSON object'
-    if set(parsed.keys()) != set(RESULT_KEYS):
-        return False, 'result keys do not match the required schema'
-    if parsed.get('schema_version') != 1:
-        return False, 'result schema_version != 1'
+    schema_version = parsed.get('schema_version')
+    if isinstance(schema_version, bool) or not isinstance(schema_version, int):
+        return False, 'result schema_version is not an integer'
+    if schema_version == 1:
+        required_keys = RESULT_KEYS_V1
+    elif schema_version == 2:
+        required_keys = RESULT_KEYS_V2
+    else:
+        return False, 'result schema_version is unsupported'
+    if set(parsed.keys()) != set(required_keys):
+        return False, 'result keys do not match the required schema version'
     if parsed.get('completed') is not True:
         return False, 'result completed != true'
 
@@ -457,6 +473,31 @@ def validate_result(parsed):
         if value < 0:
             return False, f'{key} is negative'
 
+    if schema_version == 2:
+        for key in (
+            'geometric_frontier_cells',
+            'geometric_frontier_clusters',
+            'reachable_candidate_clusters',
+            'post_exclusion_eligible',
+        ):
+            value = parsed.get(key)
+            if isinstance(value, bool) or not isinstance(value, int):
+                return False, f'{key} is not an integer'
+            if value < 0:
+                return False, f'{key} is negative'
+
+        outcome = parsed.get('outcome')
+        blocked_reason = parsed.get('blocked_reason')
+        if outcome not in ('success', 'blocked'):
+            return False, 'result outcome is not success or blocked'
+        if outcome == 'success' and blocked_reason is not None:
+            return False, 'successful result blocked_reason is not null'
+        if outcome == 'blocked' and (
+            not isinstance(blocked_reason, str)
+            or not blocked_reason.strip()
+        ):
+            return False, 'blocked result blocked_reason is not nonempty text'
+
     return True, ''
 
 
@@ -484,7 +525,8 @@ def evaluate_mission(collected):
     prev = None
     completion_receipt_ns = None
     parsed_result = None
-    result_outcome = 'success'
+    result_outcome = None
+    blocked_reason = None
     for t_ns, msg in completion_msgs:
         value = bool(msg.data)
         if prev is not None and (not prev) and value:
@@ -499,6 +541,8 @@ def evaluate_mission(collected):
     # result whose completion_time_s agrees with the mapped completion
     # transition time within a documented tolerance.
     parsed_result = None
+    result_candidates = []
+    result_rejections = []
     if completion_receipt_ns is not None:
         result_candidates = [
             (t_ns, msg)
@@ -514,15 +558,23 @@ def evaluate_mission(collected):
             try:
                 candidate = json.loads(msg.data)
             except (ValueError, TypeError):
+                result_rejections.append('malformed JSON')
                 continue
-            ok, _ = validate_result(candidate)
+            ok, reason = validate_result(candidate)
             if not ok:
+                result_rejections.append(reason)
                 continue
             if abs(candidate.get('completion_time_s', float('nan'))
                    - completion_time_s) <= 0.5:
                 parsed_result = candidate
-                result_outcome = candidate.get('outcome', 'success')
+                if candidate['schema_version'] == 1:
+                    result_outcome = 'success'
+                    blocked_reason = None
+                else:
+                    result_outcome = candidate['outcome']
+                    blocked_reason = candidate['blocked_reason']
                 break
+            result_rejections.append('completion timestamp mismatch')
 
     # ---- Map / frontier accounting (final map) ----
     map_msgs = sorted(collected.get('/map', []), key=lambda r: r[0])
@@ -714,6 +766,7 @@ def evaluate_mission(collected):
         'final_frontier_component_sizes': final_component_sizes,
         'selectable_frontier_components': selectable_components,
         'result_outcome': result_outcome,
+        'blocked_reason': blocked_reason,
         'goals_assigned': goals_assigned,
         'goals_reached': goals_reached,
         'temporary_failure_events': temp_fail,
@@ -745,8 +798,19 @@ def evaluate_mission(collected):
             'final /exploration_complete state is not true'
         )
     if parsed_result is None:
+        if completion_receipt_ns is None:
+            detail = 'no completion transition to associate'
+        elif not result_candidates:
+            detail = 'no nonempty result message after completion'
+        else:
+            detail = '; '.join(dict.fromkeys(result_rejections))
         failure_reasons.append(
-            'valid /exploration_result (completed=true) not found'
+            'valid /exploration_result (completed=true) not found: '
+            + detail
+        )
+    if parsed_result is not None and result_outcome == 'blocked':
+        failure_reasons.append(
+            'exploration outcome blocked: ' + blocked_reason
         )
     if any(size >= MIN_CLUSTER_SIZE for size in final_component_sizes):
         failure_reasons.append(

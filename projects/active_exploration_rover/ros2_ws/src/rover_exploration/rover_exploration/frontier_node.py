@@ -871,7 +871,7 @@ class FrontierDetector(Node):
         readers should consult ``outcome``.
         """
         result = {
-            'schema_version': 1,
+            'schema_version': 2,
             'completed': True,
             'outcome': self.terminal_outcome or 'success',
             'blocked_reason': self.terminal_blocked_reason,

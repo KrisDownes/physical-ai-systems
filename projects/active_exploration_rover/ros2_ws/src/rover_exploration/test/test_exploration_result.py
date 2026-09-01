@@ -3,6 +3,7 @@
 import json
 from unittest.mock import MagicMock
 
+from rover_exploration import mission_evaluator as me
 from rover_exploration.frontier_node import FrontierDetector
 
 
@@ -87,8 +88,9 @@ def test_result_schema_exact_and_deterministic():
     assert detector.result_messages[0].data == json.dumps(
         payload, sort_keys=True
     )
-    assert payload['schema_version'] == 1
+    assert payload['schema_version'] == 2
     assert payload['completed'] is True
+    assert set(payload) == set(me.RESULT_KEYS_V2)
 
 
 def test_result_published_once_on_true_transition():

@@ -114,6 +114,20 @@ def result_payload(**overrides):
     return payload
 
 
+def result_payload_v2(**overrides):
+    payload = result_payload(
+        schema_version=2,
+        outcome='success',
+        blocked_reason=None,
+        geometric_frontier_cells=0,
+        geometric_frontier_clusters=0,
+        reachable_candidate_clusters=0,
+        post_exclusion_eligible=0,
+    )
+    payload.update(overrides)
+    return payload
+
+
 # Realistic receipt timestamps (Unix epoch ~1.787e18 ns) while /clock carries
 # small simulation seconds (0-150). This exposes receipt/sim-time mixing.
 RECEIPT_BASE = 1_787_000_000_000_000_000
@@ -374,6 +388,101 @@ def test_wrong_schema_version_fails():
     ]
     result, passed, reasons = me.evaluate_mission(collected)
     assert not passed
+
+
+def test_legacy_v1_result_is_accepted_with_implicit_success():
+    result, passed, _ = me.evaluate_mission(build_successful_mission())
+    assert passed
+    assert result['result_outcome'] == 'success'
+    assert result['blocked_reason'] is None
+
+
+def test_v2_success_result_is_accepted():
+    collected = build_successful_mission()
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(
+            __import__('json').dumps(result_payload_v2(
+                completion_time_s=75.0))))
+    ]
+    result, passed, _ = me.evaluate_mission(collected)
+    assert passed
+    assert result['result_outcome'] == 'success'
+
+
+def test_v2_blocked_result_propagates_reason():
+    collected = build_successful_mission()
+    reason = 'fresh approach retry cap exhausted'
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(
+            __import__('json').dumps(result_payload_v2(
+                completion_time_s=75.0, outcome='blocked',
+                blocked_reason=reason))))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert result['passed'] is False
+    assert result['result_outcome'] == 'blocked'
+    assert result['blocked_reason'] == reason
+    assert any(reason in item for item in reasons)
+
+
+def test_v1_payload_with_v2_keys_is_rejected():
+    collected = build_successful_mission()
+    payload = result_payload(outcome='success', blocked_reason=None)
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(
+            __import__('json').dumps(payload)))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert result['result_outcome'] is None
+    assert any('keys' in reason for reason in reasons)
+
+
+def test_invalid_result_never_defaults_outcome_to_success():
+    collected = build_successful_mission()
+    _set_result(collected, schema_version=99)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert result['result_outcome'] is None
+    assert any('schema' in reason for reason in reasons)
+
+
+def test_boolean_schema_version_is_rejected():
+    collected = build_successful_mission()
+    _set_result(collected, schema_version=True)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert result['result_outcome'] is None
+    assert any('schema_version is not an integer' in reason for reason in reasons)
+
+
+def test_float_schema_version_is_rejected():
+    collected = build_successful_mission()
+    _set_result(collected, schema_version=2.0)
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert result['result_outcome'] is None
+    assert any('schema_version is not an integer' in reason for reason in reasons)
+
+
+def test_v2_counter_with_boolean_type_is_rejected():
+    collected = build_successful_mission()
+    payload = result_payload_v2(
+        completion_time_s=75.0,
+        geometric_frontier_cells=True,
+    )
+    collected['/exploration_result'] = [
+        (RECEIPT_BASE + 5_000_000_001, make_string(
+            __import__('json').dumps(payload)))
+    ]
+    result, passed, reasons = me.evaluate_mission(collected)
+    assert not passed
+    assert result['result_outcome'] is None
+    assert any(
+        'geometric_frontier_cells is not an integer' in reason
+        for reason in reasons
+    )
 
 
 def test_completed_false_result_fails():
@@ -1144,7 +1253,8 @@ def test_transition_to_true_publishes_valid_result_only():
     result_msg = node.exploration_result_publisher.publish.call_args[0][0]
     assert isinstance(result_msg, String)
     payload = _json.loads(result_msg.data)
-    assert payload['schema_version'] == 1
+    assert payload['schema_version'] == 2
+    assert set(payload) == set(me.RESULT_KEYS_V2)
     assert payload['completed'] is True
     # No empty-string publication on the result topic.
     assert result_msg.data != ''
