@@ -62,35 +62,6 @@ def alignment_progress_rad(samples, goal_position) -> float:
     return initial_error - current_error
 
 
-def prune_blacklist(
-    blacklist,
-    now_s,
-    blacklist_duration_s,
-):
-    return [
-        entry for entry in blacklist
-        if now_s - entry[2] < blacklist_duration_s
-    ]
-
-
-def is_goal_blacklisted(
-    goal_x,
-    goal_y,
-    blacklist,
-    blacklist_radius_m,
-) -> bool:
-    for blacklisted_x, blacklisted_y, _ in blacklist:
-        distance = math.hypot(
-            goal_x - blacklisted_x,
-            goal_y - blacklisted_y,
-        )
-
-        if distance <= blacklist_radius_m:
-            return True
-
-    return False
-
-
 def is_stuck(
     progress_samples,
     goal_position,

@@ -1,361 +1,94 @@
-# Tests for lifetime failure records vs. active cooldowns.
-#
-# Key invariant: cooldown pruning must never erase the lifetime
-# failure count, so a second failure — even long after the first
-# cooldown expired — still promotes the region to permanent.
+"""Tests for the one authoritative frontier-memory representation."""
 
-from rover_exploration.frontier_memory import (
-    is_excluded,
-    prune_expired_cooldowns,
-    record_failure,
-)
-from rover_exploration.grid_planning import (
-    compute_reachable_component,
-    select_cluster_weighted_goal,
-)
-
-FREE = 0
-OCCUPIED = 100
+from rover_exploration.frontier_memory import FrontierMemory
 
 
-def make_memory():
-    return {
-        'records': [],
-        'permanent': [],
-        'visited': [],
-    }
-
-
-def fail(memory, x, y, now_s):
-    return record_failure(
-        failure_records=memory['records'],
-        permanent_regions=memory['permanent'],
-        x=x, y=y, now_s=now_s,
+def fail(memory, x=1.0, y=1.0, now_s=0.0):
+    return memory.register_failure(
+        x=x,
+        y=y,
+        now_s=now_s,
         match_radius_m=0.75,
-        blacklist_duration_s=30.0,
+        cooldown_s=30.0,
         promotion_failures=2,
+        permanent_radius_m=0.20,
     )
 
 
-def excluded(memory, x, y, now_s, temporary_radius_m=None):
-    return is_excluded(
-        x=x, y=y,
-        failure_records=memory['records'],
-        permanent_regions=memory['permanent'],
-        visited_regions=memory['visited'],
+def excluded(memory, x=1.0, y=1.0, now_s=0.0):
+    return memory.exclusion_reason(
+        x=x,
+        y=y,
         now_s=now_s,
-        exclusion_radius_m=0.75,
-        temporary_radius_m=temporary_radius_m,
+        temporary_radius_m=0.75,
         visited_radius_m=0.60,
     )
 
 
-def test_second_failure_before_temporary_expiry():
-    memory = make_memory()
+def test_new_failure_has_temporary_cooldown():
+    memory = FrontierMemory()
+    assert fail(memory) == 'new'
+    assert excluded(memory, now_s=29.9) == 'temporary'
+    assert excluded(memory, now_s=30.0) is None
 
-    assert fail(memory, 1.0, 1.0, 0.0) == 'new'
-    assert excluded(memory, 1.0, 1.0, 10.0) == 'temporary'
 
-    outcome = fail(memory, 1.05, 1.02, 20.0)
+def test_cooldown_expiry_keeps_lifetime_count_for_promotion():
+    memory = FrontierMemory()
+    fail(memory, now_s=0.0)
+    memory.prune(30.0)
 
-    assert outcome == 'promoted'
-    assert memory['permanent'] == [(1.0, 1.0)]
-    assert excluded(memory, 1.0, 1.0, 20.0) == 'permanent'
+    assert memory.failures[0].count == 1
+    assert fail(memory, now_s=40.0) == 'promoted'
+    assert memory.failures[0].count == 2
 
 
-def test_second_failure_after_temporary_expiry_promotes():
-    """The core regression: expiry must not erase the first count."""
-    memory = make_memory()
+def test_second_nearby_failure_promotes_same_record():
+    memory = FrontierMemory()
+    fail(memory, now_s=0.0)
+    assert fail(memory, x=1.5, now_s=10.0) == 'promoted'
+    assert len(memory.failures) == 1
+    assert len(memory.permanent_failures) == 1
 
-    # t=0: goal A fails; temporarily excluded.
-    assert fail(memory, 5.0, 5.0, 0.0) == 'new'
-    assert excluded(memory, 5.0, 5.0, 10.0) == 'temporary'
 
-    # t=31: prune expired cooldowns; A becomes eligible again.
-    prune_expired_cooldowns(
-        failure_records=memory['records'], now_s=31.0
-    )
-    assert excluded(memory, 5.0, 5.0, 31.0) is None
+def test_permanent_exclusion_is_scoped_to_failed_approach():
+    memory = FrontierMemory()
+    fail(memory)
+    fail(memory, now_s=31.0)
 
-    # t=40: a second failure near A must see the old evidence.
-    outcome = fail(memory, 5.1, 4.95, 40.0)
+    assert excluded(memory, x=1.19, now_s=1000.0) == 'permanent'
+    assert excluded(memory, x=1.21, now_s=1000.0) is None
 
-    assert outcome == 'promoted'
-    assert memory['permanent'] == [(5.0, 5.0)]
-    assert memory['records'][0]['failure_count'] == 2
 
+def test_prune_never_resurrects_permanent_failure():
+    memory = FrontierMemory()
+    fail(memory)
+    fail(memory, now_s=31.0)
+    memory.prune(1_000_000.0)
 
-def test_spatially_shifted_failure_after_expiry():
-    memory = make_memory()
+    assert excluded(memory, now_s=1_000_000.0) == 'permanent'
 
-    assert fail(memory, 8.0, 8.0, 0.0) == 'new'
 
-    prune_expired_cooldowns(
-        failure_records=memory['records'], now_s=100.0
-    )
-    assert excluded(memory, 8.0, 8.0, 100.0) is None
+def test_overlapping_active_cooldown_excludes_candidate():
+    memory = FrontierMemory()
+    fail(memory, x=0.4, now_s=0.0)
+    fail(memory, x=1.2, now_s=20.0)
 
-    # SLAM drifts the frontier ~0.45 m away: same spatial region.
-    outcome = fail(memory, 8.3, 8.35, 120.0)
+    assert excluded(memory, x=0.8, now_s=35.0) == 'temporary'
 
-    assert outcome == 'promoted'
-    assert memory['permanent'] == [(8.0, 8.0)]
 
+def test_visited_memory_is_distinct_from_failure_memory():
+    memory = FrontierMemory()
+    memory.visited.append((2.0, 3.0))
 
-def test_permanent_exclusion_survives_arbitrarily_later_times():
-    memory = make_memory()
+    assert excluded(memory, x=2.5, y=3.0) == 'visited'
+    assert not memory.failures
 
-    fail(memory, 3.0, 7.0, 0.0)
-    fail(memory, 3.1, 6.95, 50.0)
 
-    assert memory['permanent'] == [(3.0, 7.0)]
+def test_active_cooldown_and_permanent_views_are_derived():
+    memory = FrontierMemory()
+    fail(memory, x=1.0, now_s=0.0)
+    fail(memory, x=3.0, now_s=0.0)
+    fail(memory, x=3.0, now_s=1.0)
 
-    for now_s in (60.0, 500.0, 10_000.0, 1e9):
-        assert (
-            excluded(memory, 3.05, 7.0, now_s)
-            == 'permanent'
-        )
-
-
-def test_new_failure_still_gets_a_cooldown():
-    memory = make_memory()
-
-    assert fail(memory, 1.0, 1.0, 0.0) == 'new'
-    assert memory['records'][0]['blocked_until_s'] == 30.0
-    assert excluded(memory, 1.0, 1.0, 29.9) == 'temporary'
-    assert excluded(memory, 1.0, 1.0, 30.1) is None
-
-
-def test_pruning_never_deletes_lifetime_records():
-    memory = make_memory()
-
-    fail(memory, 2.0, 2.0, 0.0)
-
-    for tick in (31.0, 62.0, 93.0):
-        prune_expired_cooldowns(
-            failure_records=memory['records'], now_s=tick
-        )
-
-    assert len(memory['records']) == 1
-    assert memory['records'][0]['failure_count'] == 1
-    assert not memory['permanent']
-
-
-# --- Cluster-weighted selection ---
-
-def make_bfs(width, height, start=(1, 1)):
-    data = [FREE] * (width * height)
-    return compute_reachable_component(
-        data=data, width=width, height=height,
-        start=start,
-    )
-
-
-def test_larger_cluster_wins_within_distance_slack():
-    bfs = make_bfs(21, 3)
-
-    candidates = {
-        (1, 5): (2,),    # small cluster, cost 4
-        (1, 12): (8,),   # large cluster, cost 11
-    }
-
-    result = select_cluster_weighted_goal(
-        bfs=bfs,
-        candidate_costs=candidates,
-        distance_slack_cells=40,
-    )
-
-    assert result is not None
-    assert result[0] == (1, 12)
-
-
-def test_nearest_wins_when_large_cluster_outside_slack():
-    bfs = make_bfs(101, 3)
-
-    # Shortest cost is 4. The huge cluster sits at cost 40: far
-    # beyond shortest_cost + slack(3), so it is not shortlisted.
-    candidates = {
-        (1, 5): (2,),     # small cluster, near
-        (1, 41): (50,),   # huge cluster, cost 40
-    }
-
-    result = select_cluster_weighted_goal(
-        bfs=bfs,
-        candidate_costs=candidates,
-        distance_slack_cells=3,
-    )
-
-    assert result is not None
-    assert result[0] == (1, 5)
-
-
-def test_unreachable_candidates_are_ignored():
-    width = 11
-    height = 3
-    data = [FREE] * (width * height)
-
-    for row in range(height):
-        data[row * width + 5] = OCCUPIED
-
-    bfs = compute_reachable_component(
-        data=data, width=width, height=height,
-        start=(1, 1),
-    )
-
-    result = select_cluster_weighted_goal(
-        bfs=bfs,
-        candidate_costs={(1, 7): (9,)},
-        distance_slack_cells=40,
-    )
-
-    assert result is None
-
-
-def test_selection_is_deterministic():
-    results = set()
-
-    for _ in range(5):
-        bfs = make_bfs(21, 3)
-        result = select_cluster_weighted_goal(
-            bfs=bfs,
-            candidate_costs={
-                (1, 8): (5,),
-                (1, 14): (5,),
-            },
-            distance_slack_cells=40,
-        )
-        results.add(result[0])
-
-    assert len(results) == 1
-
-
-def test_overlapping_cooldowns_any_active_excludes():
-    """Expired record must not mask an active overlapping one."""
-    memory = make_memory()
-
-    # Record A: expired long ago, centred at x=0.
-    memory['records'].append({
-        'x': 0.0,
-        'y': 0.0,
-        'failure_count': 1,
-        'blocked_until_s': 10.0,
-    })
-
-    # Record B: active cooldown, centred at x=1.4.
-    memory['records'].append({
-        'x': 1.4,
-        'y': 0.0,
-        'failure_count': 1,
-        'blocked_until_s': 5000.0,
-    })
-
-    # Candidate at x=0.7 is within 0.75 m of both records.
-    exclusion = excluded(memory, 0.7, 0.0, 50.0)
-
-    assert exclusion == 'temporary'
-
-
-# --- V16.4: scoped permanent exclusion (defect: a failed approach must
-# not blanket the whole frontier cluster it belonged to) ---
-
-def test_permanent_exclusion_is_scoped_not_cluster_blanket():
-    """
-    Promoted failure stores a small (0.20 m) scoped footprint.
-
-    A candidate 0.5 m away inside the same large cluster stays eligible.
-    """
-    memory = make_memory()
-
-    # Promote a failure at (5.0, 5.0) with the V16.4 scoped radius.
-    assert record_failure(
-        failure_records=memory['records'],
-        permanent_regions=memory['permanent'],
-        x=5.0, y=5.0, now_s=0.0,
-        match_radius_m=0.75,
-        blacklist_duration_s=30.0,
-        promotion_failures=2,
-        promote_radius_m=0.20,
-    ) == 'new'
-    outcome = record_failure(
-        failure_records=memory['records'],
-        permanent_regions=memory['permanent'],
-        x=5.05, y=5.02, now_s=10.0,
-        match_radius_m=0.75,
-        blacklist_duration_s=30.0,
-        promotion_failures=2,
-        promote_radius_m=0.20,
-    )
-    assert outcome == 'promoted'
-    # Stored as (x, y, radius).
-    assert memory['permanent'] == [(5.0, 5.0, 0.20)]
-
-    # Candidate 0.5 m away (still same cluster) is NOT excluded.
-    assert excluded(memory, 5.5, 5.0, 20.0,
-                    temporary_radius_m=0.20) is None
-    # Candidate 0.1 m away (the actual failed approach) IS excluded.
-    assert excluded(memory, 5.1, 5.0, 20.0,
-                    temporary_radius_m=0.20) == 'permanent'
-
-
-def test_legacy_promote_radius_defaults_to_match():
-    """
-    Legacy promote radius defaults to the match radius.
-
-    Backward-compatible: without promote_radius_m the footprint equals the
-    lifetime-record grouping radius (legacy blanket behavior).
-    """
-    memory = make_memory()
-    record_failure(
-        failure_records=memory['records'],
-        permanent_regions=memory['permanent'],
-        x=5.0, y=5.0, now_s=0.0,
-        match_radius_m=0.75,
-        blacklist_duration_s=30.0,
-        promotion_failures=2,
-    )
-    record_failure(
-        failure_records=memory['records'],
-        permanent_regions=memory['permanent'],
-        x=5.05, y=5.02, now_s=10.0,
-        match_radius_m=0.75,
-        blacklist_duration_s=30.0,
-        promotion_failures=2,
-    )
-    # Legacy 2-tuple form -> infinite footprint via min(inf, radius).
-    assert memory['permanent'] == [(5.0, 5.0)]
-    assert excluded(memory, 5.5, 5.0, 10.0) == 'permanent'
-
-
-def test_one_approach_failure_keeps_alternative_eligible():
-    """
-    One approach failure must not suppress a valid alternative.
-
-    Failure of one approach cell must not suppress a valid alternative in the
-    same cluster. Two candidates 0.5 m apart: failing the first at 0.20 m
-    scope leaves the second eligible.
-    """
-    memory = make_memory()
-    record_failure(
-        failure_records=memory['records'],
-        permanent_regions=memory['permanent'],
-        x=2.0, y=2.0, now_s=0.0,
-        match_radius_m=0.75,
-        blacklist_duration_s=30.0,
-        promotion_failures=2,
-        promote_radius_m=0.20,
-    )
-    record_failure(
-        failure_records=memory['records'],
-        permanent_regions=memory['permanent'],
-        x=2.05, y=2.02, now_s=10.0,
-        match_radius_m=0.75,
-        blacklist_duration_s=30.0,
-        promotion_failures=2,
-        promote_radius_m=0.20,
-    )
-    # The other candidate sits 0.5 m away; it must remain selectable.
-    assert excluded(memory, 2.5, 2.0, 20.0,
-                    temporary_radius_m=0.20) is None
-    # The failed approach itself stays excluded.
-    assert excluded(memory, 2.05, 2.0, 20.0,
-                    temporary_radius_m=0.20) == 'permanent'
+    assert [record.x for record in memory.active_cooldowns(2.0)] == [1.0]
+    assert [record.x for record in memory.permanent_failures] == [3.0]

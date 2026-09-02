@@ -1,10 +1,13 @@
 """Reachable approach selection and completion debounce tests."""
 
-from rover_exploration.grid_planning import (
-    compute_reachable_component,
-    find_cluster_approach_cell_reachable,
-    select_cluster_weighted_goal,
+import pytest
+
+from rover_exploration.frontier_selection import (
+    CandidateSet,
+    find_reachable_approach,
+    select_weighted_goal,
 )
+from rover_exploration.grid_planning import compute_reachable_component
 
 FREE = 0
 OCCUPIED = 100
@@ -66,7 +69,7 @@ def test_disconnected_first_choice_falls_back_to_reachable():
     planning_data[2 * width + 2] = OCCUPIED
     planning_data[2 * width + 3] = OCCUPIED
 
-    approach = find_cluster_approach_cell_reachable(
+    approach = find_reachable_approach(
         raw_data=data,
         planning_data=planning_data,
         width=width,
@@ -101,7 +104,7 @@ def test_unreachable_cluster_returns_none_within_bound():
 
     cluster = {(4, 5), (4, 6)}
 
-    approach = find_cluster_approach_cell_reachable(
+    approach = find_reachable_approach(
         raw_data=data,
         planning_data=data,
         width=width,
@@ -136,7 +139,7 @@ def test_approach_search_radius_bounds_expansion():
         for row in range(height):
             planning_data[row * width + column] = OCCUPIED
 
-    limited = find_cluster_approach_cell_reachable(
+    limited = find_reachable_approach(
         raw_data=data,
         planning_data=planning_data,
         width=width,
@@ -148,7 +151,7 @@ def test_approach_search_radius_bounds_expansion():
 
     assert limited is None
 
-    within = find_cluster_approach_cell_reachable(
+    within = find_reachable_approach(
         raw_data=data,
         planning_data=planning_data,
         width=width,
@@ -188,7 +191,7 @@ def test_raw_occupied_barrier_cannot_be_crossed():
         for column in range(5):
             planning_data[row * width + column] = OCCUPIED
 
-    approach = find_cluster_approach_cell_reachable(
+    approach = find_reachable_approach(
         raw_data=data,
         planning_data=planning_data,
         width=width,
@@ -223,7 +226,7 @@ def test_raw_unknown_barrier_cannot_be_crossed():
         for column in range(5):
             planning_data[row * width + column] = OCCUPIED
 
-    approach = find_cluster_approach_cell_reachable(
+    approach = find_reachable_approach(
         raw_data=data,
         planning_data=planning_data,
         width=width,
@@ -252,9 +255,10 @@ def test_selector_reuses_bfs_tree_without_second_search():
         start=(1, 1),
     )
 
-    result = select_cluster_weighted_goal(
+    result = select_weighted_goal(
         bfs=bfs,
-        candidate_costs={(1, 8): (9,)},
+        candidates=CandidateSet({(1, 8): 9}, {}, 0, 0),
+        eligible=[(1, 8)],
         distance_slack_cells=40,
     )
 
@@ -271,9 +275,10 @@ def test_selector_path_is_contiguous_and_reachable():
         start=(1, 1),
     )
 
-    result = select_cluster_weighted_goal(
+    result = select_weighted_goal(
         bfs=bfs,
-        candidate_costs={(1, 15): (4,)},
+        candidates=CandidateSet({(1, 15): 4}, {}, 0, 0),
+        eligible=[(1, 15)],
         distance_slack_cells=40,
     )
 
@@ -291,99 +296,25 @@ def test_selector_path_is_contiguous_and_reachable():
         assert delta == 1
 
 
-# --- Completion debounce ---
+@pytest.mark.parametrize(
+    'sizes,costs,slack,expected',
+    (
+        ({(1, 4): 2, (1, 6): 8}, {(1, 4): 3, (1, 6): 5}, 2, (1, 6)),
+        ({(1, 4): 2, (1, 8): 8}, {(1, 4): 3, (1, 8): 7}, 2, (1, 4)),
+        ({(1, 4): 5, (2, 3): 5}, {(1, 4): 3, (2, 3): 3}, 0, (1, 4)),
+    ),
+)
+def test_weighted_selection_is_bounded_and_deterministic(
+    sizes, costs, slack, expected
+):
+    bfs = {
+        'cost': costs,
+        'came_from': {cell: None for cell in costs},
+    }
+    candidates = CandidateSet(sizes, {}, 0, 0)
 
+    selected, _path = select_weighted_goal(
+        bfs, candidates, list(sizes), slack
+    )
 
-class DebounceHarness:
-    def __init__(self, period_s=8.0):
-        from rover_exploration.frontier_node import (
-            FrontierDetector,
-        )
-
-        detector = FrontierDetector.__new__(FrontierDetector)
-        detector.completion_debounce_active = False
-        detector.completion_debounce_started_s = 0.0
-        detector.exploration_complete_logged = False
-        detector.completion_debounce_period_s = period_s
-        detector.visited_goal_regions = []
-        detector.permanent_failed_regions = []
-        detector.goals_assigned = 0
-        detector.goals_reached = 0
-        detector.failure_events = 0
-        detector.temporary_failure_events = 0
-        detector.recovery_requests = 0
-        detector.frontier_cells = set()
-        detector.frontier_clusters = []
-        detector.permanent_exclusion_radius_m = 0.20
-        detector.terminal_outcome = None
-        detector.terminal_blocked_reason = None
-        detector.terminal_geometric_frontier_cells = 0
-        detector.terminal_geometric_frontier_clusters = 0
-        detector.terminal_reachable_candidate_clusters = 0
-        detector.terminal_post_exclusion_eligible = 0
-        detector.terminal_temporary_rejected = 0
-        detector.terminal_permanent_rejected = 0
-        detector.exploration_complete = False
-        detector.exploration_complete_publisher = type(
-            'Pub', (), {'publish': lambda self, m: None}
-        )()
-        detector.exploration_result_publisher = type(
-            'Pub', (), {'publish': lambda self, m: None}
-        )()
-        detector.recovery_cycle = __import__(
-            'rover_exploration.recovery_coordination',
-            fromlist=['RecoveryCoordinationState'],
-        ).RecoveryCoordinationState()
-        detector.committed_goal_world = None
-
-        self.clock_s = 0.0
-        detector.node_time_s = lambda: self.clock_s
-
-        class Logger:
-            def __init__(self):
-                self.messages = []
-
-            def warning(self, message):
-                self.messages.append(message)
-
-            def info(self, message):
-                self.messages.append(message)
-
-            def debug(self, message):
-                self.messages.append(message)
-
-        self.logger = Logger()
-        detector.get_logger = lambda: self.logger
-        self.detector = detector
-
-
-def test_debounce_publishes_nothing_and_logs_once():
-    # The debounce is a pure planner stop: no commands are issued
-    # and the completion message appears exactly once per period.
-    harness = DebounceHarness(period_s=8.0)
-    detector = harness.detector
-
-    detector.completion_debounce_tick()
-    assert detector.completion_debounce_active is True
-
-    harness.clock_s = 7.9
-    detector.completion_debounce_tick()
-
-    complete = [
-        m for m in harness.logger.messages
-        if 'Exploration complete' in m
-    ]
-    assert not complete
-
-    harness.clock_s = 8.1
-    detector.completion_debounce_tick()
-    detector.completion_debounce_tick()
-
-    complete = [
-        m for m in harness.logger.messages
-        if 'Exploration complete' in m
-    ]
-    assert len(complete) == 1
-
-    # No command publishing of any kind exists on this path.
-    assert not hasattr(detector, 'command_publisher')
+    assert selected == expected

@@ -24,12 +24,18 @@ from rosbag2_py import (
 )
 import rosidl_runtime_py.utilities
 
+from rover_exploration import result_contract
+
 # Planner definitions are reused verbatim so the evaluator's frontier
 # accounting can never silently diverge from the runtime node.
-from rover_exploration.frontier_detection import (
+from rover_exploration.frontier_selection import (
     cluster_frontier_cells,
     find_frontier_cells,
 )
+
+RESULT_KEYS_V1 = result_contract.RESULT_KEYS_V1
+RESULT_KEYS_V2 = result_contract.RESULT_KEYS_V2
+validate_result = result_contract.validate_result
 
 REQUIRED_TOPICS = [
     '/clock',
@@ -43,31 +49,6 @@ REQUIRED_TOPICS = [
     '/ground_truth/odometry',
     '/tf',
     '/recovery_request',
-]
-
-# Result schemas: V1 is the original historical payload; V2 adds the V16.4
-# truthful terminal-outcome fields. Both remain exact, closed schemas.
-RESULT_KEYS_V1 = [
-    'schema_version',
-    'completed',
-    'completion_time_s',
-    'goals_assigned',
-    'goals_reached',
-    'failure_events',
-    'temporary_failure_events',
-    'permanent_failed_regions',
-    'recovery_requests',
-    'visited_regions',
-    'frontier_cells',
-    'frontier_clusters',
-]
-RESULT_KEYS_V2 = RESULT_KEYS_V1 + [
-    'outcome',
-    'blocked_reason',
-    'geometric_frontier_cells',
-    'geometric_frontier_clusters',
-    'reachable_candidate_clusters',
-    'post_exclusion_eligible',
 ]
 
 # Threshold constants.
@@ -420,85 +401,6 @@ def read_bag(bag_dir):
         collected[topic].append((t_ns, message))
 
     return collected
-
-
-def validate_result(parsed):
-    """
-    Validate a parsed /exploration_result object against the schema.
-
-    Returns (ok, reason). Rejects empty/missing/extra keys, wrong types,
-    wrong schema version, completed != True, non-finite/negative
-    completion_time_s, or non-integer/negative counters.
-    """
-    if not isinstance(parsed, dict):
-        return False, 'result is not a JSON object'
-    schema_version = parsed.get('schema_version')
-    if isinstance(schema_version, bool) or not isinstance(schema_version, int):
-        return False, 'result schema_version is not an integer'
-    if schema_version == 1:
-        required_keys = RESULT_KEYS_V1
-    elif schema_version == 2:
-        required_keys = RESULT_KEYS_V2
-    else:
-        return False, 'result schema_version is unsupported'
-    if set(parsed.keys()) != set(required_keys):
-        return False, 'result keys do not match the required schema version'
-    if parsed.get('completed') is not True:
-        return False, 'result completed != true'
-
-    # completion_time_s: numeric, finite, non-negative, not a bool.
-    completion_time = parsed.get('completion_time_s')
-    if isinstance(completion_time, bool) or not isinstance(
-        completion_time, (int, float)
-    ):
-        return False, 'completion_time_s is not numeric'
-    if not math.isfinite(completion_time) or completion_time < 0.0:
-        return False, 'completion_time_s is not a finite non-negative number'
-
-    # Counters: integers (not bools), non-negative.
-    for key in (
-        'goals_assigned',
-        'goals_reached',
-        'failure_events',
-        'temporary_failure_events',
-        'permanent_failed_regions',
-        'recovery_requests',
-        'visited_regions',
-        'frontier_cells',
-        'frontier_clusters',
-    ):
-        value = parsed.get(key)
-        if isinstance(value, bool) or not isinstance(value, int):
-            return False, f'{key} is not an integer'
-        if value < 0:
-            return False, f'{key} is negative'
-
-    if schema_version == 2:
-        for key in (
-            'geometric_frontier_cells',
-            'geometric_frontier_clusters',
-            'reachable_candidate_clusters',
-            'post_exclusion_eligible',
-        ):
-            value = parsed.get(key)
-            if isinstance(value, bool) or not isinstance(value, int):
-                return False, f'{key} is not an integer'
-            if value < 0:
-                return False, f'{key} is negative'
-
-        outcome = parsed.get('outcome')
-        blocked_reason = parsed.get('blocked_reason')
-        if outcome not in ('success', 'blocked'):
-            return False, 'result outcome is not success or blocked'
-        if outcome == 'success' and blocked_reason is not None:
-            return False, 'successful result blocked_reason is not null'
-        if outcome == 'blocked' and (
-            not isinstance(blocked_reason, str)
-            or not blocked_reason.strip()
-        ):
-            return False, 'blocked result blocked_reason is not nonempty text'
-
-    return True, ''
 
 
 def evaluate_mission(collected):

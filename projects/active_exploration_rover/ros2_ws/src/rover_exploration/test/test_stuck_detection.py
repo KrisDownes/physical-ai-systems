@@ -9,9 +9,7 @@ from rover_exploration.stuck_detection import (
     alignment_progress_rad,
     distance_to_goal_m,
     heading_error_rad,
-    is_goal_blacklisted,
     is_stuck,
-    prune_blacklist,
     quaternion_yaw,
 )
 
@@ -281,52 +279,3 @@ def test_no_progress_goal_blacklisted_only_after_full_window():
 
 def test_distance_to_goal_measures_euclidean_distance():
     assert distance_to_goal_m((0.0, 0.0), (3.0, 4.0)) == 5.0
-
-
-def test_prune_blacklist_keeps_fresh_entries():
-    blacklist = [
-        (1.0, 1.0, 10.0),
-        (2.0, 2.0, 25.0),
-    ]
-
-    pruned = prune_blacklist(
-        blacklist=blacklist,
-        now_s=30.0,
-        blacklist_duration_s=10.0,
-    )
-
-    assert pruned == [(2.0, 2.0, 25.0)]
-
-
-def test_prune_blacklist_drops_entry_at_full_expiry():
-    blacklist = [(1.0, 1.0, 20.0)]
-
-    pruned = prune_blacklist(
-        blacklist=blacklist,
-        now_s=30.0,
-        blacklist_duration_s=10.0,
-    )
-
-    assert pruned == []
-
-
-def test_goal_within_radius_of_blacklisted_entry_is_blocked():
-    blacklist = [(1.0, 1.0, 0.0)]
-
-    assert is_goal_blacklisted(
-        goal_x=1.3,
-        goal_y=1.0,
-        blacklist=blacklist,
-        blacklist_radius_m=0.5,
-    ) is True
-
-
-def test_goal_beyond_radius_is_allowed():
-    blacklist = [(1.0, 1.0, 0.0)]
-
-    assert is_goal_blacklisted(
-        goal_x=2.0,
-        goal_y=1.0,
-        blacklist=blacklist,
-        blacklist_radius_m=0.5,
-    ) is False

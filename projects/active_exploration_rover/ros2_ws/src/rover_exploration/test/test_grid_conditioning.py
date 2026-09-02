@@ -3,15 +3,24 @@
 from rover_exploration.grid_planning import (
     build_planning_grid,
     close_occupied_walls,
+    compute_reachable_component,
     find_escape_path,
-    find_grid_path,
     pad_unknown_space,
+    reconstruct_grid_path,
 )
 
 
 FREE = 0
 OCCUPIED = 100
 UNKNOWN = -1
+
+
+def path_to(data, width, height, start, goal):
+    """Reconstruct a goal path from the runtime's one shared BFS."""
+    bfs = compute_reachable_component(data, width, height, start)
+    if bfs is None or goal not in bfs['cost']:
+        return None
+    return reconstruct_grid_path(bfs['came_from'], goal)
 
 
 def make_wall_grid(width, height, wall_row, door_columns):
@@ -105,13 +114,7 @@ def test_unknown_barrier_remains_uncrossable():
     padded[start[0] * width + start[1]] = FREE
     padded[goal[0] * width + goal[1]] = FREE
 
-    path = find_grid_path(
-        data=padded,
-        width=width,
-        height=height,
-        start=start,
-        goal=goal,
-    )
+    path = path_to(padded, width, height, start, goal)
 
     assert path is None
 
@@ -225,13 +228,7 @@ def test_planned_path_cannot_cross_sealed_wall_or_unknown():
     start = (0, 4)
     goal = (8, 4)
 
-    path = find_grid_path(
-        data=planning_data,
-        width=width,
-        height=height,
-        start=start,
-        goal=goal,
-    )
+    path = path_to(planning_data, width, height, start, goal)
 
     assert path is None
 
