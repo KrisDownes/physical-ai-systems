@@ -22,11 +22,12 @@
   <depend>ament_index_python</depend>
   <depend>python3-yaml</depend>
 
-    <exec_depend>launch</exec_depend>
-    <exec_depend>launch_ros</exec_depend>
-    <exec_depend>rover_control</exec_depend>
-    <exec_depend>rover_description</exec_depend>
-    <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>visual_rover_agent</exec_depend>
+  <exec_depend>rover_control</exec_depend>
+  <exec_depend>rover_description</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

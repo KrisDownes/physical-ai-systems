@@ -10,6 +10,7 @@ flags (-x, -y, -z, -Y).
 import importlib.util
 import os
 
+from launch import LaunchContext
 import pytest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -113,3 +114,33 @@ def test_exploration_launch_declares_and_forwards_spawn():
                 assert arg in keys
             return
     pytest.fail('simulation include not found')
+
+
+def test_agent_mode_excludes_classical_policy_and_motion_nodes():
+    """Agent mode must own motion without running classical policy nodes."""
+    exp = _load(os.path.join(
+        SRC_DIR, 'rover_exploration', 'launch', 'exploration.launch.py'))
+    context = LaunchContext()
+    context.launch_configurations['agent_mode'] = 'true'
+    context.launch_configurations['enable_motion'] = 'true'
+    found = {}
+    for entity in exp.generate_launch_description().entities:
+        if type(entity).__name__ != 'Node':
+            continue
+        package = entity._Node__package
+        executable = entity.node_executable
+        package = package.perform(context) if hasattr(package, 'perform') else package
+        executable = (
+            executable.perform(context)
+            if hasattr(executable, 'perform') else executable
+        )
+        enabled = (
+            True if entity.condition is None
+            else entity.condition.evaluate(context)
+        )
+        found[(str(package), str(executable))] = enabled
+
+    assert found[('rover_exploration', 'frontier_detector')] is False
+    assert found[('rover_control', 'path_follower')] is False
+    assert found[('rover_control', 'obstacle_guard')] is False
+    assert found[('visual_rover_agent', 'agent_executor')] is True

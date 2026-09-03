@@ -1,8 +1,8 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, PythonExpression
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
@@ -14,6 +14,11 @@ def generate_launch_description() -> LaunchDescription:
     spawn_y = LaunchConfiguration('spawn_y')
     spawn_z = LaunchConfiguration('spawn_z')
     spawn_yaw = LaunchConfiguration('spawn_yaw')
+    agent_mode = LaunchConfiguration('agent_mode')
+    classical_motion = PythonExpression([
+        "'", enable_motion, "'.lower() == 'true' and '",
+        agent_mode, "'.lower() != 'true'",
+    ])
 
     simulation_file = PathJoinSubstitution(
         [
@@ -73,6 +78,7 @@ def generate_launch_description() -> LaunchDescription:
         parameters=[
             {'use_sim_time': True},
         ],
+        condition=UnlessCondition(agent_mode),
     )
 
     obstacle_guard = Node(
@@ -82,7 +88,7 @@ def generate_launch_description() -> LaunchDescription:
         parameters=[
             {'use_sim_time': True},
         ],
-        condition=IfCondition(enable_motion),
+        condition=IfCondition(classical_motion),
     )
 
     path_follower = Node(
@@ -93,7 +99,15 @@ def generate_launch_description() -> LaunchDescription:
         parameters=[
             {'use_sim_time': True},
         ],
-        condition=IfCondition(enable_motion),
+        condition=IfCondition(classical_motion),
+    )
+
+    agent_executor = Node(
+        package='visual_rover_agent',
+        executable='agent_executor',
+        output='screen',
+        parameters=[{'use_sim_time': True}],
+        condition=IfCondition(agent_mode),
     )
 
     # Robot-localization EKF: the single publisher of odom -> base_footprint.
@@ -116,6 +130,11 @@ def generate_launch_description() -> LaunchDescription:
                 'enable_motion',
                 default_value='false',
                 description='Start autonomous rover motion',
+            ),
+            DeclareLaunchArgument(
+                'agent_mode',
+                default_value='false',
+                description='Give exclusive /cmd_vel ownership to the agent executor',
             ),
             DeclareLaunchArgument(
                 'enable_rviz',
@@ -147,6 +166,7 @@ def generate_launch_description() -> LaunchDescription:
             frontier_detector,
             obstacle_guard,
             path_follower,
+            agent_executor,
             ekf_filter_node,
         ]
     )

@@ -33,6 +33,11 @@ if(BUILD_TESTING)
     test_world_imu_system
     test/test_world_imu_system.py
   )
+
+  ament_add_pytest_test(
+    test_camera_lidar_clearance
+    test/test_camera_lidar_clearance.py
+  )
 endif()
 
 install(
