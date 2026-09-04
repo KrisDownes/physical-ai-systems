@@ -1,0 +1,4 @@
+mcp_servers:
+  rover_driver:
+    command: ${ROVER_ROS2_WS}/scripts/rover_driver_mcp
+    args: []

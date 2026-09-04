@@ -1,0 +1,10 @@
+mcp_optional_startup_grace_ms = 0
+
+[mcp_servers.rover_driver]
+command = "./scripts/rover_driver_mcp"
+enabled = true
+required = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+default_tools_approval_mode = "prompt"
+enabled_tools = ["observe", "drive", "turn", "stop", "finish"]

@@ -7,9 +7,9 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 
 import rclpy
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
-from rclpy.signals import SignalHandlerOptions
 
 from sensor_msgs.msg import LaserScan
 
@@ -144,14 +144,16 @@ class AgentExecutor(Node):
 
 def main(args=None):
     """Run the executor node."""
-    # Keep the context valid until the final zero command is published.
-    rclpy.init(args=args, signal_handler_options=SignalHandlerOptions.NO)
+    rclpy.init(args=args)
     node = AgentExecutor()
+    node.context.on_shutdown(node.stop)
     try:
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except (ExternalShutdownException, KeyboardInterrupt):
         pass
     finally:
-        node.stop()
+        if rclpy.ok():
+            node.stop()
         node.destroy_node()
-        rclpy.shutdown()
+        if rclpy.ok():
+            rclpy.shutdown()

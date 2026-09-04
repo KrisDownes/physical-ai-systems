@@ -1,0 +1,11 @@
+{
+  "mcp": {
+    "rover_driver": {
+      "type": "local",
+      "command": [
+        "${ROVER_ROS2_WS}/scripts/rover_driver_mcp"
+      ],
+      "enabled": true
+    }
+  }
+}
