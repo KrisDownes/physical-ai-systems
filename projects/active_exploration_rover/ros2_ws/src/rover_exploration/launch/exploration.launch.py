@@ -1,9 +1,10 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, PythonExpression
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -60,6 +61,8 @@ def generate_launch_description() -> LaunchDescription:
             'spawn_z': spawn_z,
             'spawn_yaw': spawn_yaw,
             'enable_rviz': enable_rviz,
+            'gazebo_args': LaunchConfiguration('gazebo_args'),
+            'world_file': LaunchConfiguration('world_file'),
         }.items(),
     )
 
@@ -78,7 +81,10 @@ def generate_launch_description() -> LaunchDescription:
         parameters=[
             {'use_sim_time': True},
         ],
-        condition=UnlessCondition(agent_mode),
+        condition=IfCondition(PythonExpression([
+            "'", agent_mode, "'.lower() != 'true' and '",
+            LaunchConfiguration('start_frontier', default='true'), "'.lower() == 'true'",
+        ])),
     )
 
     obstacle_guard = Node(
@@ -106,7 +112,7 @@ def generate_launch_description() -> LaunchDescription:
         package='visual_rover_agent',
         executable='agent_executor',
         output='screen',
-        parameters=[{'use_sim_time': True}],
+        parameters=[{'use_sim_time': True, 'obstacle_stop_distance_m': ParameterValue(LaunchConfiguration('agent_stop_distance'), value_type=float)}],
         condition=IfCondition(agent_mode),
     )
 
@@ -126,6 +132,11 @@ def generate_launch_description() -> LaunchDescription:
 
     return LaunchDescription(
         [
+            DeclareLaunchArgument('start_frontier', default_value='true'),
+            DeclareLaunchArgument('agent_stop_distance', default_value='0.25'),
+            DeclareLaunchArgument('gazebo_args', default_value='-r'),
+            DeclareLaunchArgument('world_file', default_value=PathJoinSubstitution([
+                FindPackageShare('rover_description'), 'worlds', 'kd_world.sdf'])),
             DeclareLaunchArgument(
                 'enable_motion',
                 default_value='false',

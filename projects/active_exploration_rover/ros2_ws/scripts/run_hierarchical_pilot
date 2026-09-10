@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -eo pipefail
+cd "$(dirname "$0")/.."
+# The existing entry point owns build, domain, fresh simulation and cleanup.
+exec ./scripts/run_exploration_pilot --method classical "$@"

@@ -4,6 +4,7 @@ from collections import deque
 from dataclasses import dataclass, field
 import math
 
+from rover_exploration.goal_selector import ClassicalSelector
 from rover_exploration.frontier_memory import FrontierMemory
 from rover_exploration.frontier_selection import build_reachable_candidates
 from rover_exploration.frontier_selection import filter_candidates
@@ -113,8 +114,10 @@ class StuckEvent:
 class ExplorationPolicy:
     """Own the small amount of state that survives between map cycles."""
 
-    def __init__(self, config):
+    def __init__(self, config, selector=None):
         self.config = config
+        self.selector = selector or ClassicalSelector()
+        self.selection_context = {}
         self.memory = FrontierMemory()
         self.counters = MissionCounters()
         self.target = None
@@ -263,7 +266,11 @@ class ExplorationPolicy:
         )
         self._copy_filter_stats(update.stats, candidates, filtered)
 
-        selection = select_weighted_goal(
+        if hasattr(self.selector, "event"):
+            if update.goal_reached: self.selector.event("goal_reached")
+            if update.failure: self.selector.event("bounded_replanning_exhausted")
+        selection = self.selector.select(
+            context=dict(self.selection_context, resolution=resolution, origin_x=origin_x, origin_y=origin_y, now_s=now_s),
             bfs=bfs,
             candidates=candidates,
             eligible=filtered.eligible,
@@ -280,6 +287,11 @@ class ExplorationPolicy:
                 origin_x,
                 origin_y,
             )
+            return update
+
+        # Pending external selection is not evidence of frontier exhaustion.
+        if filtered.eligible:
+            self.pending_terminal = None
             return update
 
         self._hold_or_complete(
@@ -423,10 +435,26 @@ class ExplorationPolicy:
         goal_cell = world_point_to_grid_cell(
             goal_x, goal_y, resolution, origin_x, origin_y
         )
+        # Hierarchical adapters debounce obsolete frontier regions locally.
+        # Original direct/classical benchmark behavior remains unchanged.
+        if hasattr(self, 'obsolete_debounce_s'):
+            radius = self.config.approach_search_radius_m / resolution
+            nearby = any(math.hypot(r-goal_cell[0], c-goal_cell[1]) <= radius
+                         for cluster in clusters for r,c in cluster)
+            if nearby:
+                self.obsolete_since = None
+            else:
+                if getattr(self, 'obsolete_since', None) is None:
+                    self.obsolete_since = now_s
+                if now_s-self.obsolete_since >= self.obsolete_debounce_s:
+                    if hasattr(self.selector, 'event'): self.selector.event('goal_obsolete')
+                    self.target = None; self.progress_samples.clear()
+                    return False
         path = None
         if goal_cell in bfs['cost']:
             path = reconstruct_grid_path(bfs['came_from'], goal_cell)
         if path is not None:
+            if hasattr(self, 'obsolete_debounce_s'): self.target.path_failures = 0
             update.selected_cell = goal_cell
             update.path = path
             return True

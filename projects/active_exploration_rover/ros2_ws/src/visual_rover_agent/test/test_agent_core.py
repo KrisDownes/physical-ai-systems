@@ -118,3 +118,34 @@ def test_missing_or_empty_safety_data_rejects_motion():
 def test_status_serialization_is_strict_json():
     assert json.loads(serialize_status('d', 'accepted', '', 12.3456789)) == {
         'id': 'd', 'state': 'accepted', 'reason': '', 'sim_time_s': 12.345679}
+
+
+@pytest.mark.parametrize('value', [float('nan'), float('inf'), -float('inf')])
+def test_invalid_odometry_aborts_active_motion(value):
+    machine = ready_machine()
+    machine.submit(parse('{"id":"d","action":"drive","distance_m":0.3}'), 1.0)
+    machine.update_odometry(value, 0, 0, 1.1)
+    events, velocity = machine.tick(1.1)
+    assert events[0].reason == 'stale_odometry'
+    assert velocity == (0., 0.)
+
+
+@pytest.mark.parametrize('value', [float('nan'), -float('inf'), -1.0, None])
+def test_invalid_scan_rejects_motion(value):
+    machine = ready_machine()
+    machine.update_scan(value, 1., 1., 1.)
+    events, velocity = machine.submit(parse('{"id":"d","action":"drive","distance_m":0.3}'), 1.)
+    assert events[0].reason == 'stale_scan'
+    assert velocity == (0., 0.)
+
+
+def test_future_feedback_rejects_motion():
+    machine = ready_machine()
+    events, velocity = machine.submit(parse('{"id":"d","action":"drive","distance_m":0.3}'), .9)
+    assert events[0].reason == 'stale_odometry'
+    assert velocity == (0., 0.)
+
+
+def test_oversized_integer_is_a_command_rejection():
+    with pytest.raises(CommandError, match='invalid_number'):
+        parse('{"id":"huge","action":"drive","distance_m":' + '9'*400 + '}')

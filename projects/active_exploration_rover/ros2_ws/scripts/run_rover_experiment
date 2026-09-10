@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -eo pipefail
+workspace="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source /opt/ros/jazzy/setup.bash
+if [[ " $* " != *" --reevaluate "* ]]; then
+  cd "$workspace"
+  colcon build --packages-select rover_description rover_exploration visual_rover_agent --symlink-install
+fi
+source "$workspace/install/setup.bash"
+export ROS_DOMAIN_ID=87
+export ROS_LOG_DIR="${TMPDIR:-/tmp}/rover-experiment-ros-logs"
+export RCUTILS_LOGGING_USE_STDOUT=0
+exec "$workspace/.driver_venv/bin/python" "$workspace/scripts/rover_experiment.py" "$@"

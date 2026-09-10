@@ -82,7 +82,10 @@ def parse_command(
     value = data[field]
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise CommandError('invalid_number', command_id)
-    value = float(value)
+    try:
+        value = float(value)
+    except OverflowError:
+        raise CommandError('invalid_number', command_id) from None
     if not math.isfinite(value):
         raise CommandError('invalid_number', command_id)
     if value == 0.0 or abs(value) > limit:

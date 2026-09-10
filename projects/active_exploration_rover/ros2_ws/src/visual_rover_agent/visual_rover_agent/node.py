@@ -1,6 +1,9 @@
 """Thin ROS adapter for the bounded action state machine."""
 
 import math
+import json
+import time
+from rclpy.clock import Clock, ClockType
 
 from geometry_msgs.msg import Twist
 
@@ -20,11 +23,16 @@ from visual_rover_agent.parser import (
     parse_command,
     serialize_status,
 )
-from visual_rover_agent.state_machine import ActionMachine, Limits
+from visual_rover_agent.state_machine import ActionMachine, Limits, Event
 
 
 def sector_minimum(scan, center, half_width):
     """Find the nearest valid return in an angular sector."""
+    if (not all(math.isfinite(v) for v in (
+            scan.angle_min, scan.angle_increment, scan.range_min, scan.range_max))
+            or scan.angle_increment <= 0 or scan.range_min < 0
+            or scan.range_max <= scan.range_min):
+        return None
     values = []
     for index, distance in enumerate(scan.ranges):
         angle = scan.angle_min + index * scan.angle_increment
@@ -50,7 +58,8 @@ class AgentExecutor(Node):
             'maximum_linear_speed_mps': 0.15,
             'maximum_angular_speed_radps': 0.60,
             'obstacle_stop_distance_m': 0.25,
-            'command_timeout_s': 10.0,
+            'command_timeout_s': 10.0,  # ROS/simulation seconds
+            'clock_stall_timeout_s': 1.0,  # monotonic wall seconds without ROS progress
             'odometry_staleness_timeout_s': 0.5,
             'scan_staleness_timeout_s': 0.5,
         }
@@ -69,6 +78,7 @@ class AgentExecutor(Node):
                 'all agent limits and timeouts must be finite and positive')
         self.maximum_drive = values.pop('maximum_drive_distance_m')
         self.maximum_turn = values.pop('maximum_turn_angle_deg')
+        self.clock_stall_timeout_s = values.pop('clock_stall_timeout_s')
         self.machine = ActionMachine(Limits(**values))
         self.velocity_publisher = self.create_publisher(
             Twist, '/cmd_vel', 10)
@@ -81,7 +91,11 @@ class AgentExecutor(Node):
         self.create_subscription(
             LaserScan, '/scan', self.scan_callback,
             qos_profile_sensor_data)
-        self.create_timer(0.05, self.control_callback)
+        self.timing = self.create_publisher(String, "/agent_timing", 100)
+        self.command_id = None
+        self.wall_deadline = None
+        self.last_control_sim_s = None
+        self.create_timer(0.05, self.control_callback, clock=Clock(clock_type=ClockType.STEADY_TIME))
 
     def now_s(self):
         """Return current ROS time in seconds."""
@@ -96,27 +110,52 @@ class AgentExecutor(Node):
             self.publish_status(error.command_id, 'rejected', error.reason)
             self.publish_velocity((0.0, 0.0))
             return
+        self.command_id = command.command_id
+        self.event("executor_received")
         events, velocity = self.machine.submit(command, self.now_s())
+        self.wall_deadline = time.monotonic() + self.clock_stall_timeout_s
+        self.last_control_sim_s = self.now_s()
+        for event in events:
+            if event.state == "accepted":
+                self.event("executor_accepted", id=event.command_id)
         self.publish(events, velocity)
 
     def odom_callback(self, message):
         """Forward planar odometry to the machine."""
         p = message.pose.pose.position
         q = message.pose.pose.orientation
+        components = (q.x, q.y, q.z, q.w)
+        if (not all(math.isfinite(v) for v in components)
+                or abs(sum(v * v for v in components) - 1.0) > 0.01):
+            self.machine.odom_time = None
+            return
         yaw = math.atan2(2.0 * (q.w * q.z + q.x * q.y),
                          1.0 - 2.0 * (q.y * q.y + q.z * q.z))
-        self.machine.update_odometry(p.x, p.y, yaw, self.now_s())
+        stamp = message.header.stamp
+        self.machine.update_odometry(p.x, p.y, yaw, stamp.sec + stamp.nanosec / 1e9)
 
     def scan_callback(self, message):
         """Reduce the 360-degree scan to safety clearances."""
         front = sector_minimum(message, 0.0, math.radians(25.0))
         rear = sector_minimum(message, math.pi, math.radians(30.0))
         all_around = sector_minimum(message, 0.0, math.pi)
-        self.machine.update_scan(front, rear, all_around, self.now_s())
+        stamp = message.header.stamp
+        self.machine.update_scan(front, rear, all_around, stamp.sec + stamp.nanosec / 1e9)
 
     def control_callback(self):
         """Advance control without sleeps using ROS time."""
-        self.publish(*self.machine.tick(self.now_s()))
+        self.event("control_tick")
+        sim_now, wall_now = self.now_s(), time.monotonic()
+        # Slow simulation is not a stalled clock. The machine retains its
+        # independent 10 ROS-second action deadline and sensor safety checks.
+        if self.last_control_sim_s is None or sim_now > self.last_control_sim_s:
+            self.wall_deadline = wall_now + self.clock_stall_timeout_s
+        self.last_control_sim_s = sim_now
+        if self.machine.active and self.wall_deadline is not None and wall_now > self.wall_deadline:
+            events, velocity = self.machine.shutdown()
+            self.publish([Event(e.command_id, e.state, 'clock_stalled') for e in events], velocity)
+        else:
+            self.publish(*self.machine.tick(sim_now))
 
     def publish(self, events, velocity):
         """Publish velocity before any resulting status transitions."""
@@ -124,11 +163,15 @@ class AgentExecutor(Node):
         for event in events:
             self.publish_status(event.command_id, event.state, event.reason)
 
+    def event(self, kind, **data):
+        self.timing.publish(String(data=json.dumps(dict(kind=kind, wall_s=time.monotonic(), sim_s=self.now_s(), **({"id": self.command_id} | data)))))
+
     def publish_velocity(self, velocity):
         """Publish the requested planar velocity."""
         message = Twist()
         message.linear.x, message.angular.z = velocity
         self.velocity_publisher.publish(message)
+        self.event("velocity_published", velocity=list(velocity))
 
     def publish_status(self, command_id, state, reason):
         """Publish one strict JSON status."""
@@ -136,6 +179,7 @@ class AgentExecutor(Node):
         message.data = serialize_status(
             command_id, state, reason, self.now_s())
         self.status_publisher.publish(message)
+        self.event("executor_status", id=command_id, state=state, reason=reason)
 
     def stop(self):
         """Abort active work and publish zero for orderly shutdown."""

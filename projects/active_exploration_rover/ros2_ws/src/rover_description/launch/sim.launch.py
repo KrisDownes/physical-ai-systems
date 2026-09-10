@@ -44,11 +44,12 @@ def generate_launch_description() -> LaunchDescription:
     # single RViz node and conditions it. Nothing else in the simulation
     # launch consumes the value.
     enable_rviz = LaunchConfiguration('enable_rviz')
+    gazebo_args = LaunchConfiguration('gazebo_args')
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gazebo_file),
         launch_arguments={
-            'gz_args': ['-r ', world_file],
+            'gz_args': [gazebo_args, ' ', LaunchConfiguration('world_file')],
         }.items(),
     )
 
@@ -74,6 +75,8 @@ def generate_launch_description() -> LaunchDescription:
 
     return LaunchDescription(
         [
+            DeclareLaunchArgument('gazebo_args', default_value='-r'),
+            DeclareLaunchArgument('world_file', default_value=world_file),
             DeclareLaunchArgument(
                 'spawn_x',
                 default_value='0.0',

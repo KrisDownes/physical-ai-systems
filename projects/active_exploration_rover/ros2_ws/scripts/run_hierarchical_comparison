@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+"""Future paired benchmark under the externally submitted decision-turn budget."""
+import argparse
+import json
+from pathlib import Path
+import subprocess
+
+
+def pair_commands(output):
+    runner=str(Path(__file__).resolve().parent/'run_hierarchical_pilot')
+    return [[runner,'--hierarchical-selector',selector,'--wall-budget','600',
+             '--output',str(output/selector),*(['--enable-model'] if selector=='llm' else [])]
+            for selector in ('classical','llm')]
+
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--enable-model',action='store_true')
+    parser.add_argument('--dry-run',action='store_true',help='Print commands only; no processes or output files')
+    args=parser.parse_args();commands=pair_commands(args.output.resolve())
+    if args.dry_run:
+        print(json.dumps(commands,indent=2));return
+    if not args.enable_model:parser.error('model_execution_disabled: future authorized comparison requires --enable-model')
+    if args.output.exists():parser.error('output already exists; no resume or automatic retries')
+    results={}
+    for selector,command in zip(('classical','llm'),commands):
+        subprocess.run(command,check=True)
+        result=json.loads((args.output/selector/'classical/results.json').read_text())
+        results[selector]=result
+        (args.output/'comparison.json').write_text(json.dumps(results,indent=2)+'\n')
+        if result.get('outcome') in ('infrastructure_error','interrupted','quota_exhaustion') or not result.get('manifest',{}).get('cleanup_complete'):
+            break
+
+if __name__=='__main__':main()

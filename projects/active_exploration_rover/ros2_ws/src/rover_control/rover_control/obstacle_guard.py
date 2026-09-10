@@ -155,6 +155,8 @@ class ObstacleGuard(Node):
             10,
         )
 
+        self.intervention_publisher = self.create_publisher(Bool, '/guard_intervention', 10)
+
         self.command_publisher = self.create_publisher(
             Twist,
             '/cmd_vel',
@@ -250,6 +252,9 @@ class ObstacleGuard(Node):
             stop_distance=self.stop_distance,
             resume_distance=self.resume_distance,
         )
+
+        if self.front_blocked != was_blocked and hasattr(self, 'intervention_publisher'):
+            self.intervention_publisher.publish(Bool(data=self.front_blocked))
 
         if self.front_blocked and not was_blocked:
             self.blocked_since_time = self.get_clock().now()

@@ -43,6 +43,8 @@ def test_commands_publish_status_motion_and_terminal_zero():
         end = time.monotonic() + seconds
         while time.monotonic() < end:
             pose = Odometry()
+            pose.header.stamp = probe.get_clock().now().to_msg()
+            scan.header.stamp = pose.header.stamp
             pose.pose.pose.position.x = pose_x
             pose.pose.pose.orientation.w = 1.0
             odometry.publish(pose)
@@ -92,3 +94,66 @@ def test_commands_publish_status_motion_and_terminal_zero():
         probe.destroy_node()
         executor.shutdown()
         rclpy.shutdown()
+
+
+def test_old_sensor_header_is_not_refreshed_by_receipt():
+    from visual_rover_agent.state_machine import ActionMachine, Limits
+    from visual_rover_agent.parser import parse_command
+    agent = AgentExecutor.__new__(AgentExecutor)
+    agent.machine = ActionMachine(Limits())
+    pose = Odometry()
+    pose.pose.pose.orientation.w = 1.0
+    pose.header.stamp.nanosec = 100_000_000
+    agent.odom_callback(pose)
+    agent.machine.update_scan(1., 1., 1., 1.)
+    events, velocity = agent.machine.submit(parse_command(
+        '{"id":"old","action":"drive","distance_m":0.1}', .5, 90), 1.)
+    assert events[0].reason == 'stale_odometry'
+    assert velocity == (0., 0.)
+
+
+def test_invalid_scan_geometry_is_unavailable():
+    from visual_rover_agent.node import sector_minimum
+    scan = LaserScan()
+    scan.angle_min = float('inf')
+    scan.angle_increment = .1
+    scan.range_min, scan.range_max = .1, 10.
+    scan.ranges = [1.]
+    assert sector_minimum(scan, 0., 1.) is None
+
+
+
+def test_slow_simulation_and_stalled_clock_have_different_deadlines(monkeypatch):
+    from visual_rover_agent import node
+    from visual_rover_agent.state_machine import ActionMachine, Limits
+    from visual_rover_agent.parser import parse_command
+    agent=AgentExecutor.__new__(AgentExecutor)
+    agent.machine=ActionMachine(Limits())
+    agent.clock_stall_timeout_s=1.0
+    agent.wall_deadline=1.0
+    agent.last_control_sim_s=0.0
+    agent.event=lambda *a,**k:None
+    published=[]
+    agent.publish=lambda events,velocity:published.append((events,velocity))
+    agent.machine.update_odometry(0.,0.,0.,0.)
+    agent.machine.update_scan(2.,2.,2.,0.)
+    agent.machine.submit(parse_command('{"id":"slow","action":"drive","distance_m":0.5}',.5,90),0.)
+    clock=[0.,0.]
+    agent.now_s=lambda:clock[0]
+    monkeypatch.setattr(node.time,'monotonic',lambda:clock[1])
+    # Feedback continues at RTF .52 beyond the old 10-wall-second cutoff.
+    for step in range(1,121):
+        clock[:]=[step*.052,step*.1]
+        agent.machine.update_odometry(.4,0.,0.,clock[0])
+        agent.machine.update_scan(2.,2.,2.,clock[0])
+        agent.control_callback()
+    assert agent.machine.active is not None
+    agent.machine.update_odometry(.49,0.,0.,clock[0])
+    agent.control_callback()
+    assert published[-1][0][0].state=='succeeded'
+    # A paused clock must still cause a wall-clock stop, with an honest reason.
+    agent.machine.submit(parse_command('{"id":"paused","action":"drive","distance_m":0.1}',.5,90),clock[0])
+    clock[1]+=1.1
+    agent.control_callback()
+    assert published[-1][0][0].reason=='clock_stalled'
+    assert published[-1][1]==(0.,0.)

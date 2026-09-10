@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eo pipefail
+cd "$(dirname "$0")/.."
+source /opt/ros/jazzy/setup.bash
+colcon build --base-paths src --packages-select rover_description rover_exploration rover_control visual_rover_agent --symlink-install
+source install/setup.bash
+set -u
+export ROS_DOMAIN_ID=87 ROS_LOG_DIR=/tmp/rover-pilot-ros-logs RCUTILS_LOGGING_USE_STDOUT=0
+exec .driver_venv/bin/python scripts/exploration_pilot.py "$@"

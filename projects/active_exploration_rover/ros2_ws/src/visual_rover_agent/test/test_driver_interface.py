@@ -50,6 +50,8 @@ def bare_topics(reply=True):
     topics.statuses = {}
     topics.accepted_times = {}
     topics.last_result = None
+    topics.observation_id = None
+    topics.event = lambda *args, **kwargs: None
     topics.commands = Publisher(topics, reply)
     topics.get_clock = lambda: Clock()
     return topics
@@ -61,6 +63,7 @@ def test_discovery_and_observe_image_metadata():
     fake = bare_topics()
     frame = Image()
     frame.width, frame.height, frame.encoding = 2, 1, 'rgb8'
+    frame.step = 6
     frame.data = bytes([255, 0, 0, 0, 0, 255])
     frame.header.stamp.sec = 4
     fake.frame = frame
@@ -124,6 +127,30 @@ def test_interface_never_names_raw_velocity_topic():
     assert '/cmd_vel' not in source
 
 
+def test_stop_bypasses_motion_lock():
+    fake = bare_topics()
+    fake.action_lock.acquire()
+    result = fake.action('stop')
+    assert result['terminal_state'] == 'succeeded'
+    assert fake.action_lock.locked()
+    fake.action_lock.release()
+
+
+def test_observation_must_follow_terminal_timestamp():
+    fake = bare_topics()
+    fake.frame = Image()
+    fake.frame.header.stamp.sec = 2
+    fake.frame_received = time.monotonic()
+    fake.last_result = {'terminal_sim_time_s': 2.0}
+    try:
+        fake.observe(timeout=0.001)
+        assert False
+    except ToolError as error:
+        assert str(error) == 'post_action_camera_unavailable'
+    fake.frame.header.stamp.nanosec = 1
+    assert fake.observe() is fake.frame
+
+
 def test_discovered_motion_schemas_are_bounded_and_strict():
     tools = {tool.name: tool for tool in driver.mcp._tool_manager.list_tools()}
     distance = tools['drive'].parameters['properties']['distance_m']
@@ -148,3 +175,66 @@ def test_versioned_client_configuration_has_no_personal_checkout_path():
     files = [workspace / '.codex/config.toml', *(
         workspace / 'config').glob('*')]
     assert all('/home/krisd' not in path.read_text() for path in files)
+
+
+def test_mcp_stop_interrupts_pending_drive():
+    """Exercise concurrent registered MCP handlers, not just the transport lock."""
+    fake = bare_topics(reply=False)
+    original_publish = fake.commands.publish
+
+    def publish(message):
+        original_publish(message)
+        command = json.loads(message.data)
+        if command['action'] == 'stop':
+            with fake.condition:
+                for sent in fake.commands.messages:
+                    fake.accepted_times[sent['id']] = 1.
+                    fake.statuses[sent['id']] = {
+                        'state': 'succeeded' if sent['action'] == 'stop' else 'aborted',
+                        'reason': 'stopped', 'sim_time_s': 2.}
+                fake.condition.notify_all()
+
+    fake.commands.publish = publish
+    driver.topics = fake
+
+    async def exercise():
+        movement = asyncio.create_task(driver.mcp._tool_manager.call_tool(
+            'drive', {'distance_m': .3}))
+        for _ in range(100):
+            if fake.commands.messages:
+                break
+            await asyncio.sleep(.01)
+        assert fake.commands.messages
+        await asyncio.wait_for(driver.mcp._tool_manager.call_tool('stop', {}), 1.)
+        await asyncio.wait_for(movement, 1.)
+
+    asyncio.run(exercise())
+    assert [m['action'] for m in fake.commands.messages] == ['drive', 'stop']
+
+
+def test_camera_padding_and_invalid_layout():
+    fake = bare_topics()
+    frame = Image()
+    frame.width, frame.height, frame.encoding, frame.step = 1, 1, 'bgr8', 4
+    frame.data = bytes([0, 0, 255, 0])
+    fake.frame, fake.frame_received = frame, time.monotonic()
+    driver.topics = fake
+    assert driver.observe().content[0].type == 'image'
+    frame.step = 2
+    try:
+        driver.observe()
+        assert False
+    except ToolError as error:
+        assert str(error) == 'invalid_camera_layout'
+
+
+def test_pilot_movement_cap_rejects_before_ros_publish(monkeypatch):
+    fake = bare_topics()
+    fake.movement_count = 100
+    monkeypatch.setenv('ROVER_MOVEMENT_LIMIT', '100')
+    try:
+        fake.action('drive', 'distance_m', .1)
+        assert False
+    except ToolError as error:
+        assert str(error) == 'movement_limit_reached'
+    assert not fake.commands.messages

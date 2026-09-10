@@ -34,11 +34,11 @@ def _declared_args(desc):
             dv = entity.default_value
             if isinstance(dv, list):
                 defaults[entity.name] = ' '.join(
-                    s.perform(None) if hasattr(s, 'perform') else str(s)
+                    s.perform(LaunchContext()) if hasattr(s, 'perform') else str(s)
                     for s in dv
                 )
             elif hasattr(dv, 'perform'):
-                defaults[entity.name] = dv.perform(None)
+                defaults[entity.name] = dv.perform(LaunchContext())
             else:
                 defaults[entity.name] = str(dv)
     return names, defaults

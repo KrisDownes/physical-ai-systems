@@ -49,6 +49,9 @@ class ActionMachine:
 
     def update_odometry(self, x, y, yaw, now):
         """Store fresh pose feedback and accumulate signed turn progress."""
+        if not all(math.isfinite(value) for value in (x, y, yaw, now)):
+            self.odom_time = None
+            return
         self.pose = (x, y, yaw)
         self.odom_time = now
         if self.active and self.active['action'] == 'turn':
@@ -131,6 +134,8 @@ class ActionMachine:
     def _unavailable(self, now):
         odometry_stale = (
             self.odom_time is None
+            or not math.isfinite(now)
+            or now < self.odom_time
             or now - self.odom_time
             > self.limits.odometry_staleness_timeout_s
         )
@@ -138,11 +143,13 @@ class ActionMachine:
             return 'stale_odometry'
         scan_stale = (
             self.scan_time is None
+            or not math.isfinite(self.scan_time)
+            or now < self.scan_time
             or now - self.scan_time > self.limits.scan_staleness_timeout_s
         )
         if scan_stale:
             return 'stale_scan'
-        if any(value is None for value in self.scan):
+        if any(value is None or math.isnan(value) or value < 0 for value in self.scan):
             return 'stale_scan'
         return ''
 
