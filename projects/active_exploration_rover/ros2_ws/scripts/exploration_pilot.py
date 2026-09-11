@@ -21,10 +21,15 @@ from rclpy.node import Node
 from rclpy.qos import QoSProfile, DurabilityPolicy
 from std_msgs.msg import Bool, String
 from geometry_msgs.msg import Twist
+from episode_cancellation import latch_cancel
 import rover_experiment as infrastructure
 from rover_experiment import ROOT, Monitor, Processes, wait_for, save, audit, model_metadata
 from exploration_measurement import summarize, announce_completion, benchmark_bag
 from verify_rover_bags import verify
+
+ACTIVE_CANCEL_PATH=None
+INTERRUPTED=False
+CLEANING_UP=False
 
 TOPICS=list(dict.fromkeys(infrastructure.TOPICS+['/planned_path','/cmd_vel_raw','/recovery_request','/guard_intervention']))
 TASK='''Explore this unknown environment using only rover observe/drive/turn/stop/finish.
@@ -73,10 +78,34 @@ def selected_methods(method, resume_unstarted=False):
     return ('llm',) if resume_unstarted else ('classical','llm') if method=='both' else (method,)
 
 
+def cleanup_owned_episode(processes, cancel_path, publications):
+    """Latch usage cancellation first; ROS failures cannot bypass owned teardown."""
+    errors = []
+    latch_cancel(cancel_path)
+    for publish in publications:
+        try:publish()
+        except Exception as error:errors.append('stop_publication: '+str(error))
+    # Stop the selector/controller first, recorder last. Never enumerate/kill peers.
+    entries = list(reversed(processes.owned))
+    entries.sort(key=lambda e: 0 if e[0] in ('driver','frontier_detector') else 2 if e[0]=='recorder' else 1)
+    for entry in entries:
+        try:
+            processes.stop(entry)
+            processes.owned.remove(entry)
+        except Exception as error:errors.append(entry[0]+': '+str(error))
+    save(processes.folder/'cleanup.json',processes.cleanup)
+    return errors
+
+
 def run_episode(folder,method,args):
+    global ACTIVE_CANCEL_PATH, CLEANING_UP
+    CLEANING_UP=False
     hierarchy=getattr(args,'hierarchical_selector',None)
     budget=getattr(args,'wall_budget',600)
     folder.mkdir(); processes=Processes(folder); monitor=None; executor=None; spin=None
+    cancel=None; emergency=None
+    cancel_path=folder/"cancel.requested"
+    ACTIVE_CANCEL_PATH=cancel_path
     driver=None; started=None; ended=None; manifest=dict(method=method,model_requested=args.model if method=='llm' else None,
         reasoning_effort='low' if method=='llm' else None,ros_domain_id=87,wall_budget_s=budget,
         action_budget=100 if method=='llm' else None,world='kd_world',spawn=dict(x=0,y=0,z=.02,yaw=0),
@@ -85,7 +114,7 @@ def run_episode(folder,method,args):
     if hierarchy=='llm': manifest.update(model_requested='gpt-5.6-luna',reasoning_effort='low',decision_turn_budget=20)
     empty=tempfile.TemporaryDirectory(prefix='rover-pilot-driver-')
     env=dict(os.environ,GZ_PARTITION='rover-pilot-'+folder.parent.name+'-'+method,
-             ROVER_OBSERVATION_MODE='onboard',ROVER_OBSERVATION_LOG=str(folder/'observations.jsonl'))
+             ROVER_CANCEL_FILE=str(cancel_path.resolve()),ROVER_OBSERVATION_MODE='onboard',ROVER_OBSERVATION_LOG=str(folder/'observations.jsonl'))
     if hierarchy: env.update(ROVER_SELECTOR=hierarchy,ROVER_HIERARCHY_LOG=str(folder),ROVER_ENABLE_MODEL='1' if getattr(args,'enable_model',False) else '0')
     try:
         probe=Node('experiment_preflight')
@@ -176,6 +205,7 @@ def run_episode(folder,method,args):
                 save(folder/'live.json',dict(wall_s=elapsed,coverage=monitor.coverage,movements=len(movements)))
             time.sleep(.05)
         ended=time.monotonic();manifest['episode_ended_sim_s']=monitor.latest['truth'][0]
+        latch_cancel(cancel_path)
         if cancel:
             cancel.publish(String(data=manifest['termination']));emergency.publish(Twist());time.sleep(.15)
         # Terminate owned command producers before emergency zero / completion.
@@ -195,27 +225,25 @@ def run_episode(folder,method,args):
         manifest['error']=str(error)
         manifest['termination']='interrupted' if isinstance(error,(KeyboardInterrupt,InterruptedError)) else 'infrastructure_error'
     finally:
+        CLEANING_UP=True
+        latch_cancel(cancel_path)
         if started:
             ended=ended or time.monotonic();manifest['episode_wall_s']=ended-started
             if monitor.latest.get('truth'):
                 manifest.setdefault('episode_ended_sim_s',monitor.latest['truth'][0])
                 manifest['episode_sim_s']=manifest['episode_ended_sim_s']-manifest['episode_started_sim_s']
                 manifest['real_time_factor']=manifest['episode_sim_s']/manifest['episode_wall_s']
-        if hierarchy and monitor:
-            cancel.publish(String(data='shutdown'));emergency.publish(Twist());time.sleep(.15)
-        for entry in list(reversed(processes.owned)):
-            if entry[0] in ('driver','path_follower','obstacle_guard','frontier_detector'):
-                processes.stop(entry);processes.owned.remove(entry)
-        if monitor:
-            monitor.stop_pub.publish(String(data=json.dumps(dict(id='pilot-cleanup',action='stop'))))
-            emergency.publish(Twist());time.sleep(.3)
-        # Keep recorder alive until other owned processes stop.
-        for entry in list(reversed(processes.owned)):
-            if entry[0]!='recorder':processes.stop(entry);processes.owned.remove(entry)
-        processes.close()
-        if executor:executor.shutdown();spin.join(2);monitor.destroy_node();monitor.stream.close()
+        publications=[]
+        if cancel is not None:publications.append(lambda:cancel.publish(String(data='shutdown')))
+        if emergency is not None:publications.append(lambda:emergency.publish(Twist()))
+        if monitor is not None:publications.append(lambda:monitor.stop_pub.publish(String(data=json.dumps(dict(id='pilot-cleanup',action='stop')))))
+        manifest['cleanup_errors']=cleanup_owned_episode(processes,cancel_path,publications)
+        if executor:
+            try:executor.shutdown();spin.join(2);monitor.destroy_node()
+            except Exception as error:manifest['cleanup_errors'].append('ROS teardown: '+str(error))
+            finally:monitor.stream.close()
         empty.cleanup()
-        manifest['cleanup_complete']=all(p['group_gone'] for p in processes.cleanup)
+        manifest['cleanup_complete']=not processes.owned and all(p['group_gone'] for p in processes.cleanup)
         manifest['driver_exit_code']=driver.returncode if driver else None
         manifest['ended_monotonic_s']=time.monotonic()
         save(folder/'manifest.json',manifest)
@@ -374,7 +402,7 @@ def report(root):
         'Per-method evidence pass: '+json.dumps({m:r.get('evidence_pass') for m,r in results.items()})+'. Owned cleanup complete: '+json.dumps({m:r.get('manifest',{}).get('cleanup_complete') for m,r in results.items()})+'. Bag verification contains actual final cmd_vel and every observed-frame/command/status match. GUI and independent host checks, when available, are saved separately.', '',
         'Final observed lidar sectors (meters): '+json.dumps(llm.get('final_lidar_sectors'))+'. These clearances do not prove frontier reachability or unreachability.', '',
         'Focused local checks cover sensor rendering/invalid data, stop interruption, frame ordering, movement-cap rejection, guard behavior and launch isolation. Build and run identifiers are saved with the episode sources.', '',
-        '- [Machine-readable pair](results.json) and [frozen contract](BENCHMARK_CONTRACT.md).',
+        '- [Machine-readable pair](results.json); available local documentation is saved with source snapshots.',
         '- [Classical results](classical/results.json), [original evaluator](classical/original_benchmark.json), bag `classical/bag/`, controller logs `classical/{frontier_detector,path_follower,obstacle_guard}.log`.',
         '- [Luna results](llm/results.json), [original evaluator](llm/original_benchmark.json), bag `llm/bag/`, driver `llm/driver.log`, exact observations `llm/observations.jsonl`, [final onboard map](llm/final-online-map.png).',
         '- Per method: `coverage.json`, `measurements.png`, `latency.json`, `action_timeline.json`, `bag_verification.json`, `cleanup.json`; Luna also `physical_actions.json`, `session_evidence.json`.',
@@ -417,12 +445,16 @@ def main():
     save(snapshot/'existing_mcp.json',configs)
     subprocess.run(['ps','-eo','pid,ppid,pgid,comm'],stdout=(snapshot/'existing_processes.txt').open('w'),check=True)
     source=list((ROOT/'src').rglob('*.py'))+list((ROOT/'src').rglob('*.yaml'))+list((ROOT/'src').rglob('package.xml'))
-    source+=list((ROOT/'scripts').glob('*.py'))+[ROOT/'scripts/run_exploration_pilot',ROOT/'scripts/rover_driver_mcp',ROOT/'BENCHMARK_CONTRACT.md',ROOT/'HIERARCHICAL_BENCHMARK_CONTRACT.md',ROOT/'scripts/run_hierarchical_pilot',ROOT/'scripts/run_hierarchical_comparison',ROOT/'src/rover_description/worlds/kd_world.sdf',ROOT/'src/rover_description/urdf/rover.urdf.xacro']
+    source+=list((ROOT/'scripts').glob('*.py'))+[ROOT/'scripts/run_exploration_pilot',ROOT/'scripts/rover_driver_mcp',ROOT/'scripts/run_hierarchical_pilot',ROOT/'scripts/run_hierarchical_comparison',ROOT/'src/rover_description/worlds/kd_world.sdf',ROOT/'src/rover_description/urdf/rover.urdf.xacro']
     hashes={}
+    # Optional local documentation is not required by a clean checkout.
+    source+=list(ROOT.glob('HIERARCHICAL_INPUT_SPEC_v*.md'))+list(ROOT.glob('*CONTRACT*.md'))
     for p in source:
         relative=p.relative_to(ROOT);hashes[str(relative)]=hashlib.sha256(p.read_bytes()).hexdigest()
         dest=snapshot/'source'/relative;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,dest)
-    save(snapshot/'source_hashes.json',hashes);shutil.copy2(ROOT/'BENCHMARK_CONTRACT.md',snapshot/'BENCHMARK_CONTRACT.md')
+    save(snapshot/'source_hashes.json',hashes)
+    if (ROOT/'BENCHMARK_CONTRACT.md').exists():
+        shutil.copy2(ROOT/'BENCHMARK_CONTRACT.md',snapshot/'BENCHMARK_CONTRACT.md')
     save(snapshot/'versions.json',dict(git_head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
         codex=subprocess.check_output(['codex','--version'],text=True).strip(),ros=os.environ.get('ROS_DISTRO'),
         model=args.model if 'llm' in methods else None,effort='low' if 'llm' in methods else None,methods=methods,python=os.sys.version))
@@ -430,9 +462,16 @@ def main():
     packages=subprocess.run(['dpkg-query','-W','ros-jazzy-slam-toolbox','ros-jazzy-robot-localization','ros-jazzy-ros-gz-sim'],capture_output=True,text=True)
     versions['system_packages']=packages.stdout;versions['package_version_error']=packages.stderr or None
     save(snapshot/'versions.json',versions)
-    rclpy.init()
-    def interrupt(sig,frame):raise InterruptedError('signal '+str(sig))
+    from rclpy.signals import SignalHandlerOptions
+    rclpy.init(signal_handler_options=SignalHandlerOptions.NO)
+    def interrupt(sig,frame):
+        global INTERRUPTED
+        if INTERRUPTED or CLEANING_UP:return  # Never interrupt owned teardown.
+        INTERRUPTED=True
+        if ACTIVE_CANCEL_PATH is not None:latch_cancel(ACTIVE_CANCEL_PATH)
+        raise InterruptedError('signal '+str(sig))
     signal.signal(signal.SIGTERM,interrupt)
+    signal.signal(signal.SIGINT,interrupt)
     try:
         for method in methods:
             manifest=run_episode(args.output/method,method,args);report(args.output)
@@ -442,7 +481,7 @@ def main():
         if args.hierarchical_selector:
             from hierarchical_results import report as hierarchy_report
             hierarchy_report(args.output)
-        rclpy.shutdown()
+        rclpy.try_shutdown()
     print('Pilot artifacts:',args.output,flush=True)
 
 

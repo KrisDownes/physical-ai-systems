@@ -1,0 +1,11 @@
+{
+  "description": "Four-condition exploration pilot; one factor changes from baseline. No reliability estimate from single trials.",
+  "timeout_s": 600,
+  "action_budget": 100,
+  "conditions": [
+    {"name": "baseline", "world": "kd_world", "scenario": "nominal", "model": "gpt-5.6-sol"},
+    {"name": "map_open", "world": "open_arena", "scenario": "nominal", "model": "gpt-5.6-sol"},
+    {"name": "scenario_south", "world": "kd_world", "scenario": "translated_south", "model": "gpt-5.6-sol"},
+    {"name": "model_astra", "world": "kd_world", "scenario": "nominal", "model": "gpt-6-astra"}
+  ]
+}

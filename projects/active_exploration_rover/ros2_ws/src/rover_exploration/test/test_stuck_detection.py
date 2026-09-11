@@ -279,3 +279,39 @@ def test_no_progress_goal_blacklisted_only_after_full_window():
 
 def test_distance_to_goal_measures_euclidean_distance():
     assert distance_to_goal_m((0.0, 0.0), (3.0, 4.0)) == 5.0
+
+
+# Route progress uses a fixed reference within each window, not traveled distance.
+def test_detour_progress_away_from_final_goal():
+    from rover_exploration.stuck_detection import route_progress
+    route=((0.,0.),(-2.,0.),(-2.,-2.),(2.,-2.))
+    samples=[(0.,0.,0.,math.pi,1,route),(5.,-.5,0.,math.pi,2,route)]
+    assert math.dist(samples[-1][1:3],route[-1])>math.dist(samples[0][1:3],route[-1])
+    result=route_progress(samples,4.5,.05)
+    assert result['progress_m']==.5 and not result['stuck']
+
+
+def test_stationary_and_oscillating_routes_remain_bounded():
+    from rover_exploration.stuck_detection import route_progress
+    route=((0.,0.),(5.,0.))
+    for xs in [[0]*7,[0,.3,0,.3,0,.3,0]]:
+        samples=[(float(t),x,0.,0.,1,route) for t,x in enumerate(xs)]
+        assert route_progress(samples,4.5,.05)['stuck']
+
+
+def test_replanning_does_not_reset_window_or_create_progress():
+    from types import SimpleNamespace
+    from rover_exploration.exploration_policy import ExplorationPolicy
+    config=SimpleNamespace(stuck_window_s=6.,stuck_progress_threshold_m=.05,
+        stuck_alignment_threshold_rad=math.pi/8,blacklist_radius_m=.75,
+        blacklist_duration_s=30.,permanent_after_failures=2,permanent_exclusion_radius_m=.2)
+    p=ExplorationPolicy(config);p.target=SimpleNamespace(goal_world=(4.,0.))
+    for t in range(6):
+        # Alternating route direction/length cannot confer alignment or arc credit.
+        p.set_route(((0.,0.),((-1)**t*(10-t),0.)))
+        event=p.observe_pose(float(t),(0.,0.,0.))
+        if t<5:assert event is None
+    assert event is not None and p.recovery_state=='requested'
+    assert p.progress_measurement['progress_m']==0.
+    assert p.progress_measurement['reference_route_version']==1
+    assert p.progress_measurement['current_route_version']==6

@@ -1,3 +1,4 @@
+import json
 import math
 
 from geometry_msgs.msg import Point, PoseStamped
@@ -269,6 +270,13 @@ class FrontierDetector(Node):
             pose.pose.position.y = y
             pose.pose.orientation.w = 1.0
             message.poses.append(pose)
+        previous_version = self.policy.route_version
+        self.policy.set_route([(p.pose.position.x, p.pose.position.y) for p in message.poses])
+        if self.policy.route_version != previous_version:
+            self.get_logger().info("route_version " + json.dumps(dict(
+                route_version=self.policy.route_version,
+                path_stamp_s=header.stamp.sec+header.stamp.nanosec/1e9,
+                frame=header.frame_id, route=self.policy.active_route)))
         self.path_publisher.publish(message)
 
     @staticmethod
@@ -429,6 +437,8 @@ class FrontierDetector(Node):
         if self.latest_pose is None:
             return
         event = self.policy.observe_pose(self.node_time_s(), self.latest_pose)
+        if self.policy.progress_measurement is not None:
+            self.get_logger().info("route_progress " + json.dumps(self.policy.progress_measurement))
         if event is None:
             return
         request = Bool()
@@ -436,7 +446,7 @@ class FrontierDetector(Node):
         self.recovery_request_publisher.publish(request)
         self._log_failure(event.failure_outcome, event.goal_x, event.goal_y)
         self.get_logger().warning(
-            f'Rover made no progress toward goal '
+            f'route_no_progress: Rover made no sustained route progress for goal '
             f'({event.goal_x:.3f}, {event.goal_y:.3f}); recovery requested'
         )
 

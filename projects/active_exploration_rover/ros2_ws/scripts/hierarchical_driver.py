@@ -5,6 +5,8 @@ inference requests may exceed that count. No automatic application retries.
 Model execution requires explicit opt-in; offline tests do not spawn Codex.
 """
 import json
+import os
+import hashlib
 import queue
 import subprocess
 import tempfile
@@ -13,12 +15,16 @@ import time
 import tomllib
 from pathlib import Path
 from collections import deque
+from hierarchical_inputs import INPUT_SPEC_VERSION, INPUT_SCHEMA
+from episode_cancellation import cancellation_lock
 
 PROMPT='''Select exactly one current approach ID from the onboard candidate list. Local robotics plans and follows the route. Use camera, lidar, online map and recent outcomes to explore unknown space. Local blockage is not global exhaustion: consider alternate approaches and previously observed free space. Candidate reachability is provisional and revalidated locally. Return concise JSON with destination_id and reason. Never invent coordinates, issue movement commands, or use outside tools. No later destination is committed.'''
 SCHEMA={'type':'object','properties':{'destination_id':{'type':'string'},'reason':{'type':'string'}},'required':['destination_id','reason'],'additionalProperties':False}
-INPUT_SPEC_VERSION='hierarchical-onboard-v2'
 FRONTIER_SIZE_DEFINITION='frontier_component_cell_count is the number of cells in the frontier component. It is not free-space area, accessible-area coverage, or a guarantee of traversability.'
 PROMPT += '\nInput specification: '+INPUT_SPEC_VERSION+'. The compatible candidate field "cells" means frontier_component_cell_count. '+FRONTIER_SIZE_DEFINITION
+PROMPT += '\nplanned_path_length_m is a current-map traversable-grid route estimate, not guaranteed executed distance or traversability; null means unavailable. Its map and model-visible pose timestamps are in planned_path_context. Immediate lidar-sector clearance does not establish whether an entire alternate route is blocked. Consider route cost, frontier-component size and prior failures when selecting a destination; frontier size is not measured information gain.'
+PROMPT_SHA256=hashlib.sha256(PROMPT.encode()).hexdigest()
+INPUT_SCHEMA_SHA256=hashlib.sha256(json.dumps(INPUT_SCHEMA,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
 
 class PersistentDriver:
@@ -28,6 +34,8 @@ class PersistentDriver:
         self.folder=folder;self.tmp=tempfile.TemporaryDirectory(prefix='rover-goal-driver-')
         self.log=(folder/'driver_rpc.jsonl').open('a',buffering=1)
         self.counter=0;self.turns=0;self.thread_id=None;self.turn_id=None;self.closed=False
+        self.cancelling=threading.Event()
+        self.cancel_path=Path(os.environ.get("ROVER_CANCEL_FILE", str(folder/"cancel.requested")))
         self.inbox=queue.Queue();self.deferred=deque();self.write_lock=threading.Lock()
         config={'model':'gpt-5.6-luna','model_reasoning_effort':'low','web_search':'disabled',
                 'approval_policy':'never','sandbox_mode':'read-only','mcp_servers':{},
@@ -42,7 +50,8 @@ class PersistentDriver:
         cmd=['codex','app-server','--stdio']
         for k,v in config.items():cmd+=['-c',k+'='+json.dumps(v)]
         (folder/'driver_configuration.json').write_text(json.dumps(dict(command=cmd,config=config,
-            model='gpt-5.6-luna',effort='low',input_spec_version=INPUT_SPEC_VERSION,submitted_turn_cap=20,actual_inference_cap_enforceable=False),indent=2))
+            model='gpt-5.6-luna',effort='low',input_spec_version=INPUT_SPEC_VERSION,prompt_sha256=PROMPT_SHA256,input_schema_sha256=INPUT_SCHEMA_SHA256,submitted_turn_cap=20,actual_inference_cap_enforceable=False),indent=2))
+        (folder/'input_specification.json').write_text(json.dumps(dict(version=INPUT_SPEC_VERSION,prompt=PROMPT,prompt_sha256=PROMPT_SHA256,input_schema=INPUT_SCHEMA,input_schema_sha256=INPUT_SCHEMA_SHA256),indent=2))
         self.stderr=(folder/'driver_stderr.log').open('w')
         self.process=subprocess.Popen(cmd,cwd=self.tmp.name,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.stderr,text=True,bufsize=1)
         self.reader=threading.Thread(target=self.read,daemon=True);self.reader.start()
@@ -62,9 +71,11 @@ class PersistentDriver:
         self.inbox.put({'fatal':'transport_closed'})
 
     def send(self,event):
-        with self.write_lock:
+        with self.write_lock, cancellation_lock(getattr(self, "cancel_path", None)):
             if self.closed:raise RuntimeError('driver_closed')
             if event.get('method')=='turn/start':
+                if (getattr(self, 'cancelling', None) and self.cancelling.is_set()) or (getattr(self, 'cancel_path', None) and self.cancel_path.exists()):
+                    raise RuntimeError('episode_cancelled')
                 if self.turns>=20: raise RuntimeError('decision_turn_limit')
                 self.turns+=1  # Reserve before write; failed writes are not retried.
             self.log.write(json.dumps({'direction':'sent','wall_s':time.monotonic(),'message':event})+'\n')
@@ -111,9 +122,16 @@ class PersistentDriver:
         if not self.closed and self.thread_id and self.turn_id:
             self.counter+=1;self.send({'id':self.counter,'method':'turn/interrupt','params':{'threadId':self.thread_id,'turnId':self.turn_id}})
 
+    def latch_cancel(self):
+        with self.write_lock:
+            self.cancelling.set()
+
     def close(self):
         if self.closed:return
-        self.cancel();self.closed=True
+        self.latch_cancel()
+        try:self.cancel()
+        except Exception:pass  # Transport failure cannot skip owned-process teardown.
+        self.closed=True
         self.process.terminate()
         try:self.process.wait(timeout=3)
         except subprocess.TimeoutExpired:self.process.kill();self.process.wait()

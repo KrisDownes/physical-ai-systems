@@ -133,6 +133,7 @@ class Monitor(Node):
 class Processes:
     def __init__(self, folder):
         self.folder, self.owned, self.cleanup = folder, [], []
+        self.stopped_pids = set()
 
     def start(self, name, command, **kwargs):
         log = (self.folder / (name + '.log')).open('w')
@@ -145,6 +146,7 @@ class Processes:
 
     def stop(self, entry):
         name, proc, log = entry
+        if proc.pid in self.stopped_pids:return
         sent = []
         for sig, duration in ((signal.SIGINT, 8), (signal.SIGTERM, 4), (signal.SIGKILL, 2)):
             try:
@@ -170,6 +172,7 @@ class Processes:
         except ProcessLookupError:
             gone = True
         log.close()
+        if gone:self.stopped_pids.add(proc.pid)
         self.cleanup.append({'name': name, 'returncode': proc.returncode,
                              'signals': sent, 'group_gone': gone})
 

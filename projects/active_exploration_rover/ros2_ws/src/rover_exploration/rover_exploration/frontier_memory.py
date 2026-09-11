@@ -34,10 +34,12 @@ class FrontierMemory:
         permanent_radius_m,
     ):
         """Record a failure and return its lifecycle outcome."""
+        # Evidence may only merge within the eventual exclusion footprint.
+        # A distant failed approach must get its own count and center.
         record = next(
             (
                 item for item in self.failures
-                if math.hypot(x - item.x, y - item.y) <= match_radius_m
+                if math.hypot(x - item.x, y - item.y) <= min(match_radius_m, permanent_radius_m)
             ),
             None,
         )

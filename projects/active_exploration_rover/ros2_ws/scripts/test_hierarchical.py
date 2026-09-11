@@ -18,7 +18,7 @@ def fixture():
 
 def test_frontier_size_definition_preserves_candidate_schema():
     from hierarchical_driver import PROMPT, INPUT_SPEC_VERSION, FRONTIER_SIZE_DEFINITION
-    assert INPUT_SPEC_VERSION == 'hierarchical-onboard-v2'
+    assert INPUT_SPEC_VERSION == 'hierarchical-onboard-v3'
     assert FRONTIER_SIZE_DEFINITION == ('frontier_component_cell_count is the number of cells in the frontier component. '
         'It is not free-space area, accessible-area coverage, or a guarantee of traversability.')
     assert FRONTIER_SIZE_DEFINITION in PROMPT
@@ -124,7 +124,8 @@ def test_gate_stops_pending_stale_and_terminal_without_driver():
 def test_shutdown_with_closed_ros_context_does_not_publish(monkeypatch):
     import hierarchical_controller as adapter
     e,_,_,_=fixture();sent=[]
-    node=SimpleNamespace(executive=e,velocity=SimpleNamespace(publish=sent.append))
+    import threading
+    node=SimpleNamespace(executive=e,velocity=SimpleNamespace(publish=sent.append),shutdown_event=threading.Event(),driver=None)
     monkeypatch.setattr(adapter.rclpy,'ok',lambda:False)
     adapter.HierarchicalController.cancel(node,'shutdown')
     assert e.closed and not sent
@@ -231,3 +232,64 @@ def test_prepared_pair_is_dry_run_only_without_model_opt_in(tmp_path):
     blocked=subprocess.run([str(command),'--output',str(output)],capture_output=True,text=True)
     assert blocked.returncode==2 and 'model_execution_disabled' in blocked.stderr
     assert not output.exists()
+
+
+def test_invalid_ros_stop_still_tears_down_owned_and_latches_submission(tmp_path):
+    import io,threading
+    from exploration_pilot import cleanup_owned_episode
+    from rover_experiment import Processes
+    owner=Processes(tmp_path)
+    # Only a harmless owned sleeping Python child: no ROS/model/simulator.
+    import sys
+    child=owner.start('driver',[sys.executable,'-c','import time; time.sleep(60)'])
+    def invalid_context():raise RuntimeError("publisher's context is invalid")
+    marker=tmp_path/'cancel.requested'
+    errors=cleanup_owned_episode(owner,marker,[invalid_context])
+    assert child.poll() is not None and not owner.owned
+    assert owner.cleanup[-1]['group_gone'] and 'context is invalid' in errors[0]
+    assert cleanup_owned_episode(owner,marker,[invalid_context]) # idempotent
+    assert len(owner.cleanup)==1
+    d=PersistentDriver.__new__(PersistentDriver)
+    d.closed=False;d.turns=0;d.write_lock=threading.Lock();d.log=io.StringIO()
+    d.cancelling=threading.Event();d.cancel_path=marker
+    d.process=SimpleNamespace(stdin=io.StringIO())
+    with pytest.raises(RuntimeError,match='episode_cancelled'):
+        d.send({'method':'turn/start','params':{}})
+    assert d.turns==0 and d.process.stdin.getvalue()==''
+    marker.unlink();d.latch_cancel()
+    with pytest.raises(RuntimeError,match='episode_cancelled'):
+        d.send({'method':'turn/start','params':{}})
+    assert d.turns==0
+
+
+def test_controller_close_latches_before_failed_publication(monkeypatch):
+    import io,threading,time
+    import hierarchical_controller as adapter
+    e,_,_,_=fixture();steps=[]
+    def fail_publish(_):
+        assert steps==['latched']
+        raise RuntimeError('invalid ROS context')
+    node=SimpleNamespace(executive=e,shutdown_event=threading.Event(),
+        driver=SimpleNamespace(latch_cancel=lambda:steps.append('latched'),close=lambda:steps.append('closed')),
+        velocity=SimpleNamespace(publish=fail_publish),event=lambda *a,**k:None,
+        worker=SimpleNamespace(join=lambda _:steps.append('joined')),idle_cause='executing',
+        idle_since=time.monotonic(),log=io.StringIO())
+    node.cancel=lambda reason:adapter.HierarchicalController.cancel(node,reason)
+    monkeypatch.setattr(adapter.rclpy,'ok',lambda:True)
+    adapter.HierarchicalController.close(node)
+    adapter.HierarchicalController.close(node)
+    assert steps==['latched','closed','joined'] and e.closed and node.shutdown_event.is_set()
+
+
+def test_cancel_serializes_with_inflight_submission(tmp_path):
+    import threading
+    from episode_cancellation import cancellation_lock,latch_cancel
+    marker=tmp_path/'cancel.requested';entered=threading.Event();finished=threading.Event()
+    def cancel():
+        entered.set();latch_cancel(marker);finished.set()
+    with cancellation_lock(marker):
+        thread=threading.Thread(target=cancel);thread.start()
+        assert entered.wait(1) and not marker.exists()
+        # An already admitted submission finishes before cancellation is latched.
+    thread.join(1)
+    assert finished.is_set() and marker.exists()

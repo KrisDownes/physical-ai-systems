@@ -16,7 +16,7 @@ from rover_exploration.grid_planning import compute_reachable_component
 from rover_exploration.grid_planning import find_escape_path
 from rover_exploration.grid_planning import is_traversable_grid_cell
 from rover_exploration.grid_planning import reconstruct_grid_path
-from rover_exploration.stuck_detection import is_stuck
+from rover_exploration.stuck_detection import route_progress
 
 
 @dataclass(frozen=True)
@@ -122,6 +122,9 @@ class ExplorationPolicy:
         self.counters = MissionCounters()
         self.target = None
         self.progress_samples = deque()
+        self.active_route = ()
+        self.route_version = 0
+        self.progress_measurement = None
         self.recovery_state = 'idle'
         self.pending_terminal = None
         self.terminal = None
@@ -142,8 +145,16 @@ class ExplorationPolicy:
             self.progress_samples.clear()
         return ended
 
+    def set_route(self, route):
+        """Version published routes without resetting progress history."""
+        route = tuple(tuple(p) for p in route)
+        if route != self.active_route:
+            self.route_version += 1
+            self.active_route = route
+
     def observe_pose(self, now_s, pose):
         """Register progress and return a newly detected stuck event."""
+        self.progress_measurement = None
         if (
             self.complete
             or self.recovery_state != 'idle'
@@ -153,18 +164,22 @@ class ExplorationPolicy:
             return None
 
         x, y, yaw = pose
-        self.progress_samples.append((now_s, x, y, yaw))
+        self.progress_samples.append((now_s, x, y, yaw, self.route_version, self.active_route))
         minimum_time = now_s - self.config.stuck_window_s
         while self.progress_samples and self.progress_samples[0][0] < minimum_time:
             self.progress_samples.popleft()
 
-        if not is_stuck(
-            progress_samples=self.progress_samples,
-            goal_position=self.target.goal_world,
+        self.progress_measurement = route_progress(
+            samples=self.progress_samples,
             minimum_window_s=self.config.stuck_window_s - 1.5,
             progress_threshold_m=self.config.stuck_progress_threshold_m,
             alignment_threshold_rad=self.config.stuck_alignment_threshold_rad,
-        ):
+        )
+        first, last = self.progress_samples[0], self.progress_samples[-1]
+        self.progress_measurement.update(
+            goal_world=self.target.goal_world, sample_sim_s=now_s,
+            final_goal_distance_progress_m=math.dist(first[1:3], self.target.goal_world)-math.dist(last[1:3], self.target.goal_world))
+        if not self.progress_measurement["stuck"]:
             return None
 
         goal_x, goal_y = self.target.goal_world
@@ -513,7 +528,6 @@ class ExplorationPolicy:
             self.target.attempted_paths.add(tuple(path))
             self.target.fresh_approaches += 1
             self.counters.goals_assigned += 1
-            self.progress_samples.clear()
             self.pending_terminal = None
             update.selected_cell = cell
             update.path = path
@@ -584,7 +598,8 @@ class ExplorationPolicy:
         goal_world = grid_cell_center(
             cell[0], cell[1], resolution, origin_x, origin_y
         )
-        if self.target is not None and anchor == self.target.anchor:
+        continuing_target = self.target is not None and anchor == self.target.anchor
+        if continuing_target:
             self.target.goal_world = goal_world
             self.target.attempted_cells.add(cell)
             self.target.attempted_paths.add(tuple(path))
@@ -597,7 +612,8 @@ class ExplorationPolicy:
                 attempted_paths={tuple(path)},
             )
         self.counters.goals_assigned += 1
-        self.progress_samples.clear()
+        if not continuing_target:
+            self.progress_samples.clear()
         self.pending_terminal = None
         self.cooldown_hold = False
         update.path = path

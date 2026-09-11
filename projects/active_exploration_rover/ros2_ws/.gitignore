@@ -1,0 +1,12 @@
+# Local evidence, build products and planning documents
+/experiment_runs/
+/full_mission_v16_4*/
+/build/
+/install/
+/log/
+__pycache__/
+*.pyc
+*CONTRACT*.md
+*contract*.md
+*HANDOFF*.md
+*handoff*.md

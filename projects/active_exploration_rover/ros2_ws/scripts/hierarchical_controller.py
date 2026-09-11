@@ -20,6 +20,7 @@ from PIL import Image, ImageDraw
 from rover_exploration.frontier_node import FrontierDetector
 from rover_exploration.goal_selector import GoalExecutive
 from visual_rover_agent.onboard import Onboard, stamp, yaw
+from hierarchical_inputs import annotate_route_distances
 
 
 class HierarchicalController(FrontierDetector):
@@ -59,14 +60,22 @@ class HierarchicalController(FrontierDetector):
                    inference_request_cap_enforceable=False if self.method=='llm' else None)
 
     def event(self,kind,**data):
+        if kind=="cancel":
+            self.shutdown_event.set()
+            if self.driver:self.driver.latch_cancel()
         with self.log_lock:
             self.log.write(json.dumps(dict(kind=kind,wall_s=time.monotonic(),sim_s=self.node_time_s(),**{k:v for k,v in data.items() if k not in ('sim_s','wall_s')}))+'\n')
         if kind in ('cancel','safety_stop') and self.driver:
             threading.Thread(target=self.driver.cancel,daemon=True).start()
 
     def cancel(self,reason):
+        self.shutdown_event.set()
+        if self.driver:self.driver.latch_cancel()
         self.executive.cancel(reason)
-        if rclpy.ok(): self.velocity.publish(Twist())
+        try:
+            if rclpy.ok(): self.velocity.publish(Twist())
+        except Exception as error:
+            self.event("stop_publication_failed",error=str(error))
 
     def safety_reason(self):
         now=time.monotonic();sim=self.node_time_s()
@@ -179,6 +188,7 @@ class HierarchicalController(FrontierDetector):
         snapshot.update(decision,camera=dict(captured_sim_time_s=stamp(msg),frame=msg.header.frame_id,state='valid'),
             observation_id=f"goal-observation-{decision['request_id']}",
             candidate_definition='Eligible reachable approach points from shared online planner; IDs valid only for this request. Green A labels are eligible approaches; red F labels are raw frontier representatives.')
+        snapshot=annotate_route_distances(snapshot,self.latest_map,self._build_planning_grid,self.policy._reachable_tree)
         payload=dict(snapshot=snapshot,images=['data:image/jpeg;base64,'+base64.b64encode(buf.getvalue()).decode(), 'data:image/png;base64,'+map_image])
         with (self.folder/'goal_observations.jsonl').open('a') as f:f.write(json.dumps(payload)+'\n')
         try:self.requests.put_nowait(payload)
@@ -197,7 +207,9 @@ class HierarchicalController(FrontierDetector):
                 elif self.method=='llm':
                     from hierarchical_driver import PersistentDriver
                     if self.driver is None:self.driver=PersistentDriver(self.folder,enable_model=os.environ.get('ROVER_ENABLE_MODEL')=='1')
-                    if self.shutdown_event.is_set() or not self.executive.pending or self.executive.pending['request_id']!=rid: continue
+                    if self.shutdown_event.is_set():
+                        self.driver.close();continue
+                    if not self.executive.pending or self.executive.pending['request_id']!=rid: continue
                     answer=self.driver.choose(payload)
                 else:raise RuntimeError('unexpected_selector_request')
                 self.event('selector_response',request_id=rid,destination_id=answer,selector=self.method)
@@ -205,9 +217,13 @@ class HierarchicalController(FrontierDetector):
             except Exception as error:self.responses.put((rid,None,str(error)))
 
     def close(self):
-        self.cancel('shutdown');self.shutdown_event.set()
-        if self.driver:self.driver.close()
-        self.worker.join(2)
+        if getattr(self, '_closed', False):return
+        self._closed=True
+        self.shutdown_event.set()
+        try:self.cancel('shutdown')
+        finally:
+            if self.driver:self.driver.close()
+            self.worker.join(2)
         self.event('state_duration',cause=self.idle_cause,duration_wall_s=time.monotonic()-self.idle_since)
         self.log.close()
 

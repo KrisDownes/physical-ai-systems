@@ -111,3 +111,48 @@ def is_stuck(
     )
 
     return alignment_rad < alignment_threshold_rad
+
+
+def route_projection(position, route):
+    """Signed arc coordinate on a fixed polyline; ties prefer earlier segments."""
+    best = None
+    arc = 0.0
+    for a, b in zip(route, route[1:]):
+        dx, dy = b[0]-a[0], b[1]-a[1]
+        length = math.hypot(dx, dy)
+        if not length:
+            continue
+        u = max(0.0, min(1.0, ((position[0]-a[0])*dx + (position[1]-a[1])*dy)/length**2))
+        point = (a[0]+u*dx, a[1]+u*dy)
+        item = (math.dist(position, point), arc+u*length, math.atan2(dy, dx))
+        if best is None or item[0] < best[0]:
+            best = item
+        arc += length
+    return best
+
+
+def route_progress(samples, minimum_window_s, progress_threshold_m,
+                   alignment_threshold_rad=math.pi/8):
+    """Compare both endpoints on the OLD sample's route, never across replans.
+
+    Samples: (sim_s, x, y, yaw, route_version, immutable_world_polyline).
+    Net arc advance (not accumulated travel) rejects back-and-forth motion.
+    Replanning neither clears samples nor credits a change in path length.
+    """
+    if not samples:
+        return dict(ready=False, stuck=False, reason='no_samples')
+    old, new = samples[0], samples[-1]
+    route = old[5]
+    a, b = route_projection(old[1:3], route), route_projection(new[1:3], route)
+    progress = b[1]-a[1] if a and b else 0.0
+    # One fixed local bearing prevents replan-induced alignment credit.
+    alignment = (abs(normalize_angle(a[2]-old[3])) -
+                 abs(normalize_angle(a[2]-new[3]))) if a else 0.0
+    ready = new[0]-old[0] >= minimum_window_s
+    stuck = ready and progress < progress_threshold_m and alignment < alignment_threshold_rad
+    return dict(ready=ready, stuck=stuck, reason='route_no_progress' if stuck else 'route_progress_or_grace',
+                window_s=new[0]-old[0], progress_m=progress, alignment_rad=alignment,
+                reference_route_version=old[4], current_route_version=new[4],
+                start_pose=list(old[1:4]), end_pose=list(new[1:4]),
+                start_arc_m=a[1] if a else None, end_arc_m=b[1] if b else None,
+                route_available=bool(a and b))

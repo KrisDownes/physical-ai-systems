@@ -42,12 +42,15 @@ def test_cooldown_expiry_keeps_lifetime_count_for_promotion():
     assert memory.failures[0].count == 2
 
 
-def test_second_nearby_failure_promotes_same_record():
+def test_distinct_neighbor_keeps_separate_evidence():
     memory = FrontierMemory()
     fail(memory, now_s=0.0)
-    assert fail(memory, x=1.5, now_s=10.0) == 'promoted'
-    assert len(memory.failures) == 1
-    assert len(memory.permanent_failures) == 1
+    assert fail(memory, x=1.5, now_s=10.0) == 'new'
+    assert len(memory.failures) == 2
+    assert len(memory.permanent_failures) == 0
+    assert fail(memory, x=1.5, now_s=41.0) == 'promoted'
+    assert excluded(memory, x=1.5, now_s=1000) == 'permanent'
+    assert excluded(memory, x=1.0, now_s=1000) is None
 
 
 def test_permanent_exclusion_is_scoped_to_failed_approach():
@@ -92,3 +95,20 @@ def test_active_cooldown_and_permanent_views_are_derived():
 
     assert [record.x for record in memory.active_cooldowns(2.0)] == [1.0]
     assert [record.x for record in memory.permanent_failures] == [3.0]
+
+
+def test_recorded_promotion_excludes_actual_approach_only():
+    import json
+    from pathlib import Path
+    events = json.loads((Path(__file__).parent/'fixtures/recorded_failure_sequence.json').read_text())
+    memory = FrontierMemory()
+    promoted = []
+    for e in events:
+        x,y=e['goal']
+        outcome=fail(memory,x=x,y=y,now_s=e['sim_s'])
+        if outcome=='promoted':
+            assert excluded(memory,x=x,y=y,now_s=e['sim_s'])=='permanent'
+            promoted.append((x,y))
+    assert any(abs(x-6.01438)<1e-4 for x,y in promoted)
+    # A distinct unfailed approach outside the .20m footprint stays available.
+    assert excluded(memory,x=6.31438,y=-.44330,now_s=10000) is None
