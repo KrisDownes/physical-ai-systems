@@ -61,6 +61,7 @@ class HierarchicalController(FrontierDetector):
 
     def event(self,kind,**data):
         if kind=="cancel":
+            self.policy.invalidate_progress_reference("cancel", self.node_time_s(), cancel=True)
             self.shutdown_event.set()
             if self.driver:self.driver.latch_cancel()
         with self.log_lock:
@@ -106,6 +107,8 @@ class HierarchicalController(FrontierDetector):
 
     def safety_tick(self):
         reason=self.safety_reason();now=time.monotonic()
+        if reason and reason.startswith("localization_") and hasattr(self.policy, "invalidate_progress_reference"):
+            self.policy.invalidate_progress_reference(reason, self.node_time_s())
         if reason:self.safe_since=None
         elif self.safe_since is None:self.safe_since=now
         safe=not reason and now-self.safe_since>=self.resume_debounce

@@ -271,7 +271,8 @@ class FrontierDetector(Node):
             pose.pose.orientation.w = 1.0
             message.poses.append(pose)
         previous_version = self.policy.route_version
-        self.policy.set_route([(p.pose.position.x, p.pose.position.y) for p in message.poses])
+        self.policy.set_route([(p.pose.position.x, p.pose.position.y) for p in message.poses],
+                              frame=header.frame_id, now_s=self.node_time_s())
         if self.policy.route_version != previous_version:
             self.get_logger().info("route_version " + json.dumps(dict(
                 route_version=self.policy.route_version,
@@ -446,7 +447,7 @@ class FrontierDetector(Node):
         self.recovery_request_publisher.publish(request)
         self._log_failure(event.failure_outcome, event.goal_x, event.goal_y)
         self.get_logger().warning(
-            f'route_no_progress: Rover made no sustained route progress for goal '
+            f'{self.policy.progress_measurement["reason"]}: recovery for goal '
             f'({event.goal_x:.3f}, {event.goal_y:.3f}); recovery requested'
         )
 

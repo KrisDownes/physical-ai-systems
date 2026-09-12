@@ -144,13 +144,13 @@ def route_progress(samples, minimum_window_s, progress_threshold_m,
     old, new = samples[0], samples[-1]
     route = old[5]
     a, b = route_projection(old[1:3], route), route_projection(new[1:3], route)
-    progress = b[1]-a[1] if a and b else 0.0
+    progress = b[1]-a[1] if a and b else None
     # One fixed local bearing prevents replan-induced alignment credit.
     alignment = (abs(normalize_angle(a[2]-old[3])) -
-                 abs(normalize_angle(a[2]-new[3]))) if a else 0.0
+                 abs(normalize_angle(a[2]-new[3]))) if a else None
     ready = new[0]-old[0] >= minimum_window_s
-    stuck = ready and progress < progress_threshold_m and alignment < alignment_threshold_rad
-    return dict(ready=ready, stuck=stuck, reason='route_no_progress' if stuck else 'route_progress_or_grace',
+    stuck = ready and progress is not None and progress < progress_threshold_m and alignment < alignment_threshold_rad
+    return dict(ready=ready, stuck=stuck, reason='progress_unavailable' if progress is None else 'route_no_progress' if stuck else 'route_progress_or_grace',
                 window_s=new[0]-old[0], progress_m=progress, alignment_rad=alignment,
                 reference_route_version=old[4], current_route_version=new[4],
                 start_pose=list(old[1:4]), end_pose=list(new[1:4]),

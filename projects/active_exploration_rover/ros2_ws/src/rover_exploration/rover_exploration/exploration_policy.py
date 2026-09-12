@@ -125,6 +125,13 @@ class ExplorationPolicy:
         self.active_route = ()
         self.route_version = 0
         self.progress_measurement = None
+        self.diagnostic_route = ()
+        self.diagnostic_version = 0
+        self.progress_goal = None
+        self.route_frame = 'map'
+        self.route_missing_since = None
+        self.reference_failure_since = None
+        self.progress_cancelled = False
         self.recovery_state = 'idle'
         self.pending_terminal = None
         self.terminal = None
@@ -143,19 +150,51 @@ class ExplorationPolicy:
         self.recovery_state = 'idle'
         if ended:
             self.progress_samples.clear()
+            self.active_route = self.diagnostic_route = ()
+            self.route_missing_since = self.reference_failure_since = None
         return ended
 
-    def set_route(self, route):
-        """Version published routes without resetting progress history."""
+    def _sync_progress_goal(self):
+        goal = tuple(self.target.goal_world) if self.target and self.target.goal_world else None
+        if goal != self.progress_goal:
+            self.progress_goal = goal
+            self.progress_samples.clear()
+            self.active_route = self.diagnostic_route = ()
+            self.route_missing_since = self.reference_failure_since = None
+
+    def invalidate_progress_reference(self, reason, now_s=None, cancel=False):
+        """Drop incompatible diagnostic geometry, never reset a failure deadline."""
+        if self.reference_failure_since is None:
+            self.reference_failure_since = now_s
+        self.progress_samples.clear()
+        self.active_route = self.diagnostic_route = ()
+        self.progress_cancelled |= cancel
+
+    def set_route(self, route, frame='map', now_s=None):
+        """Published motion route and diagnostic reference have separate lifetimes."""
+        self._sync_progress_goal()
+        if frame != self.route_frame:
+            self.invalidate_progress_reference('frame_changed', now_s)
+            self.route_frame = frame
         route = tuple(tuple(p) for p in route)
         if route != self.active_route:
             self.route_version += 1
             self.active_route = route
+        valid = len(route)>1 and all(math.isfinite(v) for p in route for v in p) and any(a!=b for a,b in zip(route,route[1:]))
+        if valid and not self.progress_cancelled:
+            self.diagnostic_route = route
+            self.diagnostic_version = self.route_version
+            self.route_missing_since = None
+        elif self.route_missing_since is None:
+            self.route_missing_since = now_s
 
     def observe_pose(self, now_s, pose):
         """Register progress and return a newly detected stuck event."""
         self.progress_measurement = None
+        self._sync_progress_goal()
         if (
+            self.progress_cancelled
+            or
             self.complete
             or self.recovery_state != 'idle'
             or self.target is None
@@ -164,7 +203,9 @@ class ExplorationPolicy:
             return None
 
         x, y, yaw = pose
-        self.progress_samples.append((now_s, x, y, yaw, self.route_version, self.active_route))
+        if not self.active_route and self.route_missing_since is None:
+            self.route_missing_since = now_s
+        self.progress_samples.append((now_s, x, y, yaw, self.diagnostic_version, self.diagnostic_route))
         minimum_time = now_s - self.config.stuck_window_s
         while self.progress_samples and self.progress_samples[0][0] < minimum_time:
             self.progress_samples.popleft()
@@ -175,6 +216,20 @@ class ExplorationPolicy:
             progress_threshold_m=self.config.stuck_progress_threshold_m,
             alignment_threshold_rad=self.config.stuck_alignment_threshold_rad,
         )
+        # Empty publications never reset pose history. Persistent route/reference
+        # loss has its own bounded reason, not a fabricated zero measurement.
+        bound = self.config.stuck_window_s - 1.5
+        for since, reason in [(self.route_missing_since, 'planning_route_unavailable'),
+                              (self.reference_failure_since, 'progress_reference_unavailable')]:
+            if since is not None and now_s-since >= bound:
+                self.progress_measurement.update(stuck=True, reason=reason)
+                break
+        else:
+            if self.progress_measurement['ready'] and self.progress_measurement['route_available'] and not self.progress_measurement['stuck']:
+                self.reference_failure_since = None
+        self.progress_measurement.update(published_route_version=self.route_version,
+            published_route_available=bool(self.active_route), frame=self.route_frame,
+            route_missing_since=self.route_missing_since, reference_failure_since=self.reference_failure_since)
         first, last = self.progress_samples[0], self.progress_samples[-1]
         self.progress_measurement.update(
             goal_world=self.target.goal_world, sample_sim_s=now_s,
