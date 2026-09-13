@@ -63,6 +63,7 @@ def generate_launch_description() -> LaunchDescription:
             'enable_rviz': enable_rviz,
             'gazebo_args': LaunchConfiguration('gazebo_args'),
             'world_file': LaunchConfiguration('world_file'),
+            'world_name': LaunchConfiguration('world_name'),
         }.items(),
     )
 
@@ -135,6 +136,7 @@ def generate_launch_description() -> LaunchDescription:
             DeclareLaunchArgument('start_frontier', default_value='true'),
             DeclareLaunchArgument('agent_stop_distance', default_value='0.25'),
             DeclareLaunchArgument('gazebo_args', default_value='-r'),
+            DeclareLaunchArgument('world_name', default_value='kd_world'),
             DeclareLaunchArgument('world_file', default_value=PathJoinSubstitution([
                 FindPackageShare('rover_description'), 'worlds', 'kd_world.sdf'])),
             DeclareLaunchArgument(

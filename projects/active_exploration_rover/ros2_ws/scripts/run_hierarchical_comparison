@@ -2,14 +2,15 @@
 """Future paired benchmark under the externally submitted decision-turn budget."""
 import argparse
 import json
+import hashlib
 from pathlib import Path
 import subprocess
 
 
-def pair_commands(output):
+def pair_commands(output,world="kd_world",seed=None):
     runner=str(Path(__file__).resolve().parent/'run_hierarchical_pilot')
     return [[runner,'--hierarchical-selector',selector,'--wall-budget','600',
-             '--output',str(output/selector),*(['--enable-model'] if selector=='llm' else [])]
+             '--output',str(output/selector),'--world',world,*(['--seed',str(seed)] if seed is not None else []),*(['--enable-model'] if selector=='llm' else [])]
             for selector in ('classical','llm')]
 
 
@@ -18,13 +19,28 @@ def main():
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--enable-model',action='store_true')
     parser.add_argument('--dry-run',action='store_true',help='Print commands only; no processes or output files')
-    args=parser.parse_args();commands=pair_commands(args.output.resolve())
+    parser.add_argument('--world',choices=['kd_world','office_loop_01'],default='kd_world')
+    parser.add_argument('--seed',type=int,default=None)
+    args=parser.parse_args();commands=pair_commands(args.output.resolve(),args.world,args.seed)
     if args.dry_run:
         print(json.dumps(commands,indent=2));return
     if not args.enable_model:parser.error('model_execution_disabled: future authorized comparison requires --enable-model')
     if args.output.exists():parser.error('output already exists; no resume or automatic retries')
+    args.output.mkdir(parents=True)
+    root=Path(__file__).resolve().parents[1]
+    sources=[p for d in ['src','scripts'] for p in (root/d).rglob('*')
+             if p.is_file() and (p.suffix in ('.py','.yaml','.sdf','.xacro','.xml') or p.name.startswith('run_'))]
+    hashes={str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
+    (args.output/'pair_configuration.json').write_text(json.dumps(dict(world=args.world,
+        spawn=dict(x=0,y=0,z=.02,yaw=0),simulator_seed=args.seed,
+        sensor_seed='No separate per-sensor seed exposed; Gazebo global seed supplied when requested',
+        nondeterminism='ROS scheduling, SLAM timing, rendering and model responses remain nondeterministic',
+        wall_budget_s=600,luna_turn_cap=20,model='gpt-5.6-luna',reasoning='low',
+        commands=commands,source_sha256=hashes),indent=2)+'\n')
     results={}
     for selector,command in zip(('classical','llm'),commands):
+        if any(hashlib.sha256((root/p).read_bytes()).hexdigest()!=h for p,h in hashes.items()):
+            raise RuntimeError('Frozen source changed; pair stopped')
         subprocess.run(command,check=True)
         result=json.loads((args.output/selector/'classical/results.json').read_text())
         results[selector]=result

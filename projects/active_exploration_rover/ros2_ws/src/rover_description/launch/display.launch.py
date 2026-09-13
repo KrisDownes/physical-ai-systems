@@ -65,6 +65,7 @@ def generate_launch_description() -> LaunchDescription:
         condition=IfCondition(enable_rviz),
     )
 
+    joint_topic = ['/world/', LaunchConfiguration('world_name'), '/model/kd_bot/joint_state']
     bridge_node = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -79,10 +80,10 @@ def generate_launch_description() -> LaunchDescription:
             '/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
             '/imu/data_raw@sensor_msgs/msg/Imu[gz.msgs.IMU',
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
-            '/world/kd_world/model/kd_bot/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
+            [*joint_topic, '@sensor_msgs/msg/JointState[gz.msgs.Model'],
         ],
         remappings=[
-            ('/world/kd_world/model/kd_bot/joint_state', '/joint_states'),
+            (joint_topic, '/joint_states'),
             ('/camera', '/camera/image_raw'),
             ('/camera_info', '/camera/camera_info'),
         ],
@@ -90,6 +91,7 @@ def generate_launch_description() -> LaunchDescription:
 
     return LaunchDescription(
         [
+            DeclareLaunchArgument('world_name', default_value='kd_world'),
             DeclareLaunchArgument(
                 'enable_rviz',
                 default_value='true',

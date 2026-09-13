@@ -108,7 +108,7 @@ def run_episode(folder,method,args):
     ACTIVE_CANCEL_PATH=cancel_path
     driver=None; started=None; ended=None; manifest=dict(method=method,model_requested=args.model if method=='llm' else None,
         reasoning_effort='low' if method=='llm' else None,ros_domain_id=87,wall_budget_s=budget,
-        action_budget=100 if method=='llm' else None,world='kd_world',spawn=dict(x=0,y=0,z=.02,yaw=0),
+        action_budget=100 if method=='llm' else None,world=args.world,simulator_seed=args.seed,spawn=dict(x=0,y=0,z=.02,yaw=0),
         setup_started_monotonic_s=time.monotonic(),termination='infrastructure_error')
     manifest.update(benchmark_mode='hierarchical' if hierarchy else ('direct_llm' if method=='llm' else 'original_classical'), selector=hierarchy, diagnostic=hierarchy=='mock')
     if hierarchy=='llm': manifest.update(model_requested='gpt-5.6-luna',reasoning_effort='low',decision_turn_budget=20)
@@ -136,11 +136,13 @@ def run_episode(folder,method,args):
         spin=threading.Thread(target=executor.spin,daemon=True);spin.start()
         recorder=processes.start('recorder',['ros2','bag','record','-o',str(folder/'bag'),*TOPICS,*(['/hierarchy_status','/hierarchy_cancel','/cmd_vel_guarded','/recovery_status'] if hierarchy else [])],env=env)
         wait_for(lambda:'Listening for topics' in (folder/'recorder.log').read_text(),20,'recorder',[recorder])
-        world=ROOT/'src/rover_description/worlds/kd_world.sdf'
+        world=ROOT/'src/rover_description/worlds'/f'{args.world}.sdf'
         simulation_cmd=['ros2','launch','rover_exploration','exploration.launch.py',
              'agent_mode:='+str(method=='llm').lower(),'enable_motion:=false','start_frontier:=false',
-             'agent_stop_distance:=0.45','enable_rviz:=false','gazebo_args:=-r -s --headless-rendering',
-             'spawn_x:=0','spawn_y:=0','spawn_z:=0.02','spawn_yaw:=0','world_file:='+str(world)]
+             'agent_stop_distance:=0.45','enable_rviz:=false',
+             'gazebo_args:=-r -s --headless-rendering'+(' --seed '+str(args.seed) if args.seed is not None else ''),
+             'spawn_x:=0','spawn_y:=0','spawn_z:=0.02','spawn_yaw:=0',
+             'world_name:='+args.world,'world_file:='+str(world)]
         manifest['simulation_command']=simulation_cmd
         simulation=processes.start('simulation',simulation_cmd,env=env)
         if not args.headless and os.environ.get('DISPLAY'):
@@ -417,6 +419,8 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--method', choices=['both','classical','llm'], default='both')
     parser.add_argument('--resume-unstarted',action='store_true',help='Run only the never-started LLM half; requires classical results and no LLM directory. Never retries an episode.')
+    parser.add_argument('--world',choices=['kd_world','office_loop_01'],default='kd_world')
+    parser.add_argument('--seed',type=int,default=None)
     parser.add_argument('--headless',action='store_true');parser.add_argument('--model',default='gpt-5.6-luna')
     parser.add_argument('--hierarchical-selector',choices=['classical','mock','llm'])
     parser.add_argument('--wall-budget',type=int,choices=[120,600],default=600)
@@ -445,7 +449,7 @@ def main():
     save(snapshot/'existing_mcp.json',configs)
     subprocess.run(['ps','-eo','pid,ppid,pgid,comm'],stdout=(snapshot/'existing_processes.txt').open('w'),check=True)
     source=list((ROOT/'src').rglob('*.py'))+list((ROOT/'src').rglob('*.yaml'))+list((ROOT/'src').rglob('package.xml'))
-    source+=list((ROOT/'scripts').glob('*.py'))+[ROOT/'scripts/run_exploration_pilot',ROOT/'scripts/rover_driver_mcp',ROOT/'scripts/run_hierarchical_pilot',ROOT/'scripts/run_hierarchical_comparison',ROOT/'src/rover_description/worlds/kd_world.sdf',ROOT/'src/rover_description/urdf/rover.urdf.xacro']
+    source+=list((ROOT/'scripts').glob('*.py'))+[ROOT/'scripts/run_exploration_pilot',ROOT/'scripts/rover_driver_mcp',ROOT/'scripts/run_hierarchical_pilot',ROOT/'scripts/run_hierarchical_comparison',ROOT/'src/rover_description/worlds'/f'{args.world}.sdf',ROOT/'src/rover_description/urdf/rover.urdf.xacro']
     hashes={}
     # Optional local documentation is not required by a clean checkout.
     source+=list(ROOT.glob('HIERARCHICAL_INPUT_SPEC_v*.md'))+list(ROOT.glob('*CONTRACT*.md'))

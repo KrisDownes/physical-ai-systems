@@ -57,6 +57,7 @@ def generate_launch_description() -> LaunchDescription:
         PythonLaunchDescriptionSource(display_file),
         launch_arguments={
             'enable_rviz': enable_rviz,
+            'world_name': LaunchConfiguration('world_name'),
         }.items(),
     )
     spawn_robot = Node(
@@ -77,6 +78,7 @@ def generate_launch_description() -> LaunchDescription:
         [
             DeclareLaunchArgument('gazebo_args', default_value='-r'),
             DeclareLaunchArgument('world_file', default_value=world_file),
+            DeclareLaunchArgument('world_name', default_value='kd_world'),
             DeclareLaunchArgument(
                 'spawn_x',
                 default_value='0.0',
