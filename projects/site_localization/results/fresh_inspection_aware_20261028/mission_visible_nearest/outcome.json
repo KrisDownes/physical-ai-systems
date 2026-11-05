@@ -1,0 +1,153 @@
+{
+  "case": "visible",
+  "return_required": false,
+  "correct_physical_inspection": true,
+  "complete_contract": true,
+  "success_claim": true,
+  "false_completion": false,
+  "wrong_asset_acceptances": 0,
+  "contacts": 0,
+  "contact_system_live": true,
+  "clearance_m": 0.33776945776320066,
+  "total_sim_s": 129.132,
+  "total_path_m": 10.47403867194712,
+  "acquisition": {
+    "reason": "mapping_endpoint_ready",
+    "exploration_termination": "continuous_acquisition_reserve",
+    "time": 74.566,
+    "wheel_distance_m": 5.77795116670019,
+    "frontier_goals": 3,
+    "failed_goals": [],
+    "visited": [
+      {
+        "point": [
+          0.9622918978414803,
+          -0.4147952983989318
+        ],
+        "area": 20.330000605881217
+      },
+      {
+        "point": [
+          2.1122919149778157,
+          1.2352047261879842
+        ],
+        "area": 29.000000864267356
+      },
+      {
+        "point": [
+          4.361465798660371,
+          2.250540481117094
+        ],
+        "area": 34.97500104233623
+      }
+    ],
+    "map_messages": 77,
+    "known_free_area_m2": 34.97500104233623,
+    "complete_environment_claim": false
+  },
+  "acquisition_time_s": 74.566,
+  "acquisition_physical_distance_m": 5.757408282907918,
+  "physical_dock_return": false,
+  "end_dock_dwell_s": 0.0,
+  "handoff_success": true,
+  "interventions": 0,
+  "resets_after_start": 0,
+  "infrastructure_failure": false,
+  "termination": "inspection_finished",
+  "inspection_abstentions": 0,
+  "incorrect_numeric_acceptances": 0,
+  "observations": 3,
+  "recoveries": 0,
+  "navigation_failure": false,
+  "inspection_reason": "fresh_identity_and_inspection",
+  "honest_noncompletion": false,
+  "handoff_physical_motion_m": 0.0,
+  "handoff_continuous_truth_coverage": true,
+  "handoff_seed_position_error_m": 0.0515781275689533,
+  "handoff_seed_heading_error_deg": 0.6909114095541176,
+  "first_localization_ready": {
+    "event": "localization_ready",
+    "time": 81.63,
+    "seed": [
+      2.34205282656948,
+      0.2314521505004521,
+      -2.8875906197847407
+    ],
+    "estimate": [
+      2.338564837201151,
+      0.21173108488924866,
+      -2.8898785029805985
+    ],
+    "difference": [
+      -0.0034879893683292806,
+      -0.01972106561120343,
+      -0.0022878831958577095
+    ]
+  },
+  "inspection_time_s": 48.69199999999999,
+  "inspection_path_m": 4.730127667651077,
+  "task_decision_time_s": 126.96,
+  "decision_physical_path_m": 10.47403867194712,
+  "all_observations": [
+    {
+      "id": 0,
+      "time": 118.558,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": true,
+      "distance_m": 1.4972395673406385,
+      "heading_error_deg": 1.9822954136023403,
+      "stationary_before_capture_s": 2.312000000000012,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 1,
+      "time": 119.986,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": true,
+      "distance_m": 1.4972395673406385,
+      "heading_error_deg": 1.9822954136023403,
+      "stationary_before_capture_s": 3.740000000000009,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 2,
+      "time": 126.242,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "accept",
+      "reading_value": 6.204152289503443,
+      "error_interval_MPa": [
+        0,
+        0.2958477104965569
+      ],
+      "reading_valid": true,
+      "actual_target_visible": true,
+      "distance_m": 1.126017193257774,
+      "heading_error_deg": 2.7867214255211716,
+      "stationary_before_capture_s": 2.278000000000006,
+      "valid_physical_inspection": true,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    }
+  ]
+}

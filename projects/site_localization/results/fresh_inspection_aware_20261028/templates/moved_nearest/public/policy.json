@@ -1,0 +1,25 @@
+{
+  "mode": "autonomous",
+  "old_view": [
+    -1.5,
+    -1.5,
+    0
+  ],
+  "old_asset_pose": [
+    0,
+    -1.5,
+    0
+  ],
+  "search_coordinates": [
+    -1.5,
+    0,
+    1.5
+  ],
+  "inflation_m": 0.45,
+  "max_search_positions": 4,
+  "max_captures": 36,
+  "max_path_m": 18,
+  "max_sim_s": 420,
+  "track_ttl_s": 60,
+  "vision_python": "/home/krisd/physical-ai-systems/projects/robot_policy_eval/.venv/bin/python3"
+}

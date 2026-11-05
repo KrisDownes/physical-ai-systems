@@ -1,0 +1,71 @@
+{
+  "version": "known-asset-local-calibration-v1",
+  "asset_name": "R02 development reference; physical unit ID unverified",
+  "units": "MPa",
+  "valid_range": [
+    5,
+    10
+  ],
+  "numerical_tolerance_MPa": 0.5,
+  "printed_marks": [
+    {
+      "value": 5,
+      "point": [
+        54.0,
+        219.0
+      ]
+    },
+    {
+      "value": 10,
+      "point": [
+        114.0,
+        88.5
+      ]
+    }
+  ],
+  "calibration": {
+    "angle_low_deg": 176.78050510314716,
+    "angle_high_deg": 230.54407334395825,
+    "value_low": 5,
+    "value_high": 10,
+    "value_per_deg": 0.09299977965756705
+  },
+  "detector": {
+    "radius": 165,
+    "scale_start_deg": 128.97840986095665,
+    "scale_sweep_deg": 270,
+    "min_value": 0,
+    "max_value": 25,
+    "center": [
+      214,
+      210
+    ],
+    "panel_shape": [
+      425,
+      425
+    ]
+  },
+  "registration": {
+    "ring_min": 0.82,
+    "ring_max": 0.99,
+    "ratio": 0.7,
+    "ransac_px": 3,
+    "min_matches": 10,
+    "min_inliers": 8,
+    "ransac_seed": 20261023
+  },
+  "commissioning_assistance": {
+    "operator_time_seconds": null,
+    "source": "Reused assistant-marked visible5/10 stroke midpoints, legacy manual pivot/radius/crop, user-confirmed numbered scale and MPa units; no new human session",
+    "pixel_mark_uncertainty": "Approximately +/-2px placement, not calibrated statistics",
+    "pivot_uncertainty": "Existing +/-3px estimate, not surveyed",
+    "needle_reference_used": false,
+    "identity": "Unknown physical unit; matching cannot establish identity",
+    "geometry": "Local unrectified reference chart; planar inter-image H assumes negligible pointer/dial parallax and lens distortion"
+  },
+  "input_hashes": {
+    "results/r02_geometry_diagnostic_20261023/image_observations.json": "4b3718b406832fe82e61e0dba5395ab9eb768baf530ab3cf9c8d851088f52204",
+    "results/real_gauge_feasibility_20261023/method_inputs.json": "fd347b1351ffa6b8247900d6f6f943bdf74ee7f85aaaa28ba229922128b0fba8",
+    "data/task_verification/paddle_audit/inventory_20261023/20190822_132.jpg": "2b77041b33990f74ccb4374a4b54cc56743e9e22592d2f26c270c09f2b535d4a"
+  }
+}

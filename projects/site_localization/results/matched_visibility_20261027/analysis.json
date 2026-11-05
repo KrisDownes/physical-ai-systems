@@ -1,0 +1,2852 @@
+{
+  "protocol": "docs/post_repair_connected/matched_protocol.md",
+  "scope": "Inspection-only diagnostic restarts from the same per-case physical/map/estimated handoff",
+  "completed_arms": [
+    {
+      "case": "wrong_asset",
+      "arm": "nearest",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/matched_visibility_20261027/mission_wrong_asset_nearest_infra_retry02",
+      "diagnostic_reset": true,
+      "continuous_mission": false,
+      "physical_restart_position_error_m": 4.307629854045085e-12,
+      "first_localization_ready": {
+        "time_s": 2.154,
+        "estimated_pose": [
+          1.654944035461343,
+          -1.643506278257537,
+          -2.951986536980291
+        ],
+        "position_error_m": 0.1404209809199618
+      },
+      "acquired_map_sha256": "a04f5902e2b78725dbd53e9492cfe336a9d97ad96a30e249f4769f4cf60035d7",
+      "success_claim": false,
+      "complete_physical_inspection": false,
+      "final_claimed_capture_physically_valid": false,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "minimum_clearance_m": 0.3361323212349765,
+      "termination_reason": "search_budget_exhausted",
+      "captures": 32,
+      "sim_time_s": 256.038,
+      "wheel_path_m": 18.002957051612928,
+      "physical_path_m": 17.970047744196403,
+      "first_target_detection": {
+        "capture_id": 30,
+        "time_s": 243.236,
+        "physical_path_m": 15.046322034750965,
+        "remaining_18m_physical_proxy_m": 2.9536779652490353,
+        "remaining_420s_s": 176.764
+      },
+      "approach": {
+        "confirmation_time_s": 244.238,
+        "planned_map_path_m": 3.1607836733023977,
+        "physical_path_at_confirmation_m": 15.046322034750965,
+        "remaining_18m_physical_proxy_m": 2.9536779652490353,
+        "actual_physical_motion_after_confirmation_m": 2.9237257094454385
+      },
+      "station_observations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 16.93000050458172,
+          "captures": [
+            {
+              "id": 0,
+              "time_s": 56.746,
+              "camera_yaw_rad": 0.017616471450903958,
+              "physical_station_offset_m": 0.04117541447143379,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 92.57568359375,
+              "target_visibility_fractions": {
+                "inner": 0.0,
+                "scale": 0.0
+              },
+              "target_distance_m": 3.9510744943154052
+            },
+            {
+              "id": 1,
+              "time_s": 61.642,
+              "camera_yaw_rad": 0.8134791091655482,
+              "physical_station_offset_m": 0.04117541523563765,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.951074494320024
+            },
+            {
+              "id": 2,
+              "time_s": 66.81,
+              "camera_yaw_rad": 1.6612034312245836,
+              "physical_station_offset_m": 0.04117541521682702,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9510744931604
+            },
+            {
+              "id": 3,
+              "time_s": 75.888,
+              "camera_yaw_rad": 2.4041227298637806,
+              "physical_station_offset_m": 0.031122383021550667,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9588333859470257
+            },
+            {
+              "id": 4,
+              "time_s": 79.934,
+              "camera_yaw_rad": -3.1155062382227126,
+              "physical_station_offset_m": 0.03112238313826493,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.958833385948334
+            },
+            {
+              "id": 5,
+              "time_s": 84.048,
+              "camera_yaw_rad": -2.326804146466434,
+              "physical_station_offset_m": 0.031122382625987984,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9588333859457006
+            },
+            {
+              "id": 6,
+              "time_s": 88.094,
+              "camera_yaw_rad": -1.5442879321220604,
+              "physical_station_offset_m": 0.031122382854330097,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9588333867845025
+            },
+            {
+              "id": 7,
+              "time_s": 92.208,
+              "camera_yaw_rad": -0.760062153426693,
+              "physical_station_offset_m": 0.031122382666270154,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9588333861314644
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            0.0,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 12.310000366887241,
+          "captures": [
+            {
+              "id": 8,
+              "time_s": 113.696,
+              "camera_yaw_rad": 0.05565001605828813,
+              "physical_station_offset_m": 0.15841096549702793,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.007942256432082
+            },
+            {
+              "id": 9,
+              "time_s": 119.034,
+              "camera_yaw_rad": 0.8712005787373278,
+              "physical_station_offset_m": 0.15716183952767862,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.009327276055534
+            },
+            {
+              "id": 10,
+              "time_s": 123.148,
+              "camera_yaw_rad": 1.570879126336458,
+              "physical_station_offset_m": 0.1585200184576452,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.012826195110521
+            },
+            {
+              "id": 11,
+              "time_s": 127.976,
+              "camera_yaw_rad": 2.386476890656767,
+              "physical_station_offset_m": 0.15852001908800875,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.01282619555185
+            },
+            {
+              "id": 12,
+              "time_s": 132.056,
+              "camera_yaw_rad": -3.1153962247660534,
+              "physical_station_offset_m": 0.15852001940743657,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.012826196204942
+            },
+            {
+              "id": 13,
+              "time_s": 136.068,
+              "camera_yaw_rad": -2.3454487421374273,
+              "physical_station_offset_m": 0.15852001917254832,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.012826195718413
+            },
+            {
+              "id": 14,
+              "time_s": 140.046,
+              "camera_yaw_rad": -1.5136982379943928,
+              "physical_station_offset_m": 0.15852002011891902,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.01282619638101
+            },
+            {
+              "id": 15,
+              "time_s": 144.16,
+              "camera_yaw_rad": -0.7711372397285026,
+              "physical_station_offset_m": 0.15852002033689302,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 59.59113311767578,
+              "target_visibility_fractions": {
+                "inner": 0.0,
+                "scale": 0.0
+              },
+              "target_distance_m": 4.012826196533727
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            -1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 0.010000000298040001,
+          "captures": [
+            {
+              "id": 16,
+              "time_s": 167.11,
+              "camera_yaw_rad": 0.03136002668312135,
+              "physical_station_offset_m": 0.13101882482210012,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 5.074018892802203
+            },
+            {
+              "id": 17,
+              "time_s": 171.122,
+              "camera_yaw_rad": 0.7910958916864332,
+              "physical_station_offset_m": 0.131018824887001,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 5.074018893117245
+            },
+            {
+              "id": 18,
+              "time_s": 175.508,
+              "camera_yaw_rad": 1.593015607991543,
+              "physical_station_offset_m": 0.1310188247511298,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 5.074018893007936
+            },
+            {
+              "id": 19,
+              "time_s": 179.588,
+              "camera_yaw_rad": 2.3733910143020163,
+              "physical_station_offset_m": 0.131018825246491,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 5.074018893411259
+            },
+            {
+              "id": 20,
+              "time_s": 183.668,
+              "camera_yaw_rad": -3.115645277858383,
+              "physical_station_offset_m": 0.1310188253038227,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 5.074018893683695
+            },
+            {
+              "id": 21,
+              "time_s": 187.816,
+              "camera_yaw_rad": -2.33343660281693,
+              "physical_station_offset_m": 0.1310188252499154,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 5.074018893413706
+            },
+            {
+              "id": 22,
+              "time_s": 191.964,
+              "camera_yaw_rad": -1.5463214692124436,
+              "physical_station_offset_m": 0.1310188254566794,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 5.074018893580603
+            },
+            {
+              "id": 23,
+              "time_s": 196.078,
+              "camera_yaw_rad": -0.7588237356504578,
+              "physical_station_offset_m": 0.13101882448977575,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 58.867916107177734,
+              "target_visibility_fractions": {
+                "inner": 0.0,
+                "scale": 0.0
+              },
+              "target_distance_m": 5.074018892794309
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 7.31000021786724,
+          "captures": [
+            {
+              "id": 24,
+              "time_s": 213.996,
+              "camera_yaw_rad": 0.0555569340504378,
+              "physical_station_offset_m": 0.22014833535781678,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.3329406624087463
+            },
+            {
+              "id": 25,
+              "time_s": 220.524,
+              "camera_yaw_rad": 0.8015134500297711,
+              "physical_station_offset_m": 0.21256236115328414,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.330306129319961
+            },
+            {
+              "id": 26,
+              "time_s": 224.57,
+              "camera_yaw_rad": 1.592786140493055,
+              "physical_station_offset_m": 0.21256236039647025,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.330306128987313
+            },
+            {
+              "id": 27,
+              "time_s": 228.65,
+              "camera_yaw_rad": 2.3772804861054295,
+              "physical_station_offset_m": 0.21256236087815178,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.33030612920234
+            },
+            {
+              "id": 28,
+              "time_s": 232.696,
+              "camera_yaw_rad": -3.12269378358404,
+              "physical_station_offset_m": 0.21256236095466732,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.3303061293111096
+            },
+            {
+              "id": 29,
+              "time_s": 239.156,
+              "camera_yaw_rad": -2.278507808576883,
+              "physical_station_offset_m": 0.2125623604478898,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.330306128611728
+            },
+            {
+              "id": 30,
+              "time_s": 243.236,
+              "camera_yaw_rad": -1.5473729884039311,
+              "physical_station_offset_m": 0.21256236098921577,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 40.78567886352539,
+              "target_visibility_fractions": {
+                "inner": 1.0,
+                "scale": 1.0
+              },
+              "target_distance_m": 3.3303061288484557
+            },
+            {
+              "id": 31,
+              "time_s": 243.95,
+              "camera_yaw_rad": -1.5473729884039311,
+              "physical_station_offset_m": 0.21256236098921577,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 40.78567886352539,
+              "target_visibility_fractions": {
+                "inner": 1.0,
+                "scale": 1.0
+              },
+              "target_distance_m": 3.3303061288484557
+            }
+          ],
+          "decoded_target_count": 2,
+          "actual_usable_target_images": 0
+        }
+      ],
+      "search_choice_logs": [],
+      "all_owned_processes_reaped": true
+    },
+    {
+      "case": "wrong_asset",
+      "arm": "gain",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/matched_visibility_20261027/mission_wrong_asset_gain",
+      "diagnostic_reset": true,
+      "continuous_mission": false,
+      "physical_restart_position_error_m": 4.307629854045085e-12,
+      "first_localization_ready": {
+        "time_s": 2.142,
+        "estimated_pose": [
+          1.654944035461343,
+          -1.643506278257537,
+          -2.951986536980291
+        ],
+        "position_error_m": 0.1404209809199618
+      },
+      "acquired_map_sha256": "a04f5902e2b78725dbd53e9492cfe336a9d97ad96a30e249f4769f4cf60035d7",
+      "success_claim": true,
+      "complete_physical_inspection": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "minimum_clearance_m": 0.32918825981196465,
+      "termination_reason": "fresh_identity_and_inspection",
+      "captures": 17,
+      "sim_time_s": 167.838,
+      "wheel_path_m": 15.015828144177195,
+      "physical_path_m": 14.981890789849668,
+      "first_target_detection": {
+        "capture_id": 14,
+        "time_s": 143.072,
+        "physical_path_m": 11.847423580073478,
+        "remaining_18m_physical_proxy_m": 6.152576419926522,
+        "remaining_420s_s": 276.928
+      },
+      "approach": {
+        "confirmation_time_s": 144.194,
+        "planned_map_path_m": 3.1392769264976965,
+        "physical_path_at_confirmation_m": 11.847423580073478,
+        "remaining_18m_physical_proxy_m": 6.152576419926522,
+        "actual_physical_motion_after_confirmation_m": 3.13446720977619
+      },
+      "station_observations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 16.93000050458172,
+          "captures": [
+            {
+              "id": 0,
+              "time_s": 58.174,
+              "camera_yaw_rad": 0.02487601840758989,
+              "physical_station_offset_m": 0.029899723753835792,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 92.3946533203125,
+              "target_visibility_fractions": {
+                "inner": 0.0,
+                "scale": 0.0
+              },
+              "target_distance_m": 3.958508429989917
+            },
+            {
+              "id": 1,
+              "time_s": 62.492,
+              "camera_yaw_rad": 0.8135056965405857,
+              "physical_station_offset_m": 0.029899724385530912,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9585084299918734
+            },
+            {
+              "id": 2,
+              "time_s": 66.708,
+              "camera_yaw_rad": 1.6013517875551546,
+              "physical_station_offset_m": 0.02989972409965941,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.958508428960069
+            },
+            {
+              "id": 3,
+              "time_s": 70.822,
+              "camera_yaw_rad": 2.3776980655299824,
+              "physical_station_offset_m": 0.029899724201613177,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.958508429324695
+            },
+            {
+              "id": 4,
+              "time_s": 74.97,
+              "camera_yaw_rad": -3.108469870219806,
+              "physical_station_offset_m": 0.02989972418505769,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.958508429322775
+            },
+            {
+              "id": 5,
+              "time_s": 79.05,
+              "camera_yaw_rad": -2.327309455993057,
+              "physical_station_offset_m": 0.029899723346550666,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.95850842931847
+            },
+            {
+              "id": 6,
+              "time_s": 83.096,
+              "camera_yaw_rad": -1.5412797713894708,
+              "physical_station_offset_m": 0.02989972358109256,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.958508430159493
+            },
+            {
+              "id": 7,
+              "time_s": 87.312,
+              "camera_yaw_rad": -0.7433941537149177,
+              "physical_station_offset_m": 0.029899723321303886,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.958508429257321
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 17.520000522166082,
+          "captures": [
+            {
+              "id": 8,
+              "time_s": 118.184,
+              "camera_yaw_rad": 0.03410635937366615,
+              "physical_station_offset_m": 0.2097434158608052,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.318075309324188
+            },
+            {
+              "id": 9,
+              "time_s": 122.4,
+              "camera_yaw_rad": 0.8044106443650647,
+              "physical_station_offset_m": 0.20649292656440207,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.3190595453754987
+            },
+            {
+              "id": 10,
+              "time_s": 126.548,
+              "camera_yaw_rad": 1.5961363648522318,
+              "physical_station_offset_m": 0.20649292621342302,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.3190595452285474
+            },
+            {
+              "id": 11,
+              "time_s": 130.696,
+              "camera_yaw_rad": 2.379575074514682,
+              "physical_station_offset_m": 0.20649292669266872,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.319059545433385
+            },
+            {
+              "id": 12,
+              "time_s": 134.844,
+              "camera_yaw_rad": -3.107962123773164,
+              "physical_station_offset_m": 0.20649292713669615,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.319059546112506
+            },
+            {
+              "id": 13,
+              "time_s": 138.992,
+              "camera_yaw_rad": -2.340730590007862,
+              "physical_station_offset_m": 0.2064929267955711,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.319059545587234
+            },
+            {
+              "id": 14,
+              "time_s": 143.072,
+              "camera_yaw_rad": -1.5479388011222321,
+              "physical_station_offset_m": 0.20649292748554982,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 41.23774719238281,
+              "target_visibility_fractions": {
+                "inner": 1.0,
+                "scale": 1.0
+              },
+              "target_distance_m": 3.3190595458783916
+            },
+            {
+              "id": 15,
+              "time_s": 143.82,
+              "camera_yaw_rad": -1.5479388011222321,
+              "physical_station_offset_m": 0.20649292748554982,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 41.23774719238281,
+              "target_visibility_fractions": {
+                "inner": 1.0,
+                "scale": 1.0
+              },
+              "target_distance_m": 3.3190595458783916
+            }
+          ],
+          "decoded_target_count": 2,
+          "actual_usable_target_images": 0
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 87.576,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.5010480076284618,
+            -1.4891026570793806,
+            -0.7957274149009668
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 8.510000253632041,
+              "path_m": 3.3897638472367566,
+              "weighted_graph_cost": 4.006677878103455,
+              "gain_per_effort": 1.9386009247374132
+            },
+            {
+              "station": [
+                0.0,
+                1.5
+              ],
+              "new_visible_area_m2": 12.310000366887241,
+              "path_m": 3.3448288171092386,
+              "weighted_graph_cost": 3.95929179125788,
+              "gain_per_effort": 2.833253250027351
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "new_visible_area_m2": 13.270000395499082,
+              "path_m": 7.147831779681205,
+              "weighted_graph_cost": 8.331211253643588,
+              "gain_per_effort": 1.6286541934495227
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 13.300000396393202,
+              "path_m": 5.647991505836452,
+              "weighted_graph_cost": 6.649496883112167,
+              "gain_per_effort": 2.0006043005194534
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 17.520000522166082,
+              "path_m": 4.637762952512036,
+              "weighted_graph_cost": 5.436866467245911,
+              "gain_per_effort": 3.1076156748235824
+            }
+          ],
+          "selected": [
+            1.5,
+            1.5
+          ],
+          "sampled_map_cells": 3661,
+          "elapsed_wall_s": 0.42822015890851617,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        }
+      ],
+      "all_owned_processes_reaped": true
+    },
+    {
+      "case": "moved",
+      "arm": "gain",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/matched_visibility_20261027/mission_moved_gain",
+      "diagnostic_reset": true,
+      "continuous_mission": false,
+      "physical_restart_position_error_m": 1.863618464307988e-12,
+      "first_localization_ready": {
+        "time_s": 2.156,
+        "estimated_pose": [
+          1.2585414340141932,
+          1.8595994114095997,
+          -1.580351483984562
+        ],
+        "position_error_m": 0.06107055129449733
+      },
+      "acquired_map_sha256": "df18fee753c5a1612ca0714eadea96844728d1886006ef1ca00a05d75b6d8e0a",
+      "success_claim": true,
+      "complete_physical_inspection": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "minimum_clearance_m": 0.3428526350126989,
+      "termination_reason": "fresh_identity_and_inspection",
+      "captures": 17,
+      "sim_time_s": 151.544,
+      "wheel_path_m": 12.336833067320475,
+      "physical_path_m": 12.311029965227627,
+      "first_target_detection": {
+        "capture_id": 14,
+        "time_s": 128.384,
+        "physical_path_m": 9.24732740194762,
+        "remaining_18m_physical_proxy_m": 8.75267259805238,
+        "remaining_420s_s": 291.616
+      },
+      "approach": {
+        "confirmation_time_s": 129.444,
+        "planned_map_path_m": 3.0583686435118835,
+        "physical_path_at_confirmation_m": 9.24732740194762,
+        "remaining_18m_physical_proxy_m": 8.75267259805238,
+        "actual_physical_motion_after_confirmation_m": 3.063702563280007
+      },
+      "station_observations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 16.690000497428763,
+          "captures": [
+            {
+              "id": 0,
+              "time_s": 34.748,
+              "camera_yaw_rad": 0.02113186012385195,
+              "physical_station_offset_m": 0.014861023104525452,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 92.89599609375,
+              "target_visibility_fractions": {
+                "inner": 0.0,
+                "scale": 0.0
+              },
+              "target_distance_m": 3.9365280748743015
+            },
+            {
+              "id": 1,
+              "time_s": 38.828,
+              "camera_yaw_rad": 0.7778986784747332,
+              "physical_station_offset_m": 0.014861023411644345,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9365280748767053
+            },
+            {
+              "id": 2,
+              "time_s": 42.874,
+              "camera_yaw_rad": 1.5813461756067446,
+              "physical_station_offset_m": 0.014861023674922562,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9365280745878724
+            },
+            {
+              "id": 3,
+              "time_s": 47.09,
+              "camera_yaw_rad": 2.3608821467335632,
+              "physical_station_offset_m": 0.014861022634767955,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9365280757387313
+            },
+            {
+              "id": 4,
+              "time_s": 51.238,
+              "camera_yaw_rad": -3.1287169164795436,
+              "physical_station_offset_m": 0.014861022995208363,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9365280757434022
+            },
+            {
+              "id": 5,
+              "time_s": 55.318,
+              "camera_yaw_rad": -2.3495232119399585,
+              "physical_station_offset_m": 0.014861022596769578,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9365280757473404
+            },
+            {
+              "id": 6,
+              "time_s": 59.84,
+              "camera_yaw_rad": -1.568731233851543,
+              "physical_station_offset_m": 0.014861022253784727,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9365280761237145
+            },
+            {
+              "id": 7,
+              "time_s": 63.92,
+              "camera_yaw_rad": -0.7935921218827704,
+              "physical_station_offset_m": 0.014861023253546888,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9365280750186056
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 17.580000523954322,
+          "captures": [
+            {
+              "id": 8,
+              "time_s": 97.104,
+              "camera_yaw_rad": 0.031016157754059564,
+              "physical_station_offset_m": 0.08345197269744285,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.210005096069506
+            },
+            {
+              "id": 9,
+              "time_s": 101.524,
+              "camera_yaw_rad": 0.7826166719675272,
+              "physical_station_offset_m": 0.08022180871170474,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.2100891384661914
+            },
+            {
+              "id": 10,
+              "time_s": 105.57,
+              "camera_yaw_rad": 1.5557900370158446,
+              "physical_station_offset_m": 0.08022180855926349,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.2100891384096415
+            },
+            {
+              "id": 11,
+              "time_s": 115.94,
+              "camera_yaw_rad": 2.3660316062988622,
+              "physical_station_offset_m": 0.06455096304366402,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.2046832071320175
+            },
+            {
+              "id": 12,
+              "time_s": 119.986,
+              "camera_yaw_rad": 3.134469936460007,
+              "physical_station_offset_m": 0.06455096393869918,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.2046832083154047
+            },
+            {
+              "id": 13,
+              "time_s": 124.372,
+              "camera_yaw_rad": -2.3473865308930497,
+              "physical_station_offset_m": 0.06455096311055303,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.2046832072114237
+            },
+            {
+              "id": 14,
+              "time_s": 128.384,
+              "camera_yaw_rad": -1.5860737765562987,
+              "physical_station_offset_m": 0.06455096422632385,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 39.91789245605469,
+              "target_visibility_fractions": {
+                "inner": 1.0,
+                "scale": 1.0
+              },
+              "target_distance_m": 3.2046832077074052
+            },
+            {
+              "id": 15,
+              "time_s": 129.132,
+              "camera_yaw_rad": -1.5860737765562987,
+              "physical_station_offset_m": 0.06455096422632385,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 39.91789245605469,
+              "target_visibility_fractions": {
+                "inner": 1.0,
+                "scale": 1.0
+              },
+              "target_distance_m": 3.2046832077074052
+            }
+          ],
+          "decoded_target_count": 2,
+          "actual_usable_target_images": 0
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 64.152,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.4857256935472813,
+            -1.4989426976764884,
+            -0.8116939692078721
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 8.870000264361481,
+              "path_m": 3.3285357890657945,
+              "weighted_graph_cost": 3.9359185314316916,
+              "gain_per_effort": 2.0491918506871922
+            },
+            {
+              "station": [
+                0.0,
+                1.5
+              ],
+              "new_visible_area_m2": 12.44000037076176,
+              "path_m": 3.346795204432695,
+              "weighted_graph_cost": 3.947773621745965,
+              "gain_per_effort": 2.8618786452317617
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "new_visible_area_m2": 13.380000398777522,
+              "path_m": 7.300881929465039,
+              "weighted_graph_cost": 8.540420748862731,
+              "gain_per_effort": 1.611876968311464
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 13.3500003978834,
+              "path_m": 5.801045982801808,
+              "weighted_graph_cost": 6.866703088312651,
+              "gain_per_effort": 1.9629334122489843
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 17.580000523954322,
+              "path_m": 4.725405094617056,
+              "weighted_graph_cost": 5.55765749267727,
+              "gain_per_effort": 3.0705251826604876
+            }
+          ],
+          "selected": [
+            1.5,
+            1.5
+          ],
+          "sampled_map_cells": 3659,
+          "elapsed_wall_s": 0.42330923897679895,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        }
+      ],
+      "all_owned_processes_reaped": true
+    },
+    {
+      "case": "moved",
+      "arm": "nearest",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/matched_visibility_20261027/mission_moved_nearest",
+      "diagnostic_reset": true,
+      "continuous_mission": false,
+      "physical_restart_position_error_m": 1.863618464307988e-12,
+      "first_localization_ready": {
+        "time_s": 2.136,
+        "estimated_pose": [
+          1.2585414340141932,
+          1.8595994114095997,
+          -1.580351483984562
+        ],
+        "position_error_m": 0.06107055129449733
+      },
+      "acquired_map_sha256": "df18fee753c5a1612ca0714eadea96844728d1886006ef1ca00a05d75b6d8e0a",
+      "success_claim": true,
+      "complete_physical_inspection": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "minimum_clearance_m": 0.337931051603649,
+      "termination_reason": "fresh_identity_and_inspection",
+      "captures": 33,
+      "sim_time_s": 235.15,
+      "wheel_path_m": 13.882670378981162,
+      "physical_path_m": 13.84511151448265,
+      "first_target_detection": {
+        "capture_id": 30,
+        "time_s": 213.69,
+        "physical_path_m": 10.791800590003659,
+        "remaining_18m_physical_proxy_m": 7.208199409996341,
+        "remaining_420s_s": 206.31
+      },
+      "approach": {
+        "confirmation_time_s": 214.71,
+        "planned_map_path_m": 3.058098970918732,
+        "physical_path_at_confirmation_m": 10.791800590003659,
+        "remaining_18m_physical_proxy_m": 7.208199409996341,
+        "actual_physical_motion_after_confirmation_m": 3.053310924478991
+      },
+      "station_observations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 16.690000497428763,
+          "captures": [
+            {
+              "id": 0,
+              "time_s": 34.442,
+              "camera_yaw_rad": 0.0039468123328056295,
+              "physical_station_offset_m": 0.02263490914787519,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 92.9718017578125,
+              "target_visibility_fractions": {
+                "inner": 0.0,
+                "scale": 0.0
+              },
+              "target_distance_m": 3.934318734526149
+            },
+            {
+              "id": 1,
+              "time_s": 38.624,
+              "camera_yaw_rad": 0.8025848304415749,
+              "physical_station_offset_m": 0.02263490967744651,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9343187345275763
+            },
+            {
+              "id": 2,
+              "time_s": 42.772,
+              "camera_yaw_rad": 1.5800067836838307,
+              "physical_station_offset_m": 0.022634909880850786,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9343187342370705
+            },
+            {
+              "id": 3,
+              "time_s": 46.886,
+              "camera_yaw_rad": 2.3569912712661965,
+              "physical_station_offset_m": 0.022634909211753786,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.934318735210266
+            },
+            {
+              "id": 4,
+              "time_s": 52.972,
+              "camera_yaw_rad": -3.0738793865499416,
+              "physical_station_offset_m": 0.02263490994779647,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.93431873522199
+            },
+            {
+              "id": 5,
+              "time_s": 56.882,
+              "camera_yaw_rad": -2.3697032785557,
+              "physical_station_offset_m": 0.022634909431130442,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9343187352295614
+            },
+            {
+              "id": 6,
+              "time_s": 60.928,
+              "camera_yaw_rad": -1.5732062097264758,
+              "physical_station_offset_m": 0.02263490917825137,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9343187355916447
+            },
+            {
+              "id": 7,
+              "time_s": 65.076,
+              "camera_yaw_rad": -0.7842278782024191,
+              "physical_station_offset_m": 0.022634909968057892,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.934318734449344
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            -1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 8.870000264361481,
+          "captures": [
+            {
+              "id": 8,
+              "time_s": 97.036,
+              "camera_yaw_rad": 0.008259771007902166,
+              "physical_station_offset_m": 0.026340912852460874,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.972424016264938
+            },
+            {
+              "id": 9,
+              "time_s": 101.184,
+              "camera_yaw_rad": 0.782188107716456,
+              "physical_station_offset_m": 0.026340912696377734,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.972424016478006
+            },
+            {
+              "id": 10,
+              "time_s": 105.332,
+              "camera_yaw_rad": 1.5602549267492554,
+              "physical_station_offset_m": 0.026340913075088387,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.972424016811896
+            },
+            {
+              "id": 11,
+              "time_s": 109.378,
+              "camera_yaw_rad": 2.359059102328768,
+              "physical_station_offset_m": 0.026340914205411563,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.9724240178164845
+            },
+            {
+              "id": 12,
+              "time_s": 113.526,
+              "camera_yaw_rad": 3.136530307189467,
+              "physical_station_offset_m": 0.026340913635827645,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.972424018633846
+            },
+            {
+              "id": 13,
+              "time_s": 117.64,
+              "camera_yaw_rad": -2.3456108546674925,
+              "physical_station_offset_m": 0.026340914041671673,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.972424018074711
+            },
+            {
+              "id": 14,
+              "time_s": 121.686,
+              "camera_yaw_rad": -1.572474773388869,
+              "physical_station_offset_m": 0.026340914934331695,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 4.972424018858663
+            },
+            {
+              "id": 15,
+              "time_s": 125.732,
+              "camera_yaw_rad": -0.7958060903949274,
+              "physical_station_offset_m": 0.02634091379743549,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 60.18119812011719,
+              "target_visibility_fractions": {
+                "inner": 0.0,
+                "scale": 0.0
+              },
+              "target_distance_m": 4.972424017848601
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            0.0,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 3.5700001064002804,
+          "captures": [
+            {
+              "id": 16,
+              "time_s": 136.714,
+              "camera_yaw_rad": 0.057948659489583616,
+              "physical_station_offset_m": 0.071762457530823,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9323768004348296
+            },
+            {
+              "id": 17,
+              "time_s": 140.692,
+              "camera_yaw_rad": 0.7783116156585141,
+              "physical_station_offset_m": 0.07176245764913591,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.932376800773717
+            },
+            {
+              "id": 18,
+              "time_s": 146.778,
+              "camera_yaw_rad": 1.5672747919740662,
+              "physical_station_offset_m": 0.06723499241851533,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.93044011526044
+            },
+            {
+              "id": 19,
+              "time_s": 156.57,
+              "camera_yaw_rad": 2.3401854852089534,
+              "physical_station_offset_m": 0.06723499346519861,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9304401159693656
+            },
+            {
+              "id": 20,
+              "time_s": 160.786,
+              "camera_yaw_rad": 3.135304994564255,
+              "physical_station_offset_m": 0.06723499379225953,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.930440116750852
+            },
+            {
+              "id": 21,
+              "time_s": 165.58,
+              "camera_yaw_rad": -2.3690232152822466,
+              "physical_station_offset_m": 0.06723499351981417,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9304401160900815
+            },
+            {
+              "id": 22,
+              "time_s": 169.626,
+              "camera_yaw_rad": -1.580652838613626,
+              "physical_station_offset_m": 0.06723499378592367,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.9304401162689366
+            },
+            {
+              "id": 23,
+              "time_s": 176.154,
+              "camera_yaw_rad": -0.7396059591801368,
+              "physical_station_offset_m": 0.06162576118172734,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 60.724266052246094,
+              "target_visibility_fractions": {
+                "inner": 0.0,
+                "scale": 0.0
+              },
+              "target_distance_m": 3.9260478877168565
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 7.340000218761361,
+          "captures": [
+            {
+              "id": 24,
+              "time_s": 186.966,
+              "camera_yaw_rad": -0.01313029402673319,
+              "physical_station_offset_m": 0.07691637376959616,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.206472161133369
+            },
+            {
+              "id": 25,
+              "time_s": 193.086,
+              "camera_yaw_rad": 0.7730353694781693,
+              "physical_station_offset_m": 0.07103710728200964,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.205018197652767
+            },
+            {
+              "id": 26,
+              "time_s": 197.302,
+              "camera_yaw_rad": 1.565702031936581,
+              "physical_station_offset_m": 0.0710371070561136,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.205018197564974
+            },
+            {
+              "id": 27,
+              "time_s": 201.348,
+              "camera_yaw_rad": 2.344235121159419,
+              "physical_station_offset_m": 0.07103710822695959,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.205018198034615
+            },
+            {
+              "id": 28,
+              "time_s": 205.53,
+              "camera_yaw_rad": 3.130173314128081,
+              "physical_station_offset_m": 0.07103710897032181,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.205018199199462
+            },
+            {
+              "id": 29,
+              "time_s": 209.644,
+              "camera_yaw_rad": -2.3555985336120413,
+              "physical_station_offset_m": 0.07103710830155255,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": 3.2050181981392813
+            },
+            {
+              "id": 30,
+              "time_s": 213.69,
+              "camera_yaw_rad": -1.569820007035618,
+              "physical_station_offset_m": 0.07103710899900999,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 40.03697204589844,
+              "target_visibility_fractions": {
+                "inner": 1.0,
+                "scale": 1.0
+              },
+              "target_distance_m": 3.2050181984117048
+            },
+            {
+              "id": 31,
+              "time_s": 214.37,
+              "camera_yaw_rad": -1.569820007035618,
+              "physical_station_offset_m": 0.07103710899900999,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_face_diameter_px": 40.03697204589844,
+              "target_visibility_fractions": {
+                "inner": 1.0,
+                "scale": 1.0
+              },
+              "target_distance_m": 3.2050181984117048
+            }
+          ],
+          "decoded_target_count": 2,
+          "actual_usable_target_images": 0
+        }
+      ],
+      "search_choice_logs": [],
+      "all_owned_processes_reaped": true
+    },
+    {
+      "case": "absent",
+      "arm": "nearest",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/matched_visibility_20261027/mission_absent_nearest",
+      "diagnostic_reset": true,
+      "continuous_mission": false,
+      "physical_restart_position_error_m": 1.326832901573475e-12,
+      "first_localization_ready": {
+        "time_s": 2.138,
+        "estimated_pose": [
+          1.5463608628829786,
+          -1.4635439988217602,
+          -1.5247195781402045
+        ],
+        "position_error_m": 0.03971557178278292
+      },
+      "acquired_map_sha256": "faaa0cffde57a535500acfc63512349d9cf90c3305a9f558d31af768e8db254a",
+      "success_claim": false,
+      "complete_physical_inspection": false,
+      "final_claimed_capture_physically_valid": false,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "minimum_clearance_m": 0.3349003900767942,
+      "termination_reason": "search_budget_exhausted",
+      "captures": 32,
+      "sim_time_s": 250.824,
+      "wheel_path_m": 13.590731362711072,
+      "physical_path_m": 13.550904682250005,
+      "first_target_detection": null,
+      "approach": null,
+      "station_observations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 16.79000050040916,
+          "captures": [
+            {
+              "id": 0,
+              "time_s": 62.696,
+              "camera_yaw_rad": 0.008151172611451905,
+              "physical_station_offset_m": 0.02763963897450804,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 1,
+              "time_s": 66.912,
+              "camera_yaw_rad": 0.7969275910667938,
+              "physical_station_offset_m": 0.02763963885289609,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 2,
+              "time_s": 71.026,
+              "camera_yaw_rad": 1.581116107446783,
+              "physical_station_offset_m": 0.02763963874027293,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 3,
+              "time_s": 75.004,
+              "camera_yaw_rad": 2.348152272984524,
+              "physical_station_offset_m": 0.027639639131534437,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 4,
+              "time_s": 79.118,
+              "camera_yaw_rad": -3.133417601442923,
+              "physical_station_offset_m": 0.027639639586170144,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 5,
+              "time_s": 83.266,
+              "camera_yaw_rad": -2.3477205615678085,
+              "physical_station_offset_m": 0.02763963987561133,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 6,
+              "time_s": 87.346,
+              "camera_yaw_rad": -1.5684290301405293,
+              "physical_station_offset_m": 0.027639640020132396,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 7,
+              "time_s": 91.46,
+              "camera_yaw_rad": -0.7734995558149691,
+              "physical_station_offset_m": 0.027639639786313386,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            -1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 8.610000256612441,
+          "captures": [
+            {
+              "id": 8,
+              "time_s": 135.592,
+              "camera_yaw_rad": -0.011374832330169244,
+              "physical_station_offset_m": 0.026134700846238985,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 9,
+              "time_s": 139.672,
+              "camera_yaw_rad": 0.7658766652708648,
+              "physical_station_offset_m": 0.026134700891468764,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 10,
+              "time_s": 144.874,
+              "camera_yaw_rad": 1.6249719390325934,
+              "physical_station_offset_m": 0.026134699986225685,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 11,
+              "time_s": 148.92,
+              "camera_yaw_rad": 2.34184112245451,
+              "physical_station_offset_m": 0.026134700653893714,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 12,
+              "time_s": 153.0,
+              "camera_yaw_rad": 3.13865400541913,
+              "physical_station_offset_m": 0.026134700693570947,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 13,
+              "time_s": 157.046,
+              "camera_yaw_rad": -2.3736091363540046,
+              "physical_station_offset_m": 0.026134700711878633,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 14,
+              "time_s": 161.092,
+              "camera_yaw_rad": -1.5822533766650726,
+              "physical_station_offset_m": 0.026134701826818978,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 15,
+              "time_s": 165.24,
+              "camera_yaw_rad": -0.7990300106418352,
+              "physical_station_offset_m": 0.02613470100251952,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            0.0,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 3.51000010461204,
+          "captures": [
+            {
+              "id": 16,
+              "time_s": 176.392,
+              "camera_yaw_rad": 0.05706163386552902,
+              "physical_station_offset_m": 0.06537439092677277,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 17,
+              "time_s": 181.968,
+              "camera_yaw_rad": 0.7438253747274453,
+              "physical_station_offset_m": 0.05789099717141947,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 18,
+              "time_s": 186.49,
+              "camera_yaw_rad": 1.5443061597691956,
+              "physical_station_offset_m": 0.057890997216290645,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 19,
+              "time_s": 190.57,
+              "camera_yaw_rad": 2.340958191183472,
+              "physical_station_offset_m": 0.05789099774661945,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 20,
+              "time_s": 194.684,
+              "camera_yaw_rad": 3.12694824647222,
+              "physical_station_offset_m": 0.05789099789208252,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 21,
+              "time_s": 198.764,
+              "camera_yaw_rad": -2.375378312997755,
+              "physical_station_offset_m": 0.05789099782202615,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 22,
+              "time_s": 202.878,
+              "camera_yaw_rad": -1.5772870819486868,
+              "physical_station_offset_m": 0.05789099849274705,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 23,
+              "time_s": 207.128,
+              "camera_yaw_rad": -0.8052549801445139,
+              "physical_station_offset_m": 0.057890998415410684,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 7.370000219655481,
+          "captures": [
+            {
+              "id": 24,
+              "time_s": 217.906,
+              "camera_yaw_rad": -0.045210415852511246,
+              "physical_station_offset_m": 0.07349709699085258,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 25,
+              "time_s": 225.624,
+              "camera_yaw_rad": 0.7648863360947595,
+              "physical_station_offset_m": 0.05324516371607945,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 26,
+              "time_s": 229.772,
+              "camera_yaw_rad": 1.5577057597143522,
+              "physical_station_offset_m": 0.05324516293450066,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 27,
+              "time_s": 233.852,
+              "camera_yaw_rad": 2.3438688695163052,
+              "physical_station_offset_m": 0.05324516323984172,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 28,
+              "time_s": 237.898,
+              "camera_yaw_rad": 3.1221060967338556,
+              "physical_station_offset_m": 0.0532451632298977,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 29,
+              "time_s": 241.978,
+              "camera_yaw_rad": -2.3659101741721735,
+              "physical_station_offset_m": 0.05324516318663316,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 30,
+              "time_s": 246.058,
+              "camera_yaw_rad": -1.5901396408936102,
+              "physical_station_offset_m": 0.05324516375707706,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 31,
+              "time_s": 250.206,
+              "camera_yaw_rad": -0.8050576640758723,
+              "physical_station_offset_m": 0.05324516308788577,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        }
+      ],
+      "search_choice_logs": [],
+      "all_owned_processes_reaped": true
+    },
+    {
+      "case": "absent",
+      "arm": "gain",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/matched_visibility_20261027/mission_absent_gain",
+      "diagnostic_reset": true,
+      "continuous_mission": false,
+      "physical_restart_position_error_m": 1.326832901573475e-12,
+      "first_localization_ready": {
+        "time_s": 2.136,
+        "estimated_pose": [
+          1.5463608628829786,
+          -1.4635439988217602,
+          -1.5247195781402045
+        ],
+        "position_error_m": 0.03971557178278292
+      },
+      "acquired_map_sha256": "faaa0cffde57a535500acfc63512349d9cf90c3305a9f558d31af768e8db254a",
+      "success_claim": false,
+      "complete_physical_inspection": false,
+      "final_claimed_capture_physically_valid": false,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "minimum_clearance_m": 0.3471461092304541,
+      "termination_reason": "search_budget_exhausted",
+      "captures": 32,
+      "sim_time_s": 306.886,
+      "wheel_path_m": 17.53983166560799,
+      "physical_path_m": 17.496432378080666,
+      "first_target_detection": null,
+      "approach": null,
+      "station_observations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 16.79000050040916,
+          "captures": [
+            {
+              "id": 0,
+              "time_s": 74.052,
+              "camera_yaw_rad": 0.008161223963194754,
+              "physical_station_offset_m": 0.036609660486326634,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 1,
+              "time_s": 94.18,
+              "camera_yaw_rad": 0.7718725724827467,
+              "physical_station_offset_m": 0.02630370304347403,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 2,
+              "time_s": 98.396,
+              "camera_yaw_rad": 1.5647925475548348,
+              "physical_station_offset_m": 0.026303702763462975,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 3,
+              "time_s": 102.578,
+              "camera_yaw_rad": 2.364433866699814,
+              "physical_station_offset_m": 0.026303703331937222,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 4,
+              "time_s": 106.692,
+              "camera_yaw_rad": -3.1281395787214685,
+              "physical_station_offset_m": 0.026303703792594838,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 5,
+              "time_s": 110.806,
+              "camera_yaw_rad": -2.3556927170841444,
+              "physical_station_offset_m": 0.02630370385292025,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 6,
+              "time_s": 114.682,
+              "camera_yaw_rad": -1.4893274100888907,
+              "physical_station_offset_m": 0.02630370400108451,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 7,
+              "time_s": 118.762,
+              "camera_yaw_rad": -0.7715400685932025,
+              "physical_station_offset_m": 0.026303703883128714,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 17.28000051501312,
+          "captures": [
+            {
+              "id": 8,
+              "time_s": 151.776,
+              "camera_yaw_rad": 0.044702232729103016,
+              "physical_station_offset_m": 0.0689053296315636,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 9,
+              "time_s": 159.936,
+              "camera_yaw_rad": 0.7530366779647286,
+              "physical_station_offset_m": 0.05515246196934738,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 10,
+              "time_s": 163.982,
+              "camera_yaw_rad": 1.5416954723606267,
+              "physical_station_offset_m": 0.05515246121475877,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 11,
+              "time_s": 168.028,
+              "camera_yaw_rad": 2.337258642337165,
+              "physical_station_offset_m": 0.05515246160994054,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 12,
+              "time_s": 172.21,
+              "camera_yaw_rad": 3.130931022780718,
+              "physical_station_offset_m": 0.05515246160230579,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 13,
+              "time_s": 176.834,
+              "camera_yaw_rad": -2.3742969271945498,
+              "physical_station_offset_m": 0.05515246158175093,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 14,
+              "time_s": 180.982,
+              "camera_yaw_rad": -1.5891609815849086,
+              "physical_station_offset_m": 0.055152462171186876,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 15,
+              "time_s": 184.994,
+              "camera_yaw_rad": -0.8077753844869875,
+              "physical_station_offset_m": 0.05515246157467877,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            0.0,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 2.2100000658668404,
+          "captures": [
+            {
+              "id": 16,
+              "time_s": 202.504,
+              "camera_yaw_rad": 0.025336457104207535,
+              "physical_station_offset_m": 0.021928834466164542,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 17,
+              "time_s": 206.584,
+              "camera_yaw_rad": 0.7591816233676851,
+              "physical_station_offset_m": 0.021928834481303686,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 18,
+              "time_s": 211.242,
+              "camera_yaw_rad": 1.543440713190859,
+              "physical_station_offset_m": 0.021928834713569288,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 19,
+              "time_s": 217.124,
+              "camera_yaw_rad": 2.4040274438171214,
+              "physical_station_offset_m": 0.024397216743505666,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 20,
+              "time_s": 221.17,
+              "camera_yaw_rad": 3.1274714371843726,
+              "physical_station_offset_m": 0.024397217177377414,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 21,
+              "time_s": 225.25,
+              "camera_yaw_rad": -2.372135621597238,
+              "physical_station_offset_m": 0.0243972167837854,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 22,
+              "time_s": 229.296,
+              "camera_yaw_rad": -1.5954578660694552,
+              "physical_station_offset_m": 0.024397216879305673,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 23,
+              "time_s": 233.546,
+              "camera_yaw_rad": -0.8036919457763433,
+              "physical_station_offset_m": 0.024397217010393032,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        },
+        {
+          "station": [
+            1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 0.020000000596080002,
+          "captures": [
+            {
+              "id": 24,
+              "time_s": 272.476,
+              "camera_yaw_rad": -0.009657621906176994,
+              "physical_station_offset_m": 0.049524569631338215,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 25,
+              "time_s": 278.732,
+              "camera_yaw_rad": 0.7710058033773965,
+              "physical_station_offset_m": 0.049524569653546936,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 26,
+              "time_s": 282.778,
+              "camera_yaw_rad": 1.5569770103203795,
+              "physical_station_offset_m": 0.04952456951462715,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 27,
+              "time_s": 286.858,
+              "camera_yaw_rad": 2.343243519317476,
+              "physical_station_offset_m": 0.049524569744508945,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 28,
+              "time_s": 292.604,
+              "camera_yaw_rad": -3.0945377286204656,
+              "physical_station_offset_m": 0.04952456998270803,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 29,
+              "time_s": 296.548,
+              "camera_yaw_rad": -2.3786940394788685,
+              "physical_station_offset_m": 0.04952456999339759,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 30,
+              "time_s": 300.696,
+              "camera_yaw_rad": -1.5970585678504137,
+              "physical_station_offset_m": 0.04952456984559348,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            },
+            {
+              "id": 31,
+              "time_s": 306.612,
+              "camera_yaw_rad": -0.8131998579121633,
+              "physical_station_offset_m": 0.041485861901830186,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_face_diameter_px": null,
+              "target_visibility_fractions": null,
+              "target_distance_m": null
+            }
+          ],
+          "decoded_target_count": 0,
+          "actual_usable_target_images": 0
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 119.08,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.496110124651881,
+            -1.4909300016565468,
+            -0.7813412148240984
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 8.610000256612441,
+              "path_m": 3.34474548047465,
+              "weighted_graph_cost": 3.9395996452668482,
+              "gain_per_effort": 1.9817041746877715
+            },
+            {
+              "station": [
+                0.0,
+                1.5
+              ],
+              "new_visible_area_m2": 12.12000036122448,
+              "path_m": 3.3442499577476408,
+              "weighted_graph_cost": 3.946364539933465,
+              "gain_per_effort": 2.7898947986658498
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "new_visible_area_m2": 13.410000399671642,
+              "path_m": 7.3327663856247565,
+              "weighted_graph_cost": 8.54153970854994,
+              "gain_per_effort": 1.6093095352830074
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 13.39000039907556,
+              "path_m": 5.833000885772213,
+              "weighted_graph_cost": 6.865069097961645,
+              "gain_per_effort": 1.9596075901228756
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 17.28000051501312,
+              "path_m": 4.7421432940167705,
+              "weighted_graph_cost": 5.556023502326265,
+              "gain_per_effort": 3.0093293793309948
+            }
+          ],
+          "selected": [
+            1.5,
+            1.5
+          ],
+          "sampled_map_cells": 3631,
+          "elapsed_wall_s": 0.45512947894167155,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        },
+        {
+          "event": "search_choice",
+          "time": 185.282,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ],
+            [
+              1.5,
+              1.5
+            ]
+          ],
+          "current_pose": [
+            1.4893223788470538,
+            1.5034586578119151,
+            -0.8105116032444816
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 1.4400000429177602,
+              "path_m": 2.989324379686766,
+              "weighted_graph_cost": 3.374979888554928,
+              "gain_per_effort": 0.36096338774808434
+            },
+            {
+              "station": [
+                0.0,
+                1.5
+              ],
+              "new_visible_area_m2": 2.2100000658668404,
+              "path_m": 1.4893263948673263,
+              "weighted_graph_cost": 1.719970408218834,
+              "gain_per_effort": 0.8877903959977199
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "new_visible_area_m2": 1.11000003308244,
+              "path_m": 3.0034776378023587,
+              "weighted_graph_cost": 3.3486281072303257,
+              "gain_per_effort": 0.27725895671338274
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 1.0900000324863601,
+              "path_m": 1.5034965737716501,
+              "weighted_graph_cost": 1.6721574966420367,
+              "gain_per_effort": 0.43539106220713436
+            }
+          ],
+          "selected": [
+            0.0,
+            1.5
+          ],
+          "sampled_map_cells": 3631,
+          "elapsed_wall_s": 0.02072023507207632,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        },
+        {
+          "event": "search_choice",
+          "time": 233.866,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ],
+            [
+              1.5,
+              1.5
+            ],
+            [
+              0.0,
+              1.5
+            ]
+          ],
+          "current_pose": [
+            0.019378078582114277,
+            1.5038753813054198,
+            -0.80664522024319
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 0.0,
+              "path_m": 1.5193830209187347,
+              "weighted_graph_cost": 1.7119432335340095,
+              "gain_per_effort": 0.0
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "new_visible_area_m2": 0.020000000596080002,
+              "path_m": 4.071249255899838,
+              "weighted_graph_cost": 4.648552861244587,
+              "gain_per_effort": 0.003943801534269335
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 0.0,
+              "path_m": 2.5714837560472956,
+              "weighted_graph_cost": 2.9720822506562996,
+              "gain_per_effort": 0.0
+            }
+          ],
+          "selected": [
+            1.5,
+            -1.5
+          ],
+          "sampled_map_cells": 3631,
+          "elapsed_wall_s": 0.039151982055045664,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        }
+      ],
+      "all_owned_processes_reaped": true
+    }
+  ],
+  "attempt_count_including_infrastructure": 8
+}

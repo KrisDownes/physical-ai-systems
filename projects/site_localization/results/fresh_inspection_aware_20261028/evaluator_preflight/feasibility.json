@@ -1,0 +1,57 @@
+{
+  "scope": "Evaluator-only geometry, path and renderer preflight",
+  "method_inputs_exclude_truth": true,
+  "cases": [
+    {
+      "case": "visible",
+      "target_present": true,
+      "all_footprint_free_space_connected": true,
+      "connected_floor_area_m2": 29.620000000000005,
+      "evaluator_only_witness": [
+        -1.1,
+        -1.5,
+        0.0
+      ],
+      "evaluator_only_witness_path_m": 1.0295630140987,
+      "witness_usable_image": true,
+      "witness_target_pixels": 332.5537109375
+    },
+    {
+      "case": "moved",
+      "target_present": true,
+      "all_footprint_free_space_connected": true,
+      "connected_floor_area_m2": 29.620000000000005,
+      "evaluator_only_witness": [
+        1.35,
+        1.4,
+        0.0
+      ],
+      "evaluator_only_witness_path_m": 5.560818943713293,
+      "witness_usable_image": true,
+      "witness_target_pixels": 332.5537109375
+    },
+    {
+      "case": "wrong_asset",
+      "target_present": true,
+      "all_footprint_free_space_connected": true,
+      "connected_floor_area_m2": 29.620000000000005,
+      "evaluator_only_witness": [
+        1.35,
+        1.4,
+        0.0
+      ],
+      "evaluator_only_witness_path_m": 5.560818943713293,
+      "witness_usable_image": true,
+      "witness_target_pixels": 332.5537109375
+    },
+    {
+      "case": "absent",
+      "target_present": false,
+      "all_footprint_free_space_connected": true,
+      "connected_floor_area_m2": 29.620000000000005
+    }
+  ],
+  "physical_footprint_radius_m": 0.23,
+  "planner_inflation_m": 0.52,
+  "interpretation": "A witness exists; no method is given its location"
+}

@@ -1,0 +1,78 @@
+{
+  "camera": {
+    "image_size": [
+      1920,
+      1080
+    ],
+    "horizontal_fov_deg": 60,
+    "height_m": 0.8
+  },
+  "asset_height_m": 0.8,
+  "gauge_center_uv": [
+    650,
+    300
+  ],
+  "meters_per_texture_pixel": 0.0006666666666666666,
+  "assets": [
+    {
+      "id": 7,
+      "pose": [
+        2.45,
+        -1.5,
+        0
+      ],
+      "texture": "/home/krisd/physical-ai-systems/projects/site_localization/results/moved_asset_20261024/v2/textures/asset_7.png"
+    }
+  ],
+  "obstacles": [
+    [
+      -3.2,
+      0,
+      0.15,
+      6.55,
+      1.0
+    ],
+    [
+      3.2,
+      0,
+      0.15,
+      6.55,
+      1.0
+    ],
+    [
+      0,
+      -3.2,
+      6.55,
+      0.15,
+      1.0
+    ],
+    [
+      0,
+      3.2,
+      6.55,
+      0.15,
+      1.0
+    ],
+    [
+      0.5,
+      -1.15,
+      0.18,
+      4.1,
+      1.0
+    ],
+    [
+      0.5,
+      2.85,
+      0.18,
+      0.7,
+      1.0
+    ],
+    [
+      -2.35,
+      0.5,
+      1.7,
+      0.18,
+      1.0
+    ]
+  ]
+}

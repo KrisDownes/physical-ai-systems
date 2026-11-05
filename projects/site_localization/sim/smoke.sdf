@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- New smoke fixture; sensor configuration follows Gazebo Sim's installed
+     gpu_lidar_sensor.sdf example. No external resources or prior project edits. -->
+<sdf version="1.9">
+  <world name="site_localization_smoke">
+    <physics name="cpu" type="ignored"><max_step_size>0.001</max_step_size><real_time_factor>1</real_time_factor></physics>
+    <gravity>0 0 -9.81</gravity>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors"><render_engine>ogre2</render_engine></plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <model name="ground"><static>true</static><pose>0 0 -0.05 0 0 0</pose><link name="ground_link">
+      <collision name="ground_collision"><geometry><box><size>10 10 0.1</size></box></geometry></collision>
+      <visual name="ground_visual"><geometry><box><size>10 10 0.1</size></box></geometry></visual>
+    </link></model>
+    <model name="target"><static>true</static><pose>2 0 0.5 0 0 0</pose><link name="target_link">
+      <collision name="target_collision"><geometry><box><size>1 1 1</size></box></geometry></collision>
+      <visual name="target_visual"><geometry><box><size>1 1 1</size></box></geometry></visual>
+    </link></model>
+    <model name="falling_sphere"><pose>-1 0 1 0 0 0</pose><link name="sphere_link">
+      <inertial><mass>1</mass><inertia><ixx>0.004</ixx><iyy>0.004</iyy><izz>0.004</izz></inertia></inertial>
+      <collision name="sphere_collision"><geometry><sphere><radius>0.1</radius></sphere></geometry></collision>
+      <visual name="sphere_visual"><geometry><sphere><radius>0.1</radius></sphere></geometry></visual>
+    </link></model>
+    <model name="lidar_fixture"><static>true</static><pose>0 0 0.5 0 0 0</pose><link name="sensor_link">
+      <sensor name="scan" type="gpu_lidar"><topic>/site_smoke/scan</topic><update_rate>10</update_rate><always_on>true</always_on>
+        <lidar><scan><horizontal><samples>181</samples><resolution>1</resolution><min_angle>-1.57079632679</min_angle><max_angle>1.57079632679</max_angle></horizontal></scan>
+          <range><min>0.05</min><max>8</max><resolution>0.01</resolution></range>
+        </lidar>
+      </sensor>
+    </link></model>
+  </world>
+</sdf>

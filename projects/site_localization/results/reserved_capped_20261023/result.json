@@ -1,0 +1,4152 @@
+{
+  "scope": "One purposive new environment, unchanged/rearrangement, two independent full acquisitions per condition; no population reliability inference.",
+  "primary": {
+    "capped": {
+      "planned_full_workflows": 4,
+      "observed_full_workflows": 4,
+      "eligible": 4,
+      "physical_success": 4,
+      "accepted_complete": 4,
+      "bounded_all_four_criterion_met": true,
+      "deployment_reliability_qualified": false
+    },
+    "trimmed": {
+      "planned_full_workflows": 4,
+      "observed_full_workflows": 4,
+      "eligible": 4,
+      "physical_success": 4,
+      "accepted_complete": 4,
+      "bounded_all_four_criterion_met": true,
+      "deployment_reliability_qualified": false
+    }
+  },
+  "pairs": [
+    {
+      "condition": "unchanged",
+      "role": "full_deployment",
+      "repeat": 0,
+      "seed": 6000,
+      "selectors": {
+        "capped": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04176010965924604,
+          "dock": true
+        },
+        "trimmed": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04176010965924604,
+          "dock": true
+        }
+      },
+      "shared_execution": true
+    },
+    {
+      "condition": "unchanged",
+      "role": "full_deployment",
+      "repeat": 1,
+      "seed": 6001,
+      "selectors": {
+        "capped": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_deployment__repeat1__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04014023818646937,
+          "dock": true
+        },
+        "trimmed": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_deployment__repeat1__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04014023818646937,
+          "dock": true
+        }
+      },
+      "shared_execution": true
+    },
+    {
+      "condition": "unchanged",
+      "role": "continued_deployment",
+      "repeat": 0,
+      "seed": 6000,
+      "selectors": {
+        "capped": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04219114927714587,
+          "dock": true
+        },
+        "trimmed": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04219114927714587,
+          "dock": true
+        }
+      },
+      "shared_execution": true
+    },
+    {
+      "condition": "rearrangement",
+      "role": "full_deployment",
+      "repeat": 0,
+      "seed": 6100,
+      "selectors": {
+        "capped": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.03574426549514238,
+          "dock": true
+        },
+        "trimmed": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat0__trimmed",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.055991571528019785,
+          "dock": true
+        }
+      },
+      "shared_execution": false
+    },
+    {
+      "condition": "rearrangement",
+      "role": "full_deployment",
+      "repeat": 1,
+      "seed": 6101,
+      "selectors": {
+        "capped": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat1__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.03595216638906387,
+          "dock": true
+        },
+        "trimmed": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat1__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.03595216638906387,
+          "dock": true
+        }
+      },
+      "shared_execution": true
+    },
+    {
+      "condition": "rearrangement",
+      "role": "continued_deployment",
+      "repeat": 0,
+      "seed": 6100,
+      "selectors": {
+        "capped": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.038482391326582405,
+          "dock": true
+        },
+        "trimmed": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.038482391326582405,
+          "dock": true
+        }
+      },
+      "shared_execution": true
+    },
+    {
+      "condition": "unchanged",
+      "role": "graph_deployment",
+      "repeat": 0,
+      "seed": 6000,
+      "selectors": {
+        "capped": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__graph_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04095078345499724,
+          "dock": true
+        },
+        "trimmed": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__graph_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04095078345499724,
+          "dock": true
+        }
+      },
+      "shared_execution": true
+    },
+    {
+      "condition": "rearrangement",
+      "role": "graph_deployment",
+      "repeat": 0,
+      "seed": 6100,
+      "selectors": {
+        "capped": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__graph_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04508733333232052,
+          "dock": true
+        },
+        "trimmed": {
+          "physical_execution": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__graph_deployment__repeat0__capped",
+          "eligible": true,
+          "operational_decision": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "physical_success": true,
+          "accepted_complete": true,
+          "max_claim_position_m": 0.04508733333232052,
+          "dock": true
+        }
+      },
+      "shared_execution": true
+    }
+  ],
+  "attempts": [
+    {
+      "recorded_utc": "2026-10-23T13:53:09.801231+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "unchanged",
+        "role": "commission",
+        "repeat": 0,
+        "seed": 5900,
+        "domain": 191,
+        "selector": null,
+        "selection": null,
+        "name": "service_island__unchanged__commission__repeat0",
+        "extra": [
+          "--mapping",
+          "new",
+          "--localizer",
+          "slam_toolbox",
+          "--map-from-mission",
+          "4.0",
+          "3.5",
+          "-0.0"
+        ]
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0",
+      "returncode": 0,
+      "wall_s": 272.3746547449846,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__unchanged__commission__repeat0",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0",
+      "layout": "service_island",
+      "condition": "unchanged",
+      "role": "commission",
+      "cpu_s": 505.55729799999995,
+      "largest_child_rss_kib": 653152,
+      "resets": 1,
+      "serialization": {
+        "returncode": 0,
+        "stdout": "waiting for service to become available...\nrequester: making request: slam_toolbox.srv.SerializePoseGraph_Request(filename='/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0/mapper/session')\n\nresponse:\nslam_toolbox.srv.SerializePoseGraph_Response(result=0)\n\n",
+        "stderr": "",
+        "wall_s": 1.0984457100275904
+      },
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 258.774,
+      "body_contacts": 0,
+      "min_clearance_m": 0.6735693545087807,
+      "observed_sim_s": 263.228,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.037220981132061334,
+          "physical_heading_error_deg": 2.069508347908336,
+          "claim_time_s": 13.628
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03879259646403926,
+          "physical_heading_error_deg": 2.17602670133813,
+          "claim_time_s": 37.944
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.022490881491304383,
+          "physical_heading_error_deg": 0.8472744239141066,
+          "claim_time_s": 118.25
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.0782882855405446,
+          "physical_heading_error_deg": 1.370867665941357,
+          "claim_time_s": 142.508
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.038801925249980926,
+          "physical_heading_error_deg": 2.5740834897226694,
+          "claim_time_s": 219.15
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02122970434705476,
+          "physical_heading_error_deg": 1.672579079138845,
+          "claim_time_s": 243.782
+        }
+      ],
+      "max_claim_position_m": 0.0782882855405446,
+      "max_claim_heading_deg": 2.5740834897226694,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.037220981132061334,
+          "physical_heading_error_deg": 2.069508347908336,
+          "claim_time_s": 13.628
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03879259646403926,
+          "physical_heading_error_deg": 2.17602670133813,
+          "claim_time_s": 37.944
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.038801925249980926,
+          "physical_heading_error_deg": 2.5740834897226694,
+          "claim_time_s": 219.15
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02122970434705476,
+          "physical_heading_error_deg": 1.672579079138845,
+          "claim_time_s": 243.782
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.015991276785006576,
+        "1->4": 9.328785941668805e-06
+      },
+      "last_reference_time_s": 263.262,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.76720809747021,
+      "visit_window_dwell_s": {
+        "0": 2.3119999999999994,
+        "1": 2.2779999999999987,
+        "2": 2.278000000000006,
+        "3": 2.312000000000012,
+        "4": 2.3460000000000036,
+        "5": 2.2439999999999998
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 258.774,
+      "physical_dock_dwell_s": 6.494000000000028,
+      "physical_mission_completion_s": 258.774,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 13.628,
+          "controller_residual_site_m": [
+            -0.0016538065044624517,
+            -0.028769729680454326
+          ],
+          "physical_minus_estimated_site_m": [
+            0.017949425948367903,
+            -0.004694493355090312
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 37.944,
+          "controller_residual_site_m": [
+            0.0001923296752064374,
+            -0.026412990114286217
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.014794853249260775,
+            -0.00952628986863746
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 118.25,
+          "controller_residual_site_m": [
+            -0.003625670645480028,
+            0.017199889039934746
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.016370626315750147,
+            -0.006904848578907163
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 142.508,
+          "controller_residual_site_m": [
+            7.566067604436455e-05,
+            0.02728149605578012
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.07279204221443214,
+            0.001725115411977729
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 219.15,
+          "controller_residual_site_m": [
+            -0.0049752684772625955,
+            -0.027546444945206083
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.007756254283988184,
+            -0.009107309723106694
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 243.782,
+          "controller_residual_site_m": [
+            0.0025049153294984805,
+            0.0256366576997622
+          ],
+          "physical_minus_estimated_site_m": [
+            0.00854273006517614,
+            -0.007507954549870854
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T13:57:59.484259+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "unchanged",
+        "role": "continued_acquisition",
+        "repeat": 0,
+        "seed": 6000,
+        "domain": 194,
+        "selector": null,
+        "selection": null,
+        "name": "service_island__unchanged__continued_acquisition__repeat0",
+        "extra": [
+          "--mapping",
+          "continued",
+          "--localizer",
+          "slam_toolbox",
+          "--session",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0/mapper/session",
+          "--map-from-mission",
+          "3.9972200472164534",
+          "3.4949307146647377",
+          "-0.0007668276224665977"
+        ]
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_acquisition__repeat0",
+      "returncode": 0,
+      "wall_s": 262.2897540850099,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__unchanged__continued_acquisition__repeat0",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_acquisition__repeat0",
+      "layout": "service_island",
+      "condition": "unchanged",
+      "role": "continued_acquisition",
+      "cpu_s": 738.5118679999999,
+      "largest_child_rss_kib": 653560,
+      "resets": 1,
+      "serialization": {
+        "returncode": 0,
+        "stdout": "waiting for service to become available...\nrequester: making request: slam_toolbox.srv.SerializePoseGraph_Request(filename='/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_acquisition__repeat0/mapper/session')\n\nresponse:\nslam_toolbox.srv.SerializePoseGraph_Response(result=0)\n\n",
+        "stderr": "",
+        "wall_s": 4.461755254014861
+      },
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 242.284,
+      "body_contacts": 0,
+      "min_clearance_m": 0.6387963440147685,
+      "observed_sim_s": 250.036,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.032624879538534934,
+          "physical_heading_error_deg": 2.856507004508451,
+          "claim_time_s": 13.606
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.042227440966737376,
+          "physical_heading_error_deg": 2.699528629368165,
+          "claim_time_s": 37.648
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.01901908571893239,
+          "physical_heading_error_deg": 1.7156075003728046,
+          "claim_time_s": 102.914
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03398019537935442,
+          "physical_heading_error_deg": 1.1884638663717928,
+          "claim_time_s": 126.984
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03976426003195455,
+          "physical_heading_error_deg": 1.29376195167282,
+          "claim_time_s": 203.414
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.018420730790691092,
+          "physical_heading_error_deg": 0.9404869954932259,
+          "claim_time_s": 227.53
+        }
+      ],
+      "max_claim_position_m": 0.042227440966737376,
+      "max_claim_heading_deg": 2.856507004508451,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.032624879538534934,
+          "physical_heading_error_deg": 2.856507004508451,
+          "claim_time_s": 13.606
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.042227440966737376,
+          "physical_heading_error_deg": 2.699528629368165,
+          "claim_time_s": 37.648
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03976426003195455,
+          "physical_heading_error_deg": 1.29376195167282,
+          "claim_time_s": 203.414
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.018420730790691092,
+          "physical_heading_error_deg": 0.9404869954932259,
+          "claim_time_s": 227.53
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.014204148747843842,
+        "1->4": -0.002463180934782823
+      },
+      "last_reference_time_s": 250.07,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.80889754788613,
+      "visit_window_dwell_s": {
+        "0": 2.2780000000000005,
+        "1": 2.3119999999999976,
+        "2": 2.2779999999999916,
+        "3": 2.2439999999999998,
+        "4": 2.2779999999999916,
+        "5": 2.27800000000002
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 242.284,
+      "physical_dock_dwell_s": 9.792000000000002,
+      "physical_mission_completion_s": 242.284,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 13.606,
+          "controller_residual_site_m": [
+            -0.0009614526110217625,
+            -0.024560746567485747
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0049985639154845884,
+            -0.007813386582597115
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 37.648,
+          "controller_residual_site_m": [
+            -0.006264788272257071,
+            -0.02868390149640687
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.008444519539510864,
+            -0.010898835072682855
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 102.914,
+          "controller_residual_site_m": [
+            -0.008582073007153745,
+            0.022568540492460265
+          ],
+          "physical_minus_estimated_site_m": [
+            0.010457408075039254,
+            -0.0036421372428394605
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 126.984,
+          "controller_residual_site_m": [
+            0.0045638395127394205,
+            0.027561401956436526
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.022560283381729107,
+            0.0012618817928069515
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 203.414,
+          "controller_residual_site_m": [
+            0.0006513703465169662,
+            -0.026820492816983954
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.013213135064329418,
+            -0.010907460255813684
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 227.53,
+          "controller_residual_site_m": [
+            0.0017480353872283416,
+            0.026740053937662323
+          ],
+          "physical_minus_estimated_site_m": [
+            0.003702256982072605,
+            -0.00914409883564371
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T13:58:02.168526+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "unchanged",
+        "role": "full_acquisition",
+        "repeat": 0,
+        "seed": 6000,
+        "domain": 192,
+        "selector": null,
+        "selection": null,
+        "name": "service_island__unchanged__full_acquisition__repeat0",
+        "extra": [
+          "--mapping",
+          "new",
+          "--localizer",
+          "slam_toolbox",
+          "--map-from-mission",
+          "4.0",
+          "3.5",
+          "-0.0"
+        ]
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat0",
+      "returncode": 0,
+      "wall_s": 265.2203495420399,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__unchanged__full_acquisition__repeat0",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat0",
+      "layout": "service_island",
+      "condition": "unchanged",
+      "role": "full_acquisition",
+      "cpu_s": 703.888739,
+      "largest_child_rss_kib": 653036,
+      "resets": 1,
+      "serialization": {
+        "returncode": 0,
+        "stdout": "waiting for service to become available...\nrequester: making request: slam_toolbox.srv.SerializePoseGraph_Request(filename='/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat0/mapper/session')\n\nresponse:\nslam_toolbox.srv.SerializePoseGraph_Response(result=0)\n\n",
+        "stderr": "",
+        "wall_s": 4.152866791002452
+      },
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 244.97,
+      "body_contacts": 0,
+      "min_clearance_m": 0.5444375545121438,
+      "observed_sim_s": 252.45000000000002,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04056451482874885,
+          "physical_heading_error_deg": 1.386722170403712,
+          "claim_time_s": 18.032
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.05021078330937299,
+          "physical_heading_error_deg": 1.9594966042124704,
+          "claim_time_s": 42.19
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.06860510393294392,
+          "physical_heading_error_deg": 2.013786825886121,
+          "claim_time_s": 104.522
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.08089580630867453,
+          "physical_heading_error_deg": 1.5228247882718702,
+          "claim_time_s": 128.712
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.05047487758581232,
+          "physical_heading_error_deg": 1.8387841273963057,
+          "claim_time_s": 203.24
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.037722408785759096,
+          "physical_heading_error_deg": 2.0873328391269057,
+          "claim_time_s": 230.6
+        }
+      ],
+      "max_claim_position_m": 0.08089580630867453,
+      "max_claim_heading_deg": 2.0873328391269057,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04056451482874885,
+          "physical_heading_error_deg": 1.386722170403712,
+          "claim_time_s": 18.032
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.05021078330937299,
+          "physical_heading_error_deg": 1.9594966042124704,
+          "claim_time_s": 42.19
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.05047487758581232,
+          "physical_heading_error_deg": 1.8387841273963057,
+          "claim_time_s": 203.24
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.037722408785759096,
+          "physical_heading_error_deg": 2.0873328391269057,
+          "claim_time_s": 230.6
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.0028421060429897546,
+        "1->4": 0.0002640942764393292
+      },
+      "last_reference_time_s": 252.484,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.90986712838436,
+      "visit_window_dwell_s": {
+        "0": 2.312000000000001,
+        "1": 2.2779999999999987,
+        "2": 2.2779999999999916,
+        "3": 2.278000000000006,
+        "4": 2.312000000000012,
+        "5": 2.27800000000002
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 244.97,
+      "physical_dock_dwell_s": 9.52000000000001,
+      "physical_mission_completion_s": 244.97,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 18.032,
+          "controller_residual_site_m": [
+            0.0030693522094682457,
+            -0.024490726362380144
+          ],
+          "physical_minus_estimated_site_m": [
+            0.032706151458435695,
+            0.005370234721222555
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 42.19,
+          "controller_residual_site_m": [
+            0.0003405661997084586,
+            -0.028129285215808153
+          ],
+          "physical_minus_estimated_site_m": [
+            0.04173346506122,
+            0.0007267551502243563
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 104.522,
+          "controller_residual_site_m": [
+            -0.003060988357827199,
+            0.01706899992912092
+          ],
+          "physical_minus_estimated_site_m": [
+            0.071649790743332,
+            -0.018564484122353564
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 128.712,
+          "controller_residual_site_m": [
+            -0.00015169802761683115,
+            0.02700732467850364
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0799392925402822,
+            -0.013662991041597072
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 203.24,
+          "controller_residual_site_m": [
+            -0.0018618051325365315,
+            -0.02647565714922706
+          ],
+          "physical_minus_estimated_site_m": [
+            0.04433532732061174,
+            -0.0007954480766676486
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 230.6,
+          "controller_residual_site_m": [
+            -0.0030890285323055267,
+            0.02862687166828204
+          ],
+          "physical_minus_estimated_site_m": [
+            0.026815949724254384,
+            0.0006991122939137284
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T13:58:06.339074+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "unchanged",
+        "role": "full_acquisition",
+        "repeat": 1,
+        "seed": 6001,
+        "domain": 193,
+        "selector": null,
+        "selection": null,
+        "name": "service_island__unchanged__full_acquisition__repeat1",
+        "extra": [
+          "--mapping",
+          "new",
+          "--localizer",
+          "slam_toolbox",
+          "--map-from-mission",
+          "4.0",
+          "3.5",
+          "-0.0"
+        ]
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat1",
+      "returncode": 0,
+      "wall_s": 270.06853765202686,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__unchanged__full_acquisition__repeat1",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat1",
+      "layout": "service_island",
+      "condition": "unchanged",
+      "role": "full_acquisition",
+      "cpu_s": 720.247552,
+      "largest_child_rss_kib": 652964,
+      "resets": 1,
+      "serialization": {
+        "returncode": 0,
+        "stdout": "waiting for service to become available...\nrequester: making request: slam_toolbox.srv.SerializePoseGraph_Request(filename='/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat1/mapper/session')\n\nresponse:\nslam_toolbox.srv.SerializePoseGraph_Response(result=0)\n\n",
+        "stderr": "",
+        "wall_s": 3.243852636020165
+      },
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": false,
+      "physical_stops": 3,
+      "required_stops": 6,
+      "dock_after_completed_inspections": false,
+      "dock_completion_s": null,
+      "body_contacts": 0,
+      "min_clearance_m": 0.6013025941358663,
+      "observed_sim_s": 258.604,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.035790687291412236,
+          "physical_heading_error_deg": 1.6555520903776109,
+          "claim_time_s": 21.19
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.0295164594819278,
+          "physical_heading_error_deg": 2.109588583512601,
+          "claim_time_s": 53.79
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.14966949047120795,
+          "physical_heading_error_deg": 2.97382013696823,
+          "claim_time_s": 111.086
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.16463059850356337,
+          "physical_heading_error_deg": 2.49278680373516,
+          "claim_time_s": 135.242
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04340045800975419,
+          "physical_heading_error_deg": 2.5839831926327164,
+          "claim_time_s": 212.788
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.030903510586536998,
+          "physical_heading_error_deg": 1.4912678383570064,
+          "claim_time_s": 237.648
+        }
+      ],
+      "max_claim_position_m": 0.16463059850356337,
+      "max_claim_heading_deg": 2.97382013696823,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.035790687291412236,
+          "physical_heading_error_deg": 1.6555520903776109,
+          "claim_time_s": 21.19
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.0295164594819278,
+          "physical_heading_error_deg": 2.109588583512601,
+          "claim_time_s": 53.79
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04340045800975419,
+          "physical_heading_error_deg": 2.5839831926327164,
+          "claim_time_s": 212.788
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.030903510586536998,
+          "physical_heading_error_deg": 1.4912678383570064,
+          "claim_time_s": 237.648
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.004887176704875238,
+        "1->4": 0.013883998527826392
+      },
+      "last_reference_time_s": 258.638,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.84745240809444,
+      "visit_window_dwell_s": {
+        "0": 2.346,
+        "1": 2.278000000000006,
+        "2": 2.3119999999999976,
+        "3": 0.0,
+        "4": 2.3460000000000036,
+        "5": 2.3119999999999834
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 252.144,
+      "physical_dock_dwell_s": 8.499999999999972,
+      "physical_mission_completion_s": null,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 21.19,
+          "controller_residual_site_m": [
+            -0.014612141941628742,
+            -0.0008304598468762414
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0475271931571033,
+            -0.013225595797377032
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 53.79,
+          "controller_residual_site_m": [
+            0.005980697962163717,
+            -0.01907830044791936
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.018129793705443653,
+            -0.007821901279370769
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 111.086,
+          "controller_residual_site_m": [
+            -0.0006713475011270731,
+            0.02738167535188296
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.029605386824976154,
+            0.11919347853327444
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 135.242,
+          "controller_residual_site_m": [
+            -0.00021116181592617522,
+            0.027818756263550792
+          ],
+          "physical_minus_estimated_site_m": [
+            0.02806187985240527,
+            0.13443897535036653
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 212.788,
+          "controller_residual_site_m": [
+            -0.005465266770127819,
+            -0.029404517047999512
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.01739288465241451,
+            -0.0074886350130614066
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 237.648,
+          "controller_residual_site_m": [
+            0.0039017208461347153,
+            0.020013000042307327
+          ],
+          "physical_minus_estimated_site_m": [
+            0.02372453192221302,
+            -0.0061631941031772275
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:02:50.259160+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "rearrangement",
+        "role": "continued_acquisition",
+        "repeat": 0,
+        "seed": 6100,
+        "domain": 197,
+        "selector": null,
+        "selection": null,
+        "name": "service_island__rearrangement__continued_acquisition__repeat0",
+        "extra": [
+          "--mapping",
+          "continued",
+          "--localizer",
+          "slam_toolbox",
+          "--session",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0/mapper/session",
+          "--map-from-mission",
+          "3.9972200472164534",
+          "3.4949307146647377",
+          "-0.0007668276224665977"
+        ]
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_acquisition__repeat0",
+      "returncode": 0,
+      "wall_s": 263.5792145729647,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__rearrangement__continued_acquisition__repeat0",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_acquisition__repeat0",
+      "layout": "service_island",
+      "condition": "rearrangement",
+      "role": "continued_acquisition",
+      "cpu_s": 757.1835070000001,
+      "largest_child_rss_kib": 652944,
+      "resets": 1,
+      "serialization": {
+        "returncode": 0,
+        "stdout": "waiting for service to become available...\nrequester: making request: slam_toolbox.srv.SerializePoseGraph_Request(filename='/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_acquisition__repeat0/mapper/session')\n\nresponse:\nslam_toolbox.srv.SerializePoseGraph_Response(result=0)\n\n",
+        "stderr": "",
+        "wall_s": 2.946861157019157
+      },
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 244.188,
+      "body_contacts": 0,
+      "min_clearance_m": 0.5784709501201215,
+      "observed_sim_s": 250.20600000000002,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.033695087074993316,
+          "physical_heading_error_deg": 2.3396269405453367,
+          "claim_time_s": 21.128
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04035684669768599,
+          "physical_heading_error_deg": 1.801743825090783,
+          "claim_time_s": 46.73
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.024692161297477096,
+          "physical_heading_error_deg": 1.1253386762598865,
+          "claim_time_s": 104.798
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.032518895660181193,
+          "physical_heading_error_deg": 1.165484918148122,
+          "claim_time_s": 130.722
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04031145870818426,
+          "physical_heading_error_deg": 1.3305013168903714,
+          "claim_time_s": 205.638
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.019623545455647862,
+          "physical_heading_error_deg": 0.9962637349991468,
+          "claim_time_s": 229.598
+        }
+      ],
+      "max_claim_position_m": 0.04035684669768599,
+      "max_claim_heading_deg": 2.3396269405453367,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.033695087074993316,
+          "physical_heading_error_deg": 2.3396269405453367,
+          "claim_time_s": 21.128
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04035684669768599,
+          "physical_heading_error_deg": 1.801743825090783,
+          "claim_time_s": 46.73
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04031145870818426,
+          "physical_heading_error_deg": 1.3305013168903714,
+          "claim_time_s": 205.638
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.019623545455647862,
+          "physical_heading_error_deg": 0.9962637349991468,
+          "claim_time_s": 229.598
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.014071541619345453,
+        "1->4": -4.538798950172451e-05
+      },
+      "last_reference_time_s": 250.24,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.81342062926584,
+      "visit_window_dwell_s": {
+        "0": 2.3119999999999976,
+        "1": 2.3119999999999976,
+        "2": 2.2779999999999916,
+        "3": 2.27800000000002,
+        "4": 2.2439999999999998,
+        "5": 2.2779999999999916
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 244.188,
+      "physical_dock_dwell_s": 8.058000000000021,
+      "physical_mission_completion_s": 244.188,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 21.128,
+          "controller_residual_site_m": [
+            0.0007919587801081818,
+            -0.02221920299635638
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0063481772324194274,
+            -0.010710682377176095
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 46.73,
+          "controller_residual_site_m": [
+            0.002277500253271114,
+            -0.02232469418339811
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.015544054913637417,
+            -0.01578926130306435
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 104.798,
+          "controller_residual_site_m": [
+            0.001010058645429801,
+            0.029697446570359887
+          ],
+          "physical_minus_estimated_site_m": [
+            0.007087006475143376,
+            -0.0063706301143189314
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 130.722,
+          "controller_residual_site_m": [
+            0.0023625551322181693,
+            0.025842297990579022
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.018878284280636315,
+            0.0021703646042876557
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 205.638,
+          "controller_residual_site_m": [
+            0.004325322569888268,
+            -0.02659731511861496
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.017989668322356156,
+            -0.011327602262160674
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 229.598,
+          "controller_residual_site_m": [
+            0.0022754639492870155,
+            0.025970744184478978
+          ],
+          "physical_minus_estimated_site_m": [
+            0.00367134454222251,
+            -0.007269968665394533
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:03:20.717008+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "rearrangement",
+        "role": "full_acquisition",
+        "repeat": 0,
+        "seed": 6100,
+        "domain": 195,
+        "selector": null,
+        "selection": null,
+        "name": "service_island__rearrangement__full_acquisition__repeat0",
+        "extra": [
+          "--mapping",
+          "new",
+          "--localizer",
+          "slam_toolbox",
+          "--map-from-mission",
+          "4.0",
+          "3.5",
+          "-0.0"
+        ]
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat0",
+      "returncode": 0,
+      "wall_s": 299.840872847999,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__rearrangement__full_acquisition__repeat0",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat0",
+      "layout": "service_island",
+      "condition": "rearrangement",
+      "role": "full_acquisition",
+      "cpu_s": 805.4322890000001,
+      "largest_child_rss_kib": 653036,
+      "resets": 1,
+      "serialization": {
+        "returncode": 0,
+        "stdout": "waiting for service to become available...\nrequester: making request: slam_toolbox.srv.SerializePoseGraph_Request(filename='/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat0/mapper/session')\n\nresponse:\nslam_toolbox.srv.SerializePoseGraph_Response(result=0)\n\n",
+        "stderr": "",
+        "wall_s": 3.6315001549664885
+      },
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 278.97,
+      "body_contacts": 0,
+      "min_clearance_m": 0.5336982169414274,
+      "observed_sim_s": 285.872,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.026725893245391017,
+          "physical_heading_error_deg": 1.5747525667930558,
+          "claim_time_s": 14.114
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.05405417966707136,
+          "physical_heading_error_deg": 1.7880262068731199,
+          "claim_time_s": 41.38
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.09262853585843137,
+          "physical_heading_error_deg": 2.4857721483341213,
+          "claim_time_s": 105.304
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.1276150046154038,
+          "physical_heading_error_deg": 0.9858753112124046,
+          "claim_time_s": 151.346
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.06435054326599741,
+          "physical_heading_error_deg": 1.2142653014893534,
+          "claim_time_s": 231.544
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04640579004660133,
+          "physical_heading_error_deg": 1.5538754996830024,
+          "claim_time_s": 258.4
+        }
+      ],
+      "max_claim_position_m": 0.1276150046154038,
+      "max_claim_heading_deg": 2.4857721483341213,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.026725893245391017,
+          "physical_heading_error_deg": 1.5747525667930558,
+          "claim_time_s": 14.114
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.05405417966707136,
+          "physical_heading_error_deg": 1.7880262068731199,
+          "claim_time_s": 41.38
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.06435054326599741,
+          "physical_heading_error_deg": 1.2142653014893534,
+          "claim_time_s": 231.544
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04640579004660133,
+          "physical_heading_error_deg": 1.5538754996830024,
+          "claim_time_s": 258.4
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": 0.019679896801210312,
+        "1->4": 0.010296363598926057
+      },
+      "last_reference_time_s": 285.906,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 39.12299416452076,
+      "visit_window_dwell_s": {
+        "0": 2.2780000000000005,
+        "1": 2.3119999999999976,
+        "2": 2.3119999999999976,
+        "3": 2.345999999999975,
+        "4": 2.27800000000002,
+        "5": 2.244000000000028
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 278.97,
+      "physical_dock_dwell_s": 7.990000000000009,
+      "physical_mission_completion_s": 278.97,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 14.114,
+          "controller_residual_site_m": [
+            -0.0006012065061957728,
+            -0.026117830191931812
+          ],
+          "physical_minus_estimated_site_m": [
+            0.02493448009579824,
+            0.015064994982014301
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 41.38,
+          "controller_residual_site_m": [
+            0.00012429957197390706,
+            -0.027254559213458762
+          ],
+          "physical_minus_estimated_site_m": [
+            0.04678091023276432,
+            0.0003890491186639977
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 105.304,
+          "controller_residual_site_m": [
+            -0.010780583735233051,
+            0.022272892590617488
+          ],
+          "physical_minus_estimated_site_m": [
+            0.045930770245731445,
+            0.06342722434952375
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 151.346,
+          "controller_residual_site_m": [
+            -0.02085045629489013,
+            0.009978527847536611
+          ],
+          "physical_minus_estimated_site_m": [
+            0.13418826269819117,
+            0.04867410246583792
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 231.544,
+          "controller_residual_site_m": [
+            -0.0008257022773712208,
+            -0.029250478575027827
+          ],
+          "physical_minus_estimated_site_m": [
+            0.06296583732732319,
+            0.012529353176217617
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 258.4,
+          "controller_residual_site_m": [
+            0.006389282673921581,
+            0.026154184180145812
+          ],
+          "physical_minus_estimated_site_m": [
+            0.026455470710933238,
+            0.0066287309577321984
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:03:50.866510+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "rearrangement",
+        "role": "full_acquisition",
+        "repeat": 1,
+        "seed": 6101,
+        "domain": 196,
+        "selector": null,
+        "selection": null,
+        "name": "service_island__rearrangement__full_acquisition__repeat1",
+        "extra": [
+          "--mapping",
+          "new",
+          "--localizer",
+          "slam_toolbox",
+          "--map-from-mission",
+          "4.0",
+          "3.5",
+          "-0.0"
+        ]
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat1",
+      "returncode": 0,
+      "wall_s": 324.61552351200953,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__rearrangement__full_acquisition__repeat1",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat1",
+      "layout": "service_island",
+      "condition": "rearrangement",
+      "role": "full_acquisition",
+      "cpu_s": 856.9029310000001,
+      "largest_child_rss_kib": 653132,
+      "resets": 1,
+      "serialization": {
+        "returncode": 0,
+        "stdout": "waiting for service to become available...\nrequester: making request: slam_toolbox.srv.SerializePoseGraph_Request(filename='/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat1/mapper/session')\n\nresponse:\nslam_toolbox.srv.SerializePoseGraph_Response(result=0)\n\n",
+        "stderr": "",
+        "wall_s": 1.6306934549938887
+      },
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": false,
+      "physical_stops": 2,
+      "required_stops": 6,
+      "dock_after_completed_inspections": false,
+      "dock_completion_s": null,
+      "body_contacts": 0,
+      "min_clearance_m": 0.5264921848235006,
+      "observed_sim_s": 311.168,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.044549359997306893,
+          "physical_heading_error_deg": 2.1068588506944166,
+          "claim_time_s": 14.146
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.031797636842009924,
+          "physical_heading_error_deg": 2.7808083009995075,
+          "claim_time_s": 91.878
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.3429040671762185,
+          "physical_heading_error_deg": 5.298025805873744,
+          "claim_time_s": 149.826
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.35811018685158313,
+          "physical_heading_error_deg": 3.4392077365350766,
+          "claim_time_s": 178.208
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.05248961008411698,
+          "physical_heading_error_deg": 1.5252915269332092,
+          "claim_time_s": 260.968
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02862625601782949,
+          "physical_heading_error_deg": 1.2534201606596742,
+          "claim_time_s": 287.146
+        }
+      ],
+      "max_claim_position_m": 0.35811018685158313,
+      "max_claim_heading_deg": 5.298025805873744,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.044549359997306893,
+          "physical_heading_error_deg": 2.1068588506944166,
+          "claim_time_s": 14.146
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.031797636842009924,
+          "physical_heading_error_deg": 2.7808083009995075,
+          "claim_time_s": 91.878
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.05248961008411698,
+          "physical_heading_error_deg": 1.5252915269332092,
+          "claim_time_s": 260.968
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02862625601782949,
+          "physical_heading_error_deg": 1.2534201606596742,
+          "claim_time_s": 287.146
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.015923103979477403,
+        "1->4": 0.02069197324210706
+      },
+      "last_reference_time_s": 311.202,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 39.21671493795805,
+      "visit_window_dwell_s": {
+        "0": 2.312000000000001,
+        "1": 2.2439999999999998,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 2.345999999999947,
+        "5": 2.311999999999955
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 306.272,
+      "physical_dock_dwell_s": 6.935999999999979,
+      "physical_mission_completion_s": null,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 14.146,
+          "controller_residual_site_m": [
+            0.005577172732395219,
+            -0.02793700388602538
+          ],
+          "physical_minus_estimated_site_m": [
+            0.024927626841547035,
+            -0.004529943600969144
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 91.878,
+          "controller_residual_site_m": [
+            0.008488310645361707,
+            -0.014901261503217356
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.036262344187754536,
+            -0.0005807528851748955
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 149.826,
+          "controller_residual_site_m": [
+            0.0045123155640602874,
+            0.027763889458299218
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.027884290835372916,
+            0.3143427460486867
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 178.208,
+          "controller_residual_site_m": [
+            -0.007731171047694829,
+            -0.004807602502688191
+          ],
+          "physical_minus_estimated_site_m": [
+            0.1526904183660296,
+            0.33226710006502436
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 260.968,
+          "controller_residual_site_m": [
+            0.005020483328136649,
+            -0.020095483759641652
+          ],
+          "physical_minus_estimated_site_m": [
+            0.020081593079462223,
+            -0.02600272582391705
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 287.146,
+          "controller_residual_site_m": [
+            -0.001080512166015346,
+            0.02397814980847368
+          ],
+          "physical_minus_estimated_site_m": [
+            0.025257460904488216,
+            -0.008650472773267914
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:08:43.190313+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "unchanged",
+        "role": "continued_deployment",
+        "repeat": 0,
+        "seed": 6000,
+        "domain": 200,
+        "selector": "capped",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_acquisition__repeat0/capped_selection.json",
+        "name": "service_island__unchanged__continued_deployment__repeat0__capped",
+        "extra": [
+          "--remedy",
+          "acquired_map",
+          "--map",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_acquisition__repeat0/mapper/map.txt",
+          "--map-from-mission",
+          "3.997057060833873",
+          "3.493472628460407",
+          "-0.0006888490351209293"
+        ],
+        "selectors_evaluated": [
+          "capped",
+          "trimmed"
+        ],
+        "operational_decisions": {
+          "capped": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "trimmed": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_deployment__repeat0__capped",
+      "returncode": 0,
+      "wall_s": 265.9137887909892,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__unchanged__continued_deployment__repeat0__capped",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__continued_deployment__repeat0__capped",
+      "layout": "service_island",
+      "condition": "unchanged",
+      "role": "continued_deployment",
+      "cpu_s": 429.810883,
+      "largest_child_rss_kib": 653468,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 258.298,
+      "body_contacts": 0,
+      "min_clearance_m": 0.6385570734245035,
+      "observed_sim_s": 261.562,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03994987757071911,
+          "physical_heading_error_deg": 1.9487936819268976,
+          "claim_time_s": 14.024
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.023918334343480584,
+          "physical_heading_error_deg": 1.657787673482948,
+          "claim_time_s": 39.86
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.021522800042434412,
+          "physical_heading_error_deg": 1.1172079781146895,
+          "claim_time_s": 103.918
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04219114927714587,
+          "physical_heading_error_deg": 0.979101794077776,
+          "claim_time_s": 128.086
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03354201283878248,
+          "physical_heading_error_deg": 0.6467435519108102,
+          "claim_time_s": 209.97
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.01553136446988229,
+          "physical_heading_error_deg": 0.753410183594428,
+          "claim_time_s": 239.716
+        }
+      ],
+      "max_claim_position_m": 0.04219114927714587,
+      "max_claim_heading_deg": 1.9487936819268976,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03994987757071911,
+          "physical_heading_error_deg": 1.9487936819268976,
+          "claim_time_s": 14.024
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.023918334343480584,
+          "physical_heading_error_deg": 1.657787673482948,
+          "claim_time_s": 39.86
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03354201283878248,
+          "physical_heading_error_deg": 0.6467435519108102,
+          "claim_time_s": 209.97
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.01553136446988229,
+          "physical_heading_error_deg": 0.753410183594428,
+          "claim_time_s": 239.716
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.02441851310083682,
+        "1->4": 0.009623678495301893
+      },
+      "last_reference_time_s": 261.596,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.80452952889101,
+      "visit_window_dwell_s": {
+        "0": 2.346,
+        "1": 2.3119999999999976,
+        "2": 2.3459999999999894,
+        "3": 2.2439999999999998,
+        "4": 2.312000000000012,
+        "5": 2.2779999999999916
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 258.298,
+      "physical_dock_dwell_s": 5.3040000000000305,
+      "physical_mission_completion_s": 258.298,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 14.024,
+          "controller_residual_site_m": [
+            0.008863486567005197,
+            -0.025953192874838216
+          ],
+          "physical_minus_estimated_site_m": [
+            0.009144139648618488,
+            -0.009707964088920384
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 39.86,
+          "controller_residual_site_m": [
+            0.013652148946169174,
+            0.000534500615959832
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.02479514151028228,
+            -0.021698631462338636
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 103.918,
+          "controller_residual_site_m": [
+            0.006118955647708368,
+            0.024541935405834714
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.005886781560198173,
+            -0.003020387672000524
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 128.086,
+          "controller_residual_site_m": [
+            -0.0016660497753320236,
+            0.02335456812651815
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.027446608793002536,
+            0.007183051106322891
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 209.97,
+          "controller_residual_site_m": [
+            0.0023494959676986227,
+            -0.006818524805277892
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.017286204251441895,
+            -0.02321414691941892
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 239.716,
+          "controller_residual_site_m": [
+            0.0013864950718192048,
+            0.005424526917399586
+          ],
+          "physical_minus_estimated_site_m": [
+            0.014116210964848275,
+            -0.004481453305746896
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:08:59.458527+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "unchanged",
+        "role": "full_deployment",
+        "repeat": 0,
+        "seed": 6000,
+        "domain": 198,
+        "selector": "capped",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat0/capped_selection.json",
+        "name": "service_island__unchanged__full_deployment__repeat0__capped",
+        "extra": [
+          "--remedy",
+          "acquired_map",
+          "--map",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat0/mapper/map.txt",
+          "--map-from-mission",
+          "3.9551770147930587",
+          "3.5133591232439207",
+          "0.0007287008807754166"
+        ],
+        "selectors_evaluated": [
+          "capped",
+          "trimmed"
+        ],
+        "operational_decisions": {
+          "capped": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "trimmed": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_deployment__repeat0__capped",
+      "returncode": 0,
+      "wall_s": 279.27074783004355,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__unchanged__full_deployment__repeat0__capped",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_deployment__repeat0__capped",
+      "layout": "service_island",
+      "condition": "unchanged",
+      "role": "full_deployment",
+      "cpu_s": 451.445059,
+      "largest_child_rss_kib": 653352,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 271.592,
+      "body_contacts": 0,
+      "min_clearance_m": 0.6102938487806235,
+      "observed_sim_s": 274.788,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.013847845491511067,
+          "physical_heading_error_deg": 2.1066227298782882,
+          "claim_time_s": 19.916
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.0110227291474595,
+          "physical_heading_error_deg": 2.05385575709655,
+          "claim_time_s": 50.53
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.028944710647174087,
+          "physical_heading_error_deg": 1.2213775961926596,
+          "claim_time_s": 114.662
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.019287926216224494,
+          "physical_heading_error_deg": 1.2895202870594822,
+          "claim_time_s": 139.482
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.0013044284765328644,
+          "physical_heading_error_deg": 0.8827804420859665,
+          "claim_time_s": 217.972
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04176010965924604,
+          "physical_heading_error_deg": 2.305863123742302,
+          "claim_time_s": 253.92
+        }
+      ],
+      "max_claim_position_m": 0.04176010965924604,
+      "max_claim_heading_deg": 2.305863123742302,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.013847845491511067,
+          "physical_heading_error_deg": 2.1066227298782882,
+          "claim_time_s": 19.916
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.0110227291474595,
+          "physical_heading_error_deg": 2.05385575709655,
+          "claim_time_s": 50.53
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.0013044284765328644,
+          "physical_heading_error_deg": 0.8827804420859665,
+          "claim_time_s": 217.972
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04176010965924604,
+          "physical_heading_error_deg": 2.305863123742302,
+          "claim_time_s": 253.92
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": 0.027912264167734978,
+        "1->4": -0.009718300670926635
+      },
+      "last_reference_time_s": 274.822,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.94603989699749,
+      "visit_window_dwell_s": {
+        "0": 2.3119999999999976,
+        "1": 2.2779999999999987,
+        "2": 2.3119999999999976,
+        "3": 2.3799999999999955,
+        "4": 2.27800000000002,
+        "5": 2.2779999999999916
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 271.592,
+      "physical_dock_dwell_s": 5.23599999999999,
+      "physical_mission_completion_s": 271.592,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 19.916,
+          "controller_residual_site_m": [
+            -0.008065462024466008,
+            -0.015291753042384393
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.004731943605770006,
+            0.010001267819650383
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 50.53,
+          "controller_residual_site_m": [
+            0.0028493672769656087,
+            -0.02380149330874426
+          ],
+          "physical_minus_estimated_site_m": [
+            0.006169338302473015,
+            0.01746402476604869
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 114.662,
+          "controller_residual_site_m": [
+            -0.001161129372814429,
+            0.019933748682219754
+          ],
+          "physical_minus_estimated_site_m": [
+            0.025671391495371232,
+            -0.0045375372933036395
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 139.482,
+          "controller_residual_site_m": [
+            -0.006297823552666504,
+            0.01851670799186622
+          ],
+          "physical_minus_estimated_site_m": [
+            0.004386170896678365,
+            0.0006762511818874106
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 217.972,
+          "controller_residual_site_m": [
+            -0.0024494309633471545,
+            -0.014316563414176642
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0030314884065862913,
+            0.01314919766893663
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 253.92,
+          "controller_residual_site_m": [
+            1.8060524454632798e-05,
+            0.025637328315698982
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.013098416284862857,
+            0.014021353608104414
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:09:00.248964+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "unchanged",
+        "role": "full_deployment",
+        "repeat": 1,
+        "seed": 6001,
+        "domain": 199,
+        "selector": "capped",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat1/capped_selection.json",
+        "name": "service_island__unchanged__full_deployment__repeat1__capped",
+        "extra": [
+          "--remedy",
+          "acquired_map",
+          "--map",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_acquisition__repeat1/mapper/map.txt",
+          "--map-from-mission",
+          "4.011598683628926",
+          "3.4482667179964754",
+          "-0.014031163350897399"
+        ],
+        "selectors_evaluated": [
+          "capped",
+          "trimmed"
+        ],
+        "operational_decisions": {
+          "capped": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "trimmed": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_deployment__repeat1__capped",
+      "returncode": 0,
+      "wall_s": 279.89138799597276,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__unchanged__full_deployment__repeat1__capped",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__full_deployment__repeat1__capped",
+      "layout": "service_island",
+      "condition": "unchanged",
+      "role": "full_deployment",
+      "cpu_s": 448.250022,
+      "largest_child_rss_kib": 653508,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 272.238,
+      "body_contacts": 0,
+      "min_clearance_m": 0.6044665948727493,
+      "observed_sim_s": 275.502,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02370145684030121,
+          "physical_heading_error_deg": 1.9559748341720138,
+          "claim_time_s": 17.386
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.028382807912568933,
+          "physical_heading_error_deg": 0.905019806288954,
+          "claim_time_s": 47.564
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03136919800693906,
+          "physical_heading_error_deg": 1.7980607545827594,
+          "claim_time_s": 114.138
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04014023818646937,
+          "physical_heading_error_deg": 1.9821657699755253,
+          "claim_time_s": 140.778
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.022236302860437145,
+          "physical_heading_error_deg": 1.3591595307459163,
+          "claim_time_s": 229.174
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02472418175273908,
+          "physical_heading_error_deg": 0.9287386060701918,
+          "claim_time_s": 255.99
+        }
+      ],
+      "max_claim_position_m": 0.04014023818646937,
+      "max_claim_heading_deg": 1.9821657699755253,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02370145684030121,
+          "physical_heading_error_deg": 1.9559748341720138,
+          "claim_time_s": 17.386
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.028382807912568933,
+          "physical_heading_error_deg": 0.905019806288954,
+          "claim_time_s": 47.564
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.022236302860437145,
+          "physical_heading_error_deg": 1.3591595307459163,
+          "claim_time_s": 229.174
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02472418175273908,
+          "physical_heading_error_deg": 0.9287386060701918,
+          "claim_time_s": 255.99
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": 0.001022724912437871,
+        "1->4": -0.0061465050521317885
+      },
+      "last_reference_time_s": 275.536,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.904228167132395,
+      "visit_window_dwell_s": {
+        "0": 2.346,
+        "1": 2.2779999999999987,
+        "2": 2.2779999999999916,
+        "3": 2.3460000000000036,
+        "4": 2.3460000000000036,
+        "5": 2.2439999999999714
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 272.238,
+      "physical_dock_dwell_s": 5.303999999999974,
+      "physical_mission_completion_s": 272.238,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 17.386,
+          "controller_residual_site_m": [
+            0.010085872189306677,
+            -0.010499737968365785
+          ],
+          "physical_minus_estimated_site_m": [
+            0.010699141602028561,
+            -0.0008907079424256281
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 47.564,
+          "controller_residual_site_m": [
+            0.012189769732380729,
+            -0.004520423299702259
+          ],
+          "physical_minus_estimated_site_m": [
+            0.013383774570744134,
+            -0.007791262887733463
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 114.138,
+          "controller_residual_site_m": [
+            0.00036189351008530934,
+            0.02279801066868581
+          ],
+          "physical_minus_estimated_site_m": [
+            0.012060920457343194,
+            0.0060065076700959175
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 140.778,
+          "controller_residual_site_m": [
+            -0.00019463338135983221,
+            0.01948789566997222
+          ],
+          "physical_minus_estimated_site_m": [
+            0.025212194388870568,
+            0.01190255451638178
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 229.174,
+          "controller_residual_site_m": [
+            0.005112451067327939,
+            -0.009924484902783082
+          ],
+          "physical_minus_estimated_site_m": [
+            0.014815106582644066,
+            5.809696148828536e-05
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 255.99,
+          "controller_residual_site_m": [
+            0.004626363391029287,
+            0.01663997157278363
+          ],
+          "physical_minus_estimated_site_m": [
+            0.014732141854658654,
+            -0.0012603279489817876
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:13:35.269704+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "rearrangement",
+        "role": "continued_deployment",
+        "repeat": 0,
+        "seed": 6100,
+        "domain": 204,
+        "selector": "capped",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_acquisition__repeat0/capped_selection.json",
+        "name": "service_island__rearrangement__continued_deployment__repeat0__capped",
+        "extra": [
+          "--remedy",
+          "acquired_map",
+          "--map",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_acquisition__repeat0/mapper/map.txt",
+          "--map-from-mission",
+          "3.9970786026753315",
+          "3.493535925465363",
+          "-0.0007348430457396752"
+        ],
+        "selectors_evaluated": [
+          "capped",
+          "trimmed"
+        ],
+        "operational_decisions": {
+          "capped": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "trimmed": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_deployment__repeat0__capped",
+      "returncode": 0,
+      "wall_s": 255.29545238800347,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__rearrangement__continued_deployment__repeat0__capped",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__continued_deployment__repeat0__capped",
+      "layout": "service_island",
+      "condition": "rearrangement",
+      "role": "continued_deployment",
+      "cpu_s": 445.195471,
+      "largest_child_rss_kib": 652640,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 246.806,
+      "body_contacts": 0,
+      "min_clearance_m": 0.5800672147754328,
+      "observed_sim_s": 250.20600000000002,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03489170077054624,
+          "physical_heading_error_deg": 1.7893276195366852,
+          "claim_time_s": 15.824
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.038482391326582405,
+          "physical_heading_error_deg": 1.6803597923195268,
+          "claim_time_s": 44.81
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.015230332673192553,
+          "physical_heading_error_deg": 2.1332502900164316,
+          "claim_time_s": 105.304
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.037216699801923,
+          "physical_heading_error_deg": 0.8230293562901182,
+          "claim_time_s": 129.592
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03345810890828324,
+          "physical_heading_error_deg": 0.7909279545360021,
+          "claim_time_s": 207.854
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.011702596219693683,
+          "physical_heading_error_deg": 0.8202793361668645,
+          "claim_time_s": 232.254
+        }
+      ],
+      "max_claim_position_m": 0.038482391326582405,
+      "max_claim_heading_deg": 2.1332502900164316,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03489170077054624,
+          "physical_heading_error_deg": 1.7893276195366852,
+          "claim_time_s": 15.824
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.038482391326582405,
+          "physical_heading_error_deg": 1.6803597923195268,
+          "claim_time_s": 44.81
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03345810890828324,
+          "physical_heading_error_deg": 0.7909279545360021,
+          "claim_time_s": 207.854
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.011702596219693683,
+          "physical_heading_error_deg": 0.8202793361668645,
+          "claim_time_s": 232.254
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.02318910455085256,
+        "1->4": -0.005024282418299164
+      },
+      "last_reference_time_s": 250.24,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.79445093230528,
+      "visit_window_dwell_s": {
+        "0": 2.2780000000000005,
+        "1": 2.244000000000007,
+        "2": 2.2439999999999998,
+        "3": 2.3459999999999894,
+        "4": 2.3119999999999834,
+        "5": 2.312000000000012
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 246.806,
+      "physical_dock_dwell_s": 5.439999999999998,
+      "physical_mission_completion_s": 246.806,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 15.824,
+          "controller_residual_site_m": [
+            0.0033902999110635434,
+            -0.011836390693924947
+          ],
+          "physical_minus_estimated_site_m": [
+            0.011554313470333533,
+            -0.019692791241892937
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 44.81,
+          "controller_residual_site_m": [
+            0.009081860223387306,
+            -0.02113480570174886
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.011751423968029417,
+            -0.01725487874115217
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 105.304,
+          "controller_residual_site_m": [
+            0.013074348894708265,
+            0.015932374640792002
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.009822145064102727,
+            -0.001053322131296941
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 129.592,
+          "controller_residual_site_m": [
+            0.008993988087609317,
+            0.020497865291241313
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.027594692477418192,
+            0.011737155111255726
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 207.854,
+          "controller_residual_site_m": [
+            0.006311865545061135,
+            -0.017128580394272674
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.009858196553067078,
+            -0.01614105423101586
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 232.254,
+          "controller_residual_site_m": [
+            0.011466432313128383,
+            0.013481971962040262
+          ],
+          "physical_minus_estimated_site_m": [
+            0.00011163654968804337,
+            -0.015184640364598323
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:13:43.900131+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "rearrangement",
+        "role": "full_deployment",
+        "repeat": 0,
+        "seed": 6100,
+        "domain": 201,
+        "selector": "capped",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat0/capped_selection.json",
+        "name": "service_island__rearrangement__full_deployment__repeat0__capped",
+        "extra": [
+          "--remedy",
+          "acquired_map",
+          "--map",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat0/mapper/map.txt",
+          "--map-from-mission",
+          "3.9651248024070127",
+          "3.512785832496175",
+          "0.002036441792938086"
+        ],
+        "selectors_evaluated": [
+          "capped"
+        ],
+        "operational_decisions": {
+          "capped": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat0__capped",
+      "returncode": 0,
+      "wall_s": 277.9152930059936,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__rearrangement__full_deployment__repeat0__capped",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat0__capped",
+      "layout": "service_island",
+      "condition": "rearrangement",
+      "role": "full_deployment",
+      "cpu_s": 476.73368800000003,
+      "largest_child_rss_kib": 653016,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 264.384,
+      "body_contacts": 0,
+      "min_clearance_m": 0.5870460348641303,
+      "observed_sim_s": 267.682,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.008682766699177957,
+          "physical_heading_error_deg": 1.4775579528954452,
+          "claim_time_s": 14.406
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.019705635460913886,
+          "physical_heading_error_deg": 2.3033989621945614,
+          "claim_time_s": 44.106
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.022431153707267778,
+          "physical_heading_error_deg": 1.552765513177406,
+          "claim_time_s": 111.784
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03574426549514238,
+          "physical_heading_error_deg": 1.4185473449526886,
+          "claim_time_s": 137.622
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.020900487540500192,
+          "physical_heading_error_deg": 1.6294174659658398,
+          "claim_time_s": 221.452
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.022073025171735813,
+          "physical_heading_error_deg": 1.1588259181102376,
+          "claim_time_s": 248.592
+        }
+      ],
+      "max_claim_position_m": 0.03574426549514238,
+      "max_claim_heading_deg": 2.3033989621945614,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.008682766699177957,
+          "physical_heading_error_deg": 1.4775579528954452,
+          "claim_time_s": 14.406
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.019705635460913886,
+          "physical_heading_error_deg": 2.3033989621945614,
+          "claim_time_s": 44.106
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.020900487540500192,
+          "physical_heading_error_deg": 1.6294174659658398,
+          "claim_time_s": 221.452
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.022073025171735813,
+          "physical_heading_error_deg": 1.1588259181102376,
+          "claim_time_s": 248.592
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": 0.013390258472557856,
+        "1->4": 0.001194852079586306
+      },
+      "last_reference_time_s": 267.716,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.80438547338241,
+      "visit_window_dwell_s": {
+        "0": 2.2439999999999998,
+        "1": 2.3119999999999976,
+        "2": 2.2439999999999998,
+        "3": 2.3119999999999834,
+        "4": 2.3119999999999834,
+        "5": 2.3460000000000036
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 264.384,
+      "physical_dock_dwell_s": 5.338000000000022,
+      "physical_mission_completion_s": 264.384,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 14.406,
+          "controller_residual_site_m": [
+            0.0013799163348653387,
+            -0.025792361385544194
+          ],
+          "physical_minus_estimated_site_m": [
+            2.635610218160167e-05,
+            0.01722423233742898
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 44.106,
+          "controller_residual_site_m": [
+            0.0052411590068111025,
+            -0.02129327495579636
+          ],
+          "physical_minus_estimated_site_m": [
+            0.013138538606899175,
+            0.014187025273509679
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 111.784,
+          "controller_residual_site_m": [
+            0.0012204165736768857,
+            0.008153123011219954
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0003635538563093732,
+            0.01422203496176433
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 137.622,
+          "controller_residual_site_m": [
+            -0.014698073160775316,
+            0.016154721092363378
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.016114041594030848,
+            0.0019633941551970846
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 221.452,
+          "controller_residual_site_m": [
+            -0.005689191487069145,
+            -0.02154405427370376
+          ],
+          "physical_minus_estimated_site_m": [
+            0.015445332740220419,
+            0.0030603293439401824
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 248.592,
+          "controller_residual_site_m": [
+            0.01432005970758743,
+            0.015143333601831843
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.0072615413840151355,
+            0.005770675083924148
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:13:45.423550+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "rearrangement",
+        "role": "full_deployment",
+        "repeat": 1,
+        "seed": 6101,
+        "domain": 203,
+        "selector": "capped",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat1/capped_selection.json",
+        "name": "service_island__rearrangement__full_deployment__repeat1__capped",
+        "extra": [
+          "--remedy",
+          "acquired_map",
+          "--map",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat1/mapper/map.txt",
+          "--map-from-mission",
+          "3.977859024196658",
+          "3.474677178992845",
+          "-0.009134804521690604"
+        ],
+        "selectors_evaluated": [
+          "capped",
+          "trimmed"
+        ],
+        "operational_decisions": {
+          "capped": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "trimmed": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat1__capped",
+      "returncode": 0,
+      "wall_s": 266.09348590800073,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__rearrangement__full_deployment__repeat1__capped",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat1__capped",
+      "layout": "service_island",
+      "condition": "rearrangement",
+      "role": "full_deployment",
+      "cpu_s": 466.496523,
+      "largest_child_rss_kib": 653772,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 257.89,
+      "body_contacts": 0,
+      "min_clearance_m": 0.5834404973191821,
+      "observed_sim_s": 261.086,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.021160953531574985,
+          "physical_heading_error_deg": 1.4359066183840457,
+          "claim_time_s": 15.97
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.032924959990697084,
+          "physical_heading_error_deg": 0.16677586090221208,
+          "claim_time_s": 47.968
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03509938437079863,
+          "physical_heading_error_deg": 1.864681489454208,
+          "claim_time_s": 105.986
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.021250509607444686,
+          "physical_heading_error_deg": 1.330197899351476,
+          "claim_time_s": 136.726
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03595216638906387,
+          "physical_heading_error_deg": 0.953396838884578,
+          "claim_time_s": 216.538
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.015566184643388816,
+          "physical_heading_error_deg": 0.7149529332790974,
+          "claim_time_s": 243.362
+        }
+      ],
+      "max_claim_position_m": 0.03595216638906387,
+      "max_claim_heading_deg": 1.864681489454208,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.021160953531574985,
+          "physical_heading_error_deg": 1.4359066183840457,
+          "claim_time_s": 15.97
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.032924959990697084,
+          "physical_heading_error_deg": 0.16677586090221208,
+          "claim_time_s": 47.968
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03595216638906387,
+          "physical_heading_error_deg": 0.953396838884578,
+          "claim_time_s": 216.538
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.015566184643388816,
+          "physical_heading_error_deg": 0.7149529332790974,
+          "claim_time_s": 243.362
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.005594768888186169,
+        "1->4": 0.0030272063983667885
+      },
+      "last_reference_time_s": 261.12,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.80694743708761,
+      "visit_window_dwell_s": {
+        "0": 2.3119999999999994,
+        "1": 2.3120000000000047,
+        "2": 2.2439999999999998,
+        "3": 2.27800000000002,
+        "4": 2.312000000000012,
+        "5": 2.312000000000012
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 257.89,
+      "physical_dock_dwell_s": 5.236000000000018,
+      "physical_mission_completion_s": 257.89,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 15.97,
+          "controller_residual_site_m": [
+            0.008228257089987423,
+            -0.02171747938368407
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0008228162441912268,
+            0.0025899069850550127
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 47.968,
+          "controller_residual_site_m": [
+            -0.00779725643286433,
+            -0.022651944642568367
+          ],
+          "physical_minus_estimated_site_m": [
+            0.023946960665900185,
+            -0.006040215324476073
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 105.986,
+          "controller_residual_site_m": [
+            -0.0024064123261564596,
+            0.023058256984834102
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.010885794807583782,
+            0.009426878273046668
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 136.726,
+          "controller_residual_site_m": [
+            0.001158483257199805,
+            0.014110024938587928
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.00853511154246167,
+            0.005819087277393331
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 216.538,
+          "controller_residual_site_m": [
+            -0.010511422318468355,
+            -0.005780031854420553
+          ],
+          "physical_minus_estimated_site_m": [
+            0.03389528867338365,
+            -0.0215284478242872
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 243.362,
+          "controller_residual_site_m": [
+            0.013133716782778748,
+            0.005605221467691823
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0006770343901942866,
+            0.001575952279704751
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:18:38.336098+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "unchanged",
+        "role": "graph_deployment",
+        "repeat": 0,
+        "seed": 6000,
+        "domain": 205,
+        "selector": "capped",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0/capped_selection.json",
+        "name": "service_island__unchanged__graph_deployment__repeat0__capped",
+        "extra": [
+          "--mapping",
+          "localization",
+          "--localizer",
+          "slam_toolbox",
+          "--session",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0/mapper/session",
+          "--map-from-mission",
+          "3.9972200472164534",
+          "3.4949307146647377",
+          "-0.0007668276224665977"
+        ],
+        "selectors_evaluated": [
+          "capped",
+          "trimmed"
+        ],
+        "operational_decisions": {
+          "capped": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "trimmed": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__graph_deployment__repeat0__capped",
+      "returncode": 0,
+      "wall_s": 282.0934578740271,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__unchanged__graph_deployment__repeat0__capped",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__graph_deployment__repeat0__capped",
+      "layout": "service_island",
+      "condition": "unchanged",
+      "role": "graph_deployment",
+      "cpu_s": 854.0019940000001,
+      "largest_child_rss_kib": 652908,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 263.704,
+      "body_contacts": 0,
+      "min_clearance_m": 0.6315102981238327,
+      "observed_sim_s": 267.07,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.037959703745730856,
+          "physical_heading_error_deg": 2.1456697745312354,
+          "claim_time_s": 14.102
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04095078345499724,
+          "physical_heading_error_deg": 1.9797214769920426,
+          "claim_time_s": 38.302
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.023263084110611426,
+          "physical_heading_error_deg": 1.7488758675847063,
+          "claim_time_s": 103.808
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03538082098990801,
+          "physical_heading_error_deg": 2.136352223184978,
+          "claim_time_s": 145.206
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03746428666445787,
+          "physical_heading_error_deg": 2.58130822737947,
+          "claim_time_s": 221.542
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02400050082433781,
+          "physical_heading_error_deg": 1.1750585011374723,
+          "claim_time_s": 246.14
+        }
+      ],
+      "max_claim_position_m": 0.04095078345499724,
+      "max_claim_heading_deg": 2.58130822737947,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.037959703745730856,
+          "physical_heading_error_deg": 2.1456697745312354,
+          "claim_time_s": 14.102
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04095078345499724,
+          "physical_heading_error_deg": 1.9797214769920426,
+          "claim_time_s": 38.302
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03746428666445787,
+          "physical_heading_error_deg": 2.58130822737947,
+          "claim_time_s": 221.542
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02400050082433781,
+          "physical_heading_error_deg": 1.1750585011374723,
+          "claim_time_s": 246.14
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.013959202921393046,
+        "1->4": -0.0034864967905393687
+      },
+      "last_reference_time_s": 267.104,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.80519509152084,
+      "visit_window_dwell_s": {
+        "0": 2.2780000000000005,
+        "1": 2.2779999999999987,
+        "2": 2.2779999999999916,
+        "3": 2.2779999999999916,
+        "4": 2.312000000000012,
+        "5": 2.3119999999999834
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 263.704,
+      "physical_dock_dwell_s": 5.406000000000006,
+      "physical_mission_completion_s": 263.704,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 14.102,
+          "controller_residual_site_m": [
+            0.0004958876089582454,
+            -0.02863016964283638
+          ],
+          "physical_minus_estimated_site_m": [
+            0.005842178955933974,
+            -0.008796665925812075
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 38.302,
+          "controller_residual_site_m": [
+            0.0004794132672794049,
+            -0.022535462799080808
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.014433960147006708,
+            -0.015964372096143986
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 103.808,
+          "controller_residual_site_m": [
+            -0.00914798966071162,
+            0.023716934683949642
+          ],
+          "physical_minus_estimated_site_m": [
+            0.009603071623734305,
+            -0.00045830224899523486
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 145.206,
+          "controller_residual_site_m": [
+            0.010605455434144595,
+            0.02585213677528264
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.019666866863874866,
+            0.00834864270152269
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 221.542,
+          "controller_residual_site_m": [
+            0.0007155536071947743,
+            -0.026324687926453372
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.015004276414888995,
+            -0.00830774161294734
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 246.14,
+          "controller_residual_site_m": [
+            -0.0023635418974778943,
+            0.027088108742092887
+          ],
+          "physical_minus_estimated_site_m": [
+            0.015784498597317675,
+            -0.007190823472989827
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:18:38.989468+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "rearrangement",
+        "role": "graph_deployment",
+        "repeat": 0,
+        "seed": 6100,
+        "domain": 206,
+        "selector": "capped",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0/capped_selection.json",
+        "name": "service_island__rearrangement__graph_deployment__repeat0__capped",
+        "extra": [
+          "--mapping",
+          "localization",
+          "--localizer",
+          "slam_toolbox",
+          "--session",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__unchanged__commission__repeat0/mapper/session",
+          "--map-from-mission",
+          "3.9972200472164534",
+          "3.4949307146647377",
+          "-0.0007668276224665977"
+        ],
+        "selectors_evaluated": [
+          "capped",
+          "trimmed"
+        ],
+        "operational_decisions": {
+          "capped": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          },
+          "trimmed": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__graph_deployment__repeat0__capped",
+      "returncode": 0,
+      "wall_s": 272.70422207098454,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__rearrangement__graph_deployment__repeat0__capped",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__graph_deployment__repeat0__capped",
+      "layout": "service_island",
+      "condition": "rearrangement",
+      "role": "graph_deployment",
+      "cpu_s": 827.055526,
+      "largest_child_rss_kib": 652840,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 254.592,
+      "body_contacts": 0,
+      "min_clearance_m": 0.5799152316445558,
+      "observed_sim_s": 257.856,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03254630016886029,
+          "physical_heading_error_deg": 2.3433491568968536,
+          "claim_time_s": 18.772
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04508733333232052,
+          "physical_heading_error_deg": 2.409581808217372,
+          "claim_time_s": 42.916
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.030673827979657408,
+          "physical_heading_error_deg": 2.3776859342702137,
+          "claim_time_s": 109.932
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03349052339343017,
+          "physical_heading_error_deg": 1.403731535632428,
+          "claim_time_s": 137.192
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03933205745738133,
+          "physical_heading_error_deg": 1.3841557629066203,
+          "claim_time_s": 215.528
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.01833041276208112,
+          "physical_heading_error_deg": 1.7392999315698423,
+          "claim_time_s": 239.398
+        }
+      ],
+      "max_claim_position_m": 0.04508733333232052,
+      "max_claim_heading_deg": 2.409581808217372,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03254630016886029,
+          "physical_heading_error_deg": 2.3433491568968536,
+          "claim_time_s": 18.772
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.04508733333232052,
+          "physical_heading_error_deg": 2.409581808217372,
+          "claim_time_s": 42.916
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03933205745738133,
+          "physical_heading_error_deg": 1.3841557629066203,
+          "claim_time_s": 215.528
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.01833041276208112,
+          "physical_heading_error_deg": 1.7392999315698423,
+          "claim_time_s": 239.398
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.014215887406779166,
+        "1->4": -0.005755275874939188
+      },
+      "last_reference_time_s": 257.89,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.807546781732235,
+      "visit_window_dwell_s": {
+        "0": 2.2439999999999998,
+        "1": 2.2779999999999987,
+        "2": 2.278000000000006,
+        "3": 2.2779999999999916,
+        "4": 2.2779999999999916,
+        "5": 2.2439999999999998
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 254.592,
+      "physical_dock_dwell_s": 5.303999999999974,
+      "physical_mission_completion_s": 254.592,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 18.772,
+          "controller_residual_site_m": [
+            -0.0006800307897032454,
+            -0.02942256117507558
+          ],
+          "physical_minus_estimated_site_m": [
+            0.006369274630715349,
+            -0.0026226281549792674
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 42.916,
+          "controller_residual_site_m": [
+            -0.0009478987606899025,
+            -0.022013993398585452
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.016986662997739543,
+            -0.019352890960196767
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 109.932,
+          "controller_residual_site_m": [
+            0.001978712921894221,
+            0.02578830277724853
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0026780176802114752,
+            0.004529985153058913
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 137.192,
+          "controller_residual_site_m": [
+            -0.0019070644489747046,
+            0.025622887953659967
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.015411950253660489,
+            0.0030418445044635423
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 215.528,
+          "controller_residual_site_m": [
+            -0.0002796004697529497,
+            -0.026230120662441347
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.012807714146913618,
+            -0.01086075341670556
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 239.398,
+          "controller_residual_site_m": [
+            0.004095432546618927,
+            0.021297365861247197
+          ],
+          "physical_minus_estimated_site_m": [
+            0.0027952789998528793,
+            -0.004311426781773653
+          ]
+        }
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-23T14:18:57.714627+00:00",
+      "kind": "attempt_finished",
+      "job": {
+        "condition": "rearrangement",
+        "role": "full_deployment",
+        "repeat": 0,
+        "seed": 6100,
+        "domain": 202,
+        "selector": "trimmed",
+        "selection": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat0/trimmed_selection.json",
+        "name": "service_island__rearrangement__full_deployment__repeat0__trimmed",
+        "extra": [
+          "--remedy",
+          "acquired_map",
+          "--map",
+          "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_acquisition__repeat0/mapper/map.txt",
+          "--map-from-mission",
+          "3.967260989720597",
+          "3.5204314638615113",
+          "0.008647620537430796"
+        ],
+        "selectors_evaluated": [
+          "trimmed"
+        ],
+        "operational_decisions": {
+          "trimmed": {
+            "decision": "provisionally_accept",
+            "reasons": [],
+            "calibrated_integrity": false,
+            "physical_mission_certified": false
+          }
+        }
+      },
+      "attempt": 0,
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat0__trimmed",
+      "returncode": 0,
+      "wall_s": 290.4866868479876,
+      "physics_started": true,
+      "stop_reason": "controller_completed",
+      "score_returncode": 0,
+      "all_owned_processes_reaped": true,
+      "reset_count": 1,
+      "prephysics_invalid": false,
+      "run": "service_island__rearrangement__full_deployment__repeat0__trimmed",
+      "artifact_directory": "/home/krisd/physical-ai-systems/projects/site_localization/results/reserved_capped_20261023/service_island__rearrangement__full_deployment__repeat0__trimmed",
+      "layout": "service_island",
+      "condition": "rearrangement",
+      "role": "full_deployment",
+      "cpu_s": 575.446374,
+      "largest_child_rss_kib": 653012,
+      "resets": 1,
+      "serialization": null,
+      "operator_events": [
+        {
+          "type": "known_dock_initialization",
+          "count": 1,
+          "human_seconds": null
+        }
+      ],
+      "mission_success": true,
+      "physical_stops": 6,
+      "required_stops": 6,
+      "dock_after_completed_inspections": true,
+      "dock_completion_s": 275.298,
+      "body_contacts": 0,
+      "min_clearance_m": 0.586287056973167,
+      "observed_sim_s": 278.494,
+      "claimed_stop_errors": [
+        {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.034200759743990415,
+          "physical_heading_error_deg": 2.690391606912994,
+          "claim_time_s": 19.844
+        },
+        {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03410529397673829,
+          "physical_heading_error_deg": 1.809487919561085,
+          "claim_time_s": 47.8
+        },
+        {
+          "goal": 2,
+          "reference_supported": true,
+          "physical_position_error_m": 0.055115523238143456,
+          "physical_heading_error_deg": 2.1172026223036653,
+          "claim_time_s": 113.406
+        },
+        {
+          "goal": 3,
+          "reference_supported": true,
+          "physical_position_error_m": 0.055991571528019785,
+          "physical_heading_error_deg": 1.249409604273397,
+          "claim_time_s": 146.26
+        },
+        {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.030317934397442653,
+          "physical_heading_error_deg": 2.8430770039548996,
+          "claim_time_s": 234.132
+        },
+        {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02763077618951718,
+          "physical_heading_error_deg": 0.12903269304270756,
+          "claim_time_s": 258.462
+        }
+      ],
+      "max_claim_position_m": 0.055991571528019785,
+      "max_claim_heading_deg": 2.8430770039548996,
+      "unchanged_claim_errors": {
+        "0": {
+          "goal": 0,
+          "reference_supported": true,
+          "physical_position_error_m": 0.034200759743990415,
+          "physical_heading_error_deg": 2.690391606912994,
+          "claim_time_s": 19.844
+        },
+        "1": {
+          "goal": 1,
+          "reference_supported": true,
+          "physical_position_error_m": 0.03410529397673829,
+          "physical_heading_error_deg": 1.809487919561085,
+          "claim_time_s": 47.8
+        },
+        "4": {
+          "goal": 4,
+          "reference_supported": true,
+          "physical_position_error_m": 0.030317934397442653,
+          "physical_heading_error_deg": 2.8430770039548996,
+          "claim_time_s": 234.132
+        },
+        "5": {
+          "goal": 5,
+          "reference_supported": true,
+          "physical_position_error_m": 0.02763077618951718,
+          "physical_heading_error_deg": 0.12903269304270756,
+          "claim_time_s": 258.462
+        }
+      },
+      "unchanged_position_regressions_m": {
+        "0->5": -0.006569983554473236,
+        "1->4": -0.0037873595792956363
+      },
+      "last_reference_time_s": 278.528,
+      "wall_guard_before_sim_deadline": false,
+      "physical_distance_m": 38.81866536799258,
+      "visit_window_dwell_s": {
+        "0": 2.2780000000000022,
+        "1": 2.3119999999999976,
+        "2": 2.3460000000000036,
+        "3": 2.2779999999999916,
+        "4": 2.2779999999999916,
+        "5": 2.27800000000002
+      },
+      "physical_dock_after_last_claim": true,
+      "physical_dock_after_last_claim_s": 275.298,
+      "physical_dock_dwell_s": 5.236000000000047,
+      "physical_mission_completion_s": 275.298,
+      "claim_error_decomposition": [
+        {
+          "goal": 0,
+          "claim_time_s": 19.844,
+          "controller_residual_site_m": [
+            0.00022834086887257854,
+            -0.028003027412637493
+          ],
+          "physical_minus_estimated_site_m": [
+            0.010943699636046578,
+            -0.004321537209683424
+          ]
+        },
+        {
+          "goal": 1,
+          "claim_time_s": 47.8,
+          "controller_residual_site_m": [
+            0.016379856358810674,
+            -0.005763995008505773
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.010708085772248577,
+            -0.027866379590257617
+          ]
+        },
+        {
+          "goal": 2,
+          "claim_time_s": 113.406,
+          "controller_residual_site_m": [
+            0.0020623346864043768,
+            0.023808688916130194
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.0165363764140114,
+            0.029372351106436323
+          ]
+        },
+        {
+          "goal": 3,
+          "claim_time_s": 146.26,
+          "controller_residual_site_m": [
+            -0.01222957932469404,
+            0.022506911046336286
+          ],
+          "physical_minus_estimated_site_m": [
+            -0.0021025973831503286,
+            0.03161928217831678
+          ]
+        },
+        {
+          "goal": 4,
+          "claim_time_s": 234.132,
+          "controller_residual_site_m": [
+            -0.008728461111482844,
+            -0.026254473387741672
+          ],
+          "physical_minus_estimated_site_m": [
+            0.005332952065027818,
+            -0.00387271805857603
+          ]
+        },
+        {
+          "goal": 5,
+          "claim_time_s": 258.462,
+          "controller_residual_site_m": [
+            0.002268738394251013,
+            0.02364294968736025
+          ],
+          "physical_minus_estimated_site_m": [
+            0.02427479055103765,
+            -0.015968259858721412
+          ]
+        }
+      ]
+    }
+  ],
+  "distinct_environments": 1,
+  "unique_physics_executions": 16,
+  "unique_acquisition_executions": 7,
+  "unique_deployment_executions": 9,
+  "uncertainty": "Finite cohort counts and within-map paired comparisons only. One environmental cluster cannot estimate cross-site variance; visits/seeds/shared executions are not independent sites.",
+  "operational_rule": "Existing survey/frame/convergence/surface health only. Strict residual/support/ambiguity comparators remain separate in pre-outcome selection records."
+}

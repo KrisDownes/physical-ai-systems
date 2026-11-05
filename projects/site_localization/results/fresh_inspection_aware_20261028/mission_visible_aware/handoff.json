@@ -1,0 +1,158 @@
+{
+  "estimated_state": {
+    "time": 134.096,
+    "pose_time": 134.096,
+    "map_pose": [
+      0.8226775301714883,
+      3.4332424752849287,
+      -1.5566564030925223
+    ],
+    "wheel_time": 134.096,
+    "wheel_pose": [
+      0.7642182749304618,
+      2.152298043756552,
+      -1.834971603545917
+    ],
+    "slam_covariance": [
+      0.0015161380191300682,
+      0.00010032054193638536,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.00010032054193638536,
+      0.0009992809608269562,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.00016773290293957088
+    ],
+    "stationary_since": 130.5,
+    "source": "Final stopped-mapper exact-time TF; unchanged odometry",
+    "truth_used": false
+  },
+  "stationary_ready_state": {
+    "time": 132.5,
+    "pose_time": 132.498,
+    "map_pose": [
+      0.8226775301714883,
+      3.4332424752849287,
+      -1.5566564030925223
+    ],
+    "wheel_time": 132.498,
+    "wheel_pose": [
+      0.7642182749304618,
+      2.152298043756552,
+      -1.834971603545917
+    ],
+    "slam_covariance": [
+      0.0015161380191300682,
+      0.00010032054193638536,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.00010032054193638536,
+      0.0009992809608269562,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.00016773290293957088
+    ],
+    "stationary_since": 130.5,
+    "source": "SLAM exact-time TF and unreset wheel odometry",
+    "truth_used": false
+  },
+  "site_from_slam": [
+    -2.0,
+    -2.0,
+    -1.1157375599660774e-19
+  ],
+  "amcl_initial_pose": [
+    -1.1773224698285119,
+    1.4332424752849287,
+    -1.5566564030925223
+  ],
+  "amcl_initial_std_xy_m": 0.15,
+  "amcl_initial_std_yaw_deg": 10.0,
+  "map_sha256": "4014078c8f10c959a1a0b26724226b3da8615652a4f559e9aa8caa228a39a1c7",
+  "source_map_sha256": "84d309e45c1a8ca50173a3b34b331c229c02ad423b6eb524c3025ab352ba0139",
+  "map_metadata": {
+    "source": "official installed slam_toolbox /map occupancy grid",
+    "frame": "map",
+    "timestamp": 133.2,
+    "width": 131,
+    "height": 130,
+    "resolution": 0.05000000074505806,
+    "origin": [
+      -1.2195600443372765,
+      -1.2725427401887905,
+      0.0
+    ],
+    "native_states": {
+      "occupied": 1,
+      "free": -1,
+      "unknown": 0
+    },
+    "counts": {
+      "-1": 14558,
+      "0": 937,
+      "1": 1535
+    },
+    "truth_used": false
+  },
+  "odometry_reset": false,
+  "simulator_restarted": false,
+  "ground_truth_used": false,
+  "return_required": false,
+  "initial_dock_only": true,
+  "uncertainty_note": "Conservative diagonal seed floors; not calibrated joint uncertainty; AMCL shares map/lidar with SLAM"
+}

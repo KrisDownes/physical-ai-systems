@@ -1,0 +1,81 @@
+{
+  "stop_reason": "inspection_finished",
+  "wall_s": 149.08316260308493,
+  "commands": {
+    "bridge": [
+      "/opt/ros/jazzy/lib/ros_gz_bridge/parameter_bridge",
+      "/site/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist",
+      "/site/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry",
+      "/site/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+      "/judge/truth@nav_msgs/msg/Odometry[gz.msgs.Odometry",
+      "/site/contacts@ros_gz_interfaces/msg/Contacts[gz.msgs.Contacts",
+      "/judge/wheel_contacts@ros_gz_interfaces/msg/Contacts[gz.msgs.Contacts",
+      "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"
+    ],
+    "judge": [
+      "/usr/bin/python3",
+      "/home/krisd/physical-ai-systems/projects/site_localization/sim/judge_node.py",
+      "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_gain"
+    ],
+    "mapper": [
+      "ros2",
+      "launch",
+      "slam_toolbox",
+      "online_sync_launch.py",
+      "slam_params_file:=/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_gain/slam_params.yaml",
+      "use_sim_time:=true"
+    ],
+    "mapping_bridge": [
+      "/usr/bin/python3",
+      "/home/krisd/physical-ai-systems/projects/site_localization/research/slam_bridge.py",
+      "--out",
+      "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_gain/acquisition/mapper",
+      "--ros-args",
+      "-p",
+      "use_sim_time:=true"
+    ],
+    "explorer": [
+      "/usr/bin/python3",
+      "/home/krisd/physical-ai-systems/projects/site_localization/research/continuous_asset/explore.py",
+      "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_gain/acquisition"
+    ],
+    "server": [
+      "gz",
+      "sim",
+      "-s",
+      "-r",
+      "--headless-rendering",
+      "-v",
+      "3",
+      "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_gain/private/world.sdf"
+    ],
+    "camera": [
+      "/usr/bin/python3",
+      "/home/krisd/physical-ai-systems/projects/site_localization/research/moved_asset/camera.py",
+      "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_gain/inspection"
+    ],
+    "inspector": [
+      "/usr/bin/python3",
+      "/home/krisd/physical-ai-systems/projects/site_localization/research/continuous_asset/inspection.py",
+      "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_gain/inspection"
+    ]
+  },
+  "server_pid": 801280,
+  "simulator_launches": 1,
+  "initializations": 1,
+  "resets_after_start": 0,
+  "interventions": 0,
+  "all_owned_processes_reaped": true,
+  "exits": {
+    "bridge": 0,
+    "judge": 0,
+    "mapper": 0,
+    "mapping_bridge": 0,
+    "explorer": 1,
+    "server": 0,
+    "camera": 0,
+    "inspector": 0
+  },
+  "partition": "continuous_d46cc5d5500c48e6bb1bddd0f492901a",
+  "return_only": false
+}

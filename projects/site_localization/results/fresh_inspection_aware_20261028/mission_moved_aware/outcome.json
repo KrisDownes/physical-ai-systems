@@ -1,0 +1,320 @@
+{
+  "case": "moved",
+  "return_required": false,
+  "correct_physical_inspection": true,
+  "complete_contract": true,
+  "success_claim": true,
+  "false_completion": false,
+  "wrong_asset_acceptances": 0,
+  "contacts": 0,
+  "contact_system_live": true,
+  "clearance_m": 0.29964706886570514,
+  "total_sim_s": 274.006,
+  "total_path_m": 19.89642287058974,
+  "acquisition": {
+    "reason": "mapping_endpoint_ready",
+    "exploration_termination": "no_eligible_frontier",
+    "time": 130.31,
+    "wheel_distance_m": 10.745901937654963,
+    "frontier_goals": 5,
+    "failed_goals": [],
+    "visited": [
+      {
+        "point": [
+          1.2413071473815358,
+          -0.4710593411727271
+        ],
+        "area": 20.775000619143253
+      },
+      {
+        "point": [
+          2.5913071674981034,
+          0.8289406781987825
+        ],
+        "area": 32.620000972151765
+      },
+      {
+        "point": [
+          3.4913071809091485,
+          -0.5113723842626543
+        ],
+        "area": 34.88000103950501
+      },
+      {
+        "point": [
+          1.441307150361768,
+          2.7386276641661196
+        ],
+        "area": 36.58250109024347
+      },
+      {
+        "point": [
+          0.18221122697239966,
+          3.236450803438567
+        ],
+        "area": 36.560001089572914
+      }
+    ],
+    "map_messages": 137,
+    "known_free_area_m2": 36.560001089572914,
+    "complete_environment_claim": false
+  },
+  "acquisition_time_s": 130.31,
+  "acquisition_physical_distance_m": 10.69511357427878,
+  "physical_dock_return": false,
+  "end_dock_dwell_s": 0.0,
+  "handoff_success": true,
+  "interventions": 0,
+  "resets_after_start": 0,
+  "infrastructure_failure": false,
+  "termination": "inspection_finished",
+  "inspection_abstentions": 0,
+  "incorrect_numeric_acceptances": 0,
+  "observations": 12,
+  "recoveries": 0,
+  "navigation_failure": false,
+  "inspection_reason": "fresh_identity_and_inspection",
+  "honest_noncompletion": false,
+  "handoff_physical_motion_m": 0.0,
+  "handoff_continuous_truth_coverage": true,
+  "handoff_seed_position_error_m": 0.051324808568635416,
+  "handoff_seed_heading_error_deg": 1.1415484816724428,
+  "first_localization_ready": {
+    "event": "localization_ready",
+    "time": 137.666,
+    "seed": [
+      -1.79010959049017,
+      1.2359726263291657,
+      -2.8236379372860716
+    ],
+    "estimate": [
+      -1.8040966069518045,
+      1.2384940754019174,
+      -2.832987894777712
+    ],
+    "difference": [
+      -0.013987016461634472,
+      0.002521449072751647,
+      -0.00934995749164047
+    ]
+  },
+  "inspection_time_s": 138.144,
+  "inspection_path_m": 9.2341310908417,
+  "task_decision_time_s": 271.832,
+  "decision_physical_path_m": 19.89642287058974,
+  "all_observations": [
+    {
+      "id": 0,
+      "time": 185.266,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 4.87639441992071,
+      "heading_error_deg": 36.39376550201702,
+      "stationary_before_capture_s": 2.3119999999999834,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 1,
+      "time": 189.448,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 4.87639441956856,
+      "heading_error_deg": 8.796493835279549,
+      "stationary_before_capture_s": 2.312000000000012,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 2,
+      "time": 197.88,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 4.876394419025021,
+      "heading_error_deg": 55.348506796045115,
+      "stationary_before_capture_s": 2.3460000000000036,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 3,
+      "time": 202.028,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 4.876394419383515,
+      "heading_error_deg": 98.85793734255249,
+      "stationary_before_capture_s": 2.3460000000000036,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 4,
+      "time": 206.21,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 4.876394419024572,
+      "heading_error_deg": 144.52077526334833,
+      "stationary_before_capture_s": 2.312000000000012,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 5,
+      "time": 210.426,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 4.876394419347973,
+      "heading_error_deg": 170.60915160684635,
+      "stationary_before_capture_s": 2.345999999999975,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 6,
+      "time": 214.472,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 4.876394419717519,
+      "heading_error_deg": 126.41025884066137,
+      "stationary_before_capture_s": 2.312000000000012,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 7,
+      "time": 218.518,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 4.87639441933818,
+      "heading_error_deg": 81.64137229581956,
+      "stationary_before_capture_s": 2.2779999999999916,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 8,
+      "time": 231.132,
+      "observed_ids": [],
+      "identity_decision": "not_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 3.7904690620874466,
+      "heading_error_deg": 46.334488795263994,
+      "stationary_before_capture_s": 3.774000000000001,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 9,
+      "time": 238.136,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 3.781181063215742,
+      "heading_error_deg": 5.7862183587788545,
+      "stationary_before_capture_s": 2.2779999999999916,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 10,
+      "time": 238.952,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": false,
+      "distance_m": 3.781181063215742,
+      "heading_error_deg": 5.7862183587788545,
+      "stationary_before_capture_s": 3.093999999999994,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 11,
+      "time": 271.048,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "accept",
+      "reading_value": 6.204152289503443,
+      "error_interval_MPa": [
+        0,
+        0.2958477104965569
+      ],
+      "reading_valid": true,
+      "actual_target_visible": true,
+      "distance_m": 1.074176635475136,
+      "heading_error_deg": 0.5556554749241902,
+      "stationary_before_capture_s": 2.312000000000012,
+      "valid_physical_inspection": true,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    }
+  ]
+}

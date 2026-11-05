@@ -1,0 +1,13 @@
+{
+  "target_id": 7,
+  "marker_size_m": 0.16,
+  "min_marker_edge_px": 16,
+  "marker_to_gauge_right_m": 0.2866666666666666,
+  "reference_width_m": 0.2833333333333333,
+  "image_size": [
+    1920,
+    1080
+  ],
+  "horizontal_fov_deg": 60,
+  "bundle": "/home/krisd/physical-ai-systems/projects/site_localization/results/asset_calibration_20261023/frozen_bundle"
+}

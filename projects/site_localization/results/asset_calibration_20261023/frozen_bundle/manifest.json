@@ -1,0 +1,16 @@
+{
+  "frozen_at_utc": "2026-10-24T00:20:58.497176+00:00",
+  "opencv": "5.0.0",
+  "numpy": "2.2.6",
+  "files": {
+    "check_asset_calibration.py": "15f7d6ea93651ebebf5c2c47261c376e1161339c4a7930d0a1ea0feb0a6de5a1",
+    "commission_r02.py": "d417e32a2fc2298b008685aedee97feb857e5882d899cb113a0080b8cc0e9c37",
+    "commissioned_gauge.py": "12a9e931e44ec77f8fcd23da66888066c142ce8f46fd058fece6cebbf962ae4c",
+    "commissioning.json": "35a43665198854140a051a7a4f74516e889d9579d64c279e2e465bb286088d3e",
+    "development_marks.json": "33073a01f00ed659835aa6f1216b9c2f350140351f412f15a28031a6d7517210",
+    "frozen_reader.py": "f30fec60585e9ecd16ca141c28536bb2c7efded66155f720df8fe2483e7ddfff",
+    "protocol.md": "d4f68e51e7b75e1e205e66fa9a8c600bf98c532d163d121aa0f36c84a8d7a9a3",
+    "reference.png": "8c3895d37b080b777366624bfddc445100159987ff575216ae92345862e32575"
+  },
+  "status": "Frozen before development checks; no independent validation cohort exists"
+}

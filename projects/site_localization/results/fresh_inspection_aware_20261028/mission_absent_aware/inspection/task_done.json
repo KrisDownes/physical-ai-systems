@@ -1,0 +1,54 @@
+{
+  "success_claim": false,
+  "reason": "search_budget_exhausted",
+  "time": 334.886,
+  "captures": 32,
+  "visited_search_positions": [
+    [
+      -1.5,
+      -1.5
+    ],
+    [
+      0.0,
+      -1.5
+    ],
+    [
+      1.5,
+      0.0
+    ],
+    [
+      1.5,
+      -1.5
+    ]
+  ],
+  "recovery_actions": 0,
+  "wheel_path_m": 8.672903340204334,
+  "target_track": null,
+  "final_observation": {
+    "id": 31,
+    "sensor_time": 334.628,
+    "decision_time": 334.886,
+    "purpose": "search",
+    "vision": {
+      "detections": [],
+      "target": null,
+      "identity_decision": "not_observed"
+    },
+    "associated_pose": [
+      1.4955414826257998,
+      -1.4764328291776403,
+      -0.8108276740113819
+    ],
+    "association": {
+      "bracket": [
+        334.6,
+        334.7
+      ],
+      "amcl_variance": [
+        0.0002295809157710771,
+        0.00040515137137919766,
+        9.285197634168363e-05
+      ]
+    }
+  }
+}

@@ -1,0 +1,3476 @@
+{
+  "protocol": "docs/inspection_aware/protocol.md",
+  "scope": "One prospective physical layout, 4 case conditions, 12 independently acquired continuous missions",
+  "cases": [
+    {
+      "case": "visible",
+      "arm": "nearest",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_nearest",
+      "continuous_mission": true,
+      "map_sha256": "21d959988d1ab52723075db890154ccc55926da86c25450f85b51f1b133c9538",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 74.566,
+      "acquisition_distance_m": 5.757408282907918,
+      "acquisition_known_free_area_m2": 34.97500104233623,
+      "acquisition_localization": {
+        "samples": 2294,
+        "position_median_m": 0.0204764943248359,
+        "position_p95_m": 0.0515781275689533,
+        "position_max_m": 0.051584759896289856,
+        "heading_p95_deg": 1.7799148221056171,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.0515781275689533,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 494,
+        "position_median_m": 0.01636718375473549,
+        "position_p95_m": 0.05727611917038838,
+        "position_max_m": 0.06966334362254943,
+        "heading_p95_deg": 1.6337362718471518,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.33776945776320066,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 129.132,
+      "total_path_m": 10.47403867194712,
+      "inspection_wheel_path_m": 4.730127667651077,
+      "captures": 3,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 0,
+        "time_s": 118.558,
+        "inspection_physical_path_m": 4.345220843439754,
+        "remaining_18m_physical_proxy_m": 13.654779156560245,
+        "remaining_420s_s": 379.71
+      },
+      "approach": {
+        "confirmation_s": 120.414,
+        "planned_map_path_m": 0.3986636549522084,
+        "inspection_physical_path_at_confirmation_m": 4.345220843439754,
+        "remaining_18m_physical_proxy_m": 13.654779156560245,
+        "actual_physical_motion_after_confirmation_m": 0.37140954559944817
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.480000610385922,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 118.558,
+              "camera_yaw_rad": 0.03741278138736438,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": true,
+              "target_diameter_px": 243.79833984375,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 1,
+              "time_s": 119.986,
+              "camera_yaw_rad": 0.03741278138736438,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": true,
+              "target_diameter_px": 243.79833984375,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": []
+    },
+    {
+      "case": "visible",
+      "arm": "gain",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_gain",
+      "continuous_mission": true,
+      "map_sha256": "a190b679cb2b590943c5d15f2147c01b5691a8347a2f930fd375d1c5ec494e13",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 84.212,
+      "acquisition_distance_m": 7.609889148915678,
+      "acquisition_known_free_area_m2": 34.88500103965402,
+      "acquisition_localization": {
+        "samples": 2571,
+        "position_median_m": 0.014176452563586532,
+        "position_p95_m": 0.08319630688772411,
+        "position_max_m": 0.08323752569438429,
+        "heading_p95_deg": 2.0958423775748325,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.08319630688772411,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 532,
+        "position_median_m": 0.02357778134765938,
+        "position_p95_m": 0.05862956652965216,
+        "position_max_m": 0.07583479117956131,
+        "heading_p95_deg": 3.3029422405041506,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.28153434352933115,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 142.528,
+      "total_path_m": 13.908669391572479,
+      "inspection_wheel_path_m": 6.316220701954864,
+      "captures": 3,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 0,
+        "time_s": 131.75,
+        "inspection_physical_path_m": 5.951766101143229,
+        "remaining_18m_physical_proxy_m": 12.048233898856772,
+        "remaining_420s_s": 375.93600000000004
+      },
+      "approach": {
+        "confirmation_s": 133.028,
+        "planned_map_path_m": 0.3833158588654522,
+        "inspection_physical_path_at_confirmation_m": 5.951766101143229,
+        "remaining_18m_physical_proxy_m": 12.048233898856772,
+        "actual_physical_motion_after_confirmation_m": 0.3470141415135721
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.390000607703563,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 131.75,
+              "camera_yaw_rad": 0.015565669334275946,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": true,
+              "target_diameter_px": 246.5494384765625,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 1,
+              "time_s": 132.6,
+              "camera_yaw_rad": 0.015565669334275946,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": true,
+              "target_diameter_px": 246.5494384765625,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": []
+    },
+    {
+      "case": "visible",
+      "arm": "aware",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_visible_aware",
+      "continuous_mission": true,
+      "map_sha256": "4014078c8f10c959a1a0b26724226b3da8615652a4f559e9aa8caa228a39a1c7",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 130.5,
+      "acquisition_distance_m": 10.022316465074285,
+      "acquisition_known_free_area_m2": 36.39500108465553,
+      "acquisition_localization": {
+        "samples": 3936,
+        "position_median_m": 0.04409180432556728,
+        "position_p95_m": 0.06315532289427919,
+        "position_max_m": 0.07822599065619798,
+        "heading_p95_deg": 2.1600059474464075,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.04409180432556728,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 456,
+        "position_median_m": 0.028664577598261885,
+        "position_p95_m": 0.06783142945577175,
+        "position_max_m": 0.09051989234568529,
+        "heading_p95_deg": 3.621358082137446,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.29893411163985417,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 181.254,
+      "total_path_m": 13.933042602822919,
+      "inspection_wheel_path_m": 3.925988224325037,
+      "captures": 3,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 0,
+        "time_s": 171.054,
+        "inspection_physical_path_m": 3.5640261597577805,
+        "remaining_18m_physical_proxy_m": 14.43597384024222,
+        "remaining_420s_s": 383.04200000000003
+      },
+      "approach": {
+        "confirmation_s": 172.298,
+        "planned_map_path_m": 0.37786781086162585,
+        "inspection_physical_path_at_confirmation_m": 3.5640261597577805,
+        "remaining_18m_physical_proxy_m": 14.43597384024222,
+        "actual_physical_motion_after_confirmation_m": 0.3466999779908537
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.340000606213362,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 171.054,
+              "camera_yaw_rad": 0.010828804019246558,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": true,
+              "target_diameter_px": 248.7557373046875,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 1,
+              "time_s": 171.87,
+              "camera_yaw_rad": 0.010828804019246558,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": true,
+              "target_diameter_px": 248.7557373046875,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": []
+    },
+    {
+      "case": "moved",
+      "arm": "gain",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_moved_gain",
+      "continuous_mission": true,
+      "map_sha256": "d84b2b0fea8f3a4640fb4601b0c6c71666ed4c043be8719670332ee4eaa82822",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 86.15,
+      "acquisition_distance_m": 6.391578562802015,
+      "acquisition_known_free_area_m2": 34.46000102698804,
+      "acquisition_localization": {
+        "samples": 2630,
+        "position_median_m": 0.027813357706251266,
+        "position_p95_m": 0.15073586773370717,
+        "position_max_m": 0.15136104764058056,
+        "heading_p95_deg": 3.703516183816736,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.1507358677337071,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 1224,
+        "position_median_m": 0.03516071113337146,
+        "position_p95_m": 0.1427641387664439,
+        "position_max_m": 0.1485461964745142,
+        "heading_p95_deg": 3.9941612939314806,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.3189638828122464,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 213.928,
+      "total_path_m": 17.035912873697036,
+      "inspection_wheel_path_m": 10.669266961473333,
+      "captures": 12,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 9,
+        "time_s": 191.284,
+        "inspection_physical_path_m": 7.848516648103282,
+        "remaining_18m_physical_proxy_m": 10.151483351896719,
+        "remaining_420s_s": 318.408
+      },
+      "approach": {
+        "confirmation_s": 192.392,
+        "planned_map_path_m": 2.8281517456289498,
+        "inspection_physical_path_at_confirmation_m": 7.848516648103282,
+        "remaining_18m_physical_proxy_m": 10.151483351896719,
+        "actual_physical_motion_after_confirmation_m": 2.7958176627917393
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.32000060561728,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 134.878,
+              "camera_yaw_rad": 0.03290613793458715,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 138.958,
+              "camera_yaw_rad": 0.7938187431219064,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 61.55154037475586,
+              "target_visibility": {
+                "inner": 0.0,
+                "scale": 0.0
+              }
+            },
+            {
+              "capture": 2,
+              "time_s": 143.106,
+              "camera_yaw_rad": 1.59351829788955,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 147.084,
+              "camera_yaw_rad": 2.362757704030138,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 151.3,
+              "camera_yaw_rad": -3.1240171101079284,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 155.414,
+              "camera_yaw_rad": -2.3457839307605033,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 159.562,
+              "camera_yaw_rad": -1.559068772524008,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 163.71,
+              "camera_yaw_rad": -0.7748275730791925,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 11.010000328142041,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 187.102,
+              "camera_yaw_rad": -0.01057043062534569,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 191.284,
+              "camera_yaw_rad": 0.8079744230742104,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 48.60362243652344,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 10,
+              "time_s": 192.066,
+              "camera_yaw_rad": 0.8079744230742104,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 48.60362243652344,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 163.982,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.487679095793891,
+            -1.4933906834426238,
+            -0.8022906746584926
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                0.0,
+                -1.5
+              ],
+              "new_visible_area_m2": 6.490000193427961,
+              "path_m": 1.4876937773370853,
+              "weighted_graph_cost": 1.634756196382377,
+              "gain_per_effort": 2.608842073952962
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "new_visible_area_m2": 11.010000328142041,
+              "path_m": 3.064407006114196,
+              "weighted_graph_cost": 3.6066337676251714,
+              "gain_per_effort": 2.708882331808651
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 9.07000027032228,
+              "path_m": 3.6832439122974825,
+              "weighted_graph_cost": 4.331296292775236,
+              "gain_per_effort": 1.9366918401379534
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 8.02000023902808,
+              "path_m": 5.182614272266942,
+              "weighted_graph_cost": 6.05880288895439,
+              "gain_per_effort": 1.2971859290984742
+            }
+          ],
+          "selected": [
+            1.5,
+            -1.5
+          ],
+          "sampled_map_cells": 3445,
+          "elapsed_wall_s": 0.2768504460109398,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        }
+      ]
+    },
+    {
+      "case": "moved",
+      "arm": "aware",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_moved_aware",
+      "continuous_mission": true,
+      "map_sha256": "e3ad8f30363bb9dc7328ccc6d1dbf3ad7328dfbcfc0763974811df97f4e4d832",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 130.31,
+      "acquisition_distance_m": 10.69511357427878,
+      "acquisition_known_free_area_m2": 36.560001089572914,
+      "acquisition_localization": {
+        "samples": 3924,
+        "position_median_m": 0.03573005089615956,
+        "position_p95_m": 0.06186189255124445,
+        "position_max_m": 0.07549909214614912,
+        "heading_p95_deg": 1.74028566805915,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.051324808568635416,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 1383,
+        "position_median_m": 0.027303674544690876,
+        "position_p95_m": 0.06296665689478324,
+        "position_max_m": 0.07178692667685778,
+        "heading_p95_deg": 3.1072445554694816,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.29964706886570514,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 274.006,
+      "total_path_m": 19.89642287058974,
+      "inspection_wheel_path_m": 9.2341310908417,
+      "captures": 12,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 9,
+        "time_s": 238.136,
+        "inspection_physical_path_m": 5.635387844442745,
+        "remaining_18m_physical_proxy_m": 12.364612155557255,
+        "remaining_420s_s": 315.552
+      },
+      "approach": {
+        "confirmation_s": 239.266,
+        "planned_map_path_m": 3.5873124721086422,
+        "inspection_physical_path_at_confirmation_m": 5.635387844442745,
+        "remaining_18m_physical_proxy_m": 12.364612155557255,
+        "actual_physical_motion_after_confirmation_m": 3.5659214518682134
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.450000609491802,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 185.266,
+              "camera_yaw_rad": -0.002185950507077738,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 189.448,
+              "camera_yaw_rad": 0.7865328646624411,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 61.958805084228516,
+              "target_visibility": {
+                "inner": 0.0,
+                "scale": 0.0
+              }
+            },
+            {
+              "capture": 2,
+              "time_s": 197.88,
+              "camera_yaw_rad": 1.5990187644204863,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 202.028,
+              "camera_yaw_rad": 2.3584015830696914,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 206.21,
+              "camera_yaw_rad": -3.1278168566887206,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 210.426,
+              "camera_yaw_rad": -2.3446863448736837,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 214.472,
+              "camera_yaw_rad": -1.5732701404232396,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 218.518,
+              "camera_yaw_rad": -0.7919056677057258,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            0.0,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 6.870000204753481,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 231.132,
+              "camera_yaw_rad": 0.053879565152268605,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 238.136,
+              "camera_yaw_rad": 0.7620536962906246,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 63.59856414794922,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 10,
+              "time_s": 238.952,
+              "camera_yaw_rad": 0.7620536962906246,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 63.59856414794922,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 218.85,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.4869369046520255,
+            -1.4873381516851871,
+            -0.8184506496809303
+          ],
+          "rule": "discrete_bayesian_expected_detection_per_cost",
+          "selected": [
+            0.0,
+            -1.5
+          ],
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "path_m": 3.822069250430554,
+              "expected_detection_mass": 0.08820417728431017,
+              "budget_feasible_detection_mass": 0.08820417728431017,
+              "remaining_path_m": 10.004479928385562,
+              "score": 0.01829176909403252
+            },
+            {
+              "station": [
+                0.0,
+                -1.5
+              ],
+              "path_m": 1.4869908139658745,
+              "expected_detection_mass": 0.17141711412449934,
+              "budget_feasible_detection_mass": 0.17141711412449934,
+              "remaining_path_m": 12.339558364850241,
+              "score": 0.06892551157080849
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "path_m": 3.063099233054051,
+              "expected_detection_mass": 0.1827391244994537,
+              "budget_feasible_detection_mass": 0.1827391244994537,
+              "remaining_path_m": 10.763449945762066,
+              "score": 0.044975304322581566
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "path_m": 3.6565842846935706,
+              "expected_detection_mass": 0.16419048052420837,
+              "budget_feasible_detection_mass": 0.16419048052420837,
+              "remaining_path_m": 10.169964894122545,
+              "score": 0.035259853679425676
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "path_m": 5.156581763461408,
+              "expected_detection_mass": 0.09376706406989449,
+              "budget_feasible_detection_mass": 0.09376706406989449,
+              "remaining_path_m": 8.669967415354709,
+              "score": 0.015230377451720213
+            }
+          ],
+          "hypotheses": 1660,
+          "elapsed_wall_s": 0.253541913931258,
+          "truth_used": false,
+          "limitation": "2-D map occlusion and uncalibrated detection likelihood; not a reader predictor"
+        }
+      ]
+    },
+    {
+      "case": "moved",
+      "arm": "nearest",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_moved_nearest",
+      "continuous_mission": true,
+      "map_sha256": "a633828d40a5f485d52868aa5ab56f52372be7636988c24825fd789cea540555",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 116.182,
+      "acquisition_distance_m": 9.058160450655333,
+      "acquisition_known_free_area_m2": 36.435001085847624,
+      "acquisition_localization": {
+        "samples": 3509,
+        "position_median_m": 0.039695474817718054,
+        "position_p95_m": 0.06159802147308425,
+        "position_max_m": 0.06378023955516401,
+        "heading_p95_deg": 1.985497977754507,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.05326444486520432,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 1205,
+        "position_median_m": 0.024850468218630517,
+        "position_p95_m": 0.06328598522413453,
+        "position_max_m": 0.07315157218529919,
+        "heading_p95_deg": 3.1070607003022515,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.3129207187819435,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 241.944,
+      "total_path_m": 17.986252390576162,
+      "inspection_wheel_path_m": 8.961207264088447,
+      "captures": 12,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 9,
+        "time_s": 206.822,
+        "inspection_physical_path_m": 5.323307482042692,
+        "remaining_18m_physical_proxy_m": 12.676692517957308,
+        "remaining_420s_s": 332.756
+      },
+      "approach": {
+        "confirmation_s": 207.892,
+        "planned_map_path_m": 3.6315233109120184,
+        "inspection_physical_path_at_confirmation_m": 5.323307482042692,
+        "remaining_18m_physical_proxy_m": 12.676692517957308,
+        "actual_physical_motion_after_confirmation_m": 3.6047844578781376
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.46000060978984,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 159.8,
+              "camera_yaw_rad": 0.0160917810583349,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 163.914,
+              "camera_yaw_rad": 0.7939701218444093,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 62.11083221435547,
+              "target_visibility": {
+                "inner": 0.0,
+                "scale": 0.0
+              }
+            },
+            {
+              "capture": 2,
+              "time_s": 168.096,
+              "camera_yaw_rad": 1.5720171895785318,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 172.278,
+              "camera_yaw_rad": 2.370865594457956,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 176.358,
+              "camera_yaw_rad": -3.13637594753046,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 180.438,
+              "camera_yaw_rad": -2.345781530932087,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 184.552,
+              "camera_yaw_rad": -1.562895393038098,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 188.632,
+              "camera_yaw_rad": -0.768809208034428,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            0,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 6.760000201475041,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 202.606,
+              "camera_yaw_rad": -0.029317368612895904,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 206.822,
+              "camera_yaw_rad": 0.7854135505986707,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 63.37506866455078,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 10,
+              "time_s": 207.57,
+              "camera_yaw_rad": 0.7854135505986707,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 63.37506866455078,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": []
+    },
+    {
+      "case": "wrong_asset",
+      "arm": "aware",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_wrong_asset_aware",
+      "continuous_mission": true,
+      "map_sha256": "4eca476654d2f1addb48ab380c262c77e62ca82042ad66d537ee152ac9be1d09",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 110.23,
+      "acquisition_distance_m": 9.502512028430633,
+      "acquisition_known_free_area_m2": 36.595001090615995,
+      "acquisition_localization": {
+        "samples": 3333,
+        "position_median_m": 0.02113728023479821,
+        "position_p95_m": 0.12610554266005639,
+        "position_max_m": 0.12840199159501162,
+        "heading_p95_deg": 2.6352167047072963,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.011993229517553362,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 1144,
+        "position_median_m": 0.019899926799315754,
+        "position_p95_m": 0.03959528704319846,
+        "position_max_m": 0.045633487040865055,
+        "heading_p95_deg": 2.4916550788713225,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.28800328102272243,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 229.67,
+      "total_path_m": 18.62071407797924,
+      "inspection_wheel_path_m": 9.14667890980082,
+      "captures": 12,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 9,
+        "time_s": 196.792,
+        "inspection_physical_path_m": 5.563149891318675,
+        "remaining_18m_physical_proxy_m": 12.436850108681325,
+        "remaining_420s_s": 336.802
+      },
+      "approach": {
+        "confirmation_s": 197.974,
+        "planned_map_path_m": 3.5679342522700104,
+        "inspection_physical_path_at_confirmation_m": 5.563149891318675,
+        "remaining_18m_physical_proxy_m": 12.436850108681325,
+        "actual_physical_motion_after_confirmation_m": 3.555052158229932
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.720000617538883,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 152.558,
+              "camera_yaw_rad": 0.00918678498812695,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 156.876,
+              "camera_yaw_rad": 0.7880251809567019,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 61.991493225097656,
+              "target_visibility": {
+                "inner": 0.0,
+                "scale": 0.0
+              }
+            },
+            {
+              "capture": 2,
+              "time_s": 161.058,
+              "camera_yaw_rad": 1.5607258605307004,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 165.24,
+              "camera_yaw_rad": 2.351468852885845,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 169.422,
+              "camera_yaw_rad": -3.1387750097193856,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 173.468,
+              "camera_yaw_rad": -2.359210627792125,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 177.548,
+              "camera_yaw_rad": -1.577583950126473,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 181.662,
+              "camera_yaw_rad": -0.7953698258424788,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            0.0,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 6.8000002026672,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 192.78,
+              "camera_yaw_rad": 0.056298523085268865,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 196.792,
+              "camera_yaw_rad": 0.7721356187049051,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 63.2326545715332,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 10,
+              "time_s": 197.608,
+              "camera_yaw_rad": 0.7721356187049051,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 63.2326545715332,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 181.978,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.4847122368446775,
+            -1.5056063540897873,
+            -0.8047538555609715
+          ],
+          "rule": "discrete_bayesian_expected_detection_per_cost",
+          "selected": [
+            0.0,
+            -1.5
+          ],
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "path_m": 3.7974086385942663,
+              "expected_detection_mass": 0.0924404625601098,
+              "budget_feasible_detection_mass": 0.0924404625601098,
+              "remaining_path_m": 10.090895799262903,
+              "score": 0.01926883230593353
+            },
+            {
+              "station": [
+                0.0,
+                -1.5
+              ],
+              "path_m": 1.4847228217558002,
+              "expected_detection_mass": 0.17733283718800183,
+              "budget_feasible_detection_mass": 0.17733283718800183,
+              "remaining_path_m": 12.403581616101368,
+              "score": 0.07136926325757803
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "path_m": 3.090868049789681,
+              "expected_detection_mass": 0.18822131898328462,
+              "budget_feasible_detection_mass": 0.18822131898328462,
+              "remaining_path_m": 10.797436388067489,
+              "score": 0.04601011733755661
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "path_m": 3.593554229084102,
+              "expected_detection_mass": 0.17958266544538637,
+              "budget_feasible_detection_mass": 0.17958266544538637,
+              "remaining_path_m": 10.294750208773067,
+              "score": 0.03909449121300412
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "path_m": 5.093063925210481,
+              "expected_detection_mass": 0.09559193954659932,
+              "budget_feasible_detection_mass": 0.09559193954659932,
+              "remaining_path_m": 8.79524051264669,
+              "score": 0.01568864871925616
+            }
+          ],
+          "hypotheses": 1648,
+          "elapsed_wall_s": 0.19483689905609936,
+          "truth_used": false,
+          "limitation": "2-D map occlusion and uncalibrated detection likelihood; not a reader predictor"
+        }
+      ]
+    },
+    {
+      "case": "wrong_asset",
+      "arm": "nearest",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_wrong_asset_nearest",
+      "continuous_mission": true,
+      "map_sha256": "ed75e0724b0dcfe08b4ed6063ff9dc10ec2e64d53619cedaaaa2d2a6ec265db1",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 102.324,
+      "acquisition_distance_m": 8.611862109523964,
+      "acquisition_known_free_area_m2": 34.852501038685446,
+      "acquisition_localization": {
+        "samples": 3100,
+        "position_median_m": 0.07844528992627049,
+        "position_p95_m": 0.12574164104923313,
+        "position_max_m": 0.14244895723089973,
+        "heading_p95_deg": 3.063422319369892,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.11048857448005811,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 1236,
+        "position_median_m": 0.041464340524490766,
+        "position_p95_m": 0.126154535199323,
+        "position_max_m": 0.138269559705309,
+        "heading_p95_deg": 2.2652478878396254,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.3094553991825938,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 230.894,
+      "total_path_m": 18.903757902788655,
+      "inspection_wheel_path_m": 10.325305490973177,
+      "captures": 12,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 9,
+        "time_s": 196.044,
+        "inspection_physical_path_m": 6.687996303145791,
+        "remaining_18m_physical_proxy_m": 11.312003696854209,
+        "remaining_420s_s": 329.628
+      },
+      "approach": {
+        "confirmation_s": 197.166,
+        "planned_map_path_m": 3.638556696100955,
+        "inspection_physical_path_at_confirmation_m": 6.687996303145791,
+        "remaining_18m_physical_proxy_m": 11.312003696854209,
+        "actual_physical_motion_after_confirmation_m": 3.6038994901189003
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.49000061068396,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 146.098,
+              "camera_yaw_rad": -0.013157137788121545,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 150.484,
+              "camera_yaw_rad": 0.767661696142753,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 60.815399169921875,
+              "target_visibility": {
+                "inner": 0.0,
+                "scale": 0.0
+              }
+            },
+            {
+              "capture": 2,
+              "time_s": 154.666,
+              "camera_yaw_rad": 1.5604986083092782,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 158.712,
+              "camera_yaw_rad": 2.3423136527134045,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 164.832,
+              "camera_yaw_rad": 3.102301494175048,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 168.946,
+              "camera_yaw_rad": -2.3692958465725544,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 173.094,
+              "camera_yaw_rad": -1.5923662082206849,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 180.982,
+              "camera_yaw_rad": -0.76300706045035,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            0,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 6.3000001877652005,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 191.624,
+              "camera_yaw_rad": -0.04958977311859744,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 196.044,
+              "camera_yaw_rad": 0.7387753354747898,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 62.56705856323242,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 10,
+              "time_s": 196.826,
+              "camera_yaw_rad": 0.7387753354747898,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 62.56705856323242,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": []
+    },
+    {
+      "case": "wrong_asset",
+      "arm": "gain",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_wrong_asset_gain",
+      "continuous_mission": true,
+      "map_sha256": "288e1aba1b2e2dc85fb3f259dc73a513d86a44903524e623865acc2a4c223f7b",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 104.294,
+      "acquisition_distance_m": 9.498065047617649,
+      "acquisition_known_free_area_m2": 34.927501040920625,
+      "acquisition_localization": {
+        "samples": 3159,
+        "position_median_m": 0.012360963278731296,
+        "position_p95_m": 0.02348582142090137,
+        "position_max_m": 0.04198300440580116,
+        "heading_p95_deg": 1.480181528539749,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.02341855713519392,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 1379,
+        "position_median_m": 0.00911378783908807,
+        "position_p95_m": 0.02019976954065752,
+        "position_max_m": 0.027708809883832227,
+        "heading_p95_deg": 2.421890333457711,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": true,
+      "final_claimed_capture_physically_valid": true,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.33997377511329996,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 247.452,
+      "total_path_m": 21.56901322669924,
+      "inspection_wheel_path_m": 12.099092845607924,
+      "captures": 13,
+      "termination": "fresh_identity_and_inspection",
+      "first_id7": {
+        "capture": 10,
+        "time_s": 223.006,
+        "inspection_physical_path_m": 9.168877498583234,
+        "remaining_18m_physical_proxy_m": 8.831122501416766,
+        "remaining_420s_s": 304.672
+      },
+      "approach": {
+        "confirmation_s": 224.148,
+        "planned_map_path_m": 2.920998718766671,
+        "inspection_physical_path_at_confirmation_m": 9.168877498583234,
+        "remaining_18m_physical_proxy_m": 8.831122501416766,
+        "actual_physical_motion_after_confirmation_m": 2.9020706804983583
+      },
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.580000613366323,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 153.0,
+              "camera_yaw_rad": -0.006800362536509128,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 157.25,
+              "camera_yaw_rad": 0.7789002679331916,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 61.468074798583984,
+              "target_visibility": {
+                "inner": 0.0,
+                "scale": 0.0
+              }
+            },
+            {
+              "capture": 2,
+              "time_s": 161.5,
+              "camera_yaw_rad": 1.5668670523533255,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 168.402,
+              "camera_yaw_rad": 2.3996896896175928,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 172.414,
+              "camera_yaw_rad": 3.1290893174478156,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 176.528,
+              "camera_yaw_rad": -2.3647937645345976,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 180.574,
+              "camera_yaw_rad": -1.5741645629766219,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 184.722,
+              "camera_yaw_rad": -0.7959024317698764,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 11.43000034065972,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 214.846,
+              "camera_yaw_rad": -0.014718514628044584,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 218.858,
+              "camera_yaw_rad": 0.76216976366273,
+              "decoded_ids": [],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 48.400001525878906,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 10,
+              "time_s": 223.006,
+              "camera_yaw_rad": 1.56329400835646,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 41.65599060058594,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            },
+            {
+              "capture": 11,
+              "time_s": 223.822,
+              "camera_yaw_rad": 1.56329400835646,
+              "decoded_ids": [
+                7
+              ],
+              "target_rendered": true,
+              "target_usable_image": false,
+              "target_diameter_px": 41.65599060058594,
+              "target_visibility": {
+                "inner": 1.0,
+                "scale": 1.0
+              }
+            }
+          ],
+          "decoded_target_count": 2
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 185.008,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.492923879590066,
+            -1.4993656967848303,
+            -0.8068996117709784
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                0.0,
+                -1.5
+              ],
+              "new_visible_area_m2": 6.720000200282881,
+              "path_m": 1.4929240143392504,
+              "weighted_graph_cost": 1.6315439089078074,
+              "gain_per_effort": 2.6956297751674625
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "new_visible_area_m2": 11.43000034065972,
+              "path_m": 3.1297270210244763,
+              "weighted_graph_cost": 3.6155068460158404,
+              "gain_per_effort": 2.767737499953263
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 9.530000284032122,
+              "path_m": 3.625142614500413,
+              "weighted_graph_cost": 4.28993558886023,
+              "gain_per_effort": 2.060477065972918
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 8.19000024409476,
+              "path_m": 5.125023099771186,
+              "weighted_graph_cost": 5.9899356112132285,
+              "gain_per_effort": 1.337137854125108
+            }
+          ],
+          "selected": [
+            1.5,
+            -1.5
+          ],
+          "sampled_map_cells": 3498,
+          "elapsed_wall_s": 0.2926987550454214,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        }
+      ]
+    },
+    {
+      "case": "absent",
+      "arm": "nearest",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_absent_nearest",
+      "continuous_mission": true,
+      "map_sha256": "8c6fc401dec9d81494a6d6392a2fd7070359b36c641718628d9db27f9f321453",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 112.164,
+      "acquisition_distance_m": 9.664300260286666,
+      "acquisition_known_free_area_m2": 36.57500109001995,
+      "acquisition_localization": {
+        "samples": 3392,
+        "position_median_m": 0.022699276377137548,
+        "position_p95_m": 0.030266317738036872,
+        "position_max_m": 0.073455298363578,
+        "heading_p95_deg": 1.3880940911382487,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.022028922148602078,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 2105,
+        "position_median_m": 0.02239621316955245,
+        "position_p95_m": 0.03391141975849435,
+        "position_max_m": 0.043417399738247674,
+        "heading_p95_deg": 2.4380051168224472,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": false,
+      "final_claimed_capture_physically_valid": false,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.2997905541725894,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 327.488,
+      "total_path_m": 17.38248851295598,
+      "inspection_wheel_path_m": 7.7479837528422335,
+      "captures": 32,
+      "termination": "search_budget_exhausted",
+      "first_id7": null,
+      "approach": null,
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.57000061306828,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 144.874,
+              "camera_yaw_rad": -0.0028414068618210584,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 149.124,
+              "camera_yaw_rad": 0.7916350561678349,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 2,
+              "time_s": 153.238,
+              "camera_yaw_rad": 1.5703551386144832,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 158.882,
+              "camera_yaw_rad": 2.419142081660084,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 162.826,
+              "camera_yaw_rad": 3.1379439208787425,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 166.872,
+              "camera_yaw_rad": -2.3520577827564098,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 170.884,
+              "camera_yaw_rad": -1.577848992207962,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 174.93,
+              "camera_yaw_rad": -0.7875040230087117,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            0,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 6.650000198196601,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 185.47,
+              "camera_yaw_rad": -0.034495194450932534,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 189.618,
+              "camera_yaw_rad": 0.7764597343357788,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 10,
+              "time_s": 194.99,
+              "camera_yaw_rad": 1.5554040945314578,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 11,
+              "time_s": 199.104,
+              "camera_yaw_rad": 2.344916140802577,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 12,
+              "time_s": 203.184,
+              "camera_yaw_rad": 3.122470521478696,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 13,
+              "time_s": 208.386,
+              "camera_yaw_rad": -2.302615079750147,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 14,
+              "time_s": 212.364,
+              "camera_yaw_rad": -1.581514415048052,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 15,
+              "time_s": 216.444,
+              "camera_yaw_rad": -0.7902736385304436,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 6.31000018806324,
+          "camera_captures": [
+            {
+              "capture": 16,
+              "time_s": 237.592,
+              "camera_yaw_rad": -0.026756616332450873,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 17,
+              "time_s": 241.672,
+              "camera_yaw_rad": 0.7705135011679438,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 18,
+              "time_s": 250.172,
+              "camera_yaw_rad": 1.5513445701755506,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 19,
+              "time_s": 254.218,
+              "camera_yaw_rad": 2.3366438905789564,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 20,
+              "time_s": 258.366,
+              "camera_yaw_rad": 3.13060945220258,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 21,
+              "time_s": 262.514,
+              "camera_yaw_rad": -2.3672716671705225,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 22,
+              "time_s": 266.696,
+              "camera_yaw_rad": -1.5819619556100313,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 23,
+              "time_s": 270.844,
+              "camera_yaw_rad": -0.7866706554515805,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            1.5,
+            0
+          ],
+          "predicted_new_map_free_area_m2": 0.05000000149020001,
+          "camera_captures": [
+            {
+              "capture": 24,
+              "time_s": 285.974,
+              "camera_yaw_rad": 0.004502104159347531,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 25,
+              "time_s": 290.02,
+              "camera_yaw_rad": 0.7654323615198376,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 26,
+              "time_s": 294.032,
+              "camera_yaw_rad": 1.5510953798482827,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 27,
+              "time_s": 298.146,
+              "camera_yaw_rad": 2.3400567362540374,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 28,
+              "time_s": 302.294,
+              "camera_yaw_rad": 3.1180116141885774,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 29,
+              "time_s": 306.442,
+              "camera_yaw_rad": -2.371803079245867,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 30,
+              "time_s": 321.028,
+              "camera_yaw_rad": -1.5472839046553313,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 31,
+              "time_s": 325.04,
+              "camera_yaw_rad": -0.8025318904855815,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        }
+      ],
+      "search_choice_logs": []
+    },
+    {
+      "case": "absent",
+      "arm": "aware",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_absent_aware",
+      "continuous_mission": true,
+      "map_sha256": "998ae4ab69100e58493da977fb18ccc31c5afb31adc33cfe1c8252a0ba2886a4",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 102.036,
+      "acquisition_distance_m": 9.092853768425519,
+      "acquisition_known_free_area_m2": 36.47750108711422,
+      "acquisition_localization": {
+        "samples": 3094,
+        "position_median_m": 0.01701321003359759,
+        "position_p95_m": 0.027771189911523827,
+        "position_max_m": 0.030401408577442498,
+        "heading_p95_deg": 1.5824746229367093,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.023123943539267142,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 2297,
+        "position_median_m": 0.020931658391729217,
+        "position_p95_m": 0.0373810681515711,
+        "position_max_m": 0.048621545116926554,
+        "heading_p95_deg": 2.6505943872187796,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": false,
+      "final_claimed_capture_physically_valid": false,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.2910870540244719,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 337.11,
+      "total_path_m": 17.734792152356444,
+      "inspection_wheel_path_m": 8.672903340204334,
+      "captures": 32,
+      "termination": "search_budget_exhausted",
+      "first_id7": null,
+      "approach": null,
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.52000061157808,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 144.33,
+              "camera_yaw_rad": 0.008678997794316455,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 148.58,
+              "camera_yaw_rad": 0.7730393767368008,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 2,
+              "time_s": 152.762,
+              "camera_yaw_rad": 1.5723915750897615,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 156.944,
+              "camera_yaw_rad": 2.3613040149308935,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 161.024,
+              "camera_yaw_rad": 3.1392082602166322,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 165.172,
+              "camera_yaw_rad": -2.340941474048302,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 169.116,
+              "camera_yaw_rad": -1.5717387018825593,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 173.264,
+              "camera_yaw_rad": -0.778074099761812,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            0.0,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 6.6000001967064,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 184.654,
+              "camera_yaw_rad": 0.02413352297841248,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 190.842,
+              "camera_yaw_rad": 0.7681491740280842,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 10,
+              "time_s": 195.5,
+              "camera_yaw_rad": 1.5557937903209702,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 11,
+              "time_s": 199.478,
+              "camera_yaw_rad": 2.344515248164077,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 12,
+              "time_s": 208.386,
+              "camera_yaw_rad": 3.1033711115900195,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 13,
+              "time_s": 212.636,
+              "camera_yaw_rad": -2.3604057035760193,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 14,
+              "time_s": 216.614,
+              "camera_yaw_rad": -1.5754665640852834,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 15,
+              "time_s": 225.08,
+              "camera_yaw_rad": -0.735349937873776,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            1.5,
+            0.0
+          ],
+          "predicted_new_map_free_area_m2": 5.940000177035761,
+          "camera_captures": [
+            {
+              "capture": 16,
+              "time_s": 256.802,
+              "camera_yaw_rad": 0.046569300069924,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 17,
+              "time_s": 260.746,
+              "camera_yaw_rad": 0.7706055715634222,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 18,
+              "time_s": 264.826,
+              "camera_yaw_rad": 1.5550731039649301,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 19,
+              "time_s": 268.974,
+              "camera_yaw_rad": 2.3569865230549376,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 20,
+              "time_s": 274.312,
+              "camera_yaw_rad": 3.118048388808565,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 21,
+              "time_s": 278.46,
+              "camera_yaw_rad": -2.3588534276972988,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 22,
+              "time_s": 282.642,
+              "camera_yaw_rad": -1.579197016978649,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 23,
+              "time_s": 286.79,
+              "camera_yaw_rad": -0.7994137522927403,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 0.6200000184784801,
+          "camera_captures": [
+            {
+              "capture": 24,
+              "time_s": 302.396,
+              "camera_yaw_rad": -0.020219131085126345,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 25,
+              "time_s": 306.476,
+              "camera_yaw_rad": 0.7831204345917522,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 26,
+              "time_s": 310.59,
+              "camera_yaw_rad": 1.562460671134133,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 27,
+              "time_s": 317.526,
+              "camera_yaw_rad": 2.413976428877771,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 28,
+              "time_s": 321.504,
+              "camera_yaw_rad": 3.1410113688450707,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 29,
+              "time_s": 325.652,
+              "camera_yaw_rad": -2.353948579442921,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 30,
+              "time_s": 329.732,
+              "camera_yaw_rad": -1.57747160848343,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 31,
+              "time_s": 334.628,
+              "camera_yaw_rad": -0.8018308482258546,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 173.55,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.4998881215332251,
+            -1.5029820826786455,
+            -0.7906372440048386
+          ],
+          "rule": "discrete_bayesian_expected_detection_per_cost",
+          "selected": [
+            0.0,
+            -1.5
+          ],
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "path_m": 3.808383374392387,
+              "expected_detection_mass": 0.08990210047341068,
+              "budget_feasible_detection_mass": 0.08990210047341068,
+              "remaining_path_m": 10.737875564718413,
+              "score": 0.01869694936393694
+            },
+            {
+              "station": [
+                0.0,
+                -1.5
+              ],
+              "path_m": 1.4998910860237715,
+              "expected_detection_mass": 0.1636283724778229,
+              "budget_feasible_detection_mass": 0.1636283724778229,
+              "remaining_path_m": 13.046367853087029,
+              "score": 0.06545420054202591
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "path_m": 3.1270435313906826,
+              "expected_detection_mass": 0.17870972560555257,
+              "budget_feasible_detection_mass": 0.17870972560555257,
+              "remaining_path_m": 11.419215407720117,
+              "score": 0.04330211790747287
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "path_m": 3.66610007720876,
+              "expected_detection_mass": 0.16701521349450735,
+              "budget_feasible_detection_mass": 0.16701521349450735,
+              "remaining_path_m": 10.88015886190204,
+              "score": 0.03579332005978215
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "path_m": 5.166099090374784,
+              "expected_detection_mass": 0.0931596727490001,
+              "budget_feasible_detection_mass": 0.0931596727490001,
+              "remaining_path_m": 9.380159848736016,
+              "score": 0.015108364524083203
+            }
+          ],
+          "hypotheses": 1648,
+          "elapsed_wall_s": 0.23103877494577318,
+          "truth_used": false,
+          "limitation": "2-D map occlusion and uncalibrated detection likelihood; not a reader predictor"
+        },
+        {
+          "event": "search_choice",
+          "time": 225.35,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ],
+            [
+              0.0,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -0.010540843439847687,
+            -1.5011376865787756,
+            -0.7412143186835627
+          ],
+          "rule": "discrete_bayesian_expected_detection_per_cost",
+          "selected": [
+            1.5,
+            0.0
+          ],
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "path_m": 3.628984591426066,
+              "expected_detection_mass": 0.09410980508034887,
+              "budget_feasible_detection_mass": 0.09410980508034887,
+              "remaining_path_m": 9.433406703380793,
+              "score": 0.02033055051742053
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "path_m": 1.749472873509073,
+              "expected_detection_mass": 0.11625859409090736,
+              "budget_feasible_detection_mass": 0.11625859409090736,
+              "remaining_path_m": 11.312918421297788,
+              "score": 0.042283957485468794
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "path_m": 2.2596355189910904,
+              "expected_detection_mass": 0.1412729390502432,
+              "budget_feasible_detection_mass": 0.1412729390502432,
+              "remaining_path_m": 10.802755775815768,
+              "score": 0.043340102973834775
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "path_m": 3.7596340250583165,
+              "expected_detection_mass": 0.09828444594097774,
+              "budget_feasible_detection_mass": 0.09828444594097774,
+              "remaining_path_m": 9.302757269748543,
+              "score": 0.020649580497898373
+            }
+          ],
+          "hypotheses": 1648,
+          "elapsed_wall_s": 0.10560023796278983,
+          "truth_used": false,
+          "limitation": "2-D map occlusion and uncalibrated detection likelihood; not a reader predictor"
+        },
+        {
+          "event": "search_choice",
+          "time": 287.074,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ],
+            [
+              0.0,
+              -1.5
+            ],
+            [
+              1.5,
+              0.0
+            ]
+          ],
+          "current_pose": [
+            1.5103510250100156,
+            -0.00588973754358081,
+            -0.8145463759921061
+          ],
+          "rule": "discrete_bayesian_expected_detection_per_cost",
+          "selected": [
+            1.5,
+            -1.5
+          ],
+          "options": [
+            {
+              "station": [
+                -1.5,
+                1.5
+              ],
+              "path_m": 4.97136745336284,
+              "expected_detection_mass": 0.08646055842614093,
+              "budget_feasible_detection_mass": 0.08646055842614093,
+              "remaining_path_m": 5.827345354890268,
+              "score": 0.014479189080459242
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "path_m": 1.494146117384892,
+              "expected_detection_mass": 0.07923098790617211,
+              "budget_feasible_detection_mass": 0.07923098790617211,
+              "remaining_path_m": 9.304566690868215,
+              "score": 0.0317667787600374
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "path_m": 1.5059253120117986,
+              "expected_detection_mass": 0.05803776093018979,
+              "budget_feasible_detection_mass": 0.05803776093018979,
+              "remaining_path_m": 9.292787496241308,
+              "score": 0.0231602117796544
+            }
+          ],
+          "hypotheses": 1648,
+          "elapsed_wall_s": 0.06779181899037212,
+          "truth_used": false,
+          "limitation": "2-D map occlusion and uncalibrated detection likelihood; not a reader predictor"
+        }
+      ]
+    },
+    {
+      "case": "absent",
+      "arm": "gain",
+      "output": "/home/krisd/physical-ai-systems/projects/site_localization/results/fresh_inspection_aware_20261028/mission_absent_gain",
+      "continuous_mission": true,
+      "map_sha256": "c9776a7b46b874f2beece341bb97e34a029a09640088bac4a99e2fa7b65225b6",
+      "acquisition_reason": "mapping_endpoint_ready",
+      "acquisition_time_s": 116.066,
+      "acquisition_distance_m": 10.009010134031676,
+      "acquisition_known_free_area_m2": 34.822501037791376,
+      "acquisition_localization": {
+        "samples": 3509,
+        "position_median_m": 0.06944447391315947,
+        "position_p95_m": 0.08938004882143132,
+        "position_max_m": 0.10870217300712989,
+        "heading_p95_deg": 2.590639440813129,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "handoff_seed_position_error_m": 0.08606831461998406,
+      "handoff_success": true,
+      "inspection_localization": {
+        "samples": 2713,
+        "position_median_m": 0.051737791025809374,
+        "position_p95_m": 0.07210835427628717,
+        "position_max_m": 0.08019124151705159,
+        "heading_p95_deg": 2.8940912923718414,
+        "note": "Descriptive within-trajectory errors, not independent trials"
+      },
+      "complete_contract": false,
+      "final_claimed_capture_physically_valid": false,
+      "false_completion": false,
+      "wrong_asset_acceptances": 0,
+      "contacts": 0,
+      "clearance_m": 0.3419076222824534,
+      "resets": 0,
+      "interventions": 0,
+      "all_owned_processes_reaped": true,
+      "total_sim_s": 392.904,
+      "total_path_m": 24.5402934506865,
+      "inspection_wheel_path_m": 14.5853905052116,
+      "captures": 32,
+      "termination": "search_budget_exhausted",
+      "first_id7": null,
+      "approach": null,
+      "stations": [
+        {
+          "station": [
+            -1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 20.330000605915323,
+          "camera_captures": [
+            {
+              "capture": 0,
+              "time_s": 180.506,
+              "camera_yaw_rad": 0.0514474591074458,
+              "decoded_ids": [
+                8
+              ],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 1,
+              "time_s": 184.756,
+              "camera_yaw_rad": 0.7822408066699169,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 2,
+              "time_s": 188.938,
+              "camera_yaw_rad": 1.576631467844427,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 3,
+              "time_s": 193.052,
+              "camera_yaw_rad": 2.35419437535345,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 4,
+              "time_s": 197.37,
+              "camera_yaw_rad": -3.132161713600214,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 5,
+              "time_s": 201.518,
+              "camera_yaw_rad": -2.356202653136509,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 6,
+              "time_s": 205.7,
+              "camera_yaw_rad": -1.5661634121457046,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 7,
+              "time_s": 209.848,
+              "camera_yaw_rad": -0.7777662380015731,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            1.5,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 11.190000333506761,
+          "camera_captures": [
+            {
+              "capture": 8,
+              "time_s": 236.912,
+              "camera_yaw_rad": -0.016413175110944058,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 9,
+              "time_s": 241.094,
+              "camera_yaw_rad": 0.7750733300775142,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 10,
+              "time_s": 245.242,
+              "camera_yaw_rad": 1.5696439683065169,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 11,
+              "time_s": 249.39,
+              "camera_yaw_rad": 2.3416226697683897,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 12,
+              "time_s": 253.47,
+              "camera_yaw_rad": 3.1414980277923,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 13,
+              "time_s": 257.516,
+              "camera_yaw_rad": -2.366946136086056,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 14,
+              "time_s": 261.596,
+              "camera_yaw_rad": -1.5735748387332011,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 15,
+              "time_s": 265.744,
+              "camera_yaw_rad": -0.7891096070891633,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            0.0,
+            -1.5
+          ],
+          "predicted_new_map_free_area_m2": 1.9400000578197603,
+          "camera_captures": [
+            {
+              "capture": 16,
+              "time_s": 294.168,
+              "camera_yaw_rad": -0.008835983909193481,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 17,
+              "time_s": 298.248,
+              "camera_yaw_rad": 0.7729128746564278,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 18,
+              "time_s": 302.43,
+              "camera_yaw_rad": 1.5645261783756126,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 19,
+              "time_s": 306.578,
+              "camera_yaw_rad": 2.35919404547246,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 20,
+              "time_s": 310.624,
+              "camera_yaw_rad": 3.1381680089144215,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 21,
+              "time_s": 314.738,
+              "camera_yaw_rad": -2.3525131813741678,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 22,
+              "time_s": 318.852,
+              "camera_yaw_rad": -1.5712315519748343,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 23,
+              "time_s": 327.046,
+              "camera_yaw_rad": -0.8208405765707357,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        },
+        {
+          "station": [
+            1.5,
+            1.5
+          ],
+          "predicted_new_map_free_area_m2": 0.030000000894120003,
+          "camera_captures": [
+            {
+              "capture": 24,
+              "time_s": 361.726,
+              "camera_yaw_rad": 0.014494257903381018,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 25,
+              "time_s": 365.772,
+              "camera_yaw_rad": 0.7805363291549403,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 26,
+              "time_s": 369.852,
+              "camera_yaw_rad": 1.5752425490319688,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 27,
+              "time_s": 373.898,
+              "camera_yaw_rad": 2.356938493061992,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 28,
+              "time_s": 378.046,
+              "camera_yaw_rad": -3.128856325913334,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 29,
+              "time_s": 382.194,
+              "camera_yaw_rad": -2.35659239679574,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 30,
+              "time_s": 386.274,
+              "camera_yaw_rad": -1.5554437304174098,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            },
+            {
+              "capture": 31,
+              "time_s": 390.388,
+              "camera_yaw_rad": -0.7768765375089315,
+              "decoded_ids": [],
+              "target_rendered": false,
+              "target_usable_image": false,
+              "target_diameter_px": null,
+              "target_visibility": null
+            }
+          ],
+          "decoded_target_count": 0
+        }
+      ],
+      "search_choice_logs": [
+        {
+          "event": "search_choice",
+          "time": 210.132,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            -1.4807575377404623,
+            -1.5090384501335425,
+            -0.7930505221860475
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                0.0,
+                -1.5
+              ],
+              "new_visible_area_m2": 6.670000198792681,
+              "path_m": 1.4807851225468243,
+              "weighted_graph_cost": 1.5784219576871634,
+              "gain_per_effort": 2.6886650271205768
+            },
+            {
+              "station": [
+                1.5,
+                -1.5
+              ],
+              "new_visible_area_m2": 11.190000333506761,
+              "path_m": 3.0875401925254327,
+              "weighted_graph_cost": 3.5626606186269356,
+              "gain_per_effort": 2.7375878416973234
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 9.080000270620321,
+              "path_m": 3.6673108787716484,
+              "weighted_graph_cost": 4.2719577986588835,
+              "gain_per_effort": 1.9454457837636077
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 8.13000024230652,
+              "path_m": 5.167114583663377,
+              "weighted_graph_cost": 5.977685033870011,
+              "gain_per_effort": 1.3182826639613292
+            }
+          ],
+          "selected": [
+            1.5,
+            -1.5
+          ],
+          "sampled_map_cells": 3475,
+          "elapsed_wall_s": 0.2784780509537086,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        },
+        {
+          "event": "search_choice",
+          "time": 266.014,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ],
+            [
+              1.5,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            1.4781722575170004,
+            -1.4865315926643643,
+            -0.8081898461202833
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                0.0,
+                -1.5
+              ],
+              "new_visible_area_m2": 1.9400000578197603,
+              "path_m": 1.6402508104483335,
+              "weighted_graph_cost": 1.9934328428428523,
+              "gain_per_effort": 0.7347786998653868
+            },
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 0.15000000447060002,
+              "path_m": 1.4866918397338285,
+              "weighted_graph_cost": 1.6245742103387755,
+              "gain_per_effort": 0.06032110697184569
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 0.17000000506668,
+              "path_m": 2.9866113580987146,
+              "weighted_graph_cost": 3.3303014455499036,
+              "gain_per_effort": 0.04264273333825949
+            }
+          ],
+          "selected": [
+            0.0,
+            -1.5
+          ],
+          "sampled_map_cells": 3475,
+          "elapsed_wall_s": 0.019624715903773904,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        },
+        {
+          "event": "search_choice",
+          "time": 327.306,
+          "visited": [
+            [
+              -1.5,
+              -1.5
+            ],
+            [
+              1.5,
+              -1.5
+            ],
+            [
+              0.0,
+              -1.5
+            ]
+          ],
+          "current_pose": [
+            0.01781174709099778,
+            -1.4894111052842132,
+            -0.8282735717956353
+          ],
+          "rule": "max_new_map_visible_area_per_path_plus_1m",
+          "options": [
+            {
+              "station": [
+                1.5,
+                0.0
+              ],
+              "new_visible_area_m2": 0.020000000596080002,
+              "path_m": 2.2305085846962083,
+              "weighted_graph_cost": 2.66116541216869,
+              "gain_per_effort": 0.006190975839168299
+            },
+            {
+              "station": [
+                1.5,
+                1.5
+              ],
+              "new_visible_area_m2": 0.030000000894120003,
+              "path_m": 3.7302249212492433,
+              "weighted_graph_cost": 4.366892647379818,
+              "gain_per_effort": 0.006342193319254903
+            }
+          ],
+          "selected": [
+            1.5,
+            1.5
+          ],
+          "sampled_map_cells": 3475,
+          "elapsed_wall_s": 0.05924432200845331,
+          "truth_used": false,
+          "limitation": "2D map upper bound; no elevated occlusion, marker orientation or readability"
+        }
+      ]
+    }
+  ],
+  "attempted_runs": 12
+}

@@ -1,0 +1,160 @@
+{
+  "case": "visible",
+  "return_required": false,
+  "correct_physical_inspection": true,
+  "complete_contract": true,
+  "success_claim": true,
+  "false_completion": false,
+  "wrong_asset_acceptances": 0,
+  "contacts": 0,
+  "contact_system_live": true,
+  "clearance_m": 0.29893411163985417,
+  "total_sim_s": 181.254,
+  "total_path_m": 13.933042602822919,
+  "acquisition": {
+    "reason": "mapping_endpoint_ready",
+    "exploration_termination": "no_eligible_frontier",
+    "time": 130.5,
+    "wheel_distance_m": 10.067835306668158,
+    "frontier_goals": 4,
+    "failed_goals": [],
+    "visited": [
+      {
+        "point": [
+          1.198365647150497,
+          -0.44310422961683127
+        ],
+        "area": 21.28250063426793
+      },
+      {
+        "point": [
+          2.748365670247297,
+          0.755950362944299
+        ],
+        "area": 34.09500101611019
+      },
+      {
+        "point": [
+          3.3317018982300555,
+          -0.49941337041472567
+        ],
+        "area": 34.94500104144216
+      },
+      {
+        "point": [
+          0.8002655229757285,
+          3.450586688444861
+        ],
+        "area": 36.39500108465553
+      }
+    ],
+    "map_messages": 138,
+    "known_free_area_m2": 36.39500108465553,
+    "complete_environment_claim": false
+  },
+  "acquisition_time_s": 130.5,
+  "acquisition_physical_distance_m": 10.022316465074285,
+  "physical_dock_return": false,
+  "end_dock_dwell_s": 0.0,
+  "handoff_success": true,
+  "interventions": 0,
+  "resets_after_start": 0,
+  "infrastructure_failure": false,
+  "termination": "inspection_finished",
+  "inspection_abstentions": 0,
+  "incorrect_numeric_acceptances": 0,
+  "observations": 3,
+  "recoveries": 0,
+  "navigation_failure": false,
+  "inspection_reason": "fresh_identity_and_inspection",
+  "honest_noncompletion": false,
+  "handoff_physical_motion_m": 0.0,
+  "handoff_continuous_truth_coverage": true,
+  "handoff_seed_position_error_m": 0.04409180432556728,
+  "handoff_seed_heading_error_deg": 1.5643212031376537,
+  "first_localization_ready": {
+    "event": "localization_ready",
+    "time": 137.566,
+    "seed": [
+      -1.1773224698285119,
+      1.4332424752849287,
+      -1.5566564030925223
+    ],
+    "estimate": [
+      -1.1492891606914981,
+      1.4344488916902336,
+      -1.5358541986814425
+    ],
+    "difference": [
+      0.02803330913701374,
+      0.0012064164053049442,
+      0.020802204411079828
+    ]
+  },
+  "inspection_time_s": 44.894000000000005,
+  "inspection_path_m": 3.925988224325037,
+  "task_decision_time_s": 178.99,
+  "decision_physical_path_m": 13.933042602822919,
+  "all_observations": [
+    {
+      "id": 0,
+      "time": 171.054,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": true,
+      "distance_m": 1.4702382718908626,
+      "heading_error_deg": 1.97549133676678,
+      "stationary_before_capture_s": 2.312000000000012,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 1,
+      "time": 171.87,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "not_requested",
+      "reading_value": null,
+      "error_interval_MPa": null,
+      "reading_valid": false,
+      "actual_target_visible": true,
+      "distance_m": 1.4702382718908626,
+      "heading_error_deg": 1.97549133676678,
+      "stationary_before_capture_s": 3.1280000000000143,
+      "valid_physical_inspection": false,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    },
+    {
+      "id": 2,
+      "time": 178.228,
+      "observed_ids": [
+        7
+      ],
+      "identity_decision": "unique_target_marker_observed",
+      "reading_decision": "accept",
+      "reading_value": 6.204152289503443,
+      "error_interval_MPa": [
+        0,
+        0.2958477104965569
+      ],
+      "reading_valid": true,
+      "actual_target_visible": true,
+      "distance_m": 1.127408894994238,
+      "heading_error_deg": 2.614113908251213,
+      "stationary_before_capture_s": 2.27800000000002,
+      "valid_physical_inspection": true,
+      "wrong_asset_reading_accept": false,
+      "incorrect_numeric_accept": false
+    }
+  ]
+}
