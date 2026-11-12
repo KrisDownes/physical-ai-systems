@@ -1,0 +1,16 @@
+{
+  "cpu_wall_s": 51.88,
+  "gpu_wall_s": 33.16,
+  "cpu_over_gpu_ratio": 1.5645355850422198,
+  "max_abs_main_differences": {
+    "tx": 3.1369075004228364e-08,
+    "ty": 1.1806383151506672e-08,
+    "vx": 4.704661125953802e-08,
+    "wz": 2.0442130411156556e-07
+  },
+  "max_abs_adaptation_differences": {
+    "adaptation_cmd_lin_x": 9.73642069745928e-11,
+    "adaptation_cmd_ang_z": 3.343821233792177e-09
+  },
+  "note": "one 15-cycle instrumented run per backend; includes initialization and compilation, not steady-state or completed course"
+}

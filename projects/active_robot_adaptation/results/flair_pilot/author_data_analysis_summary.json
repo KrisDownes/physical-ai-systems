@@ -1,0 +1,149 @@
+{
+  "warning": "Re-analysis of published data, not a new reproduction. Non-authors angular modes are sensitivity checks and change the published metric.",
+  "analyses": [
+    {
+      "analysis": "results/flair_pilot/author_data_20_reps.json",
+      "angular_mode": "authors",
+      "repetition_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "tracking_errors": {
+        "medians": {
+          "flair": 0.04431251656506932,
+          "flair_nominal": 0.043696972496866916,
+          "driver": 0.05032235446403975,
+          "driver_nominal": 0.0459916493197926
+        },
+        "driver_overhead_percent": 9.416285800351643,
+        "flair_overhead_percent": -3.650951378255223,
+        "recovered_overhead_percent": 138.77273328002514
+      },
+      "completion_times": {
+        "medians": {
+          "flair": 170.95,
+          "flair_nominal": 151.65000000000003,
+          "driver": 196.95000000000002,
+          "driver_nominal": 180.75
+        },
+        "driver_overhead_percent": 8.96265560165976,
+        "flair_overhead_percent": -5.421853388658374,
+        "recovered_overhead_percent": 160.49382716049382
+      }
+    },
+    {
+      "analysis": "results/flair_pilot/author_data_20_reps_raw_wz_diagnostic.json",
+      "angular_mode": "raw_simulator",
+      "repetition_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "tracking_errors": {
+        "medians": {
+          "flair": 0.04651242984105236,
+          "flair_nominal": 0.03875160439138085,
+          "driver": 0.05277531552148805,
+          "driver_nominal": 0.03957700910360196
+        },
+        "driver_overhead_percent": 33.34841797503313,
+        "flair_overhead_percent": 17.523862703458313,
+        "recovered_overhead_percent": 47.45219183537325
+      },
+      "completion_times": {
+        "medians": {
+          "flair": 170.95,
+          "flair_nominal": 151.65000000000003,
+          "driver": 196.95000000000002,
+          "driver_nominal": 180.75
+        },
+        "driver_overhead_percent": 8.96265560165976,
+        "flair_overhead_percent": -5.421853388658374,
+        "recovered_overhead_percent": 160.49382716049382
+      }
+    },
+    {
+      "analysis": "results/flair_pilot/author_data_20_reps_negative_wz_diagnostic.json",
+      "angular_mode": "negative_raw",
+      "repetition_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "tracking_errors": {
+        "medians": {
+          "flair": 0.04713560656049093,
+          "flair_nominal": 0.04727780321276281,
+          "driver": 0.04958044955012647,
+          "driver_nominal": 0.04743049801038632
+        },
+        "driver_overhead_percent": 4.532846227482909,
+        "flair_overhead_percent": -0.6217338258409495,
+        "recovered_overhead_percent": 113.71619054869635
+      },
+      "completion_times": {
+        "medians": {
+          "flair": 170.95,
+          "flair_nominal": 151.65000000000003,
+          "driver": 196.95000000000002,
+          "driver_nominal": 180.75
+        },
+        "driver_overhead_percent": 8.96265560165976,
+        "flair_overhead_percent": -5.421853388658374,
+        "recovered_overhead_percent": 160.49382716049382
+      }
+    }
+  ]
+}

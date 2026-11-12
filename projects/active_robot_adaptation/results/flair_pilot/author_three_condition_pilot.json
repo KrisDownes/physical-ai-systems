@@ -1,0 +1,28 @@
+{
+  "warning": "One unpaired completed run per condition; seed unknown; author metric has unresolved angular conversion and nominal simulation-clock discrepancy. Not a paper reproduction or physical result.",
+  "files": {
+    "flair": "results/flair_pilot/author_raw_gpu_02/author_metric.json",
+    "driver": "results/flair_pilot/author_driver_damaged_platform_01/author_metric.json",
+    "driver_nominal": "results/flair_pilot/author_driver_nominal_platform_01/author_metric.json"
+  },
+  "metrics": {
+    "tracking_errors": {
+      "values": {
+        "flair": 0.044005173731787986,
+        "driver": 0.050072346245935054,
+        "driver_nominal": 0.04598976317938962
+      },
+      "denominator": 0.004082583066545437,
+      "one_run_recovered_overhead_percent": 148.61112230304067
+    },
+    "completion_times": {
+      "values": {
+        "flair": 169.8,
+        "driver": 199.6,
+        "driver_nominal": 181.3
+      },
+      "denominator": 18.299999999999983,
+      "one_run_recovered_overhead_percent": 162.84153005464486
+    }
+  }
+}

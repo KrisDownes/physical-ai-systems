@@ -1,0 +1,267 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+
+Initialising the pipeline.
+  Saving main metrics in /home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_main_no_flair.csv.
+
+  Applying BROKEN LEG perturbation.
+
+  Initialising the environment: hexapod_no_reward_velocity.
+    Using legacy_spring=False.
+    Using local hexapod
+!! USING DAMAGED CONFIG !!
+    Repeating the environment 5 times between sensor readings.
+
+    Using grid with resolution: 50 and min/max: -0.075, 0.075.
+    Loading the repertoire in map_elites_map/repertoire_MAP-Elites_180813/.
+!!!WARNING!!! Perturbation is applied as part of the environment.
+
+ NOT using FLAIR.
+
+        DEBUG: New introspection:: [0. 0. 0. 0. 0.]
+        DEBUG: RESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GP
+  Saving configuration in /home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/flair_pilot/author_driver_damaged_platform_01/upstream/gp_collection_configuration.csv.
+  Saving configuration in /home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/flair_pilot/author_driver_damaged_platform_01/upstream/gp_training_configuration.csv.
+  Saving configuration in /home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/flair_pilot/author_driver_damaged_platform_01/upstream/vicon_configuration.csv.
+
+Done initialising the pipeline, took: 15.305787801742554.
+
+Performing rep 1 / 1.
+
+  Initialising and reseting elements.
+
+        DEBUG: RESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GPRESETING GP
+  Saving main metrics in /home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_main_0.csv.
+  Saving gp_damage_introspection metrics in /home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_gp_damage_introspection_0.csv.
+  Saving learnt_state_functions metrics in /home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_learnt_state_functions_0.csv.
+  Saving adaptation metrics in /home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_adaptation_0.csv.
+
+  Done initialising and reseting, took: 0.7348039150238037.
+
+  Driver starting.
+
+  Driver - reached target 0, at: (0.0, 0.0), sensors: (0.0, 0.0).
+  Driver - next target: 1, at: (1.6709, 0.0), lap: 0.
+        DEBUG: NO DATAPOINT: not enough datapoints yet.
+
+    Debug - total_timesteps: 0.
+    Debug - Human: 0.03, 0.0.
+    Debug - Adapt: 0.03, 0.0.
+    Debug - Targets: 1.6709, 0.0.
+    Debug - Sensors: 0.016377519261166297, -0.007506863546810146.
+        DEBUG: NO DATAPOINT: not enough datapoints yet.
+        DEBUG: NO DATAPOINT: not enough datapoints yet.
+        DEBUG: NO DATAPOINT: not enough datapoints yet.
+        DEBUG: NO DATAPOINT: not enough datapoints yet.
+        DEBUG: NO DATAPOINT: not enough datapoints yet.
+
+    Debug - total_timesteps: 100.
+    Debug - Human: 0.03, -0.034744825576175996.
+    Debug - Adapt: 0.03, -0.034744825576175996.
+    Debug - Targets: 1.6709, 0.0.
+    Debug - Sensors: 1.3127439405833716, 0.06430532378648939.
+
+  Driver - reached target 1, at: (1.6709, 0.0), sensors: (1.3793616784774352, 0.06047846629423052).
+  Driver - next target: 2, at: (1.888, -0.2932), lap: 0.
+
+  Driver - reached target 2, at: (1.888, -0.2932), sensors: (1.74730565262407, -0.028932737364695732).
+  Driver - next target: 3, at: (1.9387, -3.5509), lap: 0.
+
+    Debug - total_timesteps: 200.
+    Debug - Human: 0.03, -0.03906540047839793.
+    Debug - Adapt: 0.03, -0.03906540047839793.
+    Debug - Targets: 1.9387, -3.5509.
+    Debug - Sensors: 2.0389493385125825, -0.8038703690720501.
+
+    Debug - total_timesteps: 300.
+    Debug - Human: 0.03, -0.03856679510905315.
+    Debug - Adapt: 0.03, -0.03856679510905315.
+    Debug - Targets: 1.9387, -3.5509.
+    Debug - Sensors: 2.132951017467342, -1.9127687757945084.
+
+    Debug - total_timesteps: 400.
+    Debug - Human: 0.03, -0.039233024040411985.
+    Debug - Adapt: 0.03, -0.039233024040411985.
+    Debug - Targets: 1.9387, -3.5509.
+    Debug - Sensors: 2.0976967297348827, -3.0360422362287007.
+
+  Driver - reached target 3, at: (1.9387, -3.5509), sensors: (2.0548539363121607, -3.2750023882682835).
+  Driver - next target: 4, at: (1.5123, -3.9147), lap: 0.
+
+  Driver - reached target 4, at: (1.5123, -3.9147), sensors: (1.769800514423925, -3.7754241214035758).
+  Driver - next target: 5, at: (0.2934, -4.0404), lap: 0.
+
+    Debug - total_timesteps: 500.
+    Debug - Human: 0.03, -0.04319969560854578.
+    Debug - Adapt: 0.03, -0.04319969560854578.
+    Debug - Targets: 0.2934, -4.0404.
+    Debug - Sensors: 1.1097882214797474, -4.050114428679892.
+
+  Driver - reached target 5, at: (0.2934, -4.0404), sensors: (0.577495873788235, -4.103039145721463).
+  Driver - next target: 6, at: (-0.1386, -3.6393), lap: 0.
+
+  Driver - reached target 6, at: (-0.1386, -3.6393), sensors: (-0.026492446807663605, -3.9067490925329023).
+  Driver - next target: 7, at: (-0.0925, -3.2346), lap: 0.
+
+    Debug - total_timesteps: 600.
+    Debug - Human: 0.005, -0.05.
+    Debug - Adapt: 0.005, -0.05.
+    Debug - Targets: -0.0925, -3.2346.
+    Debug - Sensors: -0.08153648389527386, -3.810789174334287.
+
+  Driver - reached target 7, at: (-0.0925, -3.2346), sensors: (-0.20965658149994928, -3.5078425212506095).
+  Driver - next target: 8, at: (0.1227, -2.9944), lap: 0.
+
+  Driver - reached target 8, at: (0.1227, -2.9944), sensors: (-0.11984062857483486, -3.1495552956807926).
+  Driver - next target: 9, at: (0.8593, -2.8947), lap: 0.
+
+    Debug - total_timesteps: 700.
+    Debug - Human: 0.03, -0.05.
+    Debug - Adapt: 0.03, -0.05.
+    Debug - Targets: 0.8593, -2.8947.
+    Debug - Sensors: 0.2798651827675576, -2.8528244883529346.
+
+  Driver - reached target 9, at: (0.8593, -2.8947), sensors: (0.5785862437653585, -2.808783557874582).
+  Driver - next target: 10, at: (1.3667, -2.4766), lap: 0.
+
+  Driver - reached target 10, at: (1.3667, -2.4766), sensors: (1.092569860224102, -2.5882815289339516).
+  Driver - next target: 11, at: (1.2234, -1.9821), lap: 0.
+
+  Driver - reached target 11, at: (1.2234, -1.9821), sensors: (1.3399528297655336, -2.2531479911083827).
+  Driver - next target: 12, at: (0.7467, -1.4822), lap: 0.
+
+    Debug - total_timesteps: 800.
+    Debug - Human: 0.03, 0.04399092137430873.
+    Debug - Adapt: 0.03, 0.04399092137430873.
+    Debug - Targets: 0.7467, -1.4822.
+    Debug - Sensors: 1.2771184543328327, -1.843715213599451.
+
+  Driver - reached target 12, at: (0.7467, -1.4822), sensors: (1.041376632825433, -1.486429291645826).
+  Driver - next target: 13, at: (0.1394, -1.5539), lap: 0.
+
+  Driver - reached target 13, at: (0.1394, -1.5539), sensors: (0.327059534822191, -1.320977383106514).
+  Driver - next target: 14, at: (-0.4154, -1.1592), lap: 0.
+
+    Debug - total_timesteps: 900.
+    Debug - Human: 0.03, -0.04354798551262845.
+    Debug - Adapt: 0.03, -0.04354798551262845.
+    Debug - Targets: -0.4154, -1.1592.
+    Debug - Sensors: -0.004402345417372044, -1.342165641156351.
+
+  Driver - reached target 14, at: (-0.4154, -1.1592), sensors: (-0.16037268649009687, -1.306341628506878).
+  Driver - next target: 15, at: (-0.3682, -0.3121), lap: 0.
+
+  Driver - reached target 15, at: (-0.3682, -0.3121), sensors: (-0.5030833870504932, -0.5630966339214916).
+  Driver - next target: 16, at: (0.0, 0.0), lap: 1.
+
+    Debug - total_timesteps: 1000.
+    Debug - Human: 0.03, -0.05.
+    Debug - Adapt: 0.03, -0.05.
+    Debug - Targets: 0.0, 0.0.
+    Debug - Sensors: -0.36567967453855826, -0.18720542954637487.
+
+  Driver - reached target 16, at: (0.0, 0.0), sensors: (-0.2859733731567146, -0.08838329689288227).
+  Driver - next target: 17, at: (1.6709, 0.0), lap: 1.
+
+    Debug - total_timesteps: 1100.
+    Debug - Human: 0.03, -0.04804064200088701.
+    Debug - Adapt: 0.03, -0.04804064200088701.
+    Debug - Targets: 1.6709, 0.0.
+    Debug - Sensors: 0.8208959433972363, 0.14755853196371227.
+
+  Driver - reached target 17, at: (1.6709, 0.0), sensors: (1.3977320623301102, 0.12069397510283551).
+  Driver - next target: 18, at: (1.888, -0.2932), lap: 1.
+
+  Driver - reached target 18, at: (1.888, -0.2932), sensors: (1.7967703585443704, -0.02329503581403378).
+  Driver - next target: 19, at: (1.9387, -3.5509), lap: 1.
+
+    Debug - total_timesteps: 1200.
+    Debug - Human: 0.03, -0.05.
+    Debug - Adapt: 0.03, -0.05.
+    Debug - Targets: 1.9387, -3.5509.
+    Debug - Sensors: 1.959280165172485, -0.2741887138696188.
+
+    Debug - total_timesteps: 1300.
+    Debug - Human: 0.03, -0.03845262194473779.
+    Debug - Adapt: 0.03, -0.03845262194473779.
+    Debug - Targets: 1.9387, -3.5509.
+    Debug - Sensors: 2.119341887318378, -1.4542253804204868.
+
+    Debug - total_timesteps: 1400.
+    Debug - Human: 0.03, -0.039105979049355706.
+    Debug - Adapt: 0.03, -0.039105979049355706.
+    Debug - Targets: 1.9387, -3.5509.
+    Debug - Sensors: 2.142649815217989, -2.5707806820724266.
+
+  Driver - reached target 19, at: (1.9387, -3.5509), sensors: (2.054536978177615, -3.2831981353171877).
+  Driver - next target: 20, at: (1.5123, -3.9147), lap: 1.
+
+  Driver - reached target 20, at: (1.5123, -3.9147), sensors: (1.773487851966324, -3.7736531532089383).
+  Driver - next target: 21, at: (0.2934, -4.0404), lap: 1.
+
+    Debug - total_timesteps: 1500.
+    Debug - Human: 0.03, -0.05.
+    Debug - Adapt: 0.03, -0.05.
+    Debug - Targets: 0.2934, -4.0404.
+    Debug - Sensors: 1.6781038096630458, -3.8534916609914394.
+
+  Driver - reached target 21, at: (0.2934, -4.0404), sensors: (0.5806158981972568, -4.103857420415144).
+  Driver - next target: 22, at: (-0.1386, -3.6393), lap: 1.
+
+    Debug - total_timesteps: 1600.
+    Debug - Human: 0.03, -0.05.
+    Debug - Adapt: 0.03, -0.05.
+    Debug - Targets: -0.1386, -3.6393.
+    Debug - Sensors: 0.39341331737152097, -4.09434145447832.
+
+  Driver - reached target 22, at: (-0.1386, -3.6393), sensors: (-0.031560202279026874, -3.8957125451023438).
+  Driver - next target: 23, at: (-0.0925, -3.2346), lap: 1.
+
+  Driver - reached target 23, at: (-0.0925, -3.2346), sensors: (-0.22169527314405718, -3.4884280568402395).
+  Driver - next target: 24, at: (0.1227, -2.9944), lap: 1.
+
+  Driver - reached target 24, at: (0.1227, -2.9944), sensors: (-0.1224063567126957, -3.1341083044066815).
+  Driver - next target: 25, at: (0.8593, -2.8947), lap: 1.
+
+    Debug - total_timesteps: 1700.
+    Debug - Human: 0.005, -0.05.
+    Debug - Adapt: 0.005, -0.05.
+    Debug - Targets: 0.8593, -2.8947.
+    Debug - Sensors: -0.04577032032379068, -3.0528074201191435.
+
+  Driver - reached target 25, at: (0.8593, -2.8947), sensors: (0.5886287841179417, -2.8099754213497103).
+  Driver - next target: 26, at: (1.3667, -2.4766), lap: 1.
+
+  Driver - reached target 26, at: (1.3667, -2.4766), sensors: (1.103603631121554, -2.5937051653070498).
+  Driver - next target: 27, at: (1.2234, -1.9821), lap: 1.
+
+  Driver - reached target 27, at: (1.2234, -1.9821), sensors: (1.3399332486196027, -2.253241034357318).
+  Driver - next target: 28, at: (0.7467, -1.4822), lap: 1.
+
+    Debug - total_timesteps: 1800.
+    Debug - Human: 0.03, 0.05.
+    Debug - Adapt: 0.03, 0.05.
+    Debug - Targets: 0.7467, -1.4822.
+    Debug - Sensors: 1.3499094261719937, -2.1900298573630885.
+
+  Driver - reached target 28, at: (0.7467, -1.4822), sensors: (1.0432671250475636, -1.486952093109369).
+  Driver - next target: 29, at: (0.1394, -1.5539), lap: 1.
+
+    Debug - total_timesteps: 1900.
+    Debug - Human: 0.03, 0.045989151529559597.
+    Debug - Adapt: 0.03, 0.045989151529559597.
+    Debug - Targets: 0.1394, -1.5539.
+    Debug - Sensors: 0.4209261029721018, -1.3085785405802677.
+
+  Driver - reached target 29, at: (0.1394, -1.5539), sensors: (0.3173248414186217, -1.32280035800576).
+  Driver - next target: 30, at: (-0.4154, -1.1592), lap: 1.
+
+  Driver - reached target 30, at: (-0.4154, -1.1592), sensors: (-0.1658678610459529, -1.3162007237938664).
+  Driver - next target: 31, at: (-0.3682, -0.3121), lap: 1.
+  Driver is done.
+
+Done with rep 1 / 1, took: 743.1272120475769.
+
+Done with all replications and runs, took 745.7025053501129

@@ -1,0 +1,20 @@
+{
+  "warning": "One completed author-example evaluation, not a 20-repetition paper reproduction. Author analysis applies -wz*pi/180; its suitability for these simulation values remains unresolved.",
+  "source_csv": "results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_main_no_flair.csv",
+  "source_log": "results/flair_pilot/author_driver_damaged_platform_01/run.txt",
+  "data_rows": 9981,
+  "tracking_errors": {
+    "Chicane Broken Middle Leg": {
+      "Driver": [
+        0.050072346245935054
+      ]
+    }
+  },
+  "completion_times": {
+    "Chicane Broken Middle Leg": {
+      "Driver": [
+        199.6
+      ]
+    }
+  }
+}
