@@ -1,2 +1,4 @@
 .venv/
+.venv-so101/
+.so101-model/
 results/*.png

@@ -1,0 +1,9 @@
+{
+  "description": "Follow-up ablation, parameters fixed before execution; reuses cases already inspected in the initial comparison, so is not an independent final test.",
+  "methods": ["global", "gp"],
+  "rls_forgetting": 0.97,
+  "gp_history": 16,
+  "gp_length": 1.2,
+  "gp_regularization": 0.0015,
+  "source_conditions_and_cases": "so101/frozen_comparison.json"
+}

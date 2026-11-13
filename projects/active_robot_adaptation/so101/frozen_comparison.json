@@ -1,0 +1,17 @@
+{
+  "description": "Fixed before the held-out SO-101 comparison; independent reset per episode.",
+  "cases": [
+    {"id": 0, "object_xy": [0.217, 0.021], "initial_pan": -0.58, "seed": 701},
+    {"id": 1, "object_xy": [0.228, 0.028], "initial_pan": -0.62, "seed": 702},
+    {"id": 2, "object_xy": [0.213, 0.029], "initial_pan": -0.57, "seed": 703},
+    {"id": 3, "object_xy": [0.232, 0.022], "initial_pan": -0.63, "seed": 704}
+  ],
+  "conditions": [
+    {"name": "none", "camera_shift_m": [0, 0], "joint_gain": [1, 1, 1, 1, 1]},
+    {"name": "camera", "camera_shift_m": [0.012, -0.008], "joint_gain": [1, 1, 1, 1, 1]},
+    {"name": "gain", "camera_shift_m": [0, 0], "joint_gain": [1, 0.7, 0.8, 1, 1]}
+  ],
+  "methods": ["nominal", "recalibration", "online"],
+  "readiness": "At least 5 of 6 development placements, including two initial arm configurations.",
+  "success": "Both jaw contacts after closing, object lifted > 0.035 m, and final center within 0.035 m of destination after release and 3.5 seconds settling."
+}

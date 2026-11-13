@@ -1,0 +1,27 @@
+{
+  "base_git_commit": "76be36aefa62e36ededa36b78e8945dd6fb2cfb5",
+  "local_code_uncommitted_at_run": true,
+  "model_revision": "370c43965323c0944b433b202aac5058b5f907a9",
+  "model_sha256": "982c02c027ec0c62d3459d0a6eb00dfb7dc13a451992e72ce99addc71f209805",
+  "source_sha256": {
+    "requirements-so101.lock.txt": "1e2cf598bc94c66b078692e4eb73565c92c9e0ea6f6b25d3362d9905e3b31ad0",
+    "so101/audit_traces.py": "f47e3e266e43ab7dd1b9526461cebd66e71e77e186c61e23977f26f6f285a59a",
+    "so101/checks.py": "9f568a667f0f009bbb78825895034bd5fd1ef6a2d8536ac7d4d6f8bc71863e37",
+    "so101/compare.py": "d6a263a2723ea8620344018be4adc9bf46d64a1eda90b7337c4b920ce86ea352",
+    "so101/environment.py": "7ad17823dcf3dc59f88c25510883f264321aa4b417e12b9d35c289be98873f75",
+    "so101/fetch_model.sh": "34064a7aa62b16459fe92e6df1b1fab266ae8fd579f6d7c11eec8fde58dab8b0",
+    "so101/frozen_comparison.json": "b31b956f6811bc9c588448dacf734ea72c1fb1a580eb6b3706c2beb46d7863e5",
+    "so101/frozen_transfer.json": "db2c58f0f5f9b16605c183d7d9afe080181234cb437438fd6ceefc85b92653fb",
+    "so101/nominal.py": "fc247f0ac9c25c38e27fecc4ada3cfe5464aa472c0c52bce83d666915a0f9aa8",
+    "so101/pilot.py": "4e29b1ae8ceca7d47cce1e2ba51d6439c0fa60067318acf3e7a71bfa76e9a035",
+    "so101/plot_results.py": "0726a1f29c70def191f822548dc3a532308cdbe3c90aaa6d88f91922ec52aa57",
+    "so101/provenance.py": "5f39d07690d6948eb4858ef5f80f1ba0395b84dfdc2f71bafb2324bbc8b6eefa",
+    "so101/rl_interface.py": "b43900ac85ec648905659c87be4a3d0854a18e714228150561cb6db845eca130",
+    "so101/scene.xml": "c7faab1b5d89e00cfc438d36f5cd4b77e1fff11bc7cefbf3b3155e508e513613",
+    "so101/test_environment.py": "3dc01a5e27cb690d4f5448974280a529e9f3d8829ed63e858226f1a975583931",
+    "so101/view.py": "74bf81b3446aeb06da16d2c5a1776befc2ce438dccf4bf8151e1ed97d4978f87"
+  },
+  "python": "3.12.3",
+  "numpy": "2.5.4",
+  "mujoco": "4.0.1"
+}

@@ -1,0 +1,601 @@
+{
+  "cases": [
+    {
+      "visible": true,
+      "stages": {
+        "approach": true,
+        "reach": true,
+        "lift": true,
+        "transport": true,
+        "lower": true
+      },
+      "success": true,
+      "failure": null,
+      "evaluation": {
+        "grasp_contact": true,
+        "lifted": true,
+        "placed": true,
+        "success": true,
+        "snapshots": {
+          "initial_z": 0.0201,
+          "after_close": {
+            "object_xyz": [
+              0.21989005533832207,
+              0.014357916320726352,
+              0.018919387414164504
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "fixed_jaw_sph_tip1",
+              "fixed_jaw_sph_tip2",
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "moving_jaw_sph_tip1",
+              "moving_jaw_sph_tip2",
+              "moving_jaw_sph_tip3",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null
+            ]
+          },
+          "after_lift": {
+            "object_xyz": [
+              0.21627180220582815,
+              0.0043724682733791015,
+              0.06093968630522138
+            ],
+            "contacts": [
+              "fixed_jaw_sph_tip1",
+              "fixed_jaw_sph_tip2",
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "moving_jaw_sph_tip1",
+              "moving_jaw_sph_tip2",
+              "moving_jaw_sph_tip3",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null
+            ]
+          },
+          "after_settle": {
+            "object_xyz": [
+              0.20543919742288744,
+              -0.06686028473187237,
+              0.019892244579783846
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          }
+        }
+      },
+      "case": 0,
+      "initial_object_xy": [
+        0.22,
+        0.024
+      ],
+      "initial_pan": -0.6,
+      "seed": 0,
+      "action_count": 82,
+      "movement_rad": 2.649350587185453,
+      "simulation_s": 8.69999999999996,
+      "controller_compute_s": 0.004158245952567086,
+      "wall_s": 3.225619305012515
+    },
+    {
+      "visible": true,
+      "stages": {
+        "approach": true,
+        "reach": true,
+        "lift": true,
+        "transport": true,
+        "lower": true
+      },
+      "success": false,
+      "failure": "placement",
+      "evaluation": {
+        "grasp_contact": true,
+        "lifted": true,
+        "placed": false,
+        "success": false,
+        "snapshots": {
+          "initial_z": 0.0201,
+          "after_close": {
+            "object_xyz": [
+              0.21405819392344005,
+              0.00022738833101058678,
+              0.019973175383505067
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box6",
+              null,
+              null,
+              "moving_jaw_sph_tip2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_lift": {
+            "object_xyz": [
+              0.22537851871415926,
+              -0.008240671483453513,
+              0.0631821555298195
+            ],
+            "contacts": [
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box6",
+              null,
+              null,
+              "moving_jaw_sph_tip2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null
+            ]
+          },
+          "after_settle": {
+            "object_xyz": [
+              0.250067322973893,
+              -0.09778057566898388,
+              0.01989224457978385
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          }
+        }
+      },
+      "case": 1,
+      "initial_object_xy": [
+        0.215,
+        0.015
+      ],
+      "initial_pan": -0.55,
+      "seed": 1,
+      "action_count": 72,
+      "movement_rad": 2.392279555554951,
+      "simulation_s": 7.699999999999858,
+      "controller_compute_s": 0.002520892070606351,
+      "wall_s": 2.5179635959793814
+    },
+    {
+      "visible": true,
+      "stages": {
+        "approach": true,
+        "reach": true,
+        "lift": true,
+        "transport": true,
+        "lower": true
+      },
+      "success": true,
+      "failure": null,
+      "evaluation": {
+        "grasp_contact": true,
+        "lifted": true,
+        "placed": true,
+        "success": true,
+        "snapshots": {
+          "initial_z": 0.0201,
+          "after_close": {
+            "object_xyz": [
+              0.22773985155921472,
+              0.017234729247475333,
+              0.02025528060418161
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box6",
+              "fixed_jaw_box6",
+              "fixed_jaw_box6",
+              "fixed_jaw_box6",
+              null,
+              null,
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_lift": {
+            "object_xyz": [
+              0.23910849445163107,
+              0.012328817357994355,
+              0.06420917037209352
+            ],
+            "contacts": [
+              "fixed_jaw_box6",
+              null,
+              null,
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_settle": {
+            "object_xyz": [
+              0.23145870382902847,
+              -0.08304451228482274,
+              0.01989224457978383
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          }
+        }
+      },
+      "case": 2,
+      "initial_object_xy": [
+        0.225,
+        0.035
+      ],
+      "initial_pan": -0.65,
+      "seed": 2,
+      "action_count": 74,
+      "movement_rad": 2.572012272590914,
+      "simulation_s": 7.899999999999854,
+      "controller_compute_s": 0.0029772959533147514,
+      "wall_s": 2.6233844429953024
+    },
+    {
+      "visible": true,
+      "stages": {
+        "approach": true,
+        "reach": true,
+        "lift": true,
+        "transport": true,
+        "lower": true
+      },
+      "success": false,
+      "failure": "grasp",
+      "evaluation": {
+        "grasp_contact": false,
+        "lifted": false,
+        "placed": false,
+        "success": false,
+        "snapshots": {
+          "initial_z": 0.0201,
+          "after_close": {
+            "object_xyz": [
+              0.2142376839208173,
+              0.01671432222943879,
+              0.024453125178795398
+            ],
+            "contacts": [
+              "table",
+              null
+            ]
+          },
+          "after_lift": {
+            "object_xyz": [
+              0.21464169248160805,
+              0.0006306464284545816,
+              0.013643646708322521
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          },
+          "after_settle": {
+            "object_xyz": [
+              0.222798790617179,
+              0.012814004934630077,
+              0.013892244579783832
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          }
+        }
+      },
+      "case": 3,
+      "initial_object_xy": [
+        0.21,
+        0.035
+      ],
+      "initial_pan": -0.55,
+      "seed": 3,
+      "action_count": 71,
+      "movement_rad": 2.208927511069106,
+      "simulation_s": 7.59999999999986,
+      "controller_compute_s": 0.002481875999365002,
+      "wall_s": 2.600559849990532
+    },
+    {
+      "visible": true,
+      "stages": {
+        "approach": true,
+        "reach": true,
+        "lift": true,
+        "transport": true,
+        "lower": true
+      },
+      "success": true,
+      "failure": null,
+      "evaluation": {
+        "grasp_contact": true,
+        "lifted": true,
+        "placed": true,
+        "success": true,
+        "snapshots": {
+          "initial_z": 0.0201,
+          "after_close": {
+            "object_xyz": [
+              0.22907662563553632,
+              0.004576285574286278,
+              0.019123098176886583
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "fixed_jaw_sph_tip1",
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box5",
+              "moving_jaw_sph_tip1",
+              "moving_jaw_sph_tip2",
+              "moving_jaw_sph_tip3",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_lift": {
+            "object_xyz": [
+              0.22637927238395011,
+              -0.003981009249596113,
+              0.06196757352759649
+            ],
+            "contacts": [
+              "fixed_jaw_sph_tip1",
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box5",
+              "moving_jaw_sph_tip1",
+              "moving_jaw_sph_tip2",
+              "moving_jaw_sph_tip3",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_settle": {
+            "object_xyz": [
+              0.20791455449012133,
+              -0.06799390623780166,
+              0.01989224457978382
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          }
+        }
+      },
+      "case": 4,
+      "initial_object_xy": [
+        0.23,
+        0.015
+      ],
+      "initial_pan": -0.65,
+      "seed": 4,
+      "action_count": 82,
+      "movement_rad": 2.740556525267143,
+      "simulation_s": 8.69999999999996,
+      "controller_compute_s": 0.0038071259041316807,
+      "wall_s": 2.8543655480025336
+    },
+    {
+      "visible": true,
+      "stages": {
+        "approach": true,
+        "reach": true,
+        "lift": true,
+        "transport": true,
+        "lower": true
+      },
+      "success": true,
+      "failure": null,
+      "evaluation": {
+        "grasp_contact": true,
+        "lifted": true,
+        "placed": true,
+        "success": true,
+        "snapshots": {
+          "initial_z": 0.0201,
+          "after_close": {
+            "object_xyz": [
+              0.22456247985904149,
+              0.010118375049567314,
+              0.019047803199449233
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "fixed_jaw_sph_tip1",
+              "fixed_jaw_sph_tip2",
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box5",
+              "moving_jaw_sph_tip1",
+              "moving_jaw_sph_tip2",
+              "moving_jaw_sph_tip3",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null
+            ]
+          },
+          "after_lift": {
+            "object_xyz": [
+              0.2259491114170814,
+              0.0020081694471405023,
+              0.061679117594815605
+            ],
+            "contacts": [
+              "fixed_jaw_sph_tip1",
+              "fixed_jaw_sph_tip2",
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box5",
+              "moving_jaw_sph_tip1",
+              "moving_jaw_sph_tip2",
+              "moving_jaw_sph_tip3",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null
+            ]
+          },
+          "after_settle": {
+            "object_xyz": [
+              0.20703815816787374,
+              -0.06771491842051658,
+              0.019892244579783842
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          }
+        }
+      },
+      "case": 5,
+      "initial_object_xy": [
+        0.225,
+        0.02
+      ],
+      "initial_pan": -0.6,
+      "seed": 5,
+      "action_count": 80,
+      "movement_rad": 2.6146725657859506,
+      "simulation_s": 8.499999999999929,
+      "controller_compute_s": 0.003958867018809542,
+      "wall_s": 2.966455899004359
+    }
+  ],
+  "readiness": {
+    "criterion": "at least 5 successes in 6 development episodes",
+    "passed": false
+  },
+  "versions": {
+    "python": "3.12.3",
+    "numpy": "2.5.4",
+    "mujoco": "4.0.1"
+  },
+  "model_revision": "370c43965323c0944b433b202aac5058b5f907a9"
+}

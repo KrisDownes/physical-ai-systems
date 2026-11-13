@@ -1,0 +1,278 @@
+{
+  "physics_steps": 2000,
+  "wall_s": 0.025231993990018964,
+  "physics_steps_per_s": 79264.44500546176,
+  "image_shape": [
+    240,
+    320,
+    3
+  ],
+  "reset_repeatable": true,
+  "joint_and_gripper_response": true,
+  "controller_observation_keys": [
+    "joint_rad",
+    "time_s",
+    "image"
+  ],
+  "self_collision_scan": {
+    "1.3": [],
+    "1.47": [],
+    "1.55": [
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.001180149140162015
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.001210512177026066
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.0015510614753709876
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.0015510614753709876
+      }
+    ],
+    "1.69": [
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.00965566319599776
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.01119942482653464
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.01119942482653464
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.009655663195997758
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.007641369062024004
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.012543421464651539
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.012543421464651539
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.007641369062024004
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.015080953842353872
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.017144421464651553
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.017144421464651553
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "lower_arm"
+        ],
+        "penetration_m": 0.015080953842353872
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.006666348263605288
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.009857535428685445
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.009857535428685445
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.006666348263605288
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.02027546176967268
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.02027546176967268
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.02455663826435072
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.02455663826435072
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.01835533568819537
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.01835533568819537
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.011858083227995883
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "wrist"
+        ],
+        "penetration_m": 0.011858083227995883
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.021322597156895044
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.020348237092765262
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.017078706714571176
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.018053066778700957
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.0013251302660927462
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.006662689556168226
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.006836292301912474
+      },
+      {
+        "bodies": [
+          "shoulder",
+          "gripper"
+        ],
+        "penetration_m": 0.0013251302660927458
+      }
+    ]
+  },
+  "mujoco_version": "4.0.1"
+}

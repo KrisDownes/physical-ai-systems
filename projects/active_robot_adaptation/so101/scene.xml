@@ -1,0 +1,16 @@
+<mujoco model="so101_tabletop">
+  <include file="so101.xml"/>
+  <visual><global offwidth="640" offheight="480"/><headlight diffuse="0.8 0.8 0.8" ambient="0.5 0.5 0.5"/></visual>
+  <worldbody>
+    <light pos="0.2 0 1" dir="0 0 -1" directional="true"/>
+    <camera name="overhead" pos="0.20 0 0.7" quat="1 0 0 0" fovy="45"/>
+    <geom name="table" type="plane" size="1 1 .01" rgba=".35 .35 .35 1"/>
+    <geom name="destination" type="cylinder" pos=".22 -.05 .001" size=".035 .001" rgba=".1 .2 1 1" contype="0" conaffinity="0"/>
+    <geom name="reference_a" type="cylinder" pos=".10 -.17 .001" size=".012 .001" rgba="1 0 1 1" contype="0" conaffinity="0"/>
+    <geom name="reference_b" type="cylinder" pos=".32 .17 .001" size=".012 .001" rgba="1 0 1 1" contype="0" conaffinity="0"/>
+    <body name="object" pos=".22 .024 .02">
+      <freejoint name="object_free"/>
+      <geom name="object_geom" type="box" size=".014 .014 .02" mass=".02" rgba="0 1 .1 1" friction="1 .03 .003" condim="6"/>
+    </body>
+  </worldbody>
+</mujoco>

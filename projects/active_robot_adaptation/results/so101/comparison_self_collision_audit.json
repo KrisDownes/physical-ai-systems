@@ -1,0 +1,182 @@
+{
+  "none-0-nominal": {
+    "sampled_states": 75,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5279672193434979
+  },
+  "none-0-recalibration": {
+    "sampled_states": 82,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5061202831056764
+  },
+  "none-0-online": {
+    "sampled_states": 76,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5032904721544655
+  },
+  "none-1-nominal": {
+    "sampled_states": 82,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49484859240993373
+  },
+  "none-1-recalibration": {
+    "sampled_states": 82,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.4948291309527207
+  },
+  "none-1-online": {
+    "sampled_states": 78,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49484859240993373
+  },
+  "none-2-nominal": {
+    "sampled_states": 75,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5663778222985407
+  },
+  "none-2-recalibration": {
+    "sampled_states": 82,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.538468700701654
+  },
+  "none-2-online": {
+    "sampled_states": 75,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5422836923958602
+  },
+  "none-3-nominal": {
+    "sampled_states": 76,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49787538541541554
+  },
+  "none-3-recalibration": {
+    "sampled_states": 90,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.4978260847146451
+  },
+  "none-3-online": {
+    "sampled_states": 77,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49787538541541554
+  },
+  "camera-0-nominal": {
+    "sampled_states": 73,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.6326837577761762
+  },
+  "camera-0-recalibration": {
+    "sampled_states": 86,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5044254498989503
+  },
+  "camera-0-online": {
+    "sampled_states": 73,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.6116650190237043
+  },
+  "camera-1-nominal": {
+    "sampled_states": 75,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5033057814065466
+  },
+  "camera-1-recalibration": {
+    "sampled_states": 83,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49453579962062943
+  },
+  "camera-1-online": {
+    "sampled_states": 74,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49809890496271303
+  },
+  "camera-2-nominal": {
+    "sampled_states": 74,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.640378562657093
+  },
+  "camera-2-recalibration": {
+    "sampled_states": 84,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5344631740681239
+  },
+  "camera-2-online": {
+    "sampled_states": 74,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.6328994100777082
+  },
+  "camera-3-nominal": {
+    "sampled_states": 75,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49993304467457395
+  },
+  "camera-3-recalibration": {
+    "sampled_states": 86,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.4962011371492502
+  },
+  "camera-3-online": {
+    "sampled_states": 75,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49940324934983465
+  },
+  "gain-0-nominal": {
+    "sampled_states": 76,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.502717074510569
+  },
+  "gain-0-recalibration": {
+    "sampled_states": 76,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5025172272081232
+  },
+  "gain-0-online": {
+    "sampled_states": 77,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5310836859713399
+  },
+  "gain-1-nominal": {
+    "sampled_states": 77,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.4960203710475795
+  },
+  "gain-1-recalibration": {
+    "sampled_states": 77,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.4960051653578931
+  },
+  "gain-1-online": {
+    "sampled_states": 78,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.4960203710475795
+  },
+  "gain-2-nominal": {
+    "sampled_states": 78,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.537601161011776
+  },
+  "gain-2-recalibration": {
+    "sampled_states": 75,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5227097192577949
+  },
+  "gain-2-online": {
+    "sampled_states": 76,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.5720063816967794
+  },
+  "gain-3-nominal": {
+    "sampled_states": 77,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.4984441684965437
+  },
+  "gain-3-recalibration": {
+    "sampled_states": 76,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.49840707063770584
+  },
+  "gain-3-online": {
+    "sampled_states": 80,
+    "sampled_self_collision_states": 0,
+    "max_abs_elbow_rad": 0.4984441684965437
+  }
+}
