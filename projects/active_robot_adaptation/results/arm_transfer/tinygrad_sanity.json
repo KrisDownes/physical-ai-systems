@@ -1,0 +1,10 @@
+{
+  "gradient_x_squared_at_3": 6.0,
+  "initial_mean": 0.0,
+  "final_mean": 1.005783200263977,
+  "steps": 100,
+  "batch_size": 256,
+  "wall_s": 2.1991143799968995,
+  "seed": 21,
+  "task": "one-step Gaussian bandit, optimum mean 1"
+}

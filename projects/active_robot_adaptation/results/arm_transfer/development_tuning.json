@@ -1,0 +1,397 @@
+{
+  "metadata": {
+    "git_revision": "cc53c209598abdd74ba8388ef8d46e7da705812d",
+    "git_status": "?? .gitignore\n?? README.md\n?? STATUS.md\n?? analog_cim_access.md\n?? arm_transfer_interface.md\n?? configs/\n?? learner_kinematics.py\n?? pyproject.toml\n?? requirements.lock.txt\n?? results/arm_transfer/\n?? results/development/\n?? results/flair_pilot/2026-11-11-retry/\n?? results/flair_pilot/2026-11-11/\n?? results/flair_pilot/author_data_one_rep.json\n?? results/flair_pilot/author_driver_damaged_platform_01/benchmark.json\n?? results/flair_pilot/author_driver_damaged_platform_01/gpu_samples.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/gp_collection_configuration.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/gp_training_configuration.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_adaptation_0.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_gp_damage_introspection_0.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_learnt_state_functions_0.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_main_0.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/vicon_configuration.csv\n?? results/flair_pilot/author_driver_damaged_platform_pilot/\n?? results/flair_pilot/author_driver_nominal_platform_01/benchmark.json\n?? results/flair_pilot/author_driver_nominal_platform_01/gpu_samples.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/gp_collection_configuration.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/gp_training_configuration.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/hexapod_chicane_broken_leg_replication_adaptation_0.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/hexapod_chicane_broken_leg_replication_gp_damage_introspection_0.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/hexapod_chicane_broken_leg_replication_learnt_state_functions_0.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/hexapod_chicane_broken_leg_replication_main_0.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/vicon_configuration.csv\n?? results/flair_pilot/author_raw_driver_damaged_01/\n?? results/flair_pilot/author_raw_gpu_01/\n?? results/flair_pilot/author_raw_gpu_02/benchmark.json\n?? results/flair_pilot/author_raw_gpu_02/gpu_samples.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/gp_collection_configuration.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/gp_training_configuration.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/hexapod_chicane_broken_leg_replication_adaptation_0.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/hexapod_chicane_broken_leg_replication_gp_damage_introspection_0.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/hexapod_chicane_broken_leg_replication_learnt_state_functions_0.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/hexapod_chicane_broken_leg_replication_main_0.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/vicon_configuration.csv\n?? results/flair_pilot/brax_sensor_replay.json\n?? results/flair_pilot/brax_sensor_replay_with_orientation.json\n?? results/flair_pilot/closed_clock_117/\n?? results/flair_pilot/closed_released_117/\n?? results/flair_pilot/closed_sensor_117/\n?? results/flair_pilot/closed_short_comparison_117.json\n?? results/flair_pilot/device_cpu_117/\n?? results/flair_pilot/device_gpu_117/\n?? results/flair_pilot/gp_collection_configuration.csv\n?? results/flair_pilot/gp_training_configuration.csv\n?? results/flair_pilot/long_checkpoints_comparison_117.json\n?? results/flair_pilot/long_clock_117/\n?? results/flair_pilot/long_released_117/\n?? results/flair_pilot/long_sensor_117/\n?? results/flair_pilot/orientation_audit.json\n?? results/flair_pilot/pilot_released_211/\n?? results/flair_pilot/pilot_released_307/\n?? results/flair_pilot/pilot_sensor_211/\n?? results/flair_pilot/pilot_sensor_307/\n?? results/flair_pilot/sensor_seed_pilot_summary.json\n?? results/flair_pilot/sensor_state_probe.json\n?? results/flair_pilot/timestamp_matching_probe.json\n?? results/flair_pilot/timestamp_varying_probe.json\n?? results/flair_pilot/vicon_configuration.csv\n?? results/paired_development/\n?? results/smoke.json\n?? scripts/arm_branch_stress.py\n?? scripts/arm_nominal_check.py\n?? scripts/arm_transfer_experiment.py\n?? scripts/check_flair_sensor_state.py\n?? scripts/evaluate.py\n?? scripts/flair_brax_sensor_replay.py\n?? scripts/flair_compare_checkpoints.py\n?? scripts/flair_compare_short.py\n?? scripts/flair_device_benchmark.py\n?? scripts/flair_orientation_audit.py\n?? scripts/flair_pilot_guard.py\n?? scripts/flair_rotation_probe.py\n?? scripts/flair_sensor_seed_pilot.py\n?? scripts/flair_short_closed_loop.py\n?? scripts/flair_timestamp_matching_probe.py\n?? scripts/paired_development.py\n?? scripts/smoke.py\n?? src/\n?? tests/",
+    "arm_transfer_sha256": "22aa8fd2313a64a53a839409b93c93858334a572e7693e96747cb163826a901c",
+    "python": "3.12.3",
+    "numpy": "2.5.4"
+  },
+  "cases": [
+    {
+      "id": "dev-0-0",
+      "family": "none",
+      "start_q": [
+        -0.6,
+        -1.25
+      ],
+      "target_q": [
+        0.05,
+        -1.55
+      ],
+      "seed": 300,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    {
+      "id": "dev-0-1",
+      "family": "gain",
+      "start_q": [
+        -0.6,
+        -1.25
+      ],
+      "target_q": [
+        0.05,
+        -1.55
+      ],
+      "seed": 301,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        0.45,
+        1.0
+      ]
+    },
+    {
+      "id": "dev-0-2",
+      "family": "gain",
+      "start_q": [
+        -0.6,
+        -1.25
+      ],
+      "target_q": [
+        0.05,
+        -1.55
+      ],
+      "seed": 302,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        1.0,
+        0.65
+      ]
+    },
+    {
+      "id": "dev-0-3",
+      "family": "camera",
+      "start_q": [
+        -0.6,
+        -1.25
+      ],
+      "target_q": [
+        0.05,
+        -1.55
+      ],
+      "seed": 303,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": 10.0
+    },
+    {
+      "id": "dev-0-4",
+      "family": "camera",
+      "start_q": [
+        -0.6,
+        -1.25
+      ],
+      "target_q": [
+        0.05,
+        -1.55
+      ],
+      "seed": 304,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": -20.0
+    },
+    {
+      "id": "dev-1-0",
+      "family": "none",
+      "start_q": [
+        0.1,
+        -1.55
+      ],
+      "target_q": [
+        0.7,
+        -1.05
+      ],
+      "seed": 310,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    {
+      "id": "dev-1-1",
+      "family": "gain",
+      "start_q": [
+        0.1,
+        -1.55
+      ],
+      "target_q": [
+        0.7,
+        -1.05
+      ],
+      "seed": 311,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        0.45,
+        1.0
+      ]
+    },
+    {
+      "id": "dev-1-2",
+      "family": "gain",
+      "start_q": [
+        0.1,
+        -1.55
+      ],
+      "target_q": [
+        0.7,
+        -1.05
+      ],
+      "seed": 312,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        1.0,
+        0.65
+      ]
+    },
+    {
+      "id": "dev-1-3",
+      "family": "camera",
+      "start_q": [
+        0.1,
+        -1.55
+      ],
+      "target_q": [
+        0.7,
+        -1.05
+      ],
+      "seed": 313,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": 10.0
+    },
+    {
+      "id": "dev-1-4",
+      "family": "camera",
+      "start_q": [
+        0.1,
+        -1.55
+      ],
+      "target_q": [
+        0.7,
+        -1.05
+      ],
+      "seed": 314,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": -20.0
+    },
+    {
+      "id": "dev-2-0",
+      "family": "none",
+      "start_q": [
+        0.55,
+        -1.15
+      ],
+      "target_q": [
+        0.0,
+        -1.7
+      ],
+      "seed": 320,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    {
+      "id": "dev-2-1",
+      "family": "gain",
+      "start_q": [
+        0.55,
+        -1.15
+      ],
+      "target_q": [
+        0.0,
+        -1.7
+      ],
+      "seed": 321,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        0.45,
+        1.0
+      ]
+    },
+    {
+      "id": "dev-2-2",
+      "family": "gain",
+      "start_q": [
+        0.55,
+        -1.15
+      ],
+      "target_q": [
+        0.0,
+        -1.7
+      ],
+      "seed": 322,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        1.0,
+        0.65
+      ]
+    },
+    {
+      "id": "dev-2-3",
+      "family": "camera",
+      "start_q": [
+        0.55,
+        -1.15
+      ],
+      "target_q": [
+        0.0,
+        -1.7
+      ],
+      "seed": 323,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": 10.0
+    },
+    {
+      "id": "dev-2-4",
+      "family": "camera",
+      "start_q": [
+        0.55,
+        -1.15
+      ],
+      "target_q": [
+        0.0,
+        -1.7
+      ],
+      "seed": 324,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": -20.0
+    }
+  ],
+  "trials": [
+    {
+      "method": "online",
+      "tuning": {
+        "forgetting": 0.9,
+        "damping": 0.015
+      },
+      "mean_error": 0.15117113015692263,
+      "cases": 15
+    },
+    {
+      "method": "online",
+      "tuning": {
+        "forgetting": 0.9,
+        "damping": 0.04
+      },
+      "mean_error": 0.1496901032635874,
+      "cases": 15
+    },
+    {
+      "method": "online",
+      "tuning": {
+        "forgetting": 0.97,
+        "damping": 0.015
+      },
+      "mean_error": 0.16464079757208008,
+      "cases": 15
+    },
+    {
+      "method": "online",
+      "tuning": {
+        "forgetting": 0.97,
+        "damping": 0.04
+      },
+      "mean_error": 0.1632624973547319,
+      "cases": 15
+    },
+    {
+      "method": "online",
+      "tuning": {
+        "forgetting": 0.995,
+        "damping": 0.015
+      },
+      "mean_error": 0.1698262251619507,
+      "cases": 15
+    },
+    {
+      "method": "online",
+      "tuning": {
+        "forgetting": 0.995,
+        "damping": 0.04
+      },
+      "mean_error": 0.16840305729630364,
+      "cases": 15
+    },
+    {
+      "method": "global",
+      "tuning": {
+        "model_forgetting": 0.9
+      },
+      "mean_error": 0.13242753281640357,
+      "cases": 15
+    },
+    {
+      "method": "global",
+      "tuning": {
+        "model_forgetting": 0.97
+      },
+      "mean_error": 0.13354790374455644,
+      "cases": 15
+    },
+    {
+      "method": "global",
+      "tuning": {
+        "model_forgetting": 0.995
+      },
+      "mean_error": 0.13418073626789942,
+      "cases": 15
+    },
+    {
+      "method": "gp",
+      "tuning": {
+        "model_forgetting": 0.9,
+        "gp_length": 0.6
+      },
+      "mean_error": 0.13426469152607948,
+      "cases": 15
+    },
+    {
+      "method": "gp",
+      "tuning": {
+        "model_forgetting": 0.9,
+        "gp_length": 1.2
+      },
+      "mean_error": 0.1345206662350416,
+      "cases": 15
+    },
+    {
+      "method": "gp",
+      "tuning": {
+        "model_forgetting": 0.97,
+        "gp_length": 0.6
+      },
+      "mean_error": 0.1339299300878002,
+      "cases": 15
+    },
+    {
+      "method": "gp",
+      "tuning": {
+        "model_forgetting": 0.97,
+        "gp_length": 1.2
+      },
+      "mean_error": 0.1335800110291534,
+      "cases": 15
+    }
+  ]
+}

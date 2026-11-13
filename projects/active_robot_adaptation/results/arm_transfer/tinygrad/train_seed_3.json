@@ -1,0 +1,8 @@
+{
+  "seed": 3,
+  "updates": 300,
+  "batch_size": 128,
+  "wall_s": 14.443704049001099,
+  "initial_reward": -1.0002648825882983,
+  "final_reward": -0.4015819816738489
+}

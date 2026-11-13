@@ -1,0 +1,140 @@
+{
+  "1": {
+    "False": {
+      "episodes": 20,
+      "successes": 20,
+      "median_integrated_error_s": 0.14899430503448674,
+      "families": {
+        "none": {
+          "episodes": 4,
+          "successes": 4,
+          "median_integrated_error_s": 0.14187147115900667
+        },
+        "gain": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.16515957220465222
+        },
+        "camera": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.10854248104417974
+        }
+      }
+    },
+    "True": {
+      "episodes": 20,
+      "successes": 20,
+      "median_integrated_error_s": 0.14031979262199046,
+      "families": {
+        "none": {
+          "episodes": 4,
+          "successes": 4,
+          "median_integrated_error_s": 0.12034107543911356
+        },
+        "gain": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.14644008537352232
+        },
+        "camera": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.10891888326279442
+        }
+      }
+    }
+  },
+  "2": {
+    "False": {
+      "episodes": 20,
+      "successes": 20,
+      "median_integrated_error_s": 0.14797432006119698,
+      "families": {
+        "none": {
+          "episodes": 4,
+          "successes": 4,
+          "median_integrated_error_s": 0.13280359216771437
+        },
+        "gain": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.15589921951901525
+        },
+        "camera": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.1081615624791023
+        }
+      }
+    },
+    "True": {
+      "episodes": 20,
+      "successes": 20,
+      "median_integrated_error_s": 0.13537207865172227,
+      "families": {
+        "none": {
+          "episodes": 4,
+          "successes": 4,
+          "median_integrated_error_s": 0.11810931778483266
+        },
+        "gain": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.14381304643213827
+        },
+        "camera": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.1122995493058681
+        }
+      }
+    }
+  },
+  "3": {
+    "False": {
+      "episodes": 20,
+      "successes": 20,
+      "median_integrated_error_s": 0.1811175470465109,
+      "families": {
+        "none": {
+          "episodes": 4,
+          "successes": 4,
+          "median_integrated_error_s": 0.1588706942775115
+        },
+        "gain": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.18465163396332032
+        },
+        "camera": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.1375475861279255
+        }
+      }
+    },
+    "True": {
+      "episodes": 20,
+      "successes": 20,
+      "median_integrated_error_s": 0.15193126058901235,
+      "families": {
+        "none": {
+          "episodes": 4,
+          "successes": 4,
+          "median_integrated_error_s": 0.13081225430318041
+        },
+        "gain": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.1617962474510481
+        },
+        "camera": {
+          "episodes": 8,
+          "successes": 8,
+          "median_integrated_error_s": 0.12806545829585425
+        }
+      }
+    }
+  }
+}

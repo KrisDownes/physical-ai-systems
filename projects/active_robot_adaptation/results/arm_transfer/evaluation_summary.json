@@ -1,0 +1,128 @@
+{
+  "none": {
+    "nominal": {
+      "episodes": 4,
+      "median_integrated_error_s": 0.0941928977656403,
+      "successes": 4,
+      "median_recovery_s_among_successes": 0.95,
+      "median_peak_error": 0.13390664111028183,
+      "median_peak_excursion": 0.1344292015027566,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.0052711445387103595
+    },
+    "online": {
+      "episodes": 4,
+      "median_integrated_error_s": 0.10482708842289631,
+      "successes": 4,
+      "median_recovery_s_among_successes": 1.0,
+      "median_peak_error": 0.13397522132999057,
+      "median_peak_excursion": 0.13668145449096353,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.005825111518788617
+    },
+    "global": {
+      "episodes": 4,
+      "median_integrated_error_s": 0.09447669872724634,
+      "successes": 4,
+      "median_recovery_s_among_successes": 0.95,
+      "median_peak_error": 0.13390814636365572,
+      "median_peak_excursion": 0.13443283886022783,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.009178176966088358
+    },
+    "gp": {
+      "episodes": 4,
+      "median_integrated_error_s": 0.10453979052235922,
+      "successes": 4,
+      "median_recovery_s_among_successes": 0.95,
+      "median_peak_error": 0.13386221741924698,
+      "median_peak_excursion": 0.13406690526920706,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.030871695948007982
+    }
+  },
+  "gain": {
+    "nominal": {
+      "episodes": 8,
+      "median_integrated_error_s": 0.12023403934616607,
+      "successes": 8,
+      "median_recovery_s_among_successes": 1.1500000000000001,
+      "median_peak_error": 0.13423498098321754,
+      "median_peak_excursion": 0.13482144843819602,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.0052394975937204435
+    },
+    "online": {
+      "episodes": 8,
+      "median_integrated_error_s": 0.1257839457152158,
+      "successes": 8,
+      "median_recovery_s_among_successes": 1.2000000000000002,
+      "median_peak_error": 0.13421547484209745,
+      "median_peak_excursion": 0.1367079392955081,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.005664490046910942
+    },
+    "global": {
+      "episodes": 8,
+      "median_integrated_error_s": 0.11083777940513401,
+      "successes": 8,
+      "median_recovery_s_among_successes": 1.1,
+      "median_peak_error": 0.1342355415294043,
+      "median_peak_excursion": 0.1348305443513701,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.007742475405393634
+    },
+    "gp": {
+      "episodes": 8,
+      "median_integrated_error_s": 0.11561932770142452,
+      "successes": 8,
+      "median_recovery_s_among_successes": 1.05,
+      "median_peak_error": 0.1342780681960266,
+      "median_peak_excursion": 0.13480771983143552,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.031418336933711544
+    }
+  },
+  "camera": {
+    "nominal": {
+      "episodes": 8,
+      "median_integrated_error_s": 0.08488191241241069,
+      "successes": 8,
+      "median_recovery_s_among_successes": 0.9,
+      "median_peak_error": 0.12231800591350854,
+      "median_peak_excursion": 0.12297977931146276,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.005235569929936901
+    },
+    "online": {
+      "episodes": 8,
+      "median_integrated_error_s": 0.09864475036797679,
+      "successes": 8,
+      "median_recovery_s_among_successes": 1.0,
+      "median_peak_error": 0.12233302631783738,
+      "median_peak_excursion": 0.12471962632097224,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.005749335985456128
+    },
+    "global": {
+      "episodes": 8,
+      "median_integrated_error_s": 0.0848307532320685,
+      "successes": 8,
+      "median_recovery_s_among_successes": 0.9,
+      "median_peak_error": 0.12231849855484356,
+      "median_peak_excursion": 0.12298009327685953,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.007694570027524605
+    },
+    "gp": {
+      "episodes": 8,
+      "median_integrated_error_s": 0.08612322556451958,
+      "successes": 8,
+      "median_recovery_s_among_successes": 0.9,
+      "median_peak_error": 0.12252799914067164,
+      "median_peak_excursion": 0.1232284732831103,
+      "median_action_count": 120.0,
+      "median_computation_wall_s": 0.02977079796983162
+    }
+  }
+}

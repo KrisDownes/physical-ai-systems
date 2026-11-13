@@ -1,0 +1,6 @@
+{
+  "base_config": "configs/development.json",
+  "camera_rotations_deg": [0, 60, -60, 90, -90, 120, -120],
+  "methods": ["fixed", "online", "model"],
+  "purpose": "Small deterministic development sweep; not held-out evaluation"
+}

@@ -1,0 +1,384 @@
+{
+  "cases": [
+    {
+      "id": "eval-0-0",
+      "family": "none",
+      "start_q": [
+        -0.48,
+        -1.35
+      ],
+      "target_q": [
+        0.22,
+        -1.65
+      ],
+      "seed": 700,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    {
+      "id": "eval-0-1",
+      "family": "gain",
+      "start_q": [
+        -0.48,
+        -1.35
+      ],
+      "target_q": [
+        0.22,
+        -1.65
+      ],
+      "seed": 701,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        0.55,
+        1.0
+      ]
+    },
+    {
+      "id": "eval-0-2",
+      "family": "gain",
+      "start_q": [
+        -0.48,
+        -1.35
+      ],
+      "target_q": [
+        0.22,
+        -1.65
+      ],
+      "seed": 702,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        1.0,
+        0.75
+      ]
+    },
+    {
+      "id": "eval-0-3",
+      "family": "camera",
+      "start_q": [
+        -0.48,
+        -1.35
+      ],
+      "target_q": [
+        0.22,
+        -1.65
+      ],
+      "seed": 703,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": -7.0
+    },
+    {
+      "id": "eval-0-4",
+      "family": "camera",
+      "start_q": [
+        -0.48,
+        -1.35
+      ],
+      "target_q": [
+        0.22,
+        -1.65
+      ],
+      "seed": 704,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": 15.0
+    },
+    {
+      "id": "eval-1-0",
+      "family": "none",
+      "start_q": [
+        0.22,
+        -1.75
+      ],
+      "target_q": [
+        0.72,
+        -1.2
+      ],
+      "seed": 710,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    {
+      "id": "eval-1-1",
+      "family": "gain",
+      "start_q": [
+        0.22,
+        -1.75
+      ],
+      "target_q": [
+        0.72,
+        -1.2
+      ],
+      "seed": 711,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        0.55,
+        1.0
+      ]
+    },
+    {
+      "id": "eval-1-2",
+      "family": "gain",
+      "start_q": [
+        0.22,
+        -1.75
+      ],
+      "target_q": [
+        0.72,
+        -1.2
+      ],
+      "seed": 712,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        1.0,
+        0.75
+      ]
+    },
+    {
+      "id": "eval-1-3",
+      "family": "camera",
+      "start_q": [
+        0.22,
+        -1.75
+      ],
+      "target_q": [
+        0.72,
+        -1.2
+      ],
+      "seed": 713,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": -7.0
+    },
+    {
+      "id": "eval-1-4",
+      "family": "camera",
+      "start_q": [
+        0.22,
+        -1.75
+      ],
+      "target_q": [
+        0.72,
+        -1.2
+      ],
+      "seed": 714,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": 15.0
+    },
+    {
+      "id": "eval-2-0",
+      "family": "none",
+      "start_q": [
+        0.48,
+        -1.38
+      ],
+      "target_q": [
+        -0.12,
+        -1.85
+      ],
+      "seed": 720,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    {
+      "id": "eval-2-1",
+      "family": "gain",
+      "start_q": [
+        0.48,
+        -1.38
+      ],
+      "target_q": [
+        -0.12,
+        -1.85
+      ],
+      "seed": 721,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        0.55,
+        1.0
+      ]
+    },
+    {
+      "id": "eval-2-2",
+      "family": "gain",
+      "start_q": [
+        0.48,
+        -1.38
+      ],
+      "target_q": [
+        -0.12,
+        -1.85
+      ],
+      "seed": 722,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        1.0,
+        0.75
+      ]
+    },
+    {
+      "id": "eval-2-3",
+      "family": "camera",
+      "start_q": [
+        0.48,
+        -1.38
+      ],
+      "target_q": [
+        -0.12,
+        -1.85
+      ],
+      "seed": 723,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": -7.0
+    },
+    {
+      "id": "eval-2-4",
+      "family": "camera",
+      "start_q": [
+        0.48,
+        -1.38
+      ],
+      "target_q": [
+        -0.12,
+        -1.85
+      ],
+      "seed": 724,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": 15.0
+    },
+    {
+      "id": "eval-3-0",
+      "family": "none",
+      "start_q": [
+        -0.12,
+        -1.65
+      ],
+      "target_q": [
+        0.42,
+        -1.05
+      ],
+      "seed": 730,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    {
+      "id": "eval-3-1",
+      "family": "gain",
+      "start_q": [
+        -0.12,
+        -1.65
+      ],
+      "target_q": [
+        0.42,
+        -1.05
+      ],
+      "seed": 731,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        0.55,
+        1.0
+      ]
+    },
+    {
+      "id": "eval-3-2",
+      "family": "gain",
+      "start_q": [
+        -0.12,
+        -1.65
+      ],
+      "target_q": [
+        0.42,
+        -1.05
+      ],
+      "seed": 732,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "gain": [
+        1.0,
+        0.75
+      ]
+    },
+    {
+      "id": "eval-3-3",
+      "family": "camera",
+      "start_q": [
+        -0.12,
+        -1.65
+      ],
+      "target_q": [
+        0.42,
+        -1.05
+      ],
+      "seed": 733,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": -7.0
+    },
+    {
+      "id": "eval-3-4",
+      "family": "camera",
+      "start_q": [
+        -0.12,
+        -1.65
+      ],
+      "target_q": [
+        0.42,
+        -1.05
+      ],
+      "seed": 734,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002,
+      "rotation_deg": 15.0
+    }
+  ],
+  "parameters": {
+    "nominal": {},
+    "online": {
+      "forgetting": 0.9,
+      "damping": 0.04
+    },
+    "global": {
+      "model_forgetting": 0.9
+    },
+    "gp": {
+      "model_forgetting": 0.97,
+      "gp_length": 1.2
+    }
+  },
+  "metrics": {
+    "tolerance": 0.015,
+    "dwell_steps": 5,
+    "normalization": 0.5
+  },
+  "note": "Evaluation frozen after development tuning and before evaluation; no combined disturbances."
+}

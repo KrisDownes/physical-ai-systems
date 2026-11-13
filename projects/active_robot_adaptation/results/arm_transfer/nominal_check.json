@@ -1,0 +1,106 @@
+[
+  {
+    "case": {
+      "start_q": [
+        -0.65,
+        -1.1
+      ],
+      "target_q": [
+        -0.1,
+        -1.35
+      ],
+      "seed": 100,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    "result": {
+      "integrated_normalized_error_s": 0.053616357802890084,
+      "recovery_time_s": 0.8,
+      "success": true,
+      "peak_error": 0.09487994316535953,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005320540934917517,
+      "reachable": true
+    }
+  },
+  {
+    "case": {
+      "start_q": [
+        0.15,
+        -1.4
+      ],
+      "target_q": [
+        0.6,
+        -1.1
+      ],
+      "seed": 101,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    "result": {
+      "integrated_normalized_error_s": 0.07589299874328563,
+      "recovery_time_s": 0.9,
+      "success": true,
+      "peak_error": 0.11783556912050427,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005221777057158761,
+      "reachable": true
+    }
+  },
+  {
+    "case": {
+      "start_q": [
+        0.65,
+        -1.0
+      ],
+      "target_q": [
+        0.25,
+        -1.6
+      ],
+      "seed": 102,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    "result": {
+      "integrated_normalized_error_s": 0.0822699761122615,
+      "recovery_time_s": 0.9,
+      "success": true,
+      "peak_error": 0.12210447015564524,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.0045697480090893805,
+      "reachable": true
+    }
+  },
+  {
+    "case": {
+      "start_q": [
+        -0.25,
+        -1.8
+      ],
+      "target_q": [
+        0.3,
+        -1.25
+      ],
+      "seed": 103,
+      "steps": 120,
+      "change_step": 20,
+      "noise": 0.0002
+    },
+    "result": {
+      "integrated_normalized_error_s": 0.10979306512768013,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.14778891569326086,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.004561281020869501,
+      "reachable": true
+    }
+  }
+]

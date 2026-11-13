@@ -1,0 +1,514 @@
+[
+  {
+    "case_id": "eval-0-0",
+    "branch": "negative",
+    "method": "nominal",
+    "metrics": {
+      "integrated_normalized_error_s": 0.06976285940011162,
+      "recovery_time_s": 0.8,
+      "success": true,
+      "peak_error": 0.11169904610587035,
+      "peak_excursion_from_post_change_observation": 0.11269668787627327,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.00560685912205372,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-0-0",
+    "branch": "negative",
+    "method": "online",
+    "metrics": {
+      "integrated_normalized_error_s": 0.0754634536538092,
+      "recovery_time_s": 0.9,
+      "success": true,
+      "peak_error": 0.11176731314566243,
+      "peak_excursion_from_post_change_observation": 0.11320297717556187,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.0063622640300309286,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-0-0",
+    "branch": "negative",
+    "method": "global",
+    "metrics": {
+      "integrated_normalized_error_s": 0.06979997258186332,
+      "recovery_time_s": 0.8,
+      "success": true,
+      "peak_error": 0.1116983952523621,
+      "peak_excursion_from_post_change_observation": 0.11269764661608457,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.007465490052709356,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-0-0",
+    "branch": "negative",
+    "method": "gp",
+    "metrics": {
+      "integrated_normalized_error_s": 0.07019687197590099,
+      "recovery_time_s": 0.8,
+      "success": true,
+      "peak_error": 0.11188135135433887,
+      "peak_excursion_from_post_change_observation": 0.1127508269758216,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.028112782048992813,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-0-0",
+    "branch": "positive",
+    "method": "nominal",
+    "metrics": {
+      "integrated_normalized_error_s": 0.7179875385652668,
+      "recovery_time_s": 2.5,
+      "success": true,
+      "peak_error": 0.23054987745292843,
+      "peak_excursion_from_post_change_observation": 0.1668414789678178,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.0054355059983208776,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-0-0",
+    "branch": "positive",
+    "method": "online",
+    "metrics": {
+      "integrated_normalized_error_s": 0.2584896284764412,
+      "recovery_time_s": 1.4000000000000001,
+      "success": true,
+      "peak_error": 0.19010279842965278,
+      "peak_excursion_from_post_change_observation": 0.19096868688167973,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005940302871749736,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-0-0",
+    "branch": "positive",
+    "method": "global",
+    "metrics": {
+      "integrated_normalized_error_s": 0.4554385338199059,
+      "recovery_time_s": 2.3000000000000003,
+      "success": true,
+      "peak_error": 0.15786194101657042,
+      "peak_excursion_from_post_change_observation": 0.16453051504997387,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.008509541003149934,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-0-0",
+    "branch": "positive",
+    "method": "gp",
+    "metrics": {
+      "integrated_normalized_error_s": 0.5672119753542203,
+      "recovery_time_s": 2.3000000000000003,
+      "success": true,
+      "peak_error": 0.19794866286922747,
+      "peak_excursion_from_post_change_observation": 0.15745021299060213,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.03820800199173391,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-1-0",
+    "branch": "negative",
+    "method": "nominal",
+    "metrics": {
+      "integrated_normalized_error_s": 0.10185834562088505,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.14089724545465498,
+      "peak_excursion_from_post_change_observation": 0.14149884182247915,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.006362174899550155,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-1-0",
+    "branch": "negative",
+    "method": "online",
+    "metrics": {
+      "integrated_normalized_error_s": 0.10297377880013558,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.14089399147621454,
+      "peak_excursion_from_post_change_observation": 0.14262747813535828,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005756197118898854,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-1-0",
+    "branch": "negative",
+    "method": "global",
+    "metrics": {
+      "integrated_normalized_error_s": 0.10269777184313074,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.14089945784503513,
+      "peak_excursion_from_post_change_observation": 0.14150090313428643,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.008157751013641246,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-1-0",
+    "branch": "negative",
+    "method": "gp",
+    "metrics": {
+      "integrated_normalized_error_s": 0.10339622757512562,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.14088506591777458,
+      "peak_excursion_from_post_change_observation": 0.1415303195599882,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.03465303206758108,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-1-0",
+    "branch": "positive",
+    "method": "nominal",
+    "metrics": {
+      "integrated_normalized_error_s": 6.6991155488907115,
+      "recovery_time_s": null,
+      "success": false,
+      "peak_error": 0.3594053218922547,
+      "peak_excursion_from_post_change_observation": 0.1187957105038088,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005524356063688174,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-1-0",
+    "branch": "positive",
+    "method": "online",
+    "metrics": {
+      "integrated_normalized_error_s": 0.10598304087634783,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.14204121340381748,
+      "peak_excursion_from_post_change_observation": 0.14262805693776462,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.006154485934530385,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-1-0",
+    "branch": "positive",
+    "method": "global",
+    "metrics": {
+      "integrated_normalized_error_s": 0.21363483877447742,
+      "recovery_time_s": 2.9000000000000004,
+      "success": true,
+      "peak_error": 0.09716118052780859,
+      "peak_excursion_from_post_change_observation": 0.14128023493101932,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.008723852050025016,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-1-0",
+    "branch": "positive",
+    "method": "gp",
+    "metrics": {
+      "integrated_normalized_error_s": 1.7217335927412447,
+      "recovery_time_s": null,
+      "success": false,
+      "peak_error": 0.1653736661199538,
+      "peak_excursion_from_post_change_observation": 0.22520454837688758,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.03950938896741718,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-2-0",
+    "branch": "negative",
+    "method": "nominal",
+    "metrics": {
+      "integrated_normalized_error_s": 0.08652744991039553,
+      "recovery_time_s": 0.9,
+      "success": true,
+      "peak_error": 0.12691603676590868,
+      "peak_excursion_from_post_change_observation": 0.1273595611830341,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005183159941225313,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-2-0",
+    "branch": "negative",
+    "method": "online",
+    "metrics": {
+      "integrated_normalized_error_s": 0.10668039804565706,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.12705645118376657,
+      "peak_excursion_from_post_change_observation": 0.13073543084656875,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005540951984585263,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-2-0",
+    "branch": "negative",
+    "method": "global",
+    "metrics": {
+      "integrated_normalized_error_s": 0.08625562561136196,
+      "recovery_time_s": 0.9,
+      "success": true,
+      "peak_error": 0.12691683488227629,
+      "peak_excursion_from_post_change_observation": 0.1273647745861692,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.007318507108720951,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-2-0",
+    "branch": "negative",
+    "method": "gp",
+    "metrics": {
+      "integrated_normalized_error_s": 0.10568335346959282,
+      "recovery_time_s": 0.9,
+      "success": true,
+      "peak_error": 0.1268393689207194,
+      "peak_excursion_from_post_change_observation": 0.12660349097842588,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.027773220994276926,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-2-0",
+    "branch": "positive",
+    "method": "nominal",
+    "metrics": {
+      "integrated_normalized_error_s": 2.187400857708437,
+      "recovery_time_s": 3.7,
+      "success": true,
+      "peak_error": 0.4886732715541406,
+      "peak_excursion_from_post_change_observation": 0.4286625064466498,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005147773976204917,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-2-0",
+    "branch": "positive",
+    "method": "online",
+    "metrics": {
+      "integrated_normalized_error_s": 0.599672532602661,
+      "recovery_time_s": 2.4000000000000004,
+      "success": true,
+      "peak_error": 0.24348871281094175,
+      "peak_excursion_from_post_change_observation": 0.24400483915357324,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005723342997953296,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-2-0",
+    "branch": "positive",
+    "method": "global",
+    "metrics": {
+      "integrated_normalized_error_s": 2.7525831311136533,
+      "recovery_time_s": 4.1000000000000005,
+      "success": true,
+      "peak_error": 0.5799156255194006,
+      "peak_excursion_from_post_change_observation": 0.5435175710597523,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.008656322985189036,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-2-0",
+    "branch": "positive",
+    "method": "gp",
+    "metrics": {
+      "integrated_normalized_error_s": 3.270002270070115,
+      "recovery_time_s": 4.5,
+      "success": true,
+      "peak_error": 0.601277708347938,
+      "peak_excursion_from_post_change_observation": 0.5484323338404216,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.03629684797488153,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-3-0",
+    "branch": "negative",
+    "method": "nominal",
+    "metrics": {
+      "integrated_normalized_error_s": 0.1260935500805623,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.16048405020199075,
+      "peak_excursion_from_post_change_observation": 0.16123503045978865,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005304937993059866,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-3-0",
+    "branch": "negative",
+    "method": "online",
+    "metrics": {
+      "integrated_normalized_error_s": 0.12981694132976362,
+      "recovery_time_s": 1.1,
+      "success": true,
+      "peak_error": 0.16048511323811526,
+      "peak_excursion_from_post_change_observation": 0.1615671085491442,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005649334940244444,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-3-0",
+    "branch": "negative",
+    "method": "global",
+    "metrics": {
+      "integrated_normalized_error_s": 0.12766809768043028,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.16048651790663956,
+      "peak_excursion_from_post_change_observation": 0.16123771173100443,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.007552393057267182,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-3-0",
+    "branch": "negative",
+    "method": "gp",
+    "metrics": {
+      "integrated_normalized_error_s": 0.1291766806169954,
+      "recovery_time_s": 1.0,
+      "success": true,
+      "peak_error": 0.16034132067525156,
+      "peak_excursion_from_post_change_observation": 0.16102502375676755,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.035014524110010825,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-3-0",
+    "branch": "positive",
+    "method": "nominal",
+    "metrics": {
+      "integrated_normalized_error_s": 7.059587749398507,
+      "recovery_time_s": null,
+      "success": false,
+      "peak_error": 0.38423834326471523,
+      "peak_excursion_from_post_change_observation": 0.13455728272893522,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.0051555220852606,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-3-0",
+    "branch": "positive",
+    "method": "online",
+    "metrics": {
+      "integrated_normalized_error_s": 0.12895547336230065,
+      "recovery_time_s": 1.1,
+      "success": true,
+      "peak_error": 0.16051041771005076,
+      "peak_excursion_from_post_change_observation": 0.1612829729548555,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.005606237056781538,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-3-0",
+    "branch": "positive",
+    "method": "global",
+    "metrics": {
+      "integrated_normalized_error_s": 0.3133152550107284,
+      "recovery_time_s": 3.7,
+      "success": true,
+      "peak_error": 0.10801016756323101,
+      "peak_excursion_from_post_change_observation": 0.11566537256557871,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.008255369029939175,
+      "reachable": true
+    }
+  },
+  {
+    "case_id": "eval-3-0",
+    "branch": "positive",
+    "method": "gp",
+    "metrics": {
+      "integrated_normalized_error_s": 2.0863130645936625,
+      "recovery_time_s": 9.700000000000001,
+      "success": true,
+      "peak_error": 0.23034557109926776,
+      "peak_excursion_from_post_change_observation": 0.20867323319184375,
+      "action_count": 120,
+      "post_change_action_count": 100,
+      "computation_wall_s": 0.03860804393480066,
+      "reachable": true
+    }
+  }
+]

@@ -1,0 +1,2571 @@
+{
+  "metadata": {
+    "git_revision": "cc53c209598abdd74ba8388ef8d46e7da705812d",
+    "git_status": "?? .gitignore\n?? README.md\n?? STATUS.md\n?? analog_cim_access.md\n?? arm_transfer_interface.md\n?? configs/\n?? learner_kinematics.py\n?? pyproject.toml\n?? requirements.lock.txt\n?? results/arm_transfer/\n?? results/development/\n?? results/flair_pilot/2026-11-11-retry/\n?? results/flair_pilot/2026-11-11/\n?? results/flair_pilot/author_data_one_rep.json\n?? results/flair_pilot/author_driver_damaged_platform_01/benchmark.json\n?? results/flair_pilot/author_driver_damaged_platform_01/gpu_samples.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/gp_collection_configuration.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/gp_training_configuration.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_adaptation_0.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_gp_damage_introspection_0.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_learnt_state_functions_0.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/hexapod_chicane_broken_leg_replication_main_0.csv\n?? results/flair_pilot/author_driver_damaged_platform_01/upstream/vicon_configuration.csv\n?? results/flair_pilot/author_driver_damaged_platform_pilot/\n?? results/flair_pilot/author_driver_nominal_platform_01/benchmark.json\n?? results/flair_pilot/author_driver_nominal_platform_01/gpu_samples.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/gp_collection_configuration.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/gp_training_configuration.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/hexapod_chicane_broken_leg_replication_adaptation_0.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/hexapod_chicane_broken_leg_replication_gp_damage_introspection_0.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/hexapod_chicane_broken_leg_replication_learnt_state_functions_0.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/hexapod_chicane_broken_leg_replication_main_0.csv\n?? results/flair_pilot/author_driver_nominal_platform_01/upstream/vicon_configuration.csv\n?? results/flair_pilot/author_raw_driver_damaged_01/\n?? results/flair_pilot/author_raw_gpu_01/\n?? results/flair_pilot/author_raw_gpu_02/benchmark.json\n?? results/flair_pilot/author_raw_gpu_02/gpu_samples.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/gp_collection_configuration.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/gp_training_configuration.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/hexapod_chicane_broken_leg_replication_adaptation_0.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/hexapod_chicane_broken_leg_replication_gp_damage_introspection_0.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/hexapod_chicane_broken_leg_replication_learnt_state_functions_0.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/hexapod_chicane_broken_leg_replication_main_0.csv\n?? results/flair_pilot/author_raw_gpu_02/upstream/vicon_configuration.csv\n?? results/flair_pilot/brax_sensor_replay.json\n?? results/flair_pilot/brax_sensor_replay_with_orientation.json\n?? results/flair_pilot/closed_clock_117/\n?? results/flair_pilot/closed_released_117/\n?? results/flair_pilot/closed_sensor_117/\n?? results/flair_pilot/closed_short_comparison_117.json\n?? results/flair_pilot/device_cpu_117/\n?? results/flair_pilot/device_gpu_117/\n?? results/flair_pilot/gp_collection_configuration.csv\n?? results/flair_pilot/gp_training_configuration.csv\n?? results/flair_pilot/long_checkpoints_comparison_117.json\n?? results/flair_pilot/long_clock_117/\n?? results/flair_pilot/long_released_117/\n?? results/flair_pilot/long_sensor_117/\n?? results/flair_pilot/orientation_audit.json\n?? results/flair_pilot/pilot_released_211/\n?? results/flair_pilot/pilot_released_307/\n?? results/flair_pilot/pilot_sensor_211/\n?? results/flair_pilot/pilot_sensor_307/\n?? results/flair_pilot/sensor_seed_pilot_summary.json\n?? results/flair_pilot/sensor_state_probe.json\n?? results/flair_pilot/timestamp_matching_probe.json\n?? results/flair_pilot/timestamp_varying_probe.json\n?? results/flair_pilot/vicon_configuration.csv\n?? results/paired_development/\n?? results/smoke.json\n?? scripts/arm_branch_stress.py\n?? scripts/arm_nominal_check.py\n?? scripts/arm_transfer_experiment.py\n?? scripts/check_flair_sensor_state.py\n?? scripts/evaluate.py\n?? scripts/flair_brax_sensor_replay.py\n?? scripts/flair_compare_checkpoints.py\n?? scripts/flair_compare_short.py\n?? scripts/flair_device_benchmark.py\n?? scripts/flair_orientation_audit.py\n?? scripts/flair_pilot_guard.py\n?? scripts/flair_rotation_probe.py\n?? scripts/flair_sensor_seed_pilot.py\n?? scripts/flair_short_closed_loop.py\n?? scripts/flair_timestamp_matching_probe.py\n?? scripts/paired_development.py\n?? scripts/smoke.py\n?? src/\n?? tests/",
+    "arm_transfer_sha256": "22aa8fd2313a64a53a839409b93c93858334a572e7693e96747cb163826a901c",
+    "python": "3.12.3",
+    "numpy": "2.5.4"
+  },
+  "episodes": [
+    {
+      "case": {
+        "id": "eval-0-0",
+        "family": "none",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 700,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.06976285940011162,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.11169904610587035,
+        "peak_excursion_from_post_change_observation": 0.11269668787627327,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.010725115993409418,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-0",
+        "family": "none",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 700,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.0754634536538092,
+        "recovery_time_s": 0.9,
+        "success": true,
+        "peak_error": 0.11176731314566243,
+        "peak_excursion_from_post_change_observation": 0.11320297717556187,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.012699250015430152,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-0",
+        "family": "none",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 700,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.06979997258186332,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.1116983952523621,
+        "peak_excursion_from_post_change_observation": 0.11269764661608457,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.013004496955545619,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-0",
+        "family": "none",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 700,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.07019687197590099,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.11188135135433887,
+        "peak_excursion_from_post_change_observation": 0.1127508269758216,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0278055679082172,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-1",
+        "family": "gain",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 701,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.1191801908393791,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.11137623034814552,
+        "peak_excursion_from_post_change_observation": 0.1119591278691024,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0053315780533012,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-1",
+        "family": "gain",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 701,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.12257621205455525,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.11136382754837942,
+        "peak_excursion_from_post_change_observation": 0.11201671790052958,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.006437480958993547,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-1",
+        "family": "gain",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 701,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.1104185345387378,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.11137631737671087,
+        "peak_excursion_from_post_change_observation": 0.11206187679100903,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007716436870396137,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-1",
+        "family": "gain",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 701,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.11286727128297654,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.1113119426278697,
+        "peak_excursion_from_post_change_observation": 0.11188041210760033,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.04873217301792465,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-2",
+        "family": "gain",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 702,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.0679860860154916,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.11196244134361447,
+        "peak_excursion_from_post_change_observation": 0.11264075574751095,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.011781991954194382,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-2",
+        "family": "gain",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 702,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.0745776835060191,
+        "recovery_time_s": 0.9,
+        "success": true,
+        "peak_error": 0.11197209110582003,
+        "peak_excursion_from_post_change_observation": 0.11283288267757907,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.010652260985807516,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-2",
+        "family": "gain",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 702,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.06877726052157888,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.11196256461178224,
+        "peak_excursion_from_post_change_observation": 0.1126336146398329,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.00747397200029809,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-2",
+        "family": "gain",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 702,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.07114952420970565,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.1119879512494085,
+        "peak_excursion_from_post_change_observation": 0.11263837261833949,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.02693908492801711,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-3",
+        "family": "camera",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 703,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.1193494024953006,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.1541042910736593,
+        "peak_excursion_from_post_change_observation": 0.15488388047272855,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0051171390368836,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-3",
+        "family": "camera",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 703,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.12678488993751494,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.15409990085264005,
+        "peak_excursion_from_post_change_observation": 0.15513537798002486,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005668314988724887,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-3",
+        "family": "camera",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 703,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.11933419343327684,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.15410516390647483,
+        "peak_excursion_from_post_change_observation": 0.15488433797926465,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007582313963212073,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-3",
+        "family": "camera",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 703,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.11925057300687697,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.15433921579104873,
+        "peak_excursion_from_post_change_observation": 0.15506155861077317,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.02965975801635068,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-4",
+        "family": "camera",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 704,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.015699107731332426,
+        "recovery_time_s": 0.5,
+        "success": true,
+        "peak_error": 0.02953084043858098,
+        "peak_excursion_from_post_change_observation": 0.030142580363918,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005221909887040965,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-4",
+        "family": "camera",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 704,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.01795815420212192,
+        "recovery_time_s": 0.6000000000000001,
+        "success": true,
+        "peak_error": 0.029516589365040792,
+        "peak_excursion_from_post_change_observation": 0.03054352179920766,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005682377974153496,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-4",
+        "family": "camera",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 704,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.015700596483628742,
+        "recovery_time_s": 0.5,
+        "success": true,
+        "peak_error": 0.02953596134736683,
+        "peak_excursion_from_post_change_observation": 0.03015215635436084,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0074578760541044176,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-0-4",
+        "family": "camera",
+        "start_q": [
+          -0.48,
+          -1.35
+        ],
+        "target_q": [
+          0.22,
+          -1.65
+        ],
+        "seed": 704,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.016665305816005154,
+        "recovery_time_s": 0.5,
+        "success": true,
+        "peak_error": 0.02889288947156259,
+        "peak_excursion_from_post_change_observation": 0.029355179940576705,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0243398009770317,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-0",
+        "family": "none",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 710,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10185834562088505,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.14089724545465498,
+        "peak_excursion_from_post_change_observation": 0.14149884182247915,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005146491952473298,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-0",
+        "family": "none",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 710,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10297377880013558,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.14089399147621454,
+        "peak_excursion_from_post_change_observation": 0.14262747813535828,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005848093016538769,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-0",
+        "family": "none",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 710,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10269777184313074,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.14089945784503513,
+        "peak_excursion_from_post_change_observation": 0.14150090313428643,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.008008017015527003,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-0",
+        "family": "none",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 710,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10339622757512562,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.14088506591777458,
+        "peak_excursion_from_post_change_observation": 0.1415303195599882,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.03197357589669991,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-1",
+        "family": "gain",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 711,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.15042195583875465,
+        "recovery_time_s": 1.3,
+        "success": true,
+        "peak_error": 0.14133955723320227,
+        "peak_excursion_from_post_change_observation": 0.1419480874812232,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005191035976167768,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-1",
+        "family": "gain",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 711,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.14125894244772075,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.14126734839673974,
+        "peak_excursion_from_post_change_observation": 0.14555087253598586,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005613791960058734,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-1",
+        "family": "gain",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 711,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.12588469190084342,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.14133853320464765,
+        "peak_excursion_from_post_change_observation": 0.14194984421394113,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.011279747996013612,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-1",
+        "family": "gain",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 711,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.11837138411987252,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.14052065690693485,
+        "peak_excursion_from_post_change_observation": 0.14103159840227505,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.03589198394911364,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-2",
+        "family": "gain",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 712,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10880770458220888,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.14138360189239474,
+        "peak_excursion_from_post_change_observation": 0.14215588338959834,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005128971024532802,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-2",
+        "family": "gain",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 712,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10797973311564409,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.14137602082782863,
+        "peak_excursion_from_post_change_observation": 0.1421938416607838,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005605937913060188,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-2",
+        "family": "gain",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 712,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10816738913215616,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.14138104401831908,
+        "peak_excursion_from_post_change_observation": 0.14217162825786653,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007408442004816607,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-2",
+        "family": "gain",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 712,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10671519780493398,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.14137890434825423,
+        "peak_excursion_from_post_change_observation": 0.14240031299051156,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.030985798017354682,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-3",
+        "family": "camera",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 713,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.16629232882314576,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.1874095207255103,
+        "peak_excursion_from_post_change_observation": 0.18812925251987486,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005378157875384204,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-3",
+        "family": "camera",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 713,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.16573829245784555,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.18730595539644668,
+        "peak_excursion_from_post_change_observation": 0.18829819891172775,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005804165979498066,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-3",
+        "family": "camera",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 713,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.16845065869783263,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.18741192322058484,
+        "peak_excursion_from_post_change_observation": 0.18812534900639435,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007806826091837138,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-3",
+        "family": "camera",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 713,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.17060268753649224,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.18750103075327224,
+        "peak_excursion_from_post_change_observation": 0.1880126879938422,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.032475208965479396,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-4",
+        "family": "camera",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 714,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.02854077848960166,
+        "recovery_time_s": 0.7000000000000001,
+        "success": true,
+        "peak_error": 0.05177890999783147,
+        "peak_excursion_from_post_change_observation": 0.05227395216548837,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005840655052452348,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-4",
+        "family": "camera",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 714,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.031309298731971656,
+        "recovery_time_s": 0.7000000000000001,
+        "success": true,
+        "peak_error": 0.0517842043705457,
+        "peak_excursion_from_post_change_observation": 0.05239798555896041,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.00742883313796483,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-4",
+        "family": "camera",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 714,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.028891134827429357,
+        "recovery_time_s": 0.7000000000000001,
+        "success": true,
+        "peak_error": 0.051779194907435155,
+        "peak_excursion_from_post_change_observation": 0.0522737427472936,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.009665999925346114,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-1-4",
+        "family": "camera",
+        "start_q": [
+          0.22,
+          -1.75
+        ],
+        "target_q": [
+          0.72,
+          -1.2
+        ],
+        "seed": 714,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.03306810182369762,
+        "recovery_time_s": 0.7000000000000001,
+        "success": true,
+        "peak_error": 0.0516575951689938,
+        "peak_excursion_from_post_change_observation": 0.052168273787168304,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.02988183792331256,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-0",
+        "family": "none",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 720,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.08652744991039553,
+        "recovery_time_s": 0.9,
+        "success": true,
+        "peak_error": 0.12691603676590868,
+        "peak_excursion_from_post_change_observation": 0.1273595611830341,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005249534995527938,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-0",
+        "family": "none",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 720,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10668039804565706,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.12705645118376657,
+        "peak_excursion_from_post_change_observation": 0.13073543084656875,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005802130021038465,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-0",
+        "family": "none",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 720,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.08625562561136196,
+        "recovery_time_s": 0.9,
+        "success": true,
+        "peak_error": 0.12691683488227629,
+        "peak_excursion_from_post_change_observation": 0.1273647745861692,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007876653136918321,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-0",
+        "family": "none",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 720,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.10568335346959282,
+        "recovery_time_s": 0.9,
+        "success": true,
+        "peak_error": 0.1268393689207194,
+        "peak_excursion_from_post_change_observation": 0.12660349097842588,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.02976981599931605,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-1",
+        "family": "gain",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 721,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.12128788785295304,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.1271304047332328,
+        "peak_excursion_from_post_change_observation": 0.12758723600924005,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0052050970698473975,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-1",
+        "family": "gain",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 721,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.12899167937587638,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.12716360128745516,
+        "peak_excursion_from_post_change_observation": 0.12772958171390156,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005521243016119115,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-1",
+        "family": "gain",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 721,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.1112570242715302,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.12713254985416098,
+        "peak_excursion_from_post_change_observation": 0.1276087334306817,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007370931038167328,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-1",
+        "family": "gain",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 721,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.11895624991050187,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.12720790561483894,
+        "peak_excursion_from_post_change_observation": 0.12858384126059597,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.031211647918098606,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-2",
+        "family": "gain",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 722,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.09306261647143992,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.12712280640982154,
+        "peak_excursion_from_post_change_observation": 0.12769480939516883,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0051248920353828,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-2",
+        "family": "gain",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 722,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.11647085570814178,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.1271177763880809,
+        "peak_excursion_from_post_change_observation": 0.13122203693023238,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005642523057758808,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-2",
+        "family": "gain",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 722,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.08986983738529526,
+        "recovery_time_s": 0.9,
+        "success": true,
+        "peak_error": 0.12712231388071932,
+        "peak_excursion_from_post_change_observation": 0.12771124448879906,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007816414028638974,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-2",
+        "family": "gain",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 722,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.09236247829148055,
+        "recovery_time_s": 0.9,
+        "success": true,
+        "peak_error": 0.12803547948511837,
+        "peak_excursion_from_post_change_observation": 0.12850580930355296,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.027519603027030826,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-3",
+        "family": "camera",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 723,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.05041442232952077,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.09053172075335778,
+        "peak_excursion_from_post_change_observation": 0.09107567815019696,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.00513681500160601,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-3",
+        "family": "camera",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 723,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.07050461079843866,
+        "recovery_time_s": 0.9,
+        "success": true,
+        "peak_error": 0.09056615178303472,
+        "peak_excursion_from_post_change_observation": 0.09430387466191961,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005901188094867393,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-3",
+        "family": "camera",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 723,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.05032731303086016,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.09053183320321227,
+        "peak_excursion_from_post_change_observation": 0.09107584857445442,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0075341019401093945,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-3",
+        "family": "camera",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 723,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.0529958781221622,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.09071678249029454,
+        "peak_excursion_from_post_change_observation": 0.09139538795544744,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.026089503953699023,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-4",
+        "family": "camera",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 724,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.20531192945210053,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.20856223425179415,
+        "peak_excursion_from_post_change_observation": 0.2091865463555297,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005249229972832836,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-4",
+        "family": "camera",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 724,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.22923949374786812,
+        "recovery_time_s": 1.3,
+        "success": true,
+        "peak_error": 0.20857974942636312,
+        "peak_excursion_from_post_change_observation": 0.20941769069484525,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.006096875018556602,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-4",
+        "family": "camera",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 724,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.2039481245411952,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.2085623263762698,
+        "peak_excursion_from_post_change_observation": 0.20918820390953874,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.009475725964875892,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-2-4",
+        "family": "camera",
+        "start_q": [
+          0.48,
+          -1.38
+        ],
+        "target_q": [
+          -0.12,
+          -1.85
+        ],
+        "seed": 724,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.21240965343907328,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.20877915419760815,
+        "peak_excursion_from_post_change_observation": 0.20897266105035112,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.031058452936122194,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-0",
+        "family": "none",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 730,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.1260935500805623,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.16048405020199075,
+        "peak_excursion_from_post_change_observation": 0.16123503045978865,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005292754081892781,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-0",
+        "family": "none",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 730,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.12981694132976362,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.16048511323811526,
+        "peak_excursion_from_post_change_observation": 0.1615671085491442,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005765536086983047,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-0",
+        "family": "none",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 730,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.12766809768043028,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.16048651790663956,
+        "peak_excursion_from_post_change_observation": 0.16123771173100443,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.010348336916649714,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-0",
+        "family": "none",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 730,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.1291766806169954,
+        "recovery_time_s": 1.0,
+        "success": true,
+        "peak_error": 0.16034132067525156,
+        "peak_excursion_from_post_change_observation": 0.16102502375676755,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.03817237009934615,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-1",
+        "family": "gain",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 731,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.19068891740819405,
+        "recovery_time_s": 1.4000000000000001,
+        "success": true,
+        "peak_error": 0.1605222948590512,
+        "peak_excursion_from_post_change_observation": 0.16118394022234947,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005297637922922149,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-1",
+        "family": "gain",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 731,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.18160418420486205,
+        "recovery_time_s": 1.3,
+        "success": true,
+        "peak_error": 0.16046875853505116,
+        "peak_excursion_from_post_change_observation": 0.16329284922914578,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005686457036063075,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-1",
+        "family": "gain",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 731,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.15320638840605652,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.1605238022082844,
+        "peak_excursion_from_post_change_observation": 0.16112446607072017,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007768513940391131,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-1",
+        "family": "gain",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 731,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          0.55,
+          1.0
+        ]
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.14710934630841818,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.16054944313518496,
+        "peak_excursion_from_post_change_observation": 0.16124905618073734,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.03162502594932448,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-2",
+        "family": "gain",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 732,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.13434125533069305,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.1603734946222901,
+        "peak_excursion_from_post_change_observation": 0.16087131979408786,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.00527389811759349,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-2",
+        "family": "gain",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 732,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.13469091732203117,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.16033825280821581,
+        "peak_excursion_from_post_change_observation": 0.16094001464004595,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005851763839018531,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-2",
+        "family": "gain",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 732,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.13427510636536885,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.16038251984922153,
+        "peak_excursion_from_post_change_observation": 0.1608910437587266,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007819577018381096,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-2",
+        "family": "gain",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 732,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "gain": [
+          1.0,
+          0.75
+        ]
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.13207226425742197,
+        "recovery_time_s": 1.1,
+        "success": true,
+        "peak_error": 0.16052082433554607,
+        "peak_excursion_from_post_change_observation": 0.16112325447559755,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.03508101901388727,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-3",
+        "family": "camera",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 733,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.20291028917568352,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.2085737529474135,
+        "peak_excursion_from_post_change_observation": 0.20912503536118693,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005264210907625966,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-3",
+        "family": "camera",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 733,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.20276338233655644,
+        "recovery_time_s": 1.3,
+        "success": true,
+        "peak_error": 0.20848757806245108,
+        "peak_excursion_from_post_change_observation": 0.20956488492498498,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005643550044624135,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-3",
+        "family": "camera",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 733,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.20415681717124629,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.2085759205510712,
+        "peak_excursion_from_post_change_observation": 0.20912628248248377,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007982028982951306,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-3",
+        "family": "camera",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 733,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": -7.0
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.20842028542821428,
+        "recovery_time_s": 1.2000000000000002,
+        "success": true,
+        "peak_error": 0.20843250771547703,
+        "peak_excursion_from_post_change_observation": 0.20911681690274458,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.03502150400890969,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-4",
+        "family": "camera",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 734,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "nominal",
+      "metrics": {
+        "integrated_normalized_error_s": 0.034115998111630866,
+        "recovery_time_s": 0.7000000000000001,
+        "success": true,
+        "peak_error": 0.06245619075006827,
+        "peak_excursion_from_post_change_observation": 0.06312775781308269,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005123765949974768,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-4",
+        "family": "camera",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 734,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "online",
+      "metrics": {
+        "integrated_normalized_error_s": 0.03815458131402102,
+        "recovery_time_s": 0.8,
+        "success": true,
+        "peak_error": 0.06247770421858181,
+        "peak_excursion_from_post_change_observation": 0.06321294624370599,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.005694505991414189,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-4",
+        "family": "camera",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 734,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "global",
+      "metrics": {
+        "integrated_normalized_error_s": 0.03473090036261035,
+        "recovery_time_s": 0.7000000000000001,
+        "success": true,
+        "peak_error": 0.062456358405661334,
+        "peak_excursion_from_post_change_observation": 0.06312668218694027,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.007078332957462408,
+        "reachable": true
+      }
+    },
+    {
+      "case": {
+        "id": "eval-3-4",
+        "family": "camera",
+        "start_q": [
+          -0.12,
+          -1.65
+        ],
+        "target_q": [
+          0.42,
+          -1.05
+        ],
+        "seed": 734,
+        "steps": 120,
+        "change_step": 20,
+        "noise": 0.0002,
+        "rotation_deg": 15.0
+      },
+      "method": "gp",
+      "metrics": {
+        "integrated_normalized_error_s": 0.035058591142133826,
+        "recovery_time_s": 0.7000000000000001,
+        "success": true,
+        "peak_error": 0.062260025171372906,
+        "peak_excursion_from_post_change_observation": 0.0629153355712051,
+        "action_count": 120,
+        "post_change_action_count": 100,
+        "computation_wall_s": 0.0283846759411972,
+        "reachable": true
+      }
+    }
+  ]
+}
