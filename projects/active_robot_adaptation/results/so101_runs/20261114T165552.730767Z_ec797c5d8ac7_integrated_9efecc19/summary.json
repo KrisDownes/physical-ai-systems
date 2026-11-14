@@ -1,0 +1,198 @@
+{
+  "none": {
+    "fixed2": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 74.0,
+      "median_movement_rad": 2.435850714394592,
+      "median_sim_s": 7.899999999999854,
+      "median_compute_s": 0.009016508935019374,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 77.0,
+      "median_movement_rad": 2.5031404808417137,
+      "median_sim_s": 8.199999999999882,
+      "median_compute_s": 0.007975734042702243,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 75.0,
+      "median_movement_rad": 2.393191468601658,
+      "median_sim_s": 7.999999999999852,
+      "median_compute_s": 0.008579400891903788,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 76.0,
+      "median_movement_rad": 2.494060168378664,
+      "median_sim_s": 8.099999999999866,
+      "median_compute_s": 0.0097317359468434,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "camera": {
+    "fixed2": {
+      "successes": 0,
+      "trials": 1,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 74.0,
+      "median_movement_rad": 2.484036037266289,
+      "median_sim_s": 7.899999999999854,
+      "median_compute_s": 0.005877024843357503,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 74.0,
+      "median_movement_rad": 2.4625507674409226,
+      "median_sim_s": 7.899999999999854,
+      "median_compute_s": 0.007185019989265129,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 0,
+      "trials": 1,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 73.0,
+      "median_movement_rad": 2.40186445531918,
+      "median_sim_s": 7.799999999999856,
+      "median_compute_s": 0.007216640078695491,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 80.0,
+      "median_movement_rad": 2.8975769139003367,
+      "median_sim_s": 8.499999999999929,
+      "median_compute_s": 0.01074480515671894,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "tool": {
+    "fixed2": {
+      "successes": 0,
+      "trials": 1,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 74.0,
+      "median_movement_rad": 2.453340978939033,
+      "median_sim_s": 7.899999999999854,
+      "median_compute_s": 0.006730625929776579,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 74.0,
+      "median_movement_rad": 2.455741438687688,
+      "median_sim_s": 7.899999999999854,
+      "median_compute_s": 0.008033571939449757,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 0,
+      "trials": 1,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 74.0,
+      "median_movement_rad": 2.362889273362759,
+      "median_sim_s": 7.899999999999854,
+      "median_compute_s": 0.007896621944382787,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 76.0,
+      "median_movement_rad": 2.458102908167845,
+      "median_sim_s": 8.099999999999866,
+      "median_compute_s": 0.009913091198541224,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "both": {
+    "fixed2": {
+      "successes": 0,
+      "trials": 1,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 73.0,
+      "median_movement_rad": 2.440342571610789,
+      "median_sim_s": 7.799999999999856,
+      "median_compute_s": 0.006069282884709537,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 75.0,
+      "median_movement_rad": 2.523959269131081,
+      "median_sim_s": 7.999999999999852,
+      "median_compute_s": 0.007509386196034029,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 0,
+      "trials": 1,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 75.0,
+      "median_movement_rad": 2.406736183752338,
+      "median_sim_s": 7.999999999999852,
+      "median_compute_s": 0.007446270959917456,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 1,
+      "trials": 1,
+      "failures": [],
+      "median_actions": 76.0,
+      "median_movement_rad": 2.463466787628446,
+      "median_sim_s": 8.099999999999866,
+      "median_compute_s": 0.009248158836271614,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  }
+}

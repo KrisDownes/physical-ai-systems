@@ -1,5 +1,6 @@
 """Create immutable-by-default, uniquely named experiment output directories."""
 import hashlib
+import gzip
 import importlib.metadata
 import json
 import platform
@@ -23,4 +24,8 @@ def create_run(label, config):
               'source_sha256':{str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in files},
               'git_project_status':subprocess.check_output(['git','status','--short','--','so101'],text=True).strip()}
     (path/'metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
+    snapshot={str(f):f.read_text() for f in files}
+    with (path/'source_snapshot.json.gz').open('xb') as raw:
+        with gzip.GzipFile(fileobj=raw,mode='wb',mtime=0) as zipped:
+            zipped.write(json.dumps(snapshot,sort_keys=True).encode())
     return path

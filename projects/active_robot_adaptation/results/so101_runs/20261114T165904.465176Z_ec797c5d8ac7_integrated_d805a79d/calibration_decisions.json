@@ -1,0 +1,578 @@
+[
+  {
+    "condition": "both",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.010167567034176803,
+        -0.010039406252787264
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "both",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0036372231395108996,
+      "offset_xy": [
+        0.01345297641670512,
+        -0.008478804652189462
+      ]
+    }
+  },
+  {
+    "condition": "both",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.010167567034176803,
+        -0.010039406252787264
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "both",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0036372231395108996,
+      "offset_xy": [
+        0.01345297641670512,
+        -0.008478804652189462
+      ]
+    }
+  },
+  {
+    "condition": "both",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        -0.005774679812713471,
+        0.007667568825374657
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "both",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "inconsistent_with_table",
+      "difference_m": 0.005141795708797061,
+      "offset_xy": [
+        -0.00994181648856371,
+        0.004655420914699004
+      ]
+    }
+  },
+  {
+    "condition": "both",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        -0.005774679812713471,
+        0.007667568825374657
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "both",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "inconsistent_with_table",
+      "difference_m": 0.005141795708797061,
+      "offset_xy": [
+        -0.00994181648856371,
+        0.004655420914699004
+      ]
+    }
+  },
+  {
+    "condition": "both_no_table",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": false,
+      "reason": "references_missing"
+    }
+  },
+  {
+    "condition": "both_no_table",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": true,
+      "reason": "fallback_assumes_nominal_geometry",
+      "offset_xy": [
+        0.01345297641670512,
+        -0.008478804652189462
+      ]
+    }
+  },
+  {
+    "condition": "both_no_table",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": false,
+      "reason": "references_missing"
+    }
+  },
+  {
+    "condition": "both_no_table",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": true,
+      "reason": "fallback_assumes_nominal_geometry",
+      "offset_xy": [
+        0.01345297641670512,
+        -0.008478804652189462
+      ]
+    }
+  },
+  {
+    "condition": "both_no_table",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": false,
+      "reason": "references_missing"
+    }
+  },
+  {
+    "condition": "both_no_table",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": true,
+      "reason": "fallback_assumes_nominal_geometry",
+      "offset_xy": [
+        -0.00994181648856371,
+        0.004655420914699004
+      ]
+    }
+  },
+  {
+    "condition": "both_no_table",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": false,
+      "reason": "references_missing"
+    }
+  },
+  {
+    "condition": "both_no_table",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": true,
+      "reason": "fallback_assumes_nominal_geometry",
+      "offset_xy": [
+        -0.00994181648856371,
+        0.004655420914699004
+      ]
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.010167567034176803,
+        -0.010039406252787264
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0005004791668107054,
+      "offset_xy": [
+        0.009940571930210945,
+        -0.010485447303798343
+      ]
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.010167567034176803,
+        -0.010039406252787264
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0005004791668107054,
+      "offset_xy": [
+        0.009940571930210945,
+        -0.010485447303798343
+      ]
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        -0.005774679812713471,
+        0.007667568825374657
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.00016874744266303103,
+      "offset_xy": [
+        -0.005872164163252258,
+        0.0075298281240357146
+      ]
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        -0.005774679812713471,
+        0.007667568825374657
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.00016874744266303103,
+      "offset_xy": [
+        -0.005872164163252258,
+        0.0075298281240357146
+      ]
+    }
+  },
+  {
+    "condition": "none",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "none",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0003540894501164945,
+      "offset_xy": [
+        0.000942683818650647,
+        -0.0014875591922380582
+      ]
+    }
+  },
+  {
+    "condition": "none",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "none",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0003540894501164945,
+      "offset_xy": [
+        0.000942683818650647,
+        -0.0014875591922380582
+      ]
+    }
+  },
+  {
+    "condition": "none",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "none",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.00037794590842762184,
+      "offset_xy": [
+        0.0008792493233585608,
+        -0.0014363506195740894
+      ]
+    }
+  },
+  {
+    "condition": "none",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "none",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.00037794590842762184,
+      "offset_xy": [
+        0.0008792493233585608,
+        -0.0014363506195740894
+      ]
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "fresh-1",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0036976672941257073,
+      "offset_xy": [
+        0.004455112904708347,
+        0.0005190588598073254
+      ]
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "fresh-1",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0036976672941257073,
+      "offset_xy": [
+        0.004455112904708347,
+        0.0005190588598073254
+      ]
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "fresh-2",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "inconsistent_with_table",
+      "difference_m": 0.005197150261775103,
+      "offset_xy": [
+        -0.002876440338086733,
+        -0.004466180680008661
+      ]
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "fresh-2",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "inconsistent_with_table",
+      "difference_m": 0.005197150261775103,
+      "offset_xy": [
+        -0.002876440338086733,
+        -0.004466180680008661
+      ]
+    }
+  }
+]

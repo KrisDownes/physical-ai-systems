@@ -1,0 +1,304 @@
+{
+  "none": {
+    "fixed2": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 79.5,
+      "median_movement_rad": 2.5308221893886675,
+      "median_sim_s": 8.449999999999921,
+      "median_compute_s": 0.007457542989868671,
+      "median_tracking_error_m_s": 0.09289348075213023,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 81.5,
+      "median_movement_rad": 2.549714301821947,
+      "median_sim_s": 8.649999999999952,
+      "median_compute_s": 0.008305367475259118,
+      "median_tracking_error_m_s": 0.09490113562815854,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 75.0,
+      "median_movement_rad": 2.4315586128648228,
+      "median_sim_s": 7.99999999999986,
+      "median_compute_s": 0.008550314378226176,
+      "median_tracking_error_m_s": 0.08925749026800277,
+      "total_accepted_motion_updates": 50,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 78.5,
+      "median_movement_rad": 2.4800126244633836,
+      "median_sim_s": 8.349999999999905,
+      "median_compute_s": 0.010196398900006898,
+      "median_tracking_error_m_s": 0.09286179544349601,
+      "total_accepted_motion_updates": 57,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "camera": {
+    "fixed2": {
+      "successes": 1,
+      "trials": 2,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 78.5,
+      "median_movement_rad": 2.4900176789097004,
+      "median_sim_s": 8.349999999999932,
+      "median_compute_s": 0.00702469446696341,
+      "median_tracking_error_m_s": 0.09396036610855313,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 83.0,
+      "median_movement_rad": 2.571597877469582,
+      "median_sim_s": 8.799999999999976,
+      "median_compute_s": 0.009017650096211582,
+      "median_tracking_error_m_s": 0.09680912466508641,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 1,
+      "trials": 2,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 78.0,
+      "median_movement_rad": 2.482865645070456,
+      "median_sim_s": 8.299999999999924,
+      "median_compute_s": 0.00898357090773061,
+      "median_tracking_error_m_s": 0.09378278428142443,
+      "total_accepted_motion_updates": 56,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 79.0,
+      "median_movement_rad": 2.5432657060691186,
+      "median_sim_s": 8.399999999999913,
+      "median_compute_s": 0.009957961665350012,
+      "median_tracking_error_m_s": 0.0939132597558558,
+      "total_accepted_motion_updates": 58,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "tool": {
+    "fixed2": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 77.0,
+      "median_movement_rad": 2.466905651874075,
+      "median_sim_s": 8.1999999999999,
+      "median_compute_s": 0.007076698064338416,
+      "median_tracking_error_m_s": 0.08948867215363265,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 80.0,
+      "median_movement_rad": 2.543326050209662,
+      "median_sim_s": 8.499999999999929,
+      "median_compute_s": 0.008405146902077831,
+      "median_tracking_error_m_s": 0.09373274109534296,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 76.0,
+      "median_movement_rad": 2.435478113446871,
+      "median_sim_s": 8.099999999999875,
+      "median_compute_s": 0.008250369966845028,
+      "median_tracking_error_m_s": 0.08925333183370551,
+      "total_accepted_motion_updates": 52,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 78.5,
+      "median_movement_rad": 2.496066585457939,
+      "median_sim_s": 8.349999999999905,
+      "median_compute_s": 0.011545417044544592,
+      "median_tracking_error_m_s": 0.09283292396640519,
+      "total_accepted_motion_updates": 57,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "both": {
+    "fixed2": {
+      "successes": 1,
+      "trials": 2,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 76.5,
+      "median_movement_rad": 2.4785914328253327,
+      "median_sim_s": 8.1499999999999,
+      "median_compute_s": 0.0067157795710954815,
+      "median_tracking_error_m_s": 0.09162487674121633,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 82.0,
+      "median_movement_rad": 2.5850865376243086,
+      "median_sim_s": 8.69999999999996,
+      "median_compute_s": 0.008502770797349513,
+      "median_tracking_error_m_s": 0.09661986007103163,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 1,
+      "trials": 2,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 77.0,
+      "median_movement_rad": 2.4567683399073483,
+      "median_sim_s": 8.1999999999999,
+      "median_compute_s": 0.008015883489861153,
+      "median_tracking_error_m_s": 0.09221765992354689,
+      "total_accepted_motion_updates": 54,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 76.5,
+      "median_movement_rad": 2.382980543663174,
+      "median_sim_s": 8.149999999999892,
+      "median_compute_s": 0.008935161895351484,
+      "median_tracking_error_m_s": 0.09090612053010075,
+      "total_accepted_motion_updates": 53,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "both_no_table": {
+    "fixed2": {
+      "successes": 1,
+      "trials": 2,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 76.5,
+      "median_movement_rad": 2.4785914328253327,
+      "median_sim_s": 8.1499999999999,
+      "median_compute_s": 0.006819770991569385,
+      "median_tracking_error_m_s": 0.09162487674121633,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "calibration": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 83.0,
+      "median_movement_rad": 2.5582476615593523,
+      "median_sim_s": 8.799999999999976,
+      "median_compute_s": 0.009066834973054938,
+      "median_tracking_error_m_s": 0.0975257836490785,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "motion": {
+      "successes": 1,
+      "trials": 2,
+      "failures": [
+        "grasp"
+      ],
+      "median_actions": 77.0,
+      "median_movement_rad": 2.4567683399073483,
+      "median_sim_s": 8.1999999999999,
+      "median_compute_s": 0.008111713425023481,
+      "median_tracking_error_m_s": 0.09221765992354689,
+      "total_accepted_motion_updates": 54,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    },
+    "integrated": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 79.0,
+      "median_movement_rad": 2.547843705614964,
+      "median_sim_s": 8.399999999999913,
+      "median_compute_s": 0.010434141353471205,
+      "median_tracking_error_m_s": 0.09509039108758299,
+      "total_accepted_motion_updates": 58,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  }
+}

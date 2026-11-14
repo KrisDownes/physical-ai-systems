@@ -1,0 +1,242 @@
+[
+  {
+    "condition": "both",
+    "case": "dev0",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.009207453216731283,
+        0.004739429763946798
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "both",
+    "case": "dev0",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "inconsistent_with_table",
+      "difference_m": 0.005931772553062871,
+      "offset_xy": [
+        0.014164079696005583,
+        0.007997923214335623
+      ]
+    }
+  },
+  {
+    "condition": "both",
+    "case": "dev0",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.009207453216731283,
+        0.004739429763946798
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "both",
+    "case": "dev0",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "inconsistent_with_table",
+      "difference_m": 0.005931772553062871,
+      "offset_xy": [
+        0.014164079696005583,
+        0.007997923214335623
+      ]
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "dev0",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.009207453216731283,
+        0.004739429763946798
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "dev0",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.00016803591682090394,
+      "offset_xy": [
+        0.009087800801528684,
+        0.004621449388976948
+      ]
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "dev0",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.009207453216731283,
+        0.004739429763946798
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "camera",
+    "case": "dev0",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.00016803591682090394,
+      "offset_xy": [
+        0.009087800801528684,
+        0.004621449388976948
+      ]
+    }
+  },
+  {
+    "condition": "none",
+    "case": "dev0",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "none",
+    "case": "dev0",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0005262551498126795,
+      "offset_xy": [
+        0.0008526202733079857,
+        -0.0016422949511826768
+      ]
+    }
+  },
+  {
+    "condition": "none",
+    "case": "dev0",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "none",
+    "case": "dev0",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "table_preferred",
+      "difference_m": 0.0005262551498126795,
+      "offset_xy": [
+        0.0008526202733079857,
+        -0.0016422949511826768
+      ]
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "dev0",
+    "method": "calibration",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "dev0",
+    "method": "calibration",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "inconsistent_with_table",
+      "difference_m": 0.005993712833342806,
+      "offset_xy": [
+        0.006204054547413018,
+        0.0020598116266935806
+      ]
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "dev0",
+    "method": "integrated",
+    "decision": {
+      "source": "table",
+      "accepted": true,
+      "offset_xy": [
+        0.0012127847277680834,
+        -0.001258594484089104
+      ],
+      "reason": "consistent_references_within_bound",
+      "reason_provenance": "derived from recorded selector source"
+    }
+  },
+  {
+    "condition": "tool",
+    "case": "dev0",
+    "method": "integrated",
+    "decision": {
+      "source": "gripper",
+      "accepted": false,
+      "reason": "inconsistent_with_table",
+      "difference_m": 0.005993712833342806,
+      "offset_xy": [
+        0.006204054547413018,
+        0.0020598116266935806
+      ]
+    }
+  }
+]

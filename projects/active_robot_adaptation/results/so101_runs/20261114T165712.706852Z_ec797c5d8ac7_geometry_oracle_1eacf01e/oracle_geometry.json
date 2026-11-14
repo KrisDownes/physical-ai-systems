@@ -1,0 +1,424 @@
+[
+  {
+    "tool_offset": [
+      0.006,
+      0,
+      0
+    ],
+    "result": {
+      "visible": true,
+      "stages": {
+        "approach": true,
+        "reach": true,
+        "lift": true,
+        "transport": true,
+        "lower": true
+      },
+      "tracking_error_m_s": 0.08427368940001738,
+      "peak_tracking_error_m": 0.09272422417450546,
+      "initial_visibility": {
+        "object": true,
+        "gripper_marker": true,
+        "table_references": true
+      },
+      "localization": {
+        "object_pixel": [
+          166.2896551724138,
+          108.12413793103448
+        ],
+        "offset_xy": [
+          0.0,
+          0.0
+        ],
+        "object_estimate_xyz": [
+          0.21432893261285138,
+          0.027055287236107464,
+          0.04
+        ],
+        "grasp_target_xy": [
+          0.20271893261285137,
+          0.014655287236107465
+        ],
+        "intervention": null,
+        "destination_pixel": [
+          167.36873156342182,
+          139.19026548672565
+        ],
+        "destination_estimate_xy": [
+          0.21775379607197584,
+          -0.04623591687199314
+        ]
+      },
+      "calibration_events": [],
+      "success": true,
+      "failure": null,
+      "evaluation": {
+        "grasp_contact": true,
+        "lifted": true,
+        "placed": true,
+        "success": true,
+        "snapshots": {
+          "initial_z": 0.0201,
+          "before_close": {
+            "object_xyz": [
+              0.2159999999999975,
+              0.024999806019906243,
+              0.019892244579783842
+            ],
+            "site_xyz": [
+              0.2029544416453012,
+              0.01464607497172251,
+              0.01538583020938783
+            ],
+            "joints_rad": [
+              -0.017285701645833023,
+              -0.0005755516196396502,
+              0.4629673653274677,
+              1.1880919547406095,
+              1.5843656314565466,
+              1.199997550001603
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          },
+          "after_close": {
+            "object_xyz": [
+              0.21603589334688794,
+              0.013197522919575433,
+              0.019829610463072595
+            ],
+            "site_xyz": [
+              0.20102646665566856,
+              0.02110106188247956,
+              0.015581816010894256
+            ],
+            "joints_rad": [
+              -0.05712135749008938,
+              -0.001945370292301358,
+              0.4630511700115765,
+              1.1903644676172618,
+              1.5843716191022956,
+              0.09751658915616539
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box6",
+              "fixed_jaw_box6",
+              null,
+              null,
+              "moving_jaw_sph_tip2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_lift": {
+            "object_xyz": [
+              0.21599476315313693,
+              0.0063815394852888875,
+              0.0632340472970353
+            ],
+            "site_xyz": [
+              0.20011634279817053,
+              0.01466126001891701,
+              0.05914688414068191
+            ],
+            "joints_rad": [
+              -0.01761593811992037,
+              -0.10232881472953534,
+              0.24522884975706433,
+              1.5110802392566087,
+              1.5843709989299508,
+              0.09542461429484551
+            ],
+            "contacts": [
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box5",
+              "fixed_jaw_box6",
+              "fixed_jaw_box6",
+              null,
+              null,
+              "moving_jaw_sph_tip2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_settle": {
+            "object_xyz": [
+              0.23128365293016234,
+              -0.05058296922032401,
+              0.01989224457978381
+            ],
+            "site_xyz": [
+              0.2126623215743554,
+              -0.03793552938487274,
+              0.011055442601176538
+            ],
+            "joints_rad": [
+              0.28128017880700656,
+              0.16089254727285635,
+              0.29237938521826834,
+              1.2230333215792784,
+              1.584452996251313,
+              1.199996781597418
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          }
+        }
+      }
+    },
+    "actions": 74,
+    "simulation_s": 7.899999999999854,
+    "wall_s": 2.987765007012058,
+    "self_collision_physics_steps": 0
+  },
+  {
+    "tool_offset": [
+      -0.006,
+      0,
+      0
+    ],
+    "result": {
+      "visible": true,
+      "stages": {
+        "approach": true,
+        "reach": true,
+        "lift": true,
+        "transport": true,
+        "lower": true
+      },
+      "tracking_error_m_s": 0.08229699284303645,
+      "peak_tracking_error_m": 0.0922833589535129,
+      "initial_visibility": {
+        "object": true,
+        "gripper_marker": true,
+        "table_references": true
+      },
+      "localization": {
+        "object_pixel": [
+          166.26206896551724,
+          108.12413793103448
+        ],
+        "offset_xy": [
+          0.0,
+          0.0
+        ],
+        "object_estimate_xyz": [
+          0.21426608641718095,
+          0.027055287236107464,
+          0.04
+        ],
+        "grasp_target_xy": [
+          0.20265608641718094,
+          0.014655287236107465
+        ],
+        "intervention": null,
+        "destination_pixel": [
+          167.44542772861357,
+          139.14601769911505
+        ],
+        "destination_estimate_xy": [
+          0.2179385833809716,
+          -0.04612930880911103
+        ]
+      },
+      "calibration_events": [],
+      "success": true,
+      "failure": null,
+      "evaluation": {
+        "grasp_contact": true,
+        "lifted": true,
+        "placed": true,
+        "success": true,
+        "snapshots": {
+          "initial_z": 0.0201,
+          "before_close": {
+            "object_xyz": [
+              0.21600000000005679,
+              0.024999806018081036,
+              0.01989224457978376
+            ],
+            "site_xyz": [
+              0.2035937743585362,
+              0.014656876812342411,
+              0.015218696910914778
+            ],
+            "joints_rad": [
+              -0.01728458505890064,
+              -0.09662383611029948,
+              0.5709001289972019,
+              1.1753437338971606,
+              1.584362635433667,
+              1.199997138126747
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          },
+          "after_close": {
+            "object_xyz": [
+              0.2157095979764262,
+              0.013529111774986162,
+              0.019462307135067584
+            ],
+            "site_xyz": [
+              0.20223768647639392,
+              0.020752491996336872,
+              0.015612929954164176
+            ],
+            "joints_rad": [
+              -0.05458119300693167,
+              -0.09902024622901205,
+              0.5693755657723819,
+              1.1762858013268336,
+              1.5847816246627477,
+              0.12030420510268422
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "fixed_jaw_sph_tip1",
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box5",
+              null,
+              null,
+              "moving_jaw_sph_tip1",
+              "moving_jaw_sph_tip2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_lift": {
+            "object_xyz": [
+              0.21628024181315036,
+              0.006941812070229979,
+              0.06250073500827812
+            ],
+            "site_xyz": [
+              0.20252012123892313,
+              0.014722773142163364,
+              0.058893591877298965
+            ],
+            "joints_rad": [
+              -0.017737226355641955,
+              -0.20508724185107646,
+              0.34948207708841245,
+              1.4949676566140688,
+              1.5847798999588105,
+              0.12002334898814973
+            ],
+            "contacts": [
+              "fixed_jaw_sph_tip3",
+              "fixed_jaw_box3",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box4",
+              "fixed_jaw_box5",
+              null,
+              "moving_jaw_sph_tip1",
+              "moving_jaw_sph_tip2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box2",
+              "moving_jaw_box3",
+              "moving_jaw_box3",
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "after_settle": {
+            "object_xyz": [
+              0.22550275414736964,
+              -0.047610416900291684,
+              0.019892244579783835
+            ],
+            "site_xyz": [
+              0.21042958503221734,
+              -0.037131698220910066,
+              0.012225139322749753
+            ],
+            "joints_rad": [
+              0.2804108946897313,
+              0.0587942806224703,
+              0.4093785512236684,
+              1.2229625261190216,
+              1.5847655982481341,
+              1.1999967868951487
+            ],
+            "contacts": [
+              "table",
+              "table",
+              "table",
+              "table"
+            ]
+          }
+        }
+      }
+    },
+    "actions": 73,
+    "simulation_s": 7.799999999999856,
+    "wall_s": 2.979948546999367,
+    "self_collision_physics_steps": 0
+  }
+]

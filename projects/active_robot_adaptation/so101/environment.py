@@ -36,10 +36,16 @@ def load_model(tool_marker=False):
 
 class Environment:
     def __init__(self, camera_shift=(0., 0.), joint_gain=(1,1,1,1,1), render=True, camera_noise_std=0.,
-                 tool_marker=False, reference_mode='visible', action_budget=None, movement_budget=None):
+                 tool_marker=False, reference_mode='visible', action_budget=None, movement_budget=None,
+                 tool_offset=(0.,0.,0.)):
         self.model = load_model(tool_marker=tool_marker)
+        # The controller keeps a distinct unperturbed kinematic model; the fixed
+        # wrist-frame mounting displacement moves jaws AND attached marker together.
+        self.nominal_model = load_model(tool_marker=tool_marker)
+        body=mujoco.mj_name2id(self.model,mujoco.mjtObj.mjOBJ_BODY,'gripper')
+        self.model.body_pos[body] += np.asarray(tool_offset,dtype=float)
         self.data = mujoco.MjData(self.model)
-        self.nominal_data = mujoco.MjData(self.model)
+        self.nominal_data = mujoco.MjData(self.nominal_model)
         self.cam = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_CAMERA, 'overhead')
         self.model.cam_pos[self.cam, :2] += camera_shift
         self.joint_gain = np.asarray(joint_gain)
@@ -125,9 +131,9 @@ class Environment:
 
     def controller_fk(self, q):
         self.nominal_data.qpos[:6] = q
-        mujoco.mj_forward(self.model, self.nominal_data)
+        mujoco.mj_forward(self.nominal_model, self.nominal_data)
         jacp, jacr = np.zeros((3,self.model.nv)), np.zeros((3,self.model.nv))
-        mujoco.mj_jacSite(self.model,self.nominal_data,jacp,jacr,self.site)
+        mujoco.mj_jacSite(self.nominal_model,self.nominal_data,jacp,jacr,self.site)
         return self.nominal_data.site_xpos[self.site].copy(), jacp[:,:5].copy()
 
     def close(self):
@@ -155,7 +161,9 @@ class Environment:
             if oid in (c.geom1, c.geom2):
                 other = c.geom2 if c.geom1 == oid else c.geom1
                 names.append(mujoco.mj_id2name(self.model, mujoco.mjtObj.mjOBJ_GEOM, other))
-        self._evaluation[stage] = {'object_xyz': self.data.xpos[self.object_id].tolist(), 'contacts': names}
+        self._evaluation[stage] = {'object_xyz': self.data.xpos[self.object_id].tolist(),
+            'site_xyz':self.data.site_xpos[self.site].tolist(),
+            'joints_rad':self.data.qpos[:6].tolist(),'contacts': names}
 
     def evaluate(self):
         e = self._evaluation
@@ -251,14 +259,19 @@ class GlobalCorrection:
         return True
 
 
+def task_jacobian(j, response=None):
+    """Apply the same joint-response estimate to translation and pitch proxy."""
+    task=np.vstack([j, np.array([0.,.10,.10,.10,0.])])
+    return (task if response is None else task@response)[:,:4]
+
+
 def cartesian_step(env, obs, delta, gripper, online=None, global_model=None):
     """Translate in world metres with fixed wrist joints; no arbitrary 6-DoF pose claim."""
     start=time.perf_counter()
     position, j = env.controller_fk(obs['joint_rad'])
     nominal_j=j.copy()
     # Regulate a feasible pitch proxy while translating; wrist roll stays fixed.
-    if online is not None: j = j@online.b
-    j4 = np.vstack([j[:,:4], np.array([0.,.10,.10,.10])])
+    j4 = task_jacobian(j,None if online is None else online.b)
     pitch_error = .10 * ((Q_GRASP[1:4].sum()) - obs['joint_rad'][1:4].sum())
     delta = np.asarray(delta, float)
     delta *= min(1., .015 / max(np.linalg.norm(delta), 1e-12))
@@ -271,8 +284,11 @@ def cartesian_step(env, obs, delta, gripper, online=None, global_model=None):
     after = env.step(u, gripper)
     if online is not None:
         start=time.perf_counter()
+        prior=online.b.copy()
         accepted=online.update(np.clip(u,-.08,.08),obs['joint_rad'][:5],after['joint_rad'][:5])
         env.trace[-1]['adaptation']={'kind':'online','accepted':accepted,'input_u':np.clip(u,-.08,.08).tolist(),
+            'reason':'accepted' if accepted else 'command_too_small',
+            'predicted_delta_q':(prior@np.clip(u,-.08,.08)).tolist(),
             'observed_delta_q':(after['joint_rad'][:5]-obs['joint_rad'][:5]).tolist(),'b':online.b.tolist()}
         env.compute_s += time.perf_counter()-start
     if global_model is not None:

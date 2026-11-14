@@ -1,0 +1,13 @@
+{
+  "purpose": "Development smoke and geometry feasibility, not final evaluation.",
+  "cases": [{"id":"dev0","object_xy":[0.216,0.025],"initial_pan":-0.60,"seed":921}],
+  "conditions": [
+    {"name":"none","camera_shift_m":[0,0],"tool_offset_wrist_m":[0,0,0],"references":"visible"},
+    {"name":"camera","camera_shift_m":[0.008,0.006],"tool_offset_wrist_m":[0,0,0],"references":"visible"},
+    {"name":"tool","camera_shift_m":[0,0],"tool_offset_wrist_m":[0.006,0,0],"references":"visible"},
+    {"name":"both","camera_shift_m":[0.008,0.006],"tool_offset_wrist_m":[0.006,0,0],"references":"visible"}
+  ],
+  "methods":["fixed2","calibration","motion","integrated"],
+  "action_budget":200,"movement_budget_rad":8.0,"camera_noise_std":0.0,
+  "frame_note":"tool offset is a rigid translation in parent wrist frame applied to gripper, jaws and attached marker; nominal controller assumes zero."
+}

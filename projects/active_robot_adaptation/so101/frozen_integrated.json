@@ -1,0 +1,20 @@
+{
+  "purpose":"Fresh paired small-sample comparison, settings frozen before execution; no adaptation memory across episodes.",
+  "cases":[
+    {"id":"fresh-1","object_xy":[0.218,0.034],"initial_pan":-0.57,"seed":951,
+     "camera_shift_m":[0.009,-0.009],"tool_offset_wrist_m":[0.004,0,0]},
+    {"id":"fresh-2","object_xy":[0.227,0.014],"initial_pan":-0.63,"seed":952,
+     "camera_shift_m":[-0.007,0.009],"tool_offset_wrist_m":[-0.005,0,0]}
+  ],
+  "conditions":[
+    {"name":"none","references":"visible"},
+    {"name":"camera","camera_changed":true,"references":"visible"},
+    {"name":"tool","tool_changed":true,"references":"visible"},
+    {"name":"both","camera_changed":true,"tool_changed":true,"references":"visible"},
+    {"name":"both_no_table","camera_changed":true,"tool_changed":true,"references":"unavailable"}
+  ],
+  "methods":["fixed2","calibration","motion","integrated"],
+  "action_budget":200,"movement_budget_rad":8.0,"camera_noise_std":0.0,
+  "trial_count":40,"compute_budget":"40 independent episodes, maximum 200 actions each; sequential local CPU with EGL; no training or paid compute.",
+  "frame_note":"tool offset is a rigid translation in parent wrist frame applied to gripper, jaws and attached marker; nominal controller assumes zero."
+}

@@ -1,0 +1,336 @@
+{
+  "source": "results/so101_runs/20261114T015619.662436Z_49ac12f199cf_fresh_camera_followup_1aff5aad/episodes_full.json.gz",
+  "case": {
+    "id": "heldout-a",
+    "object_xy": [
+      0.219,
+      0.017
+    ],
+    "initial_pan": -0.56,
+    "camera_shift_m": [
+      0.008,
+      0.01
+    ],
+    "seed": 811
+  },
+  "methods": {
+    "nominal": {
+      "success": true,
+      "failure": null,
+      "target_xy": [
+        0.1986417856687341,
+        -0.004426388924317921
+      ],
+      "last_reach_joint_rad": [
+        0.10172149426167387,
+        -0.08584503461977458,
+        0.5618582990818526,
+        1.1730951971821373,
+        1.584368240124989,
+        1.1999967837649956
+      ],
+      "last_reach_site_xyz": [
+        0.19912255356708092,
+        -0.0044926750669903506,
+        0.014795898681080472
+      ],
+      "last_reach_object_xyz": [
+        0.21899999999968808,
+        0.016999805969653378,
+        0.019892244579783804
+      ],
+      "object_xyz_after_closure": [
+        0.21657570404729795,
+        0.0032917537661452385,
+        0.019591325029763296
+      ],
+      "jaw_contact": true,
+      "jaw_after_closure_rad": 0.11471779593848068,
+      "saturated_actions": 20,
+      "total_actions": 82,
+      "updates_before_grasp": 0
+    },
+    "online": {
+      "success": false,
+      "failure": "grasp",
+      "target_xy": [
+        0.1986417856687341,
+        -0.004426388924317921
+      ],
+      "last_reach_joint_rad": [
+        0.09962847863241944,
+        -0.0831507187372867,
+        0.5659960125922769,
+        1.1758163719714982,
+        1.5843686820412104,
+        1.1999974758830152
+      ],
+      "last_reach_site_xyz": [
+        0.19843055644304894,
+        -0.004078078410384468,
+        0.014602467922097476
+      ],
+      "last_reach_object_xyz": [
+        0.21899999999982367,
+        0.01699980596537496,
+        0.019892244579783853
+      ],
+      "object_xyz_after_closure": [
+        0.22483174758772378,
+        -0.001106870259502363,
+        0.019892207563639325
+      ],
+      "jaw_contact": false,
+      "jaw_after_closure_rad": -0.09999945235131841,
+      "saturated_actions": 18,
+      "total_actions": 75,
+      "updates_before_grasp": 12,
+      "first_update": {
+        "kind": "online",
+        "accepted": true,
+        "input_u": [
+          0.08,
+          -0.01696920691014548,
+          0.013364813526186473,
+          0.005474387755741758,
+          0.0
+        ],
+        "observed_delta_q": [
+          0.07883457040359432,
+          -0.016604802345469627,
+          0.013582784452783936,
+          0.005389834995706222,
+          -2.10288970681205e-08
+        ],
+        "b": [
+          [
+            0.9881630317171571,
+            0.0025107995497548642,
+            -0.0019774859226947238,
+            -0.000810001927908728,
+            0.0
+          ],
+          [
+            0.0037011633199417354,
+            0.9992149274226958,
+            0.0006183169700122817,
+            0.0002532700395086194,
+            0.0
+          ],
+          [
+            0.0022138745683766706,
+            -0.0004695961952986593,
+            1.000369850259709,
+            0.00015149509787336645,
+            0.0
+          ],
+          [
+            -0.0008587806091883964,
+            0.00018216032309673354,
+            -0.00014346803377134675,
+            0.9999412337743524,
+            0.0
+          ],
+          [
+            -2.1358509204348406e-07,
+            4.530462024760435e-08,
+            -3.5681561589181736e-08,
+            -1.461559515864782e-08,
+            1.0
+          ]
+        ]
+      }
+    }
+  },
+  "paired_steps": [
+    {
+      "step": 0,
+      "stage": "approach",
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.0,
+      "object_difference_m": 0.0
+    },
+    {
+      "step": 1,
+      "stage": "approach",
+      "command_difference_rad": 0.0009833140575827622,
+      "tip_difference_m": 7.732269033180866e-05,
+      "object_difference_m": 0.0
+    },
+    {
+      "step": 2,
+      "stage": "approach",
+      "command_difference_rad": 0.0021529988101934897,
+      "tip_difference_m": 0.00018790592907780016,
+      "object_difference_m": 5.021695654199149e-13
+    },
+    {
+      "step": 3,
+      "stage": "approach",
+      "command_difference_rad": 0.0014881092883531769,
+      "tip_difference_m": 0.0002233105138121394,
+      "object_difference_m": 8.23131396134401e-13
+    },
+    {
+      "step": 4,
+      "stage": "approach",
+      "command_difference_rad": 0.0017981964083107558,
+      "tip_difference_m": 0.00025224675011074194,
+      "object_difference_m": 1.0586982257829134e-12
+    },
+    {
+      "step": 5,
+      "stage": "approach",
+      "command_difference_rad": 0.0008119446177655246,
+      "tip_difference_m": 0.0004990671623167301,
+      "object_difference_m": 2.3936350303092756e-12
+    },
+    {
+      "step": 6,
+      "stage": "approach",
+      "command_difference_rad": 0.011738096155644417,
+      "tip_difference_m": 0.0030103749571525136,
+      "object_difference_m": 5.42320632363471e-12
+    },
+    {
+      "step": 7,
+      "stage": "approach",
+      "command_difference_rad": 0.01898161204561108,
+      "tip_difference_m": 0.0013528388364977867,
+      "object_difference_m": 5.036551519812486e-12
+    },
+    {
+      "step": 8,
+      "stage": "reach",
+      "command_difference_rad": 0.007026898064297533,
+      "tip_difference_m": 0.003465620349741303,
+      "object_difference_m": 4.799854588574143e-12
+    },
+    {
+      "step": 9,
+      "stage": "reach",
+      "command_difference_rad": 0.014249726875820016,
+      "tip_difference_m": 0.0036930106090468707,
+      "object_difference_m": 2.473760971116313e-12
+    },
+    {
+      "step": 10,
+      "stage": "reach",
+      "command_difference_rad": 0.02869003494825264,
+      "tip_difference_m": 0.005446634183380745,
+      "object_difference_m": 2.392902597201365e-12
+    },
+    {
+      "step": 11,
+      "stage": "reach",
+      "command_difference_rad": 0.05466550408523895,
+      "tip_difference_m": 0.0008295576326320214,
+      "object_difference_m": 4.280565765165342e-12
+    },
+    {
+      "step": 12,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.001824187923020779,
+      "object_difference_m": 5.319122983020426e-12
+    },
+    {
+      "step": 13,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.001991653801202429,
+      "object_difference_m": 9.352937313033882e-05
+    },
+    {
+      "step": 14,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.002493299219664768,
+      "object_difference_m": 0.0016591962173847364
+    },
+    {
+      "step": 15,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.0032615107378712142,
+      "object_difference_m": 0.005474360899927953
+    },
+    {
+      "step": 16,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.0032800947906803353,
+      "object_difference_m": 0.006388687207914042
+    },
+    {
+      "step": 17,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.003057919307585177,
+      "object_difference_m": 0.008645847922672836
+    },
+    {
+      "step": 18,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.003211101374191074,
+      "object_difference_m": 0.012169823308145011
+    },
+    {
+      "step": 19,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.003423376260629102,
+      "object_difference_m": 0.014021659336272812
+    },
+    {
+      "step": 20,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.0036204002492972232,
+      "object_difference_m": 0.010850312937742586
+    },
+    {
+      "step": 21,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.003894698789618198,
+      "object_difference_m": 0.010457321389960082
+    },
+    {
+      "step": 22,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.0041761992464753464,
+      "object_difference_m": 0.010127767870479344
+    },
+    {
+      "step": 23,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.004419640481945289,
+      "object_difference_m": 0.009934958267129116
+    },
+    {
+      "step": 24,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.004685556095769499,
+      "object_difference_m": 0.009738230067993379
+    },
+    {
+      "step": 25,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.004942087871072027,
+      "object_difference_m": 0.009531515713293269
+    },
+    {
+      "step": 26,
+      "stage": null,
+      "command_difference_rad": 0.0,
+      "tip_difference_m": 0.005186618327395981,
+      "object_difference_m": 0.00935952341519605
+    }
+  ]
+}

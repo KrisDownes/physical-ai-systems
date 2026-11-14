@@ -17,6 +17,16 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
         result.update(success=False, failure='perception')
         return result
     begin = time.perf_counter()
+    integrated_family=method in ('fixed2','calibration','motion','integrated')
+    online = OnlineJacobian() if method in ('online','motion','integrated') else None
+    calibration_events=[]
+    destination_pixel=None
+    if integrated_family:
+        from calibration import select_calibration,blue_destination,CalibrationState,VisualTargets
+        destination_pixel=blue_destination(obs['image'])
+        if destination_pixel is None:
+            result.update(success=False,failure='destination_perception')
+            return result
     offset = recalibrate_translation(obs['image']) if method == 'recalibration' else np.zeros(2)
     if method=='recalibration' and offset is None:
         # Up to 0.6 simulated seconds waiting for declared references; every step is charged.
@@ -35,11 +45,19 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
             mid=mujoco.mj_name2id(env.model,mujoco.mjtObj.mjOBJ_SITE,'tool_marker_site')
             marker_xyz=env.nominal_data.site_xpos[mid].copy()
             offset=marker_xyz[:2]-pixel_to_plane(marker,z=marker_xyz[2])[:2]
+    if method in ('calibration','integrated'):
+        offset,calibration_events=select_calibration(env,obs)
+        result['calibration_events']=calibration_events
+        if offset is not None:
+            state=CalibrationState();state.apply(offset,joint_model=online)
+            calibration_events.extend(state.events)
     env.compute_s += time.perf_counter()-begin
     if offset is None:
         result.update(success=False, failure='calibration')
         return result
     obj = pixel_to_plane(pixel, offset_xy=offset)
+    if integrated_family:
+        obj,dest_xy=VisualTargets(pixel,destination_pixel).reproject(offset)
     if intervention=='oracle_pixel':
         # Diagnostic only: project the true object-top point, then retain stale calibration.
         truth=env.data.xpos[env.object_id].copy();truth[2]+=.02
@@ -50,12 +68,16 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
         obj=pixel_to_plane(exact)
     elif intervention=='oracle_target':
         obj[:2]=env.data.xpos[env.object_id,:2]  # diagnostic evaluator truth only
-    online = OnlineJacobian() if method == 'online' else None
     global_model = GlobalCorrection(gp=(method=='gp')) if method in ('global','gp') else None
     grasp_xy = obj[:2] + np.array([-.01161,-.01240])
     result['localization']={'object_pixel':pixel.tolist(),'offset_xy':offset.tolist(),
                             'object_estimate_xyz':obj.tolist(),'grasp_target_xy':grasp_xy.tolist(),
                             'intervention':intervention}
+    if integrated_family:
+        # Both visual targets are reprojected after the selected calibration.
+        result['calibration_events']=calibration_events
+        result['localization']['destination_pixel']=destination_pixel.tolist()
+        result['localization']['destination_estimate_xy']=dest_xy.tolist()
     if diagnostics:
         result['diagnostic_frames']=[{'image':obs['image'].copy(),'stage':'initial','time_s':obs['time_s'],
                                      'gripper_pixel':None if locate_cyan(obs['image']) is None else locate_cyan(obs['image']).tolist(),
@@ -98,6 +120,7 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
           'target_xyz':np.r_[grasp_xy,.014].tolist(),'gripper_pixel':None if marker is None else marker.tolist(),
           'object_pixel':None if objpx is None else objpx.tolist(),'site_xyz':env.data.site_xpos[env.site].tolist(),
           'object_xyz':env.data.xpos[env.object_id].tolist()})
+    env.mark_evaluation('before_close')
     for _ in range(15): obs = env.step(np.zeros(5), -.1)
     env.mark_evaluation('after_close')
     if diagnostics:
@@ -110,7 +133,8 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
         result.update(success=False, failure='lift_command', evaluation=env.evaluate())
         return result
     env.mark_evaluation('after_lift')
-    destination = np.array([.22-.01161+.01,-.05-.0124+.02,.06])
+    destination = (np.r_[dest_xy+[-.01161+.01,-.0124+.02],.06] if integrated_family else
+                   np.array([.22-.01161+.01,-.05-.0124+.02,.06]))
     if not move('transport', destination, -.1) or not move('lower', destination + [0,0,-.046], -.1):
         result.update(success=False, failure='transport', evaluation=env.evaluate())
         return result

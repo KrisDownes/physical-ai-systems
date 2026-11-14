@@ -14,6 +14,7 @@ class RunStoreTest(unittest.TestCase):
             second=run_store.create_run('test',config)
             self.assertNotEqual(first,second)
             self.assertEqual(json.loads((first/'metadata.json').read_text())['config'],config)
+            self.assertTrue((first/'source_snapshot.json.gz').exists())
             self.assertTrue((second/'metadata.json').exists())
 
 

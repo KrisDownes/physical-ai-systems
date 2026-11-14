@@ -1,0 +1,63 @@
+{
+  "label": "discrepancy_replay",
+  "revision": "ec797c5d8ac7b69f8d7e17237d6fc43c860ea816",
+  "created_utc": "20261114T165805.843479Z",
+  "config": {
+    "case": "previous heldout-a, now development",
+    "object_xy": [
+      0.219,
+      0.017
+    ],
+    "initial_pan": -0.56,
+    "camera_shift_m": [
+      0.008,
+      0.01
+    ],
+    "seed": 811,
+    "methods": [
+      "nominal",
+      "online"
+    ],
+    "tool_offset_wrist_m": [
+      0,
+      0,
+      0
+    ]
+  },
+  "python": "3.12.3",
+  "dependencies": {
+    "numpy": "2.5.4",
+    "mujoco": "4.0.1"
+  },
+  "source_sha256": {
+    "so101/audit_traces.py": "e583e5bc6dc6b0e0104c276a045fcd841c7734599125c55d5f7e4e5165e65dc7",
+    "so101/calibration.py": "9e4a51b3fbdf70b9547090fe3eb331bf1605c3d31bfcd553dd2e0fb0c74a0842",
+    "so101/camera_followup.py": "01f0f778efdd58cf87f4af05780b016045c1f91612393e4ec96e130319df1771",
+    "so101/checks.py": "38b0d1890882c06964e230e0f80c06ac72a4c7a445cbf8222b533f6a62349700",
+    "so101/compact_followup.py": "4302cfca9498994fa9d220c3471d14bf8abf1325aa9c9da024dec022136e7388",
+    "so101/compare.py": "088cd4aee21db47a5786016bb7ec89048125ec79765a1d562287220f11a40157",
+    "so101/diagnose.py": "5746086fd710761e0d377b366f047b7b2248c06c53df21ec9e355ede830788ae",
+    "so101/discrepancy.py": "537db73fec04b2075ba7620e83f18a053dfb9f19456ccf08480cc8a126febdbf",
+    "so101/discrepancy_replay.py": "d802198152a05857cfeb0b57ab166ab171f0d7e45d1c9b01029865832f605086",
+    "so101/environment.py": "b579f228996fba020eab4e33e95c84cbefc2052b45d1d009996f1f1851b28397",
+    "so101/geometry_oracle.py": "5e5ccf81d936453cefb019cd2d93d174f121defb28298d8e7090d11c43b6a805",
+    "so101/integrated_evaluation.py": "0c2c1ecf23ef6ad5980a9f6b7435389f80e3d125276c33b6827c1ebee7a5151b",
+    "so101/nominal.py": "2d27f1b86fae5c3e35b6bfd09e1c8eb315905f3ce7763336a5aec7b2f9828c4b",
+    "so101/pilot.py": "5173544e7493c4b0fcaf5bd6d2ecdcd9e32a87a4cfa9ad467a86b9aed414fea6",
+    "so101/plot_followup.py": "0bc7cc79091fc4fc2cb985c81c47b159fda381528774b08f78649ac89122c510",
+    "so101/plot_results.py": "0dfb519a2a8165c8ac700cca5fc4caa7ac3b801f63502d76ecf84c00dcdf68e9",
+    "so101/provenance.py": "18c50aed80e365ec8c15a1356e66a744bae74e856a607fb127591359fd8c67d3",
+    "so101/rl_interface.py": "b43900ac85ec648905659c87be4a3d0854a18e714228150561cb6db845eca130",
+    "so101/run_store.py": "62da3eceb8da6f65785d9f157624a3c9c838153c17ef4d07efb27b75e0a9f4e8",
+    "so101/summarize_diagnosis.py": "fdf3e7ed1b2fd366baf4ec69e838f72ed6f7302186a309b99f9ba616c73eae03",
+    "so101/test_environment.py": "3759b6d897723008497244e05fb6ad525103102d93d0abf7bc57ed79f17c9f8d",
+    "so101/test_run_store.py": "ab705be87ed739814eab12fcd6a30c6a44bdde500aca3cf8894f4a4c3e0ed228",
+    "so101/view.py": "74bf81b3446aeb06da16d2c5a1776befc2ce438dccf4bf8151e1ed97d4978f87",
+    "so101/frozen_camera_followup.json": "e4eee3baeefedf4ed60f783f7ee467b42ea77861bcb91cb6da84ff55de25ca9b",
+    "so101/frozen_comparison.json": "b31b956f6811bc9c588448dacf734ea72c1fb1a580eb6b3706c2beb46d7863e5",
+    "so101/frozen_transfer.json": "db2c58f0f5f9b16605c183d7d9afe080181234cb437438fd6ceefc85b92653fb",
+    "so101/integrated_development.json": "b6b0ab0ef81b1b4660369915f7da25e22102f160291afc77efdd41a989da41c1",
+    "so101/scene.xml": "c7faab1b5d89e00cfc438d36f5cd4b77e1fff11bc7cefbf3b3155e508e513613"
+  },
+  "git_project_status": "M so101/environment.py\n M so101/nominal.py\n M so101/test_environment.py\n?? so101/INTEGRATED_METHOD.md\n?? so101/calibration.py\n?? so101/discrepancy.py\n?? so101/discrepancy_replay.py\n?? so101/geometry_oracle.py\n?? so101/integrated_development.json\n?? so101/integrated_evaluation.py"
+}

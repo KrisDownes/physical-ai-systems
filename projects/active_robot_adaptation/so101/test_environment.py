@@ -1,8 +1,9 @@
 """Meaningful smoke tests for the model and controller observation boundary."""
 import unittest
 import numpy as np
-from environment import Environment, GlobalCorrection, locate_green, locate_cyan, pixel_to_plane, recalibrate_translation
+from environment import Environment, GlobalCorrection, locate_green, locate_cyan, pixel_to_plane, recalibrate_translation, task_jacobian
 from rl_interface import CartesianInterface
+from calibration import select_calibration, CalibrationState, VisualTargets
 
 
 class SimTest(unittest.TestCase):
@@ -97,6 +98,50 @@ class SimTest(unittest.TestCase):
             self.assertGreater(env.physics_collision_steps,0)
             self.assertTrue(any('shoulder' in pair for pair in env.physics_collision_pairs))
         finally: env.close()
+
+    def test_tool_offset_is_hidden_from_nominal_fk_and_moves_marker_and_tip(self):
+        import mujoco
+        env=Environment(tool_marker=True,tool_offset=(.008,0,0))
+        try:
+            obs=env.reset()
+            nominal,_=env.controller_fk(obs['joint_rad'])
+            actual=env.data.site_xpos[env.site]
+            self.assertAlmostEqual(np.linalg.norm(actual-nominal),.008,places=6)
+            mid=mujoco.mj_name2id(env.model,mujoco.mjtObj.mjOBJ_SITE,'tool_marker_site')
+            marker_delta=env.data.site_xpos[mid]-env.nominal_data.site_xpos[mid]
+            np.testing.assert_allclose(marker_delta,actual-nominal,atol=1e-9)
+            _,events=select_calibration(env,obs)
+            self.assertTrue(any(x.get('reason')=='inconsistent_with_table' for x in events))
+        finally:env.close()
+
+    def test_calibration_change_reprojects_both_targets_and_resets_cartesian_only(self):
+        from environment import OnlineJacobian
+        joint=OnlineJacobian();joint.b[0,0]=.7
+        cart=GlobalCorrection();cart.b[0,0]=.5;cart.data.append((np.zeros(3),np.zeros(3),np.zeros(3)))
+        state=CalibrationState();state.apply([.01,-.02],joint,cart)
+        self.assertEqual(joint.b[0,0],.7)
+        self.assertEqual(cart.b[0,0],1.)
+        self.assertFalse(cart.data)
+        targets=VisualTargets([160,120],[170,140])
+        a,b=targets.reproject([0,0]);c,d=targets.reproject([.01,-.02])
+        np.testing.assert_allclose(c[:2]-a[:2],[.01,-.02]);np.testing.assert_allclose(d-b,[.01,-.02])
+
+    def test_inconsistent_table_references_do_not_trigger_marker_fallback(self):
+        from unittest.mock import patch
+        env=Environment(tool_marker=True)
+        try:
+            obs=env.reset()
+            with patch('calibration.table_offsets',return_value=np.array([[0.,0.],[.02,0.]])):
+                offset,events=select_calibration(env,obs)
+            self.assertIsNone(offset)
+            self.assertTrue(any(e.get('reason')=='table_geometry_invalid' for e in events))
+        finally:env.close()
+
+    def test_response_model_applies_to_pitch_and_translation(self):
+        j=np.arange(15,dtype=float).reshape(3,5)/10
+        b=np.eye(5);b[1,1]=.5;b[2,0]=.2
+        expected=np.vstack((j,[0.,.1,.1,.1,0.]))@b
+        np.testing.assert_allclose(task_jacobian(j,b),expected[:,:4])
 
 
 if __name__=='__main__': unittest.main()
