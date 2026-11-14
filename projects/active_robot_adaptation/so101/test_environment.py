@@ -99,6 +99,16 @@ class SimTest(unittest.TestCase):
             self.assertTrue(any('shoulder' in pair for pair in env.physics_collision_pairs))
         finally: env.close()
 
+    def test_physics_audit_detects_joint_limit_excursion(self):
+        env=Environment(render=False)
+        try:
+            env.reset()
+            before=env.physics_limit_steps
+            env.data.qpos[0]=env.model.jnt_range[0,1]+.01
+            env._audit_physics_contacts()
+            self.assertEqual(env.physics_limit_steps,before+1)
+        finally: env.close()
+
     def test_tool_offset_is_hidden_from_nominal_fk_and_moves_marker_and_tip(self):
         import mujoco
         env=Environment(tool_marker=True,tool_offset=(.008,0,0))

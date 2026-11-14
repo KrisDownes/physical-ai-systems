@@ -43,12 +43,13 @@ def main():
                   reference_mode=cond['references'],tool_marker=True,camera_noise_std=cfg['camera_noise_std'],
                   action_budget=cfg['action_budget'],movement_budget=cfg['movement_budget_rad'])
                 q=Q_HOME.copy();q[0]=case['initial_pan'];start=time.perf_counter()
-                try:r=run(env,case['object_xy'],q,method=method,seed=case['seed'],diagnostics=(case==cfg['cases'][0] and method=='integrated'))
+                record=(case==cfg['cases'][0] and method==cfg.get('record_method','integrated') and cond['name'] in cfg.get('record_conditions',[c['name'] for c in cfg['conditions']]))
+                try:r=run(env,case['object_xy'],q,method=method,seed=case['seed'],diagnostics=record)
                 except RuntimeError as error:
                     if 'budget exhausted' not in str(error):raise
                     r={'success':False,'failure':'budget','error':str(error)}
                 frames=r.pop('diagnostic_frames',[]);r.pop('frames',None)
-                if frames:overlay(frames,shift,out/f"{cond['name']}_integrated.gif")
+                if frames:overlay(frames,shift,out/f"{cond['name']}_{method}.gif")
                 trace=env.trace
                 accepted=sum(t.get('adaptation',{}).get('accepted',False) for t in trace)
                 rejected=sum(not t['adaptation']['accepted'] for t in trace if 'adaptation' in t)
@@ -58,6 +59,7 @@ def main():
                    'movement_rad':env.movement,'simulation_s':float(env.data.time),'wall_s':time.perf_counter()-start,
                    'compute_s':env.compute_s,'accepted_motion_updates':accepted,'rejected_motion_updates':rejected,
                    'grasp_alignment_site_minus_object_m':alignment,'joint_limit_violations':env.limit_violations,
+                   'joint_limit_physics_steps':env.physics_limit_steps,
                    'self_collision_physics_steps':env.physics_collision_steps,'self_collision_pairs':env.physics_collision_pairs,
                    'trace':trace}
                 with (out/'episodes'/f"{cond['name']}_{case['id']}_{method}.json").open('x') as f:json.dump(row,f,indent=2)

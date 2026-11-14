@@ -1,0 +1,2864 @@
+[
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c0_t0",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      0.8533687559162673,
+      -1.371701689433971
+    ],
+    "grasp_relative_prediction_error_mm": 0.6678558007139461,
+    "closure_site_minus_object_mm": [
+      -12.680935417825612,
+      -12.858091724321646,
+      -5.804379644747698
+    ],
+    "final_placement_error_mm": 6.243247962529499,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.842252779148566,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 0.6678558007139461
+      },
+      "reach": {
+        "max_rotation_deg": 27.14661337899331,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 0.6678558007139461
+      },
+      "lift": {
+        "max_rotation_deg": 26.770907168881955,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 19.681932194921536
+      },
+      "transport": {
+        "max_rotation_deg": 45.29502315268613,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 82.65812068296617
+      },
+      "lower": {
+        "max_rotation_deg": 45.33516106081222,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 80.38167973546612
+      }
+    },
+    "actions": 73,
+    "movement_rad": 2.35516027218111,
+    "sim_s": 7.799999999999856,
+    "compute_s": 0.006611399003304541,
+    "wall_s": 2.827903799014166,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.0008533687559162673,
+          -0.0013717016894339712
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.0008533687559162673,
+          -0.0013717016894339712
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c0_t0",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.093038624270154,
+      -1.6502965633080624
+    ],
+    "grasp_relative_prediction_error_mm": 1.268690267059061,
+    "closure_site_minus_object_mm": [
+      -12.057355101666639,
+      -13.338770672111123,
+      -4.881774354190252
+    ],
+    "final_placement_error_mm": 6.654304052333382,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.329140320105225,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.2686902531395756
+      },
+      "reach": {
+        "max_rotation_deg": 42.32687038912299,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.268690267059061
+      },
+      "lift": {
+        "max_rotation_deg": 42.084069233936326,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 20.870382051043652
+      },
+      "transport": {
+        "max_rotation_deg": 55.334965989335295,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 64.71667934533622
+      },
+      "lower": {
+        "max_rotation_deg": 55.516442215444286,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 65.27450976593991
+      }
+    },
+    "actions": 75,
+    "movement_rad": 2.5726033685287075,
+    "sim_s": 7.999999999999852,
+    "compute_s": 0.0067892991355620325,
+    "wall_s": 3.0053343450126704,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.001093038624270154,
+          -0.0016502965633080624
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.001093038624270154,
+          -0.0016502965633080624
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c0_t1",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      4.338096398201319,
+      0.5496066011976414
+    ],
+    "grasp_relative_prediction_error_mm": 3.3882391351714345,
+    "closure_site_minus_object_mm": [
+      -12.751053970043586,
+      -9.738025212940267,
+      -4.2623747007806445
+    ],
+    "final_placement_error_mm": 7.734207197667342,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 25.753022874661884,
+        "max_tool_error_mm": 4.000000000000015,
+        "last_relative_error_mm": 3.390312458000489
+      },
+      "reach": {
+        "max_rotation_deg": 26.11288342975718,
+        "max_tool_error_mm": 4.000000000000019,
+        "last_relative_error_mm": 3.3882391351714345
+      },
+      "lift": {
+        "max_rotation_deg": 25.780036270472305,
+        "max_tool_error_mm": 4.000000000000006,
+        "last_relative_error_mm": 20.106306726325773
+      },
+      "transport": {
+        "max_rotation_deg": 44.937380335875254,
+        "max_tool_error_mm": 4.000000000000014,
+        "last_relative_error_mm": 86.52143127369273
+      },
+      "lower": {
+        "max_rotation_deg": 44.70024334738907,
+        "max_tool_error_mm": 4.000000000000019,
+        "last_relative_error_mm": 82.43115739428713
+      }
+    },
+    "actions": 72,
+    "movement_rad": 2.3077236377841333,
+    "sim_s": 7.699999999999858,
+    "compute_s": 0.007509497023420408,
+    "wall_s": 2.879417021991685,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.004338096398201319,
+          0.0005496066011976414
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.004338096398201319,
+          0.0005496066011976414
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c0_t1",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      4.3215209046491845,
+      0.9076212990334759
+    ],
+    "grasp_relative_prediction_error_mm": 3.670292746416965,
+    "closure_site_minus_object_mm": [
+      -13.544779191967699,
+      -9.704274658329002,
+      -5.001985117315311
+    ],
+    "final_placement_error_mm": 13.543192681975194,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 40.9786792204614,
+        "max_tool_error_mm": 4.000000000000021,
+        "last_relative_error_mm": 3.672950372234227
+      },
+      "reach": {
+        "max_rotation_deg": 41.17992649014052,
+        "max_tool_error_mm": 4.000000000000001,
+        "last_relative_error_mm": 3.670292746416965
+      },
+      "lift": {
+        "max_rotation_deg": 40.97441009931636,
+        "max_tool_error_mm": 4.00000000000002,
+        "last_relative_error_mm": 21.227783446188752
+      },
+      "transport": {
+        "max_rotation_deg": 54.31825847792888,
+        "max_tool_error_mm": 4.000000000000004,
+        "last_relative_error_mm": 67.34037969955016
+      },
+      "lower": {
+        "max_rotation_deg": 54.69456617021966,
+        "max_tool_error_mm": 4.0000000000000036,
+        "last_relative_error_mm": 70.8794923818834
+      }
+    },
+    "actions": 76,
+    "movement_rad": 2.5760135121802974,
+    "sim_s": 8.099999999999866,
+    "compute_s": 0.007478600979084149,
+    "wall_s": 3.0116656399914064,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.004321520904649184,
+          0.0009076212990334759
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.004321520904649184,
+          0.0009076212990334759
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c0_t2",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      -3.5092877502691797,
+      -3.75087540367669
+    ],
+    "grasp_relative_prediction_error_mm": 2.7293581600930716,
+    "closure_site_minus_object_mm": [
+      -11.3182797798069,
+      -15.127413406658091,
+      -6.12622384528896
+    ],
+    "final_placement_error_mm": 3.7347349786000237,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 27.72049083438287,
+        "max_tool_error_mm": 5.000000000000021,
+        "last_relative_error_mm": 2.739919407765048
+      },
+      "reach": {
+        "max_rotation_deg": 28.00876641426898,
+        "max_tool_error_mm": 5.000000000000013,
+        "last_relative_error_mm": 2.7293581600930716
+      },
+      "lift": {
+        "max_rotation_deg": 27.574988864800332,
+        "max_tool_error_mm": 5.000000000000021,
+        "last_relative_error_mm": 19.96185060224356
+      },
+      "transport": {
+        "max_rotation_deg": 47.01488869414951,
+        "max_tool_error_mm": 5.000000000000013,
+        "last_relative_error_mm": 83.99783387022643
+      },
+      "lower": {
+        "max_rotation_deg": 46.79357472670865,
+        "max_tool_error_mm": 5.000000000000017,
+        "last_relative_error_mm": 79.67055970385887
+      }
+    },
+    "actions": 82,
+    "movement_rad": 2.501900034623952,
+    "sim_s": 8.69999999999996,
+    "compute_s": 0.00797670500469394,
+    "wall_s": 3.2873749540012795,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          -0.00350928775026918,
+          -0.00375087540367669
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.00350928775026918,
+          -0.00375087540367669
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c0_t2",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      -2.7417673694120905,
+      -4.762630840894108
+    ],
+    "grasp_relative_prediction_error_mm": 3.3323521950755506,
+    "closure_site_minus_object_mm": [
+      -10.34631736744146,
+      -15.808146537789925,
+      -5.217827962877588
+    ],
+    "final_placement_error_mm": 3.533549317307754,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.94848254397997,
+        "max_tool_error_mm": 5.000000000000012,
+        "last_relative_error_mm": 3.3329031998867054
+      },
+      "reach": {
+        "max_rotation_deg": 43.09250689795634,
+        "max_tool_error_mm": 5.000000000000014,
+        "last_relative_error_mm": 3.3323521950755506
+      },
+      "lift": {
+        "max_rotation_deg": 42.76448516147537,
+        "max_tool_error_mm": 5.000000000000015,
+        "last_relative_error_mm": 19.77685544673806
+      },
+      "transport": {
+        "max_rotation_deg": 56.22381612220418,
+        "max_tool_error_mm": 4.999999999999993,
+        "last_relative_error_mm": 63.33452072329797
+      },
+      "lower": {
+        "max_rotation_deg": 56.78157229775525,
+        "max_tool_error_mm": 5.000000000000023,
+        "last_relative_error_mm": 64.13795762960058
+      }
+    },
+    "actions": 89,
+    "movement_rad": 2.6805913876810963,
+    "sim_s": 9.40000000000007,
+    "compute_s": 0.009270710084820166,
+    "wall_s": 3.3973108629870694,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          -0.0027417673694120903,
+          -0.004762630840894108
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.0027417673694120903,
+          -0.004762630840894108
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c1_t0",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      0.8512568674765661,
+      -1.3695898009942562
+    ],
+    "grasp_relative_prediction_error_mm": 1.6704410876309388,
+    "closure_site_minus_object_mm": [
+      -10.618254751899785,
+      -14.02099547479047,
+      -4.829725779537178
+    ],
+    "final_placement_error_mm": 3.202040176307362,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 27.35907420682087,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.6704410876309388
+      },
+      "reach": {
+        "max_rotation_deg": 27.70684170391019,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.6704410876309388
+      },
+      "lift": {
+        "max_rotation_deg": 27.167796845948317,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 19.670905957678826
+      },
+      "transport": {
+        "max_rotation_deg": 44.8369691426373,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 79.47189252778024
+      },
+      "lower": {
+        "max_rotation_deg": 45.295513320187354,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 77.5694093092744
+      }
+    },
+    "actions": 82,
+    "movement_rad": 2.4237420449818154,
+    "sim_s": 8.69999999999996,
+    "compute_s": 0.008448599983239546,
+    "wall_s": 3.0660046940029133,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.009851256867476565,
+          -0.010369589800994256
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.009851256867476565,
+          -0.010369589800994256
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c1_t0",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.24878442199817,
+      -1.6955419807186904
+    ],
+    "grasp_relative_prediction_error_mm": 1.500272828608991,
+    "closure_site_minus_object_mm": [
+      -11.732359745577902,
+      -13.899173808401295,
+      -5.898821169102238
+    ],
+    "final_placement_error_mm": 5.513696003050836,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.49007621206861,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.5002728091032917
+      },
+      "reach": {
+        "max_rotation_deg": 42.58557620617726,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.500272828608991
+      },
+      "lift": {
+        "max_rotation_deg": 42.23907488254988,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 20.160120495439564
+      },
+      "transport": {
+        "max_rotation_deg": 55.487848681093716,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 63.67610030041801
+      },
+      "lower": {
+        "max_rotation_deg": 55.6167561906508,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 63.624034813412194
+      }
+    },
+    "actions": 80,
+    "movement_rad": 2.63834944767472,
+    "sim_s": 8.499999999999929,
+    "compute_s": 0.008863600029144436,
+    "wall_s": 3.007601926976349,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.01024878442199817,
+          -0.01069554198071869
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.01024878442199817,
+          -0.01069554198071869
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c1_t1",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      4.423421611391901,
+      0.5407008303327157
+    ],
+    "grasp_relative_prediction_error_mm": 2.3683394343520967,
+    "closure_site_minus_object_mm": [
+      -11.345200218633083,
+      -10.872593393554457,
+      -4.5648057204871195
+    ],
+    "final_placement_error_mm": 7.967913374571673,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.202273098549384,
+        "max_tool_error_mm": 4.0,
+        "last_relative_error_mm": 2.369858834824527
+      },
+      "reach": {
+        "max_rotation_deg": 26.560513723545238,
+        "max_tool_error_mm": 4.000000000000005,
+        "last_relative_error_mm": 2.3683394343520967
+      },
+      "lift": {
+        "max_rotation_deg": 26.345746301875224,
+        "max_tool_error_mm": 4.000000000000015,
+        "last_relative_error_mm": 19.75473940491114
+      },
+      "transport": {
+        "max_rotation_deg": 44.21700025859318,
+        "max_tool_error_mm": 4.00000000000004,
+        "last_relative_error_mm": 82.64334067028207
+      },
+      "lower": {
+        "max_rotation_deg": 44.408219131755374,
+        "max_tool_error_mm": 4.0000000000000115,
+        "last_relative_error_mm": 80.9950219710857
+      }
+    },
+    "actions": 77,
+    "movement_rad": 2.417797663384419,
+    "sim_s": 8.199999999999882,
+    "compute_s": 0.008270899794297293,
+    "wall_s": 3.12296086398419,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.0134234216113919,
+          -0.008459299169667284
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.0134234216113919,
+          -0.008459299169667284
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c1_t1",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      4.319384416645958,
+      0.9097577870366882
+    ],
+    "grasp_relative_prediction_error_mm": 1.6053914576469246,
+    "closure_site_minus_object_mm": [
+      -14.10686551516574,
+      -11.11841607866249,
+      -3.8768894327424546
+    ],
+    "final_placement_error_mm": 11.53031385420151,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 41.43724174997631,
+        "max_tool_error_mm": 4.000000000000028,
+        "last_relative_error_mm": 1.6092730023178987
+      },
+      "reach": {
+        "max_rotation_deg": 41.720848561651806,
+        "max_tool_error_mm": 4.000000000000004,
+        "last_relative_error_mm": 1.6053914576469246
+      },
+      "lift": {
+        "max_rotation_deg": 41.4376686471192,
+        "max_tool_error_mm": 4.0000000000000195,
+        "last_relative_error_mm": 21.29544832339462
+      },
+      "transport": {
+        "max_rotation_deg": 54.64047501055613,
+        "max_tool_error_mm": 4.00000000000001,
+        "last_relative_error_mm": 66.76694378280128
+      },
+      "lower": {
+        "max_rotation_deg": 54.795959241584114,
+        "max_tool_error_mm": 4.000000000000013,
+        "last_relative_error_mm": 69.18580752224152
+      }
+    },
+    "actions": 77,
+    "movement_rad": 2.5755871592258237,
+    "sim_s": 8.199999999999882,
+    "compute_s": 0.0074803979950957,
+    "wall_s": 2.9766991719952784,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.013319384416645957,
+          -0.008090242212963311
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.013319384416645957,
+          -0.008090242212963311
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c1_t2",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      -3.5227689389790897,
+      -3.9202635090500126
+    ],
+    "grasp_relative_prediction_error_mm": 3.349868163617045,
+    "closure_site_minus_object_mm": [
+      -12.017007836265858,
+      -15.755940823898591,
+      -4.85831024026185
+    ],
+    "final_placement_error_mm": 4.070365002613896,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 27.914646438979325,
+        "max_tool_error_mm": 5.000000000000004,
+        "last_relative_error_mm": 3.3585926767574588
+      },
+      "reach": {
+        "max_rotation_deg": 28.15258082144969,
+        "max_tool_error_mm": 5.000000000000014,
+        "last_relative_error_mm": 3.349868163617045
+      },
+      "lift": {
+        "max_rotation_deg": 27.78730758507078,
+        "max_tool_error_mm": 5.000000000000012,
+        "last_relative_error_mm": 19.63930583217993
+      },
+      "transport": {
+        "max_rotation_deg": 47.2644464201872,
+        "max_tool_error_mm": 5.000000000000026,
+        "last_relative_error_mm": 84.33529140942751
+      },
+      "lower": {
+        "max_rotation_deg": 46.9764057956847,
+        "max_tool_error_mm": 5.000000000000013,
+        "last_relative_error_mm": 79.40834735500874
+      }
+    },
+    "actions": 85,
+    "movement_rad": 2.4107322216477964,
+    "sim_s": 9.000000000000007,
+    "compute_s": 0.008439500903477892,
+    "wall_s": 3.7051573019998614,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.00547723106102091,
+          -0.012920263509050012
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.00547723106102091,
+          -0.012920263509050012
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c1_t2",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      -2.712605734368314,
+      -4.901142184320787
+    ],
+    "grasp_relative_prediction_error_mm": 5.116808561671735,
+    "closure_site_minus_object_mm": [
+      -10.581408170109219,
+      -17.44854589479494,
+      -6.269889503647871
+    ],
+    "final_placement_error_mm": 2.1426504647544236,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 43.59167115132968,
+        "max_tool_error_mm": 5.00000000000001,
+        "last_relative_error_mm": 5.117205841110241
+      },
+      "reach": {
+        "max_rotation_deg": 43.662543875443205,
+        "max_tool_error_mm": 5.000000000000008,
+        "last_relative_error_mm": 5.116808561671735
+      },
+      "lift": {
+        "max_rotation_deg": 43.291045173215096,
+        "max_tool_error_mm": 5.000000000000014,
+        "last_relative_error_mm": 19.98702563640818
+      },
+      "transport": {
+        "max_rotation_deg": 56.705797280921146,
+        "max_tool_error_mm": 5.000000000000017,
+        "last_relative_error_mm": 62.92512579055051
+      },
+      "lower": {
+        "max_rotation_deg": 56.93953886779409,
+        "max_tool_error_mm": 5.000000000000015,
+        "last_relative_error_mm": 63.46124705760281
+      }
+    },
+    "actions": 86,
+    "movement_rad": 2.689736002695916,
+    "sim_s": 9.100000000000023,
+    "compute_s": 0.010763998900074512,
+    "wall_s": 3.7475612690031994,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          0.006287394265631685,
+          -0.013901142184320786
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.006287394265631685,
+          -0.013901142184320786
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c2_t0",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      0.6871344619215008,
+      -1.3144710550094165
+    ],
+    "grasp_relative_prediction_error_mm": 1.8002563793751807,
+    "closure_site_minus_object_mm": [
+      -13.217886316456706,
+      -13.070084114252221,
+      -5.867409309446199
+    ],
+    "final_placement_error_mm": 8.161543081563128,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.906301138232866,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.8002563793751807
+      },
+      "reach": {
+        "max_rotation_deg": 27.20653510769967,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.8002563793751807
+      },
+      "lift": {
+        "max_rotation_deg": 26.84374048588616,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 20.111595309903258
+      },
+      "transport": {
+        "max_rotation_deg": 45.324718824223424,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 83.5605305494828
+      },
+      "lower": {
+        "max_rotation_deg": 45.352274379808854,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 81.28901158653308
+      }
+    },
+    "actions": 73,
+    "movement_rad": 2.3521670102834085,
+    "sim_s": 7.799999999999856,
+    "compute_s": 0.006797798938350752,
+    "wall_s": 3.0960064730024897,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          -0.006312865538078499,
+          0.007685528944990583
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.006312865538078499,
+          0.007685528944990583
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c2_t0",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.0391021438294563,
+      -1.5315486607756275
+    ],
+    "grasp_relative_prediction_error_mm": 1.5670635954305114,
+    "closure_site_minus_object_mm": [
+      -10.861487388799274,
+      -12.922478588484502,
+      -5.007951209070035
+    ],
+    "final_placement_error_mm": 6.28003202922697,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.04897323324233,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.5670635905965273
+      },
+      "reach": {
+        "max_rotation_deg": 42.17259155140234,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.5670635954305114
+      },
+      "lift": {
+        "max_rotation_deg": 41.92738101578195,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 20.106801704575133
+      },
+      "transport": {
+        "max_rotation_deg": 55.38224592694522,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 64.48182627663923
+      },
+      "lower": {
+        "max_rotation_deg": 55.62284649253013,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 65.3106898242193
+      }
+    },
+    "actions": 76,
+    "movement_rad": 2.608636643789377,
+    "sim_s": 8.099999999999866,
+    "compute_s": 0.0070838999236002564,
+    "wall_s": 3.303147094004089,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          -0.005960897856170544,
+          0.007468451339224372
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.005960897856170544,
+          0.007468451339224372
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c2_t1",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      4.525701863104714,
+      0.5948378982598233
+    ],
+    "grasp_relative_prediction_error_mm": 3.6593165692414638,
+    "closure_site_minus_object_mm": [
+      -12.086860113337844,
+      -9.97004030676446,
+      -5.010471929325297
+    ],
+    "final_placement_error_mm": 9.206788708345359,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 25.82876782801691,
+        "max_tool_error_mm": 4.000000000000009,
+        "last_relative_error_mm": 3.659595478192228
+      },
+      "reach": {
+        "max_rotation_deg": 26.08447472553461,
+        "max_tool_error_mm": 4.000000000000021,
+        "last_relative_error_mm": 3.6593165692414638
+      },
+      "lift": {
+        "max_rotation_deg": 25.822464462473082,
+        "max_tool_error_mm": 4.000000000000017,
+        "last_relative_error_mm": 20.031055020464258
+      },
+      "transport": {
+        "max_rotation_deg": 44.614031586032276,
+        "max_tool_error_mm": 4.000000000000016,
+        "last_relative_error_mm": 85.7029279523359
+      },
+      "lower": {
+        "max_rotation_deg": 44.50124956624028,
+        "max_tool_error_mm": 4.000000000000001,
+        "last_relative_error_mm": 82.91942692106737
+      }
+    },
+    "actions": 72,
+    "movement_rad": 2.33481251446986,
+    "sim_s": 7.699999999999858,
+    "compute_s": 0.007161999907111749,
+    "wall_s": 3.5157277710095514,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          -0.0024742981368952865,
+          0.009594837898259823
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.0024742981368952865,
+          0.009594837898259823
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c2_t1",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      4.162460470759127,
+      0.9674868416022584
+    ],
+    "grasp_relative_prediction_error_mm": 3.229000637679749,
+    "closure_site_minus_object_mm": [
+      -14.590247991037364,
+      -10.197276459787153,
+      -3.5736638533245406
+    ],
+    "final_placement_error_mm": 13.454979341824568,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 41.191228511473135,
+        "max_tool_error_mm": 4.000000000000011,
+        "last_relative_error_mm": 3.2301410846195235
+      },
+      "reach": {
+        "max_rotation_deg": 41.459651927073864,
+        "max_tool_error_mm": 4.00000000000001,
+        "last_relative_error_mm": 3.229000637679749
+      },
+      "lift": {
+        "max_rotation_deg": 41.13952693282232,
+        "max_tool_error_mm": 4.000000000000006,
+        "last_relative_error_mm": 22.713054568821033
+      },
+      "transport": {
+        "max_rotation_deg": 54.54702152213612,
+        "max_tool_error_mm": 4.000000000000004,
+        "last_relative_error_mm": 69.1636894108215
+      },
+      "lower": {
+        "max_rotation_deg": 54.86953767026046,
+        "max_tool_error_mm": 4.00000000000002,
+        "last_relative_error_mm": 74.0472961269759
+      }
+    },
+    "actions": 76,
+    "movement_rad": 2.5818234853965505,
+    "sim_s": 8.099999999999866,
+    "compute_s": 0.007893896981840953,
+    "wall_s": 3.333716110995738,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          -0.0028375395292408734,
+          0.009967486841602258
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.0028375395292408734,
+          0.009967486841602258
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "unavailable_c2_t2",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      -3.5594655133670057,
+      -3.676727839168314
+    ],
+    "grasp_relative_prediction_error_mm": 3.0937864515859808,
+    "closure_site_minus_object_mm": [
+      -12.866322974218358,
+      -15.36374532001235,
+      -4.795141875539567
+    ],
+    "final_placement_error_mm": 6.784333586090932,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 27.803253480732504,
+        "max_tool_error_mm": 5.0000000000000195,
+        "last_relative_error_mm": 3.1034123777495726
+      },
+      "reach": {
+        "max_rotation_deg": 28.010633373214347,
+        "max_tool_error_mm": 5.000000000000011,
+        "last_relative_error_mm": 3.0937864515859808
+      },
+      "lift": {
+        "max_rotation_deg": 27.599215569828417,
+        "max_tool_error_mm": 5.000000000000012,
+        "last_relative_error_mm": 20.095360788089966
+      },
+      "transport": {
+        "max_rotation_deg": 46.28748554585025,
+        "max_tool_error_mm": 5.00000000000001,
+        "last_relative_error_mm": 83.16612174275902
+      },
+      "lower": {
+        "max_rotation_deg": 46.36743441327037,
+        "max_tool_error_mm": 5.00000000000002,
+        "last_relative_error_mm": 79.80866433560121
+      }
+    },
+    "actions": 84,
+    "movement_rad": 2.4650261847541746,
+    "sim_s": 8.899999999999991,
+    "compute_s": 0.010706000146456063,
+    "wall_s": 3.6566143080126494,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          -0.010559465513367006,
+          0.005323272160831685
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.010559465513367006,
+          0.005323272160831685
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "unavailable_c2_t2",
+    "references": "unavailable",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      -2.892744990697533,
+      -4.698608847689181
+    ],
+    "grasp_relative_prediction_error_mm": 3.10408436237663,
+    "closure_site_minus_object_mm": [
+      -10.155948603895155,
+      -15.47405195573362,
+      -5.317799536047174
+    ],
+    "final_placement_error_mm": 1.1287201934598312,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.7968964427182,
+        "max_tool_error_mm": 5.0000000000000195,
+        "last_relative_error_mm": 3.1089842573239914
+      },
+      "reach": {
+        "max_rotation_deg": 43.050295241882246,
+        "max_tool_error_mm": 4.999999999999998,
+        "last_relative_error_mm": 3.10408436237663
+      },
+      "lift": {
+        "max_rotation_deg": 42.73215316431448,
+        "max_tool_error_mm": 5.000000000000022,
+        "last_relative_error_mm": 19.92915610056478
+      },
+      "transport": {
+        "max_rotation_deg": 56.812530893063226,
+        "max_tool_error_mm": 5.000000000000002,
+        "last_relative_error_mm": 66.44773772622482
+      },
+      "lower": {
+        "max_rotation_deg": 57.31290071165103,
+        "max_tool_error_mm": 5.000000000000024,
+        "last_relative_error_mm": 66.16094685831457
+      }
+    },
+    "actions": 90,
+    "movement_rad": 2.700579973683347,
+    "sim_s": 9.500000000000085,
+    "compute_s": 0.009538899903418496,
+    "wall_s": 3.9149720709829126,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": false,
+        "reason": "references_missing"
+      },
+      {
+        "source": "gripper",
+        "accepted": true,
+        "reason": "fallback_assumes_nominal_geometry",
+        "offset_xy": [
+          -0.009892744990697533,
+          0.004301391152310818
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.009892744990697533,
+          0.004301391152310818
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c0_t0",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "grasp_relative_prediction_error_mm": 0.3563285823605288,
+    "closure_site_minus_object_mm": [
+      -11.558393307065206,
+      -12.734113611458673,
+      -4.623808656349482
+    ],
+    "final_placement_error_mm": 4.538974475760744,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.80691221960474,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 0.3563285823605288
+      },
+      "reach": {
+        "max_rotation_deg": 27.21891982432611,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 0.3563285823605288
+      },
+      "lift": {
+        "max_rotation_deg": 26.725383374086743,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 19.880846206278033
+      },
+      "transport": {
+        "max_rotation_deg": 45.232667599783575,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 82.77817861717568
+      },
+      "lower": {
+        "max_rotation_deg": 45.371831874636385,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 79.4424603091545
+      }
+    },
+    "actions": 80,
+    "movement_rad": 2.4516557525716163,
+    "sim_s": 8.499999999999929,
+    "compute_s": 0.00862920208601281,
+    "wall_s": 3.6062242519983556,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.00037679315376358877,
+        "offset_xy": [
+          0.0008533687559162673,
+          -0.0013717016894339712
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c0_t0",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "grasp_relative_prediction_error_mm": 0.9229231136976741,
+    "closure_site_minus_object_mm": [
+      -12.254356035859642,
+      -12.928465126357485,
+      -5.846320564759207
+    ],
+    "final_placement_error_mm": 5.27531367140788,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.147623820951054,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 0.9229231041081047
+      },
+      "reach": {
+        "max_rotation_deg": 42.2879473621257,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 0.9229231136976741
+      },
+      "lift": {
+        "max_rotation_deg": 41.957773922269574,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 20.03380069858319
+      },
+      "transport": {
+        "max_rotation_deg": 55.1864324436086,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 63.46139134367309
+      },
+      "lower": {
+        "max_rotation_deg": 55.397417123660794,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 64.09133906172632
+      }
+    },
+    "actions": 80,
+    "movement_rad": 2.606308865917203,
+    "sim_s": 8.499999999999929,
+    "compute_s": 0.007721900969045237,
+    "wall_s": 3.150749360996997,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.00040959693378660937,
+        "offset_xy": [
+          0.001093038624270154,
+          -0.0016502965633080624
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c0_t1",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "grasp_relative_prediction_error_mm": 5.339695545024195,
+    "closure_site_minus_object_mm": [
+      -16.83785327994772,
+      -11.546145328595326,
+      -5.533034973785211
+    ],
+    "final_placement_error_mm": 13.165530287099074,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.288688761026183,
+        "max_tool_error_mm": 4.000000000000022,
+        "last_relative_error_mm": 5.3404942494427345
+      },
+      "reach": {
+        "max_rotation_deg": 26.667082608166822,
+        "max_tool_error_mm": 4.000000000000011,
+        "last_relative_error_mm": 5.339695545024195
+      },
+      "lift": {
+        "max_rotation_deg": 26.245057215121193,
+        "max_tool_error_mm": 4.000000000000005,
+        "last_relative_error_mm": 22.60570069348046
+      },
+      "transport": {
+        "max_rotation_deg": 45.749278034578325,
+        "max_tool_error_mm": 4.000000000000025,
+        "last_relative_error_mm": 90.76684945412285
+      },
+      "lower": {
+        "max_rotation_deg": 45.49789565906258,
+        "max_tool_error_mm": 4.000000000000006,
+        "last_relative_error_mm": 87.80512855701599
+      }
+    },
+    "actions": 73,
+    "movement_rad": 2.354623854195863,
+    "sim_s": 7.799999999999856,
+    "compute_s": 0.006613000005017966,
+    "wall_s": 2.8386775749968365,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.003610701344916018,
+        "offset_xy": [
+          0.004338096398201319,
+          0.0005496066011976414
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c0_t1",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "grasp_relative_prediction_error_mm": 5.609415316581913,
+    "closure_site_minus_object_mm": [
+      -15.143149941332117,
+      -11.88233301404917,
+      -5.029831956992355
+    ],
+    "final_placement_error_mm": 15.275277212343344,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 41.823578663973876,
+        "max_tool_error_mm": 4.000000000000011,
+        "last_relative_error_mm": 5.61018354067932
+      },
+      "reach": {
+        "max_rotation_deg": 41.86778939734131,
+        "max_tool_error_mm": 4.000000000000019,
+        "last_relative_error_mm": 5.609415316581913
+      },
+      "lift": {
+        "max_rotation_deg": 41.66443621063259,
+        "max_tool_error_mm": 4.000000000000015,
+        "last_relative_error_mm": 22.947659414304844
+      },
+      "transport": {
+        "max_rotation_deg": 55.118907576373275,
+        "max_tool_error_mm": 3.99999999999999,
+        "last_relative_error_mm": 69.73302336646044
+      },
+      "lower": {
+        "max_rotation_deg": 55.572695881241295,
+        "max_tool_error_mm": 4.000000000000011,
+        "last_relative_error_mm": 74.51329047610265
+      }
+    },
+    "actions": 75,
+    "movement_rad": 2.563003079040086,
+    "sim_s": 7.999999999999852,
+    "compute_s": 0.007557901059044525,
+    "wall_s": 2.9573976899846457,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.0037890277692963262,
+        "offset_xy": [
+          0.004321520904649184,
+          0.0009076212990334759
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c0_t2",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "grasp_relative_prediction_error_mm": 4.8409825617963635,
+    "closure_site_minus_object_mm": [
+      -6.8716143331002675,
+      -12.57114922617593,
+      -6.291004760772659
+    ],
+    "final_placement_error_mm": 3.568148774868863,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.80278371127729,
+        "max_tool_error_mm": 5.0000000000000115,
+        "last_relative_error_mm": 4.843763109196218
+      },
+      "reach": {
+        "max_rotation_deg": 27.270096074642034,
+        "max_tool_error_mm": 5.0,
+        "last_relative_error_mm": 4.8409825617963635
+      },
+      "lift": {
+        "max_rotation_deg": 26.81224044030642,
+        "max_tool_error_mm": 5.000000000000014,
+        "last_relative_error_mm": 20.441168253851988
+      },
+      "transport": {
+        "max_rotation_deg": 45.50893820818844,
+        "max_tool_error_mm": 5.000000000000014,
+        "last_relative_error_mm": 80.77957247323171
+      },
+      "lower": {
+        "max_rotation_deg": 45.42670264987839,
+        "max_tool_error_mm": 5.000000000000017,
+        "last_relative_error_mm": 77.47597653529925
+      }
+    },
+    "actions": 79,
+    "movement_rad": 2.487796130980697,
+    "sim_s": 8.399999999999913,
+    "compute_s": 0.007857197924749926,
+    "wall_s": 2.990609176980797,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "inconsistent_with_table",
+        "difference_m": 0.005339422503415263,
+        "offset_xy": [
+          -0.00350928775026918,
+          -0.00375087540367669
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c0_t2",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "grasp_relative_prediction_error_mm": 3.4832917386107,
+    "closure_site_minus_object_mm": [
+      -5.822513547168645,
+      -12.183456451176093,
+      -5.054993478937706
+    ],
+    "final_placement_error_mm": 7.046159583203963,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 41.70326756859265,
+        "max_tool_error_mm": 5.0000000000000195,
+        "last_relative_error_mm": 3.4812213859131065
+      },
+      "reach": {
+        "max_rotation_deg": 41.88399990669637,
+        "max_tool_error_mm": 5.0000000000000036,
+        "last_relative_error_mm": 3.4832917386107
+      },
+      "lift": {
+        "max_rotation_deg": 41.63784525032736,
+        "max_tool_error_mm": 5.000000000000014,
+        "last_relative_error_mm": 20.549567772629416
+      },
+      "transport": {
+        "max_rotation_deg": 55.05571366832458,
+        "max_tool_error_mm": 5.000000000000002,
+        "last_relative_error_mm": 63.244715778186034
+      },
+      "lower": {
+        "max_rotation_deg": 55.405059977971504,
+        "max_tool_error_mm": 5.000000000000014,
+        "last_relative_error_mm": 63.89911907312157
+      }
+    },
+    "actions": 84,
+    "movement_rad": 2.6459365796303524,
+    "sim_s": 8.899999999999991,
+    "compute_s": 0.008447200874798,
+    "wall_s": 3.2363527200068347,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "inconsistent_with_table",
+        "difference_m": 0.005283630672096924,
+        "offset_xy": [
+          -0.0027417673694120903,
+          -0.004762630840894108
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.0012127847277680834,
+          -0.001258594484089104
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c1_t0",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.1675670341768034,
+      -1.0394062527872647
+    ],
+    "grasp_relative_prediction_error_mm": 1.3104398388555183,
+    "closure_site_minus_object_mm": [
+      -10.09215330106447,
+      -13.682353354881222,
+      -4.843493262857192
+    ],
+    "final_placement_error_mm": 3.886090679264869,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 27.229446128492555,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.3104398388555183
+      },
+      "reach": {
+        "max_rotation_deg": 27.581343145171324,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.3104398388555183
+      },
+      "lift": {
+        "max_rotation_deg": 27.07606815144232,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 19.662075265358478
+      },
+      "transport": {
+        "max_rotation_deg": 44.71824144024487,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 79.49507718057546
+      },
+      "lower": {
+        "max_rotation_deg": 45.17345240781136,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 77.77969122107602
+      }
+    },
+    "actions": 82,
+    "movement_rad": 2.436294376879243,
+    "sim_s": 8.69999999999996,
+    "compute_s": 0.009741498884977773,
+    "wall_s": 3.5290553719969466,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.00045724533574930044,
+        "offset_xy": [
+          0.009851256867476565,
+          -0.010369589800994256
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c1_t0",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.1675670341768034,
+      -1.0394062527872647
+    ],
+    "grasp_relative_prediction_error_mm": 0.8613697386157619,
+    "closure_site_minus_object_mm": [
+      -11.750826736580649,
+      -13.24553937724271,
+      -5.830949910024776
+    ],
+    "final_placement_error_mm": 6.000943791167975,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.21706414635156,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 0.8613697207803174
+      },
+      "reach": {
+        "max_rotation_deg": 42.38602903404472,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 0.8613697386157619
+      },
+      "lift": {
+        "max_rotation_deg": 42.04365418885862,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 20.221939849100732
+      },
+      "transport": {
+        "max_rotation_deg": 55.29474763199052,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 63.740038507391695
+      },
+      "lower": {
+        "max_rotation_deg": 55.42758085686304,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 63.78784048875262
+      }
+    },
+    "actions": 80,
+    "movement_rad": 2.614473913873959,
+    "sim_s": 8.499999999999929,
+    "compute_s": 0.00859460115316324,
+    "wall_s": 3.125325627013808,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.0006611432201517521,
+        "offset_xy": [
+          0.01024878442199817,
+          -0.01069554198071869
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c1_t1",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.1675670341768034,
+      -1.0394062527872647
+    ],
+    "grasp_relative_prediction_error_mm": 5.129567601530489,
+    "closure_site_minus_object_mm": [
+      -16.598983110501813,
+      -12.505695951298156,
+      -4.300783641978816
+    ],
+    "final_placement_error_mm": 15.639236232132731,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.640021813021054,
+        "max_tool_error_mm": 4.000000000000017,
+        "last_relative_error_mm": 5.131832253381188
+      },
+      "reach": {
+        "max_rotation_deg": 27.07042459618893,
+        "max_tool_error_mm": 4.000000000000016,
+        "last_relative_error_mm": 5.129567601530489
+      },
+      "lift": {
+        "max_rotation_deg": 26.707095364637293,
+        "max_tool_error_mm": 4.00000000000001,
+        "last_relative_error_mm": 24.007658371666746
+      },
+      "transport": {
+        "max_rotation_deg": 45.29801279251658,
+        "max_tool_error_mm": 4.0,
+        "last_relative_error_mm": 91.03502315370065
+      },
+      "lower": {
+        "max_rotation_deg": 45.24550338910609,
+        "max_tool_error_mm": 4.00000000000002,
+        "last_relative_error_mm": 89.65570246046211
+      }
+    },
+    "actions": 73,
+    "movement_rad": 2.3504653222995056,
+    "sim_s": 7.799999999999856,
+    "compute_s": 0.006755099922884256,
+    "wall_s": 2.737537284992868,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.0036190229927562543,
+        "offset_xy": [
+          0.0134234216113919,
+          -0.008459299169667284
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c1_t1",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.1675670341768034,
+      -1.0394062527872647
+    ],
+    "grasp_relative_prediction_error_mm": 4.228138534985519,
+    "closure_site_minus_object_mm": [
+      -13.251944074908373,
+      -13.183046073220957,
+      -4.550905493826779
+    ],
+    "final_placement_error_mm": 5.435990202233406,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.30685899071749,
+        "max_tool_error_mm": 4.0000000000000195,
+        "last_relative_error_mm": 4.224517489428948
+      },
+      "reach": {
+        "max_rotation_deg": 42.29822420012493,
+        "max_tool_error_mm": 4.000000000000001,
+        "last_relative_error_mm": 4.228138534985519
+      },
+      "lift": {
+        "max_rotation_deg": 42.03206004024808,
+        "max_tool_error_mm": 4.000000000000018,
+        "last_relative_error_mm": 21.079386774033264
+      },
+      "transport": {
+        "max_rotation_deg": 55.25947348413615,
+        "max_tool_error_mm": 4.000000000000017,
+        "last_relative_error_mm": 65.13671570341909
+      },
+      "lower": {
+        "max_rotation_deg": 55.54349705446277,
+        "max_tool_error_mm": 4.000000000000049,
+        "last_relative_error_mm": 65.53238202949427
+      }
+    },
+    "actions": 79,
+    "movement_rad": 2.5988413129857255,
+    "sim_s": 8.399999999999913,
+    "compute_s": 0.007669400074519217,
+    "wall_s": 2.8606139170005918,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.0037058323311474233,
+        "offset_xy": [
+          0.013319384416645957,
+          -0.008090242212963311
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c1_t2",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.1675670341768034,
+      -1.0394062527872647
+    ],
+    "grasp_relative_prediction_error_mm": 4.491880009423489,
+    "closure_site_minus_object_mm": [
+      -7.358058686202734,
+      -12.800926130167742,
+      -5.059219591841919
+    ],
+    "final_placement_error_mm": 3.4028006845195047,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.90787683704021,
+        "max_tool_error_mm": 5.000000000000019,
+        "last_relative_error_mm": 4.497303955050053
+      },
+      "reach": {
+        "max_rotation_deg": 27.30666175722264,
+        "max_tool_error_mm": 5.00000000000001,
+        "last_relative_error_mm": 4.491880009423489
+      },
+      "lift": {
+        "max_rotation_deg": 26.83686559478801,
+        "max_tool_error_mm": 5.000000000000009,
+        "last_relative_error_mm": 19.716725643595833
+      },
+      "transport": {
+        "max_rotation_deg": 45.321219299070705,
+        "max_tool_error_mm": 5.000000000000012,
+        "last_relative_error_mm": 80.56223018693218
+      },
+      "lower": {
+        "max_rotation_deg": 45.3503229671454,
+        "max_tool_error_mm": 5.00000000000002,
+        "last_relative_error_mm": 77.46421895278657
+      }
+    },
+    "actions": 83,
+    "movement_rad": 2.4150456125802258,
+    "sim_s": 8.799999999999976,
+    "compute_s": 0.007962800096720457,
+    "wall_s": 3.4337136410176754,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "inconsistent_with_table",
+        "difference_m": 0.005504415506849203,
+        "offset_xy": [
+          0.00547723106102091,
+          -0.012920263509050012
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c1_t2",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.1675670341768034,
+      -1.0394062527872647
+    ],
+    "grasp_relative_prediction_error_mm": 4.90813348779565,
+    "closure_site_minus_object_mm": [
+      -4.088287351768666,
+      -13.588614204039764,
+      -5.505053677304247
+    ],
+    "final_placement_error_mm": 6.335882224293973,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.192762665525215,
+        "max_tool_error_mm": 5.0000000000000115,
+        "last_relative_error_mm": 4.9074467273571925
+      },
+      "reach": {
+        "max_rotation_deg": 42.255191491665705,
+        "max_tool_error_mm": 5.0000000000000036,
+        "last_relative_error_mm": 4.90813348779565
+      },
+      "lift": {
+        "max_rotation_deg": 42.04841059847149,
+        "max_tool_error_mm": 5.000000000000007,
+        "last_relative_error_mm": 21.21507849210613
+      },
+      "transport": {
+        "max_rotation_deg": 55.279380007650914,
+        "max_tool_error_mm": 5.000000000000003,
+        "last_relative_error_mm": 62.78213551661178
+      },
+      "lower": {
+        "max_rotation_deg": 55.46561457573327,
+        "max_tool_error_mm": 5.000000000000008,
+        "last_relative_error_mm": 63.215415724473324
+      }
+    },
+    "actions": 78,
+    "movement_rad": 2.5981117754145306,
+    "sim_s": 8.299999999999898,
+    "compute_s": 0.007766099995933473,
+    "wall_s": 2.9176500879984815,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "inconsistent_with_table",
+        "difference_m": 0.0054743716642785736,
+        "offset_xy": [
+          0.006287394265631685,
+          -0.013901142184320786
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          0.010167567034176803,
+          -0.010039406252787264
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c2_t0",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2253201872865294,
+      -1.332431174625342
+    ],
+    "grasp_relative_prediction_error_mm": 1.3256161234978876,
+    "closure_site_minus_object_mm": [
+      -11.510902178731602,
+      -13.067922699100956,
+      -4.815287186462
+    ],
+    "final_placement_error_mm": 4.777704875248034,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.93229520819481,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.3256161234978876
+      },
+      "reach": {
+        "max_rotation_deg": 27.334145422146737,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.3256161234978876
+      },
+      "lift": {
+        "max_rotation_deg": 26.913259794249537,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 19.602723422230255
+      },
+      "transport": {
+        "max_rotation_deg": 45.21826730338246,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 82.42014421590241
+      },
+      "lower": {
+        "max_rotation_deg": 45.4344937720495,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 79.71599771735468
+      }
+    },
+    "actions": 80,
+    "movement_rad": 2.465449198462085,
+    "sim_s": 8.499999999999929,
+    "compute_s": 0.007957499998155981,
+    "wall_s": 3.440800037002191,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.0005384853209543416,
+        "offset_xy": [
+          -0.006312865538078499,
+          0.007685528944990583
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c2_t0",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2253201872865294,
+      -1.332431174625342
+    ],
+    "grasp_relative_prediction_error_mm": 1.3419658336645413,
+    "closure_site_minus_object_mm": [
+      -10.745780108039755,
+      -12.717885696363865,
+      -4.838859690610472
+    ],
+    "final_placement_error_mm": 5.257163236044253,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.02433398127704,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.341965830507751
+      },
+      "reach": {
+        "max_rotation_deg": 42.11116927519962,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 1.3419658336645413
+      },
+      "lift": {
+        "max_rotation_deg": 41.86820347071972,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 20.10895350240179
+      },
+      "transport": {
+        "max_rotation_deg": 55.510494151057,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 65.19617852169031
+      },
+      "lower": {
+        "max_rotation_deg": 55.619172212586214,
+        "max_tool_error_mm": 0.0,
+        "last_relative_error_mm": 65.11075890131931
+      }
+    },
+    "actions": 81,
+    "movement_rad": 2.6313765109603047,
+    "sim_s": 8.599999999999945,
+    "compute_s": 0.008136697026202455,
+    "wall_s": 3.420028722001007,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.0002726259947249885,
+        "offset_xy": [
+          -0.005960897856170544,
+          0.007468451339224372
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c2_t1",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2253201872865294,
+      -1.332431174625342
+    ],
+    "grasp_relative_prediction_error_mm": 6.146078344494653,
+    "closure_site_minus_object_mm": [
+      -17.559684118879705,
+      -11.961416380689718,
+      -5.413511439265106
+    ],
+    "final_placement_error_mm": 20.2664858983819,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.42598403610315,
+        "max_tool_error_mm": 4.0000000000000036,
+        "last_relative_error_mm": 6.1471044393336625
+      },
+      "reach": {
+        "max_rotation_deg": 26.86096126264321,
+        "max_tool_error_mm": 4.000000000000019,
+        "last_relative_error_mm": 6.146078344494653
+      },
+      "lift": {
+        "max_rotation_deg": 26.49074618125865,
+        "max_tool_error_mm": 4.000000000000012,
+        "last_relative_error_mm": 24.953568627714468
+      },
+      "transport": {
+        "max_rotation_deg": 45.86868625999546,
+        "max_tool_error_mm": 4.000000000000007,
+        "last_relative_error_mm": 93.36349336338816
+      },
+      "lower": {
+        "max_rotation_deg": 45.599455967610446,
+        "max_tool_error_mm": 4.0,
+        "last_relative_error_mm": 91.13650698302025
+      }
+    },
+    "actions": 73,
+    "movement_rad": 2.3537634139462957,
+    "sim_s": 7.799999999999856,
+    "compute_s": 0.006647500878898427,
+    "wall_s": 3.0615390059829224,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.0038218955094790454,
+        "offset_xy": [
+          -0.0024742981368952865,
+          0.009594837898259823
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c2_t1",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2253201872865294,
+      -1.332431174625342
+    ],
+    "grasp_relative_prediction_error_mm": 5.308533021339612,
+    "closure_site_minus_object_mm": [
+      -17.10175424678026,
+      -12.454178705002873,
+      -5.723194983470934
+    ],
+    "final_placement_error_mm": 32.42850599690426,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 42.060267276388345,
+        "max_tool_error_mm": 4.000000000000007,
+        "last_relative_error_mm": 5.307270947305016
+      },
+      "reach": {
+        "max_rotation_deg": 42.22358290636353,
+        "max_tool_error_mm": 4.000000000000034,
+        "last_relative_error_mm": 5.308533021339612
+      },
+      "lift": {
+        "max_rotation_deg": 41.879925900473,
+        "max_tool_error_mm": 4.000000000000025,
+        "last_relative_error_mm": 23.249988367475556
+      },
+      "transport": {
+        "max_rotation_deg": 55.31610091188901,
+        "max_tool_error_mm": 4.0000000000000195,
+        "last_relative_error_mm": 70.09044094909034
+      },
+      "lower": {
+        "max_rotation_deg": 55.74279835160732,
+        "max_tool_error_mm": 4.000000000000018,
+        "last_relative_error_mm": 81.0377526623183
+      }
+    },
+    "actions": 76,
+    "movement_rad": 2.603003644527783,
+    "sim_s": 8.099999999999866,
+    "compute_s": 0.00767579983221367,
+    "wall_s": 3.4949010320124216,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "table_preferred",
+        "difference_m": 0.0037304712740035663,
+        "offset_xy": [
+          -0.0028375395292408734,
+          0.009967486841602258
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-a",
+    "condition": "visible_c2_t2",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2253201872865294,
+      -1.332431174625342
+    ],
+    "grasp_relative_prediction_error_mm": 3.886287640165609,
+    "closure_site_minus_object_mm": [
+      -7.571936673745033,
+      -12.94467460540126,
+      -4.971211188577504
+    ],
+    "final_placement_error_mm": 4.881332831947007,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 26.91876223380678,
+        "max_tool_error_mm": 5.000000000000012,
+        "last_relative_error_mm": 3.8906413436152336
+      },
+      "reach": {
+        "max_rotation_deg": 27.340744923175993,
+        "max_tool_error_mm": 4.999999999999994,
+        "last_relative_error_mm": 3.886287640165609
+      },
+      "lift": {
+        "max_rotation_deg": 26.87130797915774,
+        "max_tool_error_mm": 5.0000000000000195,
+        "last_relative_error_mm": 19.552833917129625
+      },
+      "transport": {
+        "max_rotation_deg": 44.996783469537235,
+        "max_tool_error_mm": 5.000000000000019,
+        "last_relative_error_mm": 80.05632984266931
+      },
+      "lower": {
+        "max_rotation_deg": 45.17079633600084,
+        "max_tool_error_mm": 5.000000000000018,
+        "last_relative_error_mm": 77.07137568050574
+      }
+    },
+    "actions": 82,
+    "movement_rad": 2.4227822816940674,
+    "sim_s": 8.69999999999996,
+    "compute_s": 0.009379800903843716,
+    "wall_s": 3.7754001150024123,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "inconsistent_with_table",
+        "difference_m": 0.0053282174366823505,
+        "offset_xy": [
+          -0.010559465513367006,
+          0.005323272160831685
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "case": "holdout-b",
+    "condition": "visible_c2_t2",
+    "references": "visible",
+    "success": true,
+    "failure": null,
+    "camera_parameter_error_mm": [
+      1.2253201872865294,
+      -1.332431174625342
+    ],
+    "grasp_relative_prediction_error_mm": 3.108888161121346,
+    "closure_site_minus_object_mm": [
+      -6.053497044692935,
+      -11.949552261766131,
+      -5.011172720848358
+    ],
+    "final_placement_error_mm": 4.833867375823317,
+    "stages": {
+      "approach": {
+        "max_rotation_deg": 41.67719104005612,
+        "max_tool_error_mm": 5.000000000000004,
+        "last_relative_error_mm": 3.1058956730913727
+      },
+      "reach": {
+        "max_rotation_deg": 41.83226587882028,
+        "max_tool_error_mm": 5.0000000000000036,
+        "last_relative_error_mm": 3.108888161121346
+      },
+      "lift": {
+        "max_rotation_deg": 41.56881418327254,
+        "max_tool_error_mm": 5.000000000000023,
+        "last_relative_error_mm": 20.38180727964865
+      },
+      "transport": {
+        "max_rotation_deg": 55.4236247575439,
+        "max_tool_error_mm": 5.000000000000007,
+        "last_relative_error_mm": 65.11532642270734
+      },
+      "lower": {
+        "max_rotation_deg": 55.918696274868914,
+        "max_tool_error_mm": 5.00000000000002,
+        "last_relative_error_mm": 65.79514066181864
+      }
+    },
+    "actions": 83,
+    "movement_rad": 2.640970602841065,
+    "sim_s": 8.799999999999976,
+    "compute_s": 0.00855029805097729,
+    "wall_s": 3.6168692919891328,
+    "calibration_events": [
+      {
+        "source": "table",
+        "accepted": true,
+        "reason": "consistent_references_within_bound",
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ]
+      },
+      {
+        "source": "gripper",
+        "accepted": false,
+        "reason": "inconsistent_with_table",
+        "difference_m": 0.005318798072568499,
+        "offset_xy": [
+          -0.009892744990697533,
+          0.004301391152310818
+        ]
+      },
+      {
+        "epoch": 1,
+        "offset_xy": [
+          -0.005774679812713471,
+          0.007667568825374657
+        ],
+        "joint_response_state": "absent",
+        "cartesian_residual_state": "absent"
+      }
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  }
+]

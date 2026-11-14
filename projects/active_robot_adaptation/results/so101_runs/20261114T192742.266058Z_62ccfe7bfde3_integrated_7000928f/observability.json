@@ -1,0 +1,29 @@
+{
+  "interpretation": "Idealized local projection sensitivity, assumes accurately detected marker at every sampled state; actual occlusion and pixel noise reduce available information. Parameters are camera xy and parent-wrist offset xyz; unknown fixed overhead orientation and focal length are held fixed.",
+  "case": {
+    "id": "holdout-a",
+    "object_xy": [
+      0.217,
+      0.03
+    ],
+    "initial_pan": -0.5,
+    "seed": 1901
+  },
+  "samples": 6,
+  "single_observation_rank": 2,
+  "trajectory_rank": 5,
+  "trajectory_singular_values_divided_by_focal": [
+    7.71958715727413,
+    7.700718525638546,
+    1.2281384164527165,
+    1.0555377694386767,
+    0.11748626496157043
+  ],
+  "weakest_parameter_direction_camera_xy_then_parent_offset_xyz": [
+    -0.30131531985804555,
+    -0.16588819300177782,
+    0.4261457339758621,
+    0.8163915614845438,
+    -0.18328888998641035
+  ]
+}

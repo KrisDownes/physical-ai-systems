@@ -67,6 +67,7 @@ class Environment:
         self.limit_violations = 0
         self.saturated_actions = 0
         self.physics_collision_steps=0
+        self.physics_limit_steps=0
         self.physics_collision_pairs={}
         self.events=[]
 
@@ -83,7 +84,7 @@ class Environment:
         self.action_count, self.movement, self.compute_s = 0, 0., 0.
         self._evaluation = {'initial_z': float(self.data.xpos[self.object_id,2])}
         self.trace, self.limit_violations, self.saturated_actions = [], 0, 0
-        self.physics_collision_steps,self.physics_collision_pairs,self.events=0,{},[]
+        self.physics_collision_steps,self.physics_limit_steps,self.physics_collision_pairs,self.events=0,0,{},[]
         for _ in range(100):
             mujoco.mj_step(self.model, self.data)
             self._audit_physics_contacts()
@@ -140,6 +141,8 @@ class Environment:
         if self.renderer is not None: self.renderer.close()
 
     def _audit_physics_contacts(self):
+        q=self.data.qpos[:6]
+        self.physics_limit_steps += int(np.any(q < self.model.jnt_range[:6,0]-.001) or np.any(q > self.model.jnt_range[:6,1]+.001))
         pairs=set()
         for c in self.data.contact[:self.data.ncon]:
             b1,b2=self.model.geom_bodyid[c.geom1],self.model.geom_bodyid[c.geom2]

@@ -1,0 +1,276 @@
+{
+  "purpose": "Frozen 36-episode fresh fully crossed correction-transfer evaluation; independent resets; no tuning on results.",
+  "cases": [
+    {
+      "id": "holdout-a",
+      "object_xy": [
+        0.217,
+        0.03
+      ],
+      "initial_pan": -0.5,
+      "seed": 1901
+    },
+    {
+      "id": "holdout-b",
+      "object_xy": [
+        0.232,
+        0.017
+      ],
+      "initial_pan": -0.69,
+      "seed": 1902
+    }
+  ],
+  "conditions": [
+    {
+      "name": "visible_c0_t0",
+      "references": "visible",
+      "camera_shift_m": [
+        0,
+        0
+      ],
+      "tool_offset_wrist_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "visible_c0_t1",
+      "references": "visible",
+      "camera_shift_m": [
+        0,
+        0
+      ],
+      "tool_offset_wrist_m": [
+        0.004,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "visible_c0_t2",
+      "references": "visible",
+      "camera_shift_m": [
+        0,
+        0
+      ],
+      "tool_offset_wrist_m": [
+        -0.005,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "visible_c1_t0",
+      "references": "visible",
+      "camera_shift_m": [
+        0.009,
+        -0.009
+      ],
+      "tool_offset_wrist_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "visible_c1_t1",
+      "references": "visible",
+      "camera_shift_m": [
+        0.009,
+        -0.009
+      ],
+      "tool_offset_wrist_m": [
+        0.004,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "visible_c1_t2",
+      "references": "visible",
+      "camera_shift_m": [
+        0.009,
+        -0.009
+      ],
+      "tool_offset_wrist_m": [
+        -0.005,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "visible_c2_t0",
+      "references": "visible",
+      "camera_shift_m": [
+        -0.007,
+        0.009
+      ],
+      "tool_offset_wrist_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "visible_c2_t1",
+      "references": "visible",
+      "camera_shift_m": [
+        -0.007,
+        0.009
+      ],
+      "tool_offset_wrist_m": [
+        0.004,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "visible_c2_t2",
+      "references": "visible",
+      "camera_shift_m": [
+        -0.007,
+        0.009
+      ],
+      "tool_offset_wrist_m": [
+        -0.005,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c0_t0",
+      "references": "unavailable",
+      "camera_shift_m": [
+        0,
+        0
+      ],
+      "tool_offset_wrist_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c0_t1",
+      "references": "unavailable",
+      "camera_shift_m": [
+        0,
+        0
+      ],
+      "tool_offset_wrist_m": [
+        0.004,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c0_t2",
+      "references": "unavailable",
+      "camera_shift_m": [
+        0,
+        0
+      ],
+      "tool_offset_wrist_m": [
+        -0.005,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c1_t0",
+      "references": "unavailable",
+      "camera_shift_m": [
+        0.009,
+        -0.009
+      ],
+      "tool_offset_wrist_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c1_t1",
+      "references": "unavailable",
+      "camera_shift_m": [
+        0.009,
+        -0.009
+      ],
+      "tool_offset_wrist_m": [
+        0.004,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c1_t2",
+      "references": "unavailable",
+      "camera_shift_m": [
+        0.009,
+        -0.009
+      ],
+      "tool_offset_wrist_m": [
+        -0.005,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c2_t0",
+      "references": "unavailable",
+      "camera_shift_m": [
+        -0.007,
+        0.009
+      ],
+      "tool_offset_wrist_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c2_t1",
+      "references": "unavailable",
+      "camera_shift_m": [
+        -0.007,
+        0.009
+      ],
+      "tool_offset_wrist_m": [
+        0.004,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "unavailable_c2_t2",
+      "references": "unavailable",
+      "camera_shift_m": [
+        -0.007,
+        0.009
+      ],
+      "tool_offset_wrist_m": [
+        -0.005,
+        0,
+        0
+      ]
+    }
+  ],
+  "methods": [
+    "calibration"
+  ],
+  "action_budget": 200,
+  "movement_budget_rad": 8.0,
+  "camera_noise_std": 0.0,
+  "record_method": "calibration",
+  "record_conditions": [
+    "visible_c0_t0",
+    "visible_c1_t2",
+    "unavailable_c1_t2",
+    "unavailable_c2_t1"
+  ],
+  "trial_count": 36,
+  "compute_budget": "36 independent CPU episodes, maximum 200 actions and 8 rad accumulated joint movement each; no retries or extra probes",
+  "memory": "reset calibration and any adaptation for each episode",
+  "selection": "Existing calibration only: previous and development cases succeeded; no consequential ambiguity demonstrated to justify an extra movement."
+}

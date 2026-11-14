@@ -1,0 +1,6 @@
+{
+ "purpose":"Development reachability and tool-offset check, not evaluation",
+ "cases":[{"id":"dev-a","object_xy":[0.213,0.027],"initial_pan":-0.48,"seed":1801},{"id":"dev-b","object_xy":[0.230,0.021],"initial_pan":-0.70,"seed":1802}],
+ "conditions":[{"name":"none","references":"visible","camera_shift_m":[0,0],"tool_offset_wrist_m":[0,0,0]},{"name":"tool","references":"unavailable","camera_shift_m":[0,0],"tool_offset_wrist_m":[0.004,0,0]}],
+ "methods":["calibration"],"action_budget":200,"movement_budget_rad":8.0,"camera_noise_std":0.0,"record_conditions":[]
+}

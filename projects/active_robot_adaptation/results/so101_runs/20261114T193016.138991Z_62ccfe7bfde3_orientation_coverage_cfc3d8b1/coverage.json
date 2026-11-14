@@ -1,0 +1,732 @@
+[
+  {
+    "case": "fresh-1",
+    "condition": "both",
+    "camera_estimation_error_mm": [
+      1.1675670341768034,
+      -1.0394062527872647
+    ],
+    "calibration_joint_rad": [
+      -0.5699999999999593,
+      -0.34972803423418247,
+      0.5003307713792695,
+      1.499978777344824,
+      1.584369528732625,
+      1.1999967815257886
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 6,
+        "max_rotation_deg": 29.859140095872696,
+        "max_tool_prediction_error_mm": 4.000000000000019,
+        "wrist_roll_range_rad": [
+          1.5843678082049775,
+          1.5843719842657356
+        ]
+      },
+      "reach": {
+        "samples": 4,
+        "max_rotation_deg": 29.71838855751132,
+        "max_tool_prediction_error_mm": 4.0000000000000195,
+        "wrist_roll_range_rad": [
+          1.5843646957572775,
+          1.5843669720160003
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 48.817407618442346,
+        "max_tool_prediction_error_mm": 4.000000000000034,
+        "wrist_roll_range_rad": [
+          1.584363793332942,
+          1.5852228350050726
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 29.53932017297494,
+        "max_tool_prediction_error_mm": 3.9999999999999964,
+        "wrist_roll_range_rad": [
+          1.5850809899858127,
+          1.5850818425023854
+        ]
+      },
+      "transport": {
+        "samples": 4,
+        "max_rotation_deg": 49.34833382543282,
+        "max_tool_prediction_error_mm": 4.000000000000026,
+        "wrist_roll_range_rad": [
+          1.5850669292847894,
+          1.5850774512310823
+        ]
+      },
+      "lower": {
+        "samples": 5,
+        "max_rotation_deg": 49.1505208491425,
+        "max_tool_prediction_error_mm": 4.0000000000000115,
+        "wrist_roll_range_rad": [
+          1.5850660858969787,
+          1.5852204242099484
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-2",
+    "condition": "both",
+    "camera_estimation_error_mm": [
+      1.2253201872865294,
+      -1.332431174625342
+    ],
+    "calibration_joint_rad": [
+      -0.6299999999999566,
+      -0.34971812088184656,
+      0.5003406805358082,
+      1.4999886872976609,
+      1.5843695285573756,
+      1.1999967815349641
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 9,
+        "max_rotation_deg": 39.55557080456224,
+        "max_tool_prediction_error_mm": 5.0000000000000195,
+        "wrist_roll_range_rad": [
+          1.5843673908094988,
+          1.584369412025188
+        ]
+      },
+      "reach": {
+        "samples": 4,
+        "max_rotation_deg": 39.50292084050492,
+        "max_tool_prediction_error_mm": 5.000000000000006,
+        "wrist_roll_range_rad": [
+          1.5843631359821984,
+          1.5843669000290312
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 52.18411100899451,
+        "max_tool_prediction_error_mm": 5.0000000000000355,
+        "wrist_roll_range_rad": [
+          1.5840336793554848,
+          1.5855648571845347
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 39.569367045561116,
+        "max_tool_prediction_error_mm": 4.999999999999999,
+        "wrist_roll_range_rad": [
+          1.584738788002558,
+          1.5847407576597394
+        ]
+      },
+      "transport": {
+        "samples": 3,
+        "max_rotation_deg": 51.62015477733115,
+        "max_tool_prediction_error_mm": 5.0,
+        "wrist_roll_range_rad": [
+          1.5847367301895758,
+          1.58473821072913
+        ]
+      },
+      "lower": {
+        "samples": 10,
+        "max_rotation_deg": 52.2006090711445,
+        "max_tool_prediction_error_mm": 5.000000000000011,
+        "wrist_roll_range_rad": [
+          1.5847370467883846,
+          1.585571040162012
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-1",
+    "condition": "both_no_table",
+    "camera_estimation_error_mm": [
+      4.452976416705121,
+      0.5211953478105377
+    ],
+    "calibration_joint_rad": [
+      -0.5699999999999593,
+      -0.34972803423418247,
+      0.5003307713792695,
+      1.499978777344824,
+      1.584369528732625,
+      1.1999967815257886
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 7,
+        "max_rotation_deg": 29.260409673586693,
+        "max_tool_prediction_error_mm": 4.000000000000015,
+        "wrist_roll_range_rad": [
+          1.5843668613733346,
+          1.5843701015879441
+        ]
+      },
+      "reach": {
+        "samples": 4,
+        "max_rotation_deg": 29.32392148758877,
+        "max_tool_prediction_error_mm": 4.000000000000014,
+        "wrist_roll_range_rad": [
+          1.5843659108427464,
+          1.584366431566807
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 48.230882736086784,
+        "max_tool_prediction_error_mm": 4.0000000000000275,
+        "wrist_roll_range_rad": [
+          1.5843649980286714,
+          1.5848940056314424
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 29.194243529783652,
+        "max_tool_prediction_error_mm": 4.000000000000022,
+        "wrist_roll_range_rad": [
+          1.5846375875255236,
+          1.5846385111582075
+        ]
+      },
+      "transport": {
+        "samples": 4,
+        "max_rotation_deg": 48.75765684536448,
+        "max_tool_prediction_error_mm": 4.000000000000006,
+        "wrist_roll_range_rad": [
+          1.5846270470383679,
+          1.5846344413985143
+        ]
+      },
+      "lower": {
+        "samples": 7,
+        "max_rotation_deg": 48.49935503713637,
+        "max_tool_prediction_error_mm": 4.000000000000011,
+        "wrist_roll_range_rad": [
+          1.5846257517148492,
+          1.5849478544349576
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-2",
+    "condition": "both_no_table",
+    "camera_estimation_error_mm": [
+      -2.9418164885637093,
+      -4.344579085300995
+    ],
+    "calibration_joint_rad": [
+      -0.6299999999999566,
+      -0.34971812088184656,
+      0.5003406805358082,
+      1.4999886872976609,
+      1.5843695285573756,
+      1.1999967815349641
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 9,
+        "max_rotation_deg": 40.6763380705186,
+        "max_tool_prediction_error_mm": 5.000000000000015,
+        "wrist_roll_range_rad": [
+          1.584367126186716,
+          1.5843712611680314
+        ]
+      },
+      "reach": {
+        "samples": 5,
+        "max_rotation_deg": 40.690183111760234,
+        "max_tool_prediction_error_mm": 5.000000000000007,
+        "wrist_roll_range_rad": [
+          1.5843672589983202,
+          1.5843701442468134
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 53.360582715908855,
+        "max_tool_prediction_error_mm": 5.00000000000003,
+        "wrist_roll_range_rad": [
+          1.5843668160868036,
+          1.5860651858020818
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 40.58666134155425,
+        "max_tool_prediction_error_mm": 5.000000000000014,
+        "wrist_roll_range_rad": [
+          1.5851945424673148,
+          1.5851972864177422
+        ]
+      },
+      "transport": {
+        "samples": 3,
+        "max_rotation_deg": 52.97366785469473,
+        "max_tool_prediction_error_mm": 5.000000000000011,
+        "wrist_roll_range_rad": [
+          1.585194962241191,
+          1.5851959462132872
+        ]
+      },
+      "lower": {
+        "samples": 11,
+        "max_rotation_deg": 53.52204878301254,
+        "max_tool_prediction_error_mm": 5.000000000000018,
+        "wrist_roll_range_rad": [
+          1.585194591891657,
+          1.586070121532889
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-1",
+    "condition": "camera",
+    "camera_estimation_error_mm": [
+      1.1675670341768034,
+      -1.0394062527872647
+    ],
+    "calibration_joint_rad": [
+      -0.569999999999958,
+      -0.3497236282939804,
+      0.5003351754546769,
+      1.4999831817741223,
+      1.5843695286547366,
+      1.1999967815298662
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 7,
+        "max_rotation_deg": 29.48851359631779,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843678411240854,
+          1.5843720011944789
+        ]
+      },
+      "reach": {
+        "samples": 4,
+        "max_rotation_deg": 29.404702976792027,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843684075077191,
+          1.5843710285303303
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 48.99209532420885,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843679642773978,
+          1.5849520213836272
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 29.26151746869345,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5844139985176995,
+          1.584416773252305
+        ]
+      },
+      "transport": {
+        "samples": 4,
+        "max_rotation_deg": 49.223058649444795,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.584408375361703,
+          1.5844129436915282
+        ]
+      },
+      "lower": {
+        "samples": 9,
+        "max_rotation_deg": 49.25904634608316,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5844072529540365,
+          1.584965151311157
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-2",
+    "condition": "camera",
+    "camera_estimation_error_mm": [
+      1.2253201872865294,
+      -1.332431174625342
+    ],
+    "calibration_joint_rad": [
+      -0.629999999999958,
+      -0.3497236282939804,
+      0.5003351754546769,
+      1.4999831817741223,
+      1.5843695286547366,
+      1.1999967815298662
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 9,
+        "max_rotation_deg": 39.617628747353876,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843663810027837,
+          1.5843695393341337
+        ]
+      },
+      "reach": {
+        "samples": 5,
+        "max_rotation_deg": 39.60926643229836,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843589394263553,
+          1.5843643780469652
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 52.08971550433087,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5841702016809074,
+          1.585521576602455
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 39.50082577510019,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5848224223507454,
+          1.5848232024430173
+        ]
+      },
+      "transport": {
+        "samples": 3,
+        "max_rotation_deg": 51.819436604061,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.58482004928549,
+          1.5848211221105735
+        ]
+      },
+      "lower": {
+        "samples": 9,
+        "max_rotation_deg": 52.27972155474948,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5848188345285783,
+          1.5855223880760405
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-1",
+    "condition": "none",
+    "camera_estimation_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "calibration_joint_rad": [
+      -0.569999999999958,
+      -0.3497236282939804,
+      0.5003351754546769,
+      1.4999831817741223,
+      1.5843695286547366,
+      1.1999967815298662
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 7,
+        "max_rotation_deg": 29.352728003303607,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843678409855952,
+          1.5843720088281041
+        ]
+      },
+      "reach": {
+        "samples": 5,
+        "max_rotation_deg": 29.38304836797021,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843675278054474,
+          1.5843710376165798
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 49.13718705249502,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843670852330485,
+          1.5846938239862431
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 29.162890216955542,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.584487404604342,
+          1.5844882722021574
+        ]
+      },
+      "transport": {
+        "samples": 4,
+        "max_rotation_deg": 49.42401037187703,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5844800205470828,
+          1.5844862846891143
+        ]
+      },
+      "lower": {
+        "samples": 6,
+        "max_rotation_deg": 49.26999116981871,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5844784449302933,
+          1.5847266181549093
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-2",
+    "condition": "none",
+    "camera_estimation_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "calibration_joint_rad": [
+      -0.629999999999958,
+      -0.3497236282939804,
+      0.5003351754546769,
+      1.4999831817741223,
+      1.5843695286547366,
+      1.1999967815298662
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 9,
+        "max_rotation_deg": 39.720995923730456,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843656231932257,
+          1.5843688553368738
+        ]
+      },
+      "reach": {
+        "samples": 5,
+        "max_rotation_deg": 39.547057046361275,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5843605275799253,
+          1.584364251081624
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 52.32658659336995,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5840709478774648,
+          1.5853219012939417
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 39.56267057071778,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.584501767394245,
+          1.5845035310740403
+        ]
+      },
+      "transport": {
+        "samples": 3,
+        "max_rotation_deg": 51.68354041723325,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5844988443540324,
+          1.5845001090291266
+        ]
+      },
+      "lower": {
+        "samples": 10,
+        "max_rotation_deg": 52.55244475368092,
+        "max_tool_prediction_error_mm": 0.0,
+        "wrist_roll_range_rad": [
+          1.5844988543369156,
+          1.5853293169802187
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-1",
+    "condition": "tool",
+    "camera_estimation_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "calibration_joint_rad": [
+      -0.5699999999999593,
+      -0.34972803423418247,
+      0.5003307713792695,
+      1.499978777344824,
+      1.584369528732625,
+      1.1999967815257886
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 7,
+        "max_rotation_deg": 29.762930888607304,
+        "max_tool_prediction_error_mm": 4.000000000000018,
+        "wrist_roll_range_rad": [
+          1.584367806787825,
+          1.584371922022115
+        ]
+      },
+      "reach": {
+        "samples": 4,
+        "max_rotation_deg": 29.689877306460904,
+        "max_tool_prediction_error_mm": 4.000000000000004,
+        "wrist_roll_range_rad": [
+          1.5843702266015225,
+          1.5843713783064641
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 48.826854034925645,
+        "max_tool_prediction_error_mm": 4.000000000000032,
+        "wrist_roll_range_rad": [
+          1.5843698889827893,
+          1.584880160888179
+        ]
+      },
+      "lift": {
+        "samples": 4,
+        "max_rotation_deg": 29.584397384978207,
+        "max_tool_prediction_error_mm": 4.000000000000009,
+        "wrist_roll_range_rad": [
+          1.5847867660493524,
+          1.5847882054412123
+        ]
+      },
+      "transport": {
+        "samples": 4,
+        "max_rotation_deg": 49.37739280118203,
+        "max_tool_prediction_error_mm": 4.00000000000001,
+        "wrist_roll_range_rad": [
+          1.584779925767667,
+          1.5847862275015572
+        ]
+      },
+      "lower": {
+        "samples": 6,
+        "max_rotation_deg": 49.13301913038757,
+        "max_tool_prediction_error_mm": 4.000000000000008,
+        "wrist_roll_range_rad": [
+          1.5847780891379217,
+          1.5849348449428993
+        ]
+      }
+    }
+  },
+  {
+    "case": "fresh-2",
+    "condition": "tool",
+    "camera_estimation_error_mm": [
+      1.2127847277680834,
+      -1.258594484089104
+    ],
+    "calibration_joint_rad": [
+      -0.6299999999999566,
+      -0.34971812088184656,
+      0.5003406805358082,
+      1.4999886872976609,
+      1.5843695285573756,
+      1.1999967815349641
+    ],
+    "success": true,
+    "stage": {
+      "approach": {
+        "samples": 9,
+        "max_rotation_deg": 39.219482524811525,
+        "max_tool_prediction_error_mm": 5.00000000000001,
+        "wrist_roll_range_rad": [
+          1.5843679693596022,
+          1.5843707219786884
+        ]
+      },
+      "reach": {
+        "samples": 4,
+        "max_rotation_deg": 39.183480427154024,
+        "max_tool_prediction_error_mm": 5.0000000000000036,
+        "wrist_roll_range_rad": [
+          1.5843645797095585,
+          1.584366054493118
+        ]
+      },
+      "closure_or_release": {
+        "samples": 50,
+        "max_rotation_deg": 52.138136234663996,
+        "max_tool_prediction_error_mm": 5.00000000000002,
+        "wrist_roll_range_rad": [
+          1.5840879051200893,
+          1.5856322832462577
+        ]
+      },
+      "lift": {
+        "samples": 5,
+        "max_rotation_deg": 39.22794014353336,
+        "max_tool_prediction_error_mm": 5.000000000000012,
+        "wrist_roll_range_rad": [
+          1.5847768137283123,
+          1.584778081954298
+        ]
+      },
+      "transport": {
+        "samples": 3,
+        "max_rotation_deg": 51.54641722898736,
+        "max_tool_prediction_error_mm": 5.000000000000008,
+        "wrist_roll_range_rad": [
+          1.584774699398236,
+          1.5847759868159288
+        ]
+      },
+      "lower": {
+        "samples": 11,
+        "max_rotation_deg": 52.29532060720142,
+        "max_tool_prediction_error_mm": 5.0000000000000195,
+        "wrist_roll_range_rad": [
+          1.5847731240033325,
+          1.585637455890831
+        ]
+      }
+    }
+  }
+]

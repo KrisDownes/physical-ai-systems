@@ -1,0 +1,34 @@
+{
+  "none": {
+    "calibration": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 79.0,
+      "median_movement_rad": 2.4663594392209918,
+      "median_sim_s": 8.399999999999931,
+      "median_compute_s": 0.008402800085605122,
+      "median_tracking_error_m_s": 0.09354462954823971,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "tool": {
+    "calibration": {
+      "successes": 2,
+      "trials": 2,
+      "failures": [],
+      "median_actions": 76.5,
+      "median_movement_rad": 2.4766784278092824,
+      "median_sim_s": 8.149999999999874,
+      "median_compute_s": 0.0070187995879678056,
+      "median_tracking_error_m_s": 0.08969072547085707,
+      "total_accepted_motion_updates": 0,
+      "total_rejected_motion_updates": 0,
+      "joint_limit_violations": 0,
+      "self_collision_physics_steps": 0
+    }
+  }
+}
