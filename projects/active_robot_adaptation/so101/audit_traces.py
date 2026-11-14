@@ -8,8 +8,9 @@ from environment import load_model
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--transfer',action='store_true')
+parser.add_argument('--run',required=True,help='Unique run directory containing traces')
 args=parser.parse_args()
-out=Path('results/so101')
+out=Path(args.run)
 prefix='transfer' if args.transfer else 'comparison'
 traces=json.loads((out/f'{prefix}_traces.json').read_text())
 model=load_model(); data=mujoco.MjData(model)
@@ -30,5 +31,5 @@ for key,trace in traces.items():
                 hit=True;break
         count+=hit
     rows[key]={'sampled_states':len(trace),'sampled_self_collision_states':count,'max_abs_elbow_rad':max_elbow}
-(out/f'{prefix}_self_collision_audit.json').write_text(json.dumps(rows,indent=2)+'\n')
+with (out/f'{prefix}_self_collision_audit.json').open('x') as f: f.write(json.dumps(rows,indent=2)+'\n')
 print('episodes with sampled self-collision',sum(r['sampled_self_collision_states']>0 for r in rows.values()),'/',len(rows))

@@ -1,0 +1,20 @@
+{
+  "protocol": "Fresh camera-translation evaluation frozen after development diagnosis; independent reset per episode; no within-episode fault.",
+  "cases": [
+    {"id":"heldout-a", "object_xy":[0.219,0.017], "initial_pan":-0.56, "camera_shift_m":[0.008,0.010], "seed":811},
+    {"id":"heldout-b", "object_xy":[0.226,0.032], "initial_pan":-0.64, "camera_shift_m":[-0.010,-0.012], "seed":802},
+    {"id":"heldout-c", "object_xy":[0.232,0.031], "initial_pan":-0.59, "camera_shift_m":[0.008,0.010], "seed":803},
+    {"id":"heldout-d", "object_xy":[0.214,0.013], "initial_pan":-0.61, "camera_shift_m":[-0.010,-0.012], "seed":804}
+  ],
+  "no_change_cases": ["heldout-a", "heldout-b"],
+  "reference_modes": ["visible", "temporary", "unavailable"],
+  "methods": ["nominal", "online", "recalibration", "selfcal"],
+  "max_actions": 200,
+  "movement_budget_rad": 8.0,
+  "camera_noise_std": 0.0,
+  "temporary_condition": "Both table marker images are suppressed until simulation time 1.0 s (0.5 s after reset); object and gripper marker remain visible.",
+  "unavailable_condition": "Both table marker images are suppressed for the whole episode; object and gripper marker remain visible.",
+  "tool_marker": "Non-colliding simulated cyan marker rigidly attached 0.11 m from gripper body origin, with known position from nominal joint kinematics; idealized and not validated on hardware.",
+  "movement_limit_note": "Movement budget is checked before each step and can overshoot by one bounded action.",
+  "gripper_detection_rule": "Report and retain all episodes; an initial missing object or gripper marker is a visibility failure and makes the intended comparison ineligible."
+}

@@ -1,0 +1,200 @@
+{
+  "no_change": {
+    "nominal": {
+      "trials": 2,
+      "successes": 2,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 75.5,
+      "median_movement_rad": 2.515185447612801,
+      "median_simulation_s": 8.049999999999867,
+      "median_wall_s": 3.0149380509974435,
+      "self_collision_physics_steps": 0
+    },
+    "online": {
+      "trials": 2,
+      "successes": 2,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 76.0,
+      "median_movement_rad": 2.5436922089664353,
+      "median_simulation_s": 8.099999999999866,
+      "median_wall_s": 3.087352805014234,
+      "self_collision_physics_steps": 0
+    },
+    "recalibration": {
+      "trials": 2,
+      "successes": 2,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 84.0,
+      "median_movement_rad": 2.570144587743772,
+      "median_simulation_s": 8.899999999999991,
+      "median_wall_s": 3.36482329449791,
+      "self_collision_physics_steps": 0
+    },
+    "selfcal": {
+      "trials": 2,
+      "successes": 2,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 78.0,
+      "median_movement_rad": 2.548206677240499,
+      "median_simulation_s": 8.299999999999898,
+      "median_wall_s": 3.23936467198655,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "visible": {
+    "nominal": {
+      "trials": 4,
+      "successes": 3,
+      "ineligible_visibility": 0,
+      "failures": {
+        "grasp": 1
+      },
+      "median_actions": 76.0,
+      "median_movement_rad": 2.510268794826197,
+      "median_simulation_s": 8.099999999999866,
+      "median_wall_s": 3.1188377465005033,
+      "self_collision_physics_steps": 0
+    },
+    "online": {
+      "trials": 4,
+      "successes": 2,
+      "ineligible_visibility": 0,
+      "failures": {
+        "grasp": 2
+      },
+      "median_actions": 75.5,
+      "median_movement_rad": 2.5165170597080726,
+      "median_simulation_s": 8.049999999999859,
+      "median_wall_s": 3.138309197485796,
+      "self_collision_physics_steps": 0
+    },
+    "recalibration": {
+      "trials": 4,
+      "successes": 4,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 81.0,
+      "median_movement_rad": 2.5868513710536565,
+      "median_simulation_s": 8.599999999999945,
+      "median_wall_s": 3.358820318506332,
+      "self_collision_physics_steps": 0
+    },
+    "selfcal": {
+      "trials": 4,
+      "successes": 4,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 79.5,
+      "median_movement_rad": 2.563402213481612,
+      "median_simulation_s": 8.449999999999921,
+      "median_wall_s": 3.134222200504155,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "temporary": {
+    "nominal": {
+      "trials": 4,
+      "successes": 3,
+      "ineligible_visibility": 0,
+      "failures": {
+        "grasp": 1
+      },
+      "median_actions": 76.0,
+      "median_movement_rad": 2.510268794826197,
+      "median_simulation_s": 8.099999999999866,
+      "median_wall_s": 3.041927135011065,
+      "self_collision_physics_steps": 0
+    },
+    "online": {
+      "trials": 4,
+      "successes": 2,
+      "ineligible_visibility": 0,
+      "failures": {
+        "grasp": 2
+      },
+      "median_actions": 75.5,
+      "median_movement_rad": 2.5165170597080726,
+      "median_simulation_s": 8.049999999999859,
+      "median_wall_s": 3.1998107919935137,
+      "self_collision_physics_steps": 0
+    },
+    "recalibration": {
+      "trials": 4,
+      "successes": 4,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 84.5,
+      "median_movement_rad": 2.6040274213213053,
+      "median_simulation_s": 8.95,
+      "median_wall_s": 3.4480211269983556,
+      "self_collision_physics_steps": 0
+    },
+    "selfcal": {
+      "trials": 4,
+      "successes": 4,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 79.5,
+      "median_movement_rad": 2.563402213481612,
+      "median_simulation_s": 8.449999999999921,
+      "median_wall_s": 3.0861181280051824,
+      "self_collision_physics_steps": 0
+    }
+  },
+  "unavailable": {
+    "nominal": {
+      "trials": 4,
+      "successes": 3,
+      "ineligible_visibility": 0,
+      "failures": {
+        "grasp": 1
+      },
+      "median_actions": 76.0,
+      "median_movement_rad": 2.510268794826197,
+      "median_simulation_s": 8.099999999999866,
+      "median_wall_s": 3.021046361493063,
+      "self_collision_physics_steps": 0
+    },
+    "online": {
+      "trials": 4,
+      "successes": 2,
+      "ineligible_visibility": 0,
+      "failures": {
+        "grasp": 2
+      },
+      "median_actions": 75.5,
+      "median_movement_rad": 2.5165170597080726,
+      "median_simulation_s": 8.049999999999859,
+      "median_wall_s": 3.1015604220010573,
+      "self_collision_physics_steps": 0
+    },
+    "recalibration": {
+      "trials": 4,
+      "successes": 0,
+      "ineligible_visibility": 0,
+      "failures": {
+        "calibration": 4
+      },
+      "median_actions": 6.0,
+      "median_movement_rad": 0.0025015445503288616,
+      "median_simulation_s": 1.0999999999999985,
+      "median_wall_s": 0.6287914804997854,
+      "self_collision_physics_steps": 0
+    },
+    "selfcal": {
+      "trials": 4,
+      "successes": 4,
+      "ineligible_visibility": 0,
+      "failures": {},
+      "median_actions": 79.5,
+      "median_movement_rad": 2.563402213481612,
+      "median_simulation_s": 8.449999999999921,
+      "median_wall_s": 3.118384467510623,
+      "self_collision_physics_steps": 0
+    }
+  }
+}

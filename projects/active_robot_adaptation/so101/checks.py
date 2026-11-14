@@ -5,6 +5,7 @@ from pathlib import Path
 import mujoco
 import numpy as np
 from environment import Environment, locate_green, pixel_to_plane, recalibrate_translation, load_model
+from run_store import create_run
 
 
 def main():
@@ -40,9 +41,10 @@ def main():
             'image_shape':list(img.shape),'reset_repeatable':True,
             'joint_and_gripper_response':True,'controller_observation_keys':['joint_rad','time_s','image'],
             'self_collision_scan':collisions,'mujoco_version':mujoco.__version__}
-    path=Path('results/so101/model_checks.json');path.parent.mkdir(parents=True,exist_ok=True)
+    path=create_run('checks',{'physics_steps':2000,'seeds':[0]})/'model_checks.json'
     path.write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
+    print('saved:',path)
 
 
 if __name__=='__main__':main()

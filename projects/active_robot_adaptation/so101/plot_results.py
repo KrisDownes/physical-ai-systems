@@ -1,12 +1,17 @@
 """Plot initial SO-101 comparison and labeled follow-up transfer ablation."""
 import json
+import argparse
 from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-out=Path('results/so101')
+parser=argparse.ArgumentParser()
+parser.add_argument('--run',required=True)
+parser.add_argument('--transfer-run',required=True)
+args=parser.parse_args()
+out=Path(args.run)
 a=json.loads((out/'comparison.json').read_text())['summary']
-b=json.loads((out/'transfer.json').read_text())['summary']
+b=json.loads((Path(args.transfer_run)/'transfer.json').read_text())['summary']
 conditions=('none','camera','gain')
 labels=('Nominal','Recalibration','Online Jacobian','Global*','Global + GP*')
 methods=('nominal','recalibration','online','global','gp')
@@ -24,4 +29,6 @@ ax.set_title('SO-101 simulation: paired pilot')
 ax.set_xlabel('* Follow-up ablation reused already-inspected cases.',fontsize=8,labelpad=10)
 ax.legend(ncol=3,fontsize=8,loc='upper center')
 ax.grid(axis='y',alpha=.18);ax.set_axisbelow(True)
-fig.savefig(out/'success_comparison.png',dpi=160)
+target=out/'success_comparison.png'
+if target.exists(): raise FileExistsError(target)
+fig.savefig(target,dpi=160)

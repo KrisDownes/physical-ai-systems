@@ -1,0 +1,6 @@
+{
+  "python": "3.12.3",
+  "numpy": "2.5.4",
+  "mujoco": "4.0.1",
+  "note": "Recorded immediately after the runs from the same unchanged virtual environment."
+}

@@ -1,0 +1,107 @@
+{
+  "label": "fresh_camera_followup",
+  "revision": "49ac12f199cf0483e4cec0584abe1dbffe474d11",
+  "created_utc": "20261114T015443.570566Z",
+  "config": {
+    "protocol": "Fresh camera-translation evaluation frozen after development diagnosis; independent reset per episode; no within-episode fault.",
+    "cases": [
+      {
+        "id": "heldout-a",
+        "object_xy": [
+          0.211,
+          0.022
+        ],
+        "initial_pan": -0.56,
+        "camera_shift_m": [
+          0.008,
+          0.01
+        ],
+        "seed": 801
+      },
+      {
+        "id": "heldout-b",
+        "object_xy": [
+          0.226,
+          0.032
+        ],
+        "initial_pan": -0.64,
+        "camera_shift_m": [
+          -0.01,
+          -0.012
+        ],
+        "seed": 802
+      },
+      {
+        "id": "heldout-c",
+        "object_xy": [
+          0.232,
+          0.031
+        ],
+        "initial_pan": -0.59,
+        "camera_shift_m": [
+          0.008,
+          0.01
+        ],
+        "seed": 803
+      },
+      {
+        "id": "heldout-d",
+        "object_xy": [
+          0.214,
+          0.013
+        ],
+        "initial_pan": -0.61,
+        "camera_shift_m": [
+          -0.01,
+          -0.012
+        ],
+        "seed": 804
+      }
+    ],
+    "no_change_cases": [
+      "heldout-a",
+      "heldout-b"
+    ],
+    "reference_modes": [
+      "visible",
+      "temporary",
+      "unavailable"
+    ],
+    "methods": [
+      "nominal",
+      "online",
+      "recalibration",
+      "selfcal"
+    ],
+    "max_actions": 200,
+    "movement_budget_rad": 8.0,
+    "camera_noise_std": 0.0,
+    "temporary_condition": "Both table marker images are suppressed until simulation time 1.0 s (0.5 s after reset); object and gripper marker remain visible.",
+    "unavailable_condition": "Both table marker images are suppressed for the whole episode; object and gripper marker remain visible.",
+    "tool_marker": "Non-colliding simulated cyan marker rigidly attached 0.11 m from gripper body origin, with known position from nominal joint kinematics; idealized and not validated on hardware.",
+    "movement_limit_note": "Movement budget is checked before each step and can overshoot by one bounded action.",
+    "gripper_detection_rule": "Report and retain all episodes; an initial missing object or gripper marker is a visibility failure and makes the intended comparison ineligible."
+  },
+  "python": "3.12.3",
+  "source_sha256": {
+    "so101/audit_traces.py": "e583e5bc6dc6b0e0104c276a045fcd841c7734599125c55d5f7e4e5165e65dc7",
+    "so101/camera_followup.py": "d944f63f145d7e4de0c07c4eb5318a9bf92f5780404348c1989baf5c915273b1",
+    "so101/checks.py": "38b0d1890882c06964e230e0f80c06ac72a4c7a445cbf8222b533f6a62349700",
+    "so101/compare.py": "088cd4aee21db47a5786016bb7ec89048125ec79765a1d562287220f11a40157",
+    "so101/diagnose.py": "3a4603fc79fd6fc0abbbc9dbb3a310f50860634ba1d54ec3b97d2de3df4373aa",
+    "so101/environment.py": "bbae39499136437586e715e968a8955e630ed2966a87043e18d998212a3b423e",
+    "so101/nominal.py": "62d42b9c773c03fcd795d23a84d0a633a3cb0b42ad88d5ad5e963f3c52fc92b8",
+    "so101/pilot.py": "5173544e7493c4b0fcaf5bd6d2ecdcd9e32a87a4cfa9ad467a86b9aed414fea6",
+    "so101/plot_results.py": "0dfb519a2a8165c8ac700cca5fc4caa7ac3b801f63502d76ecf84c00dcdf68e9",
+    "so101/provenance.py": "18c50aed80e365ec8c15a1356e66a744bae74e856a607fb127591359fd8c67d3",
+    "so101/rl_interface.py": "b43900ac85ec648905659c87be4a3d0854a18e714228150561cb6db845eca130",
+    "so101/run_store.py": "89e645aa258efe8dbd9e963311c8d18cac08b045707c6e89b2180875dbf618df",
+    "so101/test_environment.py": "3dc01a5e27cb690d4f5448974280a529e9f3d8829ed63e858226f1a975583931",
+    "so101/view.py": "74bf81b3446aeb06da16d2c5a1776befc2ce438dccf4bf8151e1ed97d4978f87",
+    "so101/frozen_camera_followup.json": "6976bf510cfa6fd627c5ff7c7edf8a3fa26a243376014acfa409eafcc4d49baf",
+    "so101/frozen_comparison.json": "b31b956f6811bc9c588448dacf734ea72c1fb1a580eb6b3706c2beb46d7863e5",
+    "so101/frozen_transfer.json": "db2c58f0f5f9b16605c183d7d9afe080181234cb437438fd6ceefc85b92653fb",
+    "so101/scene.xml": "c7faab1b5d89e00cfc438d36f5cd4b77e1fff11bc7cefbf3b3155e508e513613"
+  },
+  "git_project_status": "M so101/audit_traces.py\n M so101/checks.py\n M so101/compare.py\n M so101/environment.py\n M so101/nominal.py\n M so101/pilot.py\n M so101/plot_results.py\n M so101/provenance.py\n?? so101/camera_followup.py\n?? so101/diagnose.py\n?? so101/frozen_camera_followup.json\n?? so101/run_store.py"
+}

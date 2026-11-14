@@ -10,8 +10,9 @@ import mujoco
 import numpy as np
 from environment import Environment, Q_HOME
 from nominal import run
+from run_store import create_run
 
-OUT = Path('results/so101')
+BASELINE = Path('results/so101')
 PLAN = Path('so101/frozen_comparison.json')
 
 
@@ -19,7 +20,7 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--transfer',action='store_true')
     args=parser.parse_args()
-    nominal = json.loads((OUT/'nominal_development.json').read_text())
+    nominal = json.loads((BASELINE/'nominal_development.json').read_text())
     if not nominal['readiness']['passed']:
         raise RuntimeError('Nominal readiness gate not met; no disturbance comparison')
     plan=json.loads(PLAN.read_text())
@@ -29,6 +30,7 @@ def main():
         plan['methods']=transfer['methods']
         plan['transfer']=transfer
         label='transfer'
+    OUT=create_run(label,plan)
     rows=[]
     traces={}
     OUT.mkdir(parents=True,exist_ok=True)
@@ -69,6 +71,7 @@ def main():
     (OUT/f'{label}.json').write_text(json.dumps(output,indent=2)+'\n')
     (OUT/f'{label}_traces.json').write_text(json.dumps(traces,separators=(',',':'))+'\n')
     print(json.dumps(summary,indent=2))
+    print('saved:',OUT)
 
 
 if __name__=='__main__': main()

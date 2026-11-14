@@ -1,0 +1,157 @@
+{
+  "nominal": {
+    "success": true,
+    "failure": null,
+    "object_estimate_bias_mm": [
+      -1.052777848635833,
+      0.6428472136768837
+    ],
+    "last_reach_site_error_mm": 0.32693933062779745,
+    "pre_grasp_accepted_updates": 0,
+    "pre_grasp_input_singular_values": [],
+    "pre_grasp_input_rank": 0,
+    "grasp_contact": true,
+    "lifted": true,
+    "physics_collision_steps": 0
+  },
+  "shift_nominal": {
+    "success": false,
+    "failure": "grasp",
+    "object_estimate_bias_mm": [
+      -13.58273811042196,
+      7.477370992832948
+    ],
+    "last_reach_site_error_mm": 1.831892885297534,
+    "pre_grasp_accepted_updates": 0,
+    "pre_grasp_input_singular_values": [],
+    "pre_grasp_input_rank": 0,
+    "grasp_contact": false,
+    "lifted": false,
+    "physics_collision_steps": 0
+  },
+  "shift_online": {
+    "success": false,
+    "failure": "grasp",
+    "object_estimate_bias_mm": [
+      -13.58273811042196,
+      7.477370992832948
+    ],
+    "last_reach_site_error_mm": 1.3483852196280643,
+    "pre_grasp_accepted_updates": 10,
+    "pre_grasp_input_singular_values": [
+      0.20795322626034596,
+      0.1904198969589467,
+      0.07658277016249519,
+      0.034058931345117,
+      0.0
+    ],
+    "pre_grasp_input_rank": 4,
+    "grasp_contact": false,
+    "lifted": false,
+    "physics_collision_steps": 0
+  },
+  "shift_global": {
+    "success": false,
+    "failure": "grasp",
+    "object_estimate_bias_mm": [
+      -13.58273811042196,
+      7.477370992832948
+    ],
+    "last_reach_site_error_mm": 1.6681666130894242,
+    "pre_grasp_accepted_updates": 10,
+    "pre_grasp_input_singular_values": [
+      0.029832051522774034,
+      0.02147281707162951,
+      0.008703423349400377
+    ],
+    "pre_grasp_input_rank": 3,
+    "grasp_contact": false,
+    "lifted": false,
+    "physics_collision_steps": 0
+  },
+  "shift_gp": {
+    "success": false,
+    "failure": "grasp",
+    "object_estimate_bias_mm": [
+      -13.58273811042196,
+      7.477370992832948
+    ],
+    "last_reach_site_error_mm": 1.857455415259586,
+    "pre_grasp_accepted_updates": 16,
+    "pre_grasp_input_singular_values": [
+      0.028834704489402545,
+      0.02286786088490118,
+      0.007081215751390499
+    ],
+    "pre_grasp_input_rank": 3,
+    "grasp_contact": false,
+    "lifted": false,
+    "physics_collision_steps": 0
+  },
+  "oracle_pixel": {
+    "success": false,
+    "failure": "grasp",
+    "object_estimate_bias_mm": [
+      -12.000816196352627,
+      7.995266091938548
+    ],
+    "last_reach_site_error_mm": 0.7824807875416999,
+    "pre_grasp_accepted_updates": 0,
+    "pre_grasp_input_singular_values": [],
+    "pre_grasp_input_rank": 0,
+    "grasp_contact": false,
+    "lifted": false,
+    "physics_collision_steps": 0
+  },
+  "oracle_target_nominal": {
+    "success": true,
+    "failure": null,
+    "object_estimate_bias_mm": [
+      0.0,
+      0.0
+    ],
+    "last_reach_site_error_mm": 2.230971927047075,
+    "pre_grasp_accepted_updates": 0,
+    "pre_grasp_input_singular_values": [],
+    "pre_grasp_input_rank": 0,
+    "grasp_contact": true,
+    "lifted": true,
+    "physics_collision_steps": 0
+  },
+  "oracle_target_online": {
+    "success": true,
+    "failure": null,
+    "object_estimate_bias_mm": [
+      0.0,
+      0.0
+    ],
+    "last_reach_site_error_mm": 2.7348413779353336,
+    "pre_grasp_accepted_updates": 11,
+    "pre_grasp_input_singular_values": [
+      0.2274826759483207,
+      0.1953726730856079,
+      0.08673136525664882,
+      0.03400827460550779,
+      0.0
+    ],
+    "pre_grasp_input_rank": 4,
+    "grasp_contact": true,
+    "lifted": true,
+    "physics_collision_steps": 0
+  },
+  "shift_selfcal": {
+    "success": true,
+    "failure": null,
+    "object_estimate_bias_mm": [
+      -0.5229866723769072,
+      -2.0702786652652163
+    ],
+    "last_reach_site_error_mm": 2.7347368563094308,
+    "pre_grasp_accepted_updates": 0,
+    "pre_grasp_input_singular_values": [],
+    "pre_grasp_input_rank": 0,
+    "grasp_contact": true,
+    "lifted": true,
+    "physics_collision_steps": 0
+  }
+}

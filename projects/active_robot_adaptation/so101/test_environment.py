@@ -1,7 +1,7 @@
 """Meaningful smoke tests for the model and controller observation boundary."""
 import unittest
 import numpy as np
-from environment import Environment, GlobalCorrection, locate_green, pixel_to_plane, recalibrate_translation
+from environment import Environment, GlobalCorrection, locate_green, locate_cyan, pixel_to_plane, recalibrate_translation
 from rl_interface import CartesianInterface
 
 
@@ -72,6 +72,30 @@ class SimTest(unittest.TestCase):
             c=env.reset(seed=32)['image']
             np.testing.assert_array_equal(a,b)
             self.assertFalse(np.array_equal(a,c))
+        finally: env.close()
+
+    def test_reference_mask_keeps_object_and_tool_marker(self):
+        env=Environment(tool_marker=True,reference_mode='unavailable',camera_shift=(.012,-.008))
+        try:
+            image=env.reset()['image']
+            self.assertIsNotNone(locate_green(image))
+            marker=locate_cyan(image)
+            self.assertIsNotNone(marker)
+            self.assertGreater(np.linalg.norm(marker-locate_green(image)),10)
+            self.assertIsNone(recalibrate_translation(image))
+        finally: env.close()
+
+    def test_physics_audit_detects_reported_nonadjacent_collision(self):
+        import mujoco
+        env=Environment(render=False)
+        try:
+            env.reset()
+            env.data.qpos[:6]=0
+            env.data.qpos[2]=1.55
+            mujoco.mj_forward(env.model,env.data)
+            env._audit_physics_contacts()
+            self.assertGreater(env.physics_collision_steps,0)
+            self.assertTrue(any('shoulder' in pair for pair in env.physics_collision_pairs))
         finally: env.close()
 
 

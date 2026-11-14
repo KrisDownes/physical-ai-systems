@@ -8,14 +8,15 @@ import mujoco
 import numpy as np
 from environment import Environment, Q_HOME
 from nominal import run
+from run_store import create_run
 
-OUT = Path('results/so101')
 # Frozen before this sweep; the first case was used while debugging.
 CASES = [(.22,.024,-.60), (.215,.015,-.55), (.225,.035,-.65),
          (.21,.035,-.55), (.23,.015,-.65), (.225,.02,-.60)]
 
 
 def main():
+    OUT = create_run('nominal', {'cases': CASES, 'seeds': list(range(len(CASES)))})
     OUT.mkdir(parents=True, exist_ok=True)
     rows = []
     env = Environment()

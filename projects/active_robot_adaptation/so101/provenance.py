@@ -1,4 +1,5 @@
 """Record exact local source and external model hashes for this run."""
+import argparse
 import hashlib
 import importlib.metadata
 import json
@@ -15,4 +16,6 @@ result={'base_git_commit':subprocess.check_output(['git','rev-parse','HEAD'],tex
         'source_sha256':{str(p):sha(p) for p in files},
         'python':platform.python_version(),'numpy':importlib.metadata.version('numpy'),
         'mujoco':importlib.metadata.version('mujoco')}
-Path('results/so101/provenance.json').write_text(json.dumps(result,indent=2)+'\n')
+parser=argparse.ArgumentParser();parser.add_argument('--run',required=True);args=parser.parse_args()
+target=Path(args.run)/'provenance.json'
+with target.open('x') as f: f.write(json.dumps(result,indent=2)+'\n')

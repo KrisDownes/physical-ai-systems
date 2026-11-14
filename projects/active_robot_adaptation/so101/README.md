@@ -21,7 +21,7 @@ MUJOCO_GL=egl PYTHONPATH=so101 OPENBLAS_NUM_THREADS=1 .venv-so101/bin/python so1
 MUJOCO_GL=egl PYTHONPATH=so101 OPENBLAS_NUM_THREADS=1 .venv-so101/bin/python so101/compare.py --transfer
 ```
 
-These evaluation commands overwrite corresponding results. The optional graphical viewer is `PYTHONPATH=so101 .venv-so101/bin/python so101/view.py`; it requires a working display and was not interactively verified. `so101/plot_results.py` uses the existing 2D `.venv` and Matplotlib to regenerate the comparison plot.
+Each evaluation command now creates a unique directory under `results/so101_runs/` with commit, frozen configuration, seeds and source hashes. The original baseline remains under `results/so101/` and has a local pre-rerun archive under `results/so101_archive/baseline_49ac12f/`. The optional graphical viewer is `PYTHONPATH=so101 .venv-so101/bin/python so101/view.py`; it requires a working display and was not interactively verified. To plot newly produced comparison runs, use `MPLCONFIGDIR=/tmp/active-adaptation-mpl .venv/bin/python so101/plot_results.py --run COMPARISON_RUN --transfer-run TRANSFER_RUN`; the target plot must not already exist.
 
 ## Interface and measurement
 
