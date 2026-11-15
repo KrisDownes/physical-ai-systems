@@ -1,0 +1,32 @@
+{
+  "purpose": "development numerical sensitivity, halved 2.5 ms step",
+  "conditions": [
+    {
+      "fill": "full",
+      "grip": "dry"
+    },
+    {
+      "fill": "full",
+      "grip": "wet"
+    }
+  ],
+  "cases": [
+    {
+      "id": "dev",
+      "object_xy": [
+        0.217,
+        0.03
+      ],
+      "initial_pan": -0.5,
+      "seed": 2111
+    }
+  ],
+  "action_budget": 200,
+  "movement_budget_rad": 8,
+  "record_videos": false,
+  "grasp_offset": [
+    -0.008,
+    -0.03
+  ],
+  "physics_timestep": 0.0025
+}

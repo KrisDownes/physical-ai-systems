@@ -1,0 +1,6 @@
+{
+ "purpose":"Development feasibility diagnostic; fixed baseline controller; not held-out evaluation.",
+ "conditions":[{"fill":"empty","grip":"dry"},{"fill":"empty","grip":"wet"},{"fill":"half","grip":"dry"},{"fill":"half","grip":"wet"},{"fill":"full","grip":"dry"},{"fill":"full","grip":"wet"}],
+ "cases":[{"id":"dev","object_xy":[0.217,0.030],"initial_pan":-0.50,"seed":2111}],
+ "action_budget":200,"movement_budget_rad":8,"record_videos":true
+}

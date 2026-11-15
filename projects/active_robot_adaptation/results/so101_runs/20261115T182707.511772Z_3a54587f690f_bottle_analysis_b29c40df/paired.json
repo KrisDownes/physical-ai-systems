@@ -1,0 +1,1424 @@
+[
+  {
+    "condition": {
+      "fill": "empty",
+      "grip": "dry"
+    },
+    "case": "holdout-a",
+    "baseline": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04412300648207697,
+      "relative_motion_m": 0.010310564634728079,
+      "max_tilt_deg": 31.627433446742117,
+      "placement_error_m": 0.04044329549641769,
+      "actions": 74,
+      "movement_rad": 2.501070023435369,
+      "sim_s": 7.899999999999854,
+      "wall_s": 3.753276572038885,
+      "compute_s": 0.007871398061979562,
+      "normal_force_peak_N": 7.852793032576586,
+      "normal_impulse_Ns": 175.5669484407201,
+      "max_joint_tracking_error_rad": 1.2976665406387702,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.00476270937724621,
+        2.94
+      ],
+      "force_saturation_steps": 860,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "stability_or_tilt",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04412300648207697,
+      "relative_motion_m": 0.017245502857079247,
+      "max_tilt_deg": 45.502413030541966,
+      "placement_error_m": 0.008970541801203722,
+      "actions": 82,
+      "movement_rad": 2.482169290606375,
+      "sim_s": 8.69999999999996,
+      "wall_s": 4.234179256018251,
+      "compute_s": 0.00986240355996415,
+      "normal_force_peak_N": 9.042565393386292,
+      "normal_impulse_Ns": 228.71219765671307,
+      "max_joint_tracking_error_rad": 1.3721995406387701,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.00476270937724621,
+        2.94
+      ],
+      "force_saturation_steps": 1003,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "empty",
+      "grip": "dry"
+    },
+    "case": "holdout-b",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.043798661486874724,
+      "relative_motion_m": 0.008724529657326835,
+      "max_tilt_deg": 30.13602620167323,
+      "placement_error_m": 0.03333029076369043,
+      "actions": 75,
+      "movement_rad": 2.5820307141864447,
+      "sim_s": 7.999999999999852,
+      "wall_s": 3.6550040480215102,
+      "compute_s": 0.006581700872629881,
+      "normal_force_peak_N": 7.849770824265146,
+      "normal_impulse_Ns": 172.18624801103945,
+      "max_joint_tracking_error_rad": 1.2976652251421488,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.031254555901796266,
+        2.94
+      ],
+      "force_saturation_steps": 884,
+      "command_saturation_actions": 19,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "stability_or_tilt",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.043798661486874724,
+      "relative_motion_m": 0.015969856897486923,
+      "max_tilt_deg": 43.09605904038427,
+      "placement_error_m": 0.006613608302491765,
+      "actions": 83,
+      "movement_rad": 2.5442403998124807,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.8323311529820785,
+      "compute_s": 0.007760498905554414,
+      "normal_force_peak_N": 8.663394247805304,
+      "normal_impulse_Ns": 221.8700778777434,
+      "max_joint_tracking_error_rad": 1.3721982251421487,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.031254555901796266,
+        2.94
+      ],
+      "force_saturation_steps": 1033,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "empty",
+      "grip": "dry"
+    },
+    "case": "holdout-c",
+    "baseline": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04403410279439476,
+      "relative_motion_m": 0.008306314240442628,
+      "max_tilt_deg": 35.30903907256319,
+      "placement_error_m": 0.04013055786800907,
+      "actions": 76,
+      "movement_rad": 2.6483403938140735,
+      "sim_s": 8.099999999999866,
+      "wall_s": 3.659275832993444,
+      "compute_s": 0.007905397040303797,
+      "normal_force_peak_N": 8.020753461540094,
+      "normal_impulse_Ns": 151.48089917376188,
+      "max_joint_tracking_error_rad": 1.2976642665775886,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.03346918049737724,
+        2.94
+      ],
+      "force_saturation_steps": 897,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "stability_or_tilt",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04403410279439476,
+      "relative_motion_m": 0.015870564149451923,
+      "max_tilt_deg": 47.63451113202096,
+      "placement_error_m": 0.007137041634251246,
+      "actions": 83,
+      "movement_rad": 2.60270272946868,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.819460642989725,
+      "compute_s": 0.007867700885981321,
+      "normal_force_peak_N": 8.80238445483981,
+      "normal_impulse_Ns": 191.4764333213275,
+      "max_joint_tracking_error_rad": 1.3721972665775886,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.03346918049737724,
+        2.94
+      ],
+      "force_saturation_steps": 1020,
+      "command_saturation_actions": 12,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "empty",
+      "grip": "wet"
+    },
+    "case": "holdout-a",
+    "baseline": {
+      "success": false,
+      "failure": "grasp",
+      "acquired": false,
+      "lifted": false,
+      "held_at_lift_end": false,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 80,
+      "closure_push_m": 0.07746932038832141,
+      "relative_motion_m": 0.08795391394433198,
+      "max_tilt_deg": 1.823161606110081e-05,
+      "placement_error_m": 0.06094177297145595,
+      "actions": 74,
+      "movement_rad": 2.4869168852335943,
+      "sim_s": 7.899999999999854,
+      "wall_s": 3.581965784949716,
+      "compute_s": 0.00600780121749267,
+      "normal_force_peak_N": 8.622412034973387,
+      "normal_impulse_Ns": 19.595497768911525,
+      "max_joint_tracking_error_rad": 1.2976712338431655,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.00476270937724621,
+        2.94
+      ],
+      "force_saturation_steps": 674,
+      "command_saturation_actions": 19,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "grasp",
+      "acquired": false,
+      "lifted": false,
+      "held_at_lift_end": false,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 160,
+      "closure_push_m": 0.0774693268202272,
+      "relative_motion_m": 0.08650034830403722,
+      "max_tilt_deg": 8.537736462515939e-07,
+      "placement_error_m": 0.060941773294275296,
+      "actions": 82,
+      "movement_rad": 2.487342128179618,
+      "sim_s": 8.69999999999996,
+      "wall_s": 4.0562439559726045,
+      "compute_s": 0.007922700955532491,
+      "normal_force_peak_N": 8.622412034973387,
+      "normal_impulse_Ns": 19.595497768911525,
+      "max_joint_tracking_error_rad": 1.3722010460202922,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.00476270937724621,
+        2.94
+      ],
+      "force_saturation_steps": 815,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 9,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "empty",
+      "grip": "wet"
+    },
+    "case": "holdout-b",
+    "baseline": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.043163145085067786,
+      "relative_motion_m": 0.04120677094180898,
+      "max_tilt_deg": 10.956961581940636,
+      "placement_error_m": 0.14290595114131466,
+      "actions": 75,
+      "movement_rad": 2.5690626441844433,
+      "sim_s": 7.999999999999852,
+      "wall_s": 3.6166820660000667,
+      "compute_s": 0.006561694841366261,
+      "normal_force_peak_N": 7.73694225956383,
+      "normal_impulse_Ns": 182.96690909609342,
+      "max_joint_tracking_error_rad": 1.2984104408467694,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.005182629007094874,
+        2.94
+      ],
+      "force_saturation_steps": 883,
+      "command_saturation_actions": 19,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.043163145085067786,
+      "relative_motion_m": 0.1235590558044245,
+      "max_tilt_deg": 95.93975127281647,
+      "placement_error_m": 0.127521032566644,
+      "actions": 83,
+      "movement_rad": 2.5449205410990197,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.8637234520283528,
+      "compute_s": 0.00829970184713602,
+      "normal_force_peak_N": 7.73694225956383,
+      "normal_impulse_Ns": 214.2689292440877,
+      "max_joint_tracking_error_rad": 1.3722008472609055,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.005182629007094874,
+        2.94
+      ],
+      "force_saturation_steps": 1040,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 9,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "empty",
+      "grip": "wet"
+    },
+    "case": "holdout-c",
+    "baseline": {
+      "success": false,
+      "failure": "lift",
+      "acquired": true,
+      "lifted": false,
+      "held_at_lift_end": false,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 56,
+      "closure_push_m": 0.04252064414706958,
+      "relative_motion_m": 0.10985966902837159,
+      "max_tilt_deg": 94.39254295371586,
+      "placement_error_m": 0.07652108053691457,
+      "actions": 76,
+      "movement_rad": 2.648907295078079,
+      "sim_s": 8.099999999999866,
+      "wall_s": 3.5782336840056814,
+      "compute_s": 0.006446599843911827,
+      "normal_force_peak_N": 7.693690426634737,
+      "normal_impulse_Ns": 121.52430910179935,
+      "max_joint_tracking_error_rad": 1.2976712203404857,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.004622329770654687,
+        2.94
+      ],
+      "force_saturation_steps": 898,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "lift",
+      "acquired": true,
+      "lifted": false,
+      "held_at_lift_end": false,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 120,
+      "closure_push_m": 0.04252064414706958,
+      "relative_motion_m": 0.30403756316936453,
+      "max_tilt_deg": 93.47667606961717,
+      "placement_error_m": 0.29373052737607425,
+      "actions": 83,
+      "movement_rad": 2.6059820599751715,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.9044928930234164,
+      "compute_s": 0.008460500044748187,
+      "normal_force_peak_N": 7.818591683714404,
+      "normal_impulse_Ns": 122.37497279341724,
+      "max_joint_tracking_error_rad": 1.3722006872287942,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.004622329770654687,
+        2.94
+      ],
+      "force_saturation_steps": 1022,
+      "command_saturation_actions": 12,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 9,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "full",
+      "grip": "dry"
+    },
+    "case": "holdout-a",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.0413147719246112,
+      "relative_motion_m": 0.00375217830411919,
+      "max_tilt_deg": 7.685326436178778,
+      "placement_error_m": 0.018408137097439374,
+      "actions": 75,
+      "movement_rad": 2.553498394373649,
+      "sim_s": 7.999999999999852,
+      "wall_s": 4.008361278974917,
+      "compute_s": 0.006642402033321559,
+      "normal_force_peak_N": 14.234641109803844,
+      "normal_impulse_Ns": 202.32892449246236,
+      "max_joint_tracking_error_rad": 1.2976665406387702,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.008084571029030485,
+        2.94
+      ],
+      "force_saturation_steps": 877,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.0413147719246112,
+      "relative_motion_m": 0.0029425424833096135,
+      "max_tilt_deg": 7.787909303623007,
+      "placement_error_m": 0.015281864034762317,
+      "actions": 82,
+      "movement_rad": 2.477531908298973,
+      "sim_s": 8.69999999999996,
+      "wall_s": 4.750080302997958,
+      "compute_s": 0.009621598350349814,
+      "normal_force_peak_N": 14.234641109803844,
+      "normal_impulse_Ns": 258.75825350210823,
+      "max_joint_tracking_error_rad": 1.3721995406387701,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.008084571029030485,
+        2.94
+      ],
+      "force_saturation_steps": 1015,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "full",
+      "grip": "dry"
+    },
+    "case": "holdout-b",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04108060325679888,
+      "relative_motion_m": 0.0028498220287213683,
+      "max_tilt_deg": 5.842687239569269,
+      "placement_error_m": 0.016400018180006696,
+      "actions": 75,
+      "movement_rad": 2.5687279421008404,
+      "sim_s": 7.999999999999852,
+      "wall_s": 3.570483724004589,
+      "compute_s": 0.006742100231349468,
+      "normal_force_peak_N": 18.518508327241804,
+      "normal_impulse_Ns": 181.1023717102329,
+      "max_joint_tracking_error_rad": 1.2976652251421488,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.08461976594253429,
+        2.94
+      ],
+      "force_saturation_steps": 876,
+      "command_saturation_actions": 19,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04108060325679888,
+      "relative_motion_m": 0.003868124726915138,
+      "max_tilt_deg": 8.396753862684493,
+      "placement_error_m": 0.0170650590625266,
+      "actions": 83,
+      "movement_rad": 2.539280486285182,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.8639670819975436,
+      "compute_s": 0.008191597647964954,
+      "normal_force_peak_N": 18.518508327241804,
+      "normal_impulse_Ns": 244.51306757336582,
+      "max_joint_tracking_error_rad": 1.3721982251421487,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.08461976594253429,
+        2.94
+      ],
+      "force_saturation_steps": 1038,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "full",
+      "grip": "dry"
+    },
+    "case": "holdout-c",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.040266171048851974,
+      "relative_motion_m": 0.003141647333328257,
+      "max_tilt_deg": 8.993382285950204,
+      "placement_error_m": 0.01627698396823369,
+      "actions": 76,
+      "movement_rad": 2.651378424528929,
+      "sim_s": 8.099999999999866,
+      "wall_s": 3.549018685996998,
+      "compute_s": 0.006594502949155867,
+      "normal_force_peak_N": 15.674780483538024,
+      "normal_impulse_Ns": 183.2822366425881,
+      "max_joint_tracking_error_rad": 1.2976642665775886,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.08888037332690146,
+        2.94
+      ],
+      "force_saturation_steps": 904,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.040266171048851974,
+      "relative_motion_m": 0.0047556085436921735,
+      "max_tilt_deg": 13.521508219974926,
+      "placement_error_m": 0.02544121178405961,
+      "actions": 83,
+      "movement_rad": 2.5954887847399837,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.9428835949511267,
+      "compute_s": 0.008213999855797738,
+      "normal_force_peak_N": 15.674780483538024,
+      "normal_impulse_Ns": 239.2538979686277,
+      "max_joint_tracking_error_rad": 1.3721972665775886,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.08888037332690146,
+        2.94
+      ],
+      "force_saturation_steps": 1042,
+      "command_saturation_actions": 12,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "full",
+      "grip": "wet"
+    },
+    "case": "holdout-a",
+    "baseline": {
+      "success": false,
+      "failure": "lift",
+      "acquired": true,
+      "lifted": false,
+      "held_at_lift_end": false,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 78,
+      "closure_push_m": 0.042107042803922176,
+      "relative_motion_m": 0.12070508647904091,
+      "max_tilt_deg": 96.83217966919973,
+      "placement_error_m": 0.1016199021003105,
+      "actions": 74,
+      "movement_rad": 2.5309957296292995,
+      "sim_s": 7.899999999999854,
+      "wall_s": 3.7490509979543276,
+      "compute_s": 0.006467199826147407,
+      "normal_force_peak_N": 16.134079660079447,
+      "normal_impulse_Ns": 118.0628552941329,
+      "max_joint_tracking_error_rad": 1.297671242040969,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.00476270937724621,
+        2.94
+      ],
+      "force_saturation_steps": 859,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "lift",
+      "acquired": true,
+      "lifted": false,
+      "held_at_lift_end": false,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 160,
+      "closure_push_m": 0.042107042803922176,
+      "relative_motion_m": 0.09697709216108952,
+      "max_tilt_deg": 97.48122975571926,
+      "placement_error_m": 0.07028648636806757,
+      "actions": 82,
+      "movement_rad": 2.484658303254718,
+      "sim_s": 8.69999999999996,
+      "wall_s": 4.114317737985402,
+      "compute_s": 0.007958902860991657,
+      "normal_force_peak_N": 16.134079660079447,
+      "normal_impulse_Ns": 120.24601533795602,
+      "max_joint_tracking_error_rad": 1.3722010624453695,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.00476270937724621,
+        2.94
+      ],
+      "force_saturation_steps": 989,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 10,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "full",
+      "grip": "wet"
+    },
+    "case": "holdout-b",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04116770029537379,
+      "relative_motion_m": 0.002921368570275061,
+      "max_tilt_deg": 5.9053046963060805,
+      "placement_error_m": 0.014900575006419794,
+      "actions": 75,
+      "movement_rad": 2.5657359818495418,
+      "sim_s": 7.999999999999852,
+      "wall_s": 3.613895134010818,
+      "compute_s": 0.006725201150402427,
+      "normal_force_peak_N": 14.6410275270807,
+      "normal_impulse_Ns": 190.0635668729945,
+      "max_joint_tracking_error_rad": 1.2976652251421488,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.007165322815808395,
+        2.94
+      ],
+      "force_saturation_steps": 879,
+      "command_saturation_actions": 19,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04116770029537379,
+      "relative_motion_m": 0.004120182181126649,
+      "max_tilt_deg": 2.2909354503950032,
+      "placement_error_m": 0.013349346780030196,
+      "actions": 83,
+      "movement_rad": 2.5353033133420864,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.913189112965483,
+      "compute_s": 0.008011603087652475,
+      "normal_force_peak_N": 14.6410275270807,
+      "normal_impulse_Ns": 253.96369170650587,
+      "max_joint_tracking_error_rad": 1.3721982251421487,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.01021362655546909,
+        2.94
+      ],
+      "force_saturation_steps": 1032,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "full",
+      "grip": "wet"
+    },
+    "case": "holdout-c",
+    "baseline": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04003543110005313,
+      "relative_motion_m": 0.03648084214125857,
+      "max_tilt_deg": 7.209409039046134,
+      "placement_error_m": 0.13498410198091904,
+      "actions": 76,
+      "movement_rad": 2.655456434499063,
+      "sim_s": 8.099999999999866,
+      "wall_s": 3.588978081010282,
+      "compute_s": 0.007048301922623068,
+      "normal_force_peak_N": 14.023246266746195,
+      "normal_impulse_Ns": 181.04337731158958,
+      "max_joint_tracking_error_rad": 1.3198864043609166,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.005607651748732678,
+        2.94
+      ],
+      "force_saturation_steps": 904,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04003543110005313,
+      "relative_motion_m": 0.057562726528940455,
+      "max_tilt_deg": 13.334608090260243,
+      "placement_error_m": 0.050432314002711455,
+      "actions": 83,
+      "movement_rad": 2.5986678313716,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.8720480970223434,
+      "compute_s": 0.007845301297493279,
+      "normal_force_peak_N": 14.023246266746195,
+      "normal_impulse_Ns": 193.58944279850107,
+      "max_joint_tracking_error_rad": 1.3722009439986664,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.005607651748732678,
+        2.94
+      ],
+      "force_saturation_steps": 1046,
+      "command_saturation_actions": 12,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 10,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "half",
+      "grip": "dry"
+    },
+    "case": "holdout-a",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04230118477119496,
+      "relative_motion_m": 0.0044385387302508725,
+      "max_tilt_deg": 11.680617021305043,
+      "placement_error_m": 0.02027782296850344,
+      "actions": 74,
+      "movement_rad": 2.512379124068282,
+      "sim_s": 7.899999999999854,
+      "wall_s": 3.8322537970379926,
+      "compute_s": 0.006364197994116694,
+      "normal_force_peak_N": 11.133186439214288,
+      "normal_impulse_Ns": 194.86072522639267,
+      "max_joint_tracking_error_rad": 1.2976665406387702,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.03878358664405823,
+        2.94
+      ],
+      "force_saturation_steps": 860,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04230118477119496,
+      "relative_motion_m": 0.003518012778573577,
+      "max_tilt_deg": 15.362387439181855,
+      "placement_error_m": 0.020657626036627907,
+      "actions": 82,
+      "movement_rad": 2.481094854852854,
+      "sim_s": 8.69999999999996,
+      "wall_s": 4.195309761969838,
+      "compute_s": 0.008172300120349973,
+      "normal_force_peak_N": 11.133186439214288,
+      "normal_impulse_Ns": 259.74160339330257,
+      "max_joint_tracking_error_rad": 1.3721995406387701,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.03878358664405823,
+        2.94
+      ],
+      "force_saturation_steps": 1018,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "half",
+      "grip": "dry"
+    },
+    "case": "holdout-b",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04224017773679376,
+      "relative_motion_m": 0.004414511329244702,
+      "max_tilt_deg": 12.711418611649279,
+      "placement_error_m": 0.023246972019615588,
+      "actions": 75,
+      "movement_rad": 2.5803233261326413,
+      "sim_s": 7.999999999999852,
+      "wall_s": 3.7374165810178965,
+      "compute_s": 0.00679500208934769,
+      "normal_force_peak_N": 11.025544481976787,
+      "normal_impulse_Ns": 186.1206841682986,
+      "max_joint_tracking_error_rad": 1.2976652251421488,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.0532652847036843,
+        2.94
+      ],
+      "force_saturation_steps": 880,
+      "command_saturation_actions": 19,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04224017773679376,
+      "relative_motion_m": 0.009874292830957988,
+      "max_tilt_deg": 25.81782238443211,
+      "placement_error_m": 0.04107849769245212,
+      "actions": 83,
+      "movement_rad": 2.537315391160844,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.7613661629729904,
+      "compute_s": 0.00813209981424734,
+      "normal_force_peak_N": 11.025544481976787,
+      "normal_impulse_Ns": 246.69321494806923,
+      "max_joint_tracking_error_rad": 1.3721982251421487,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.0532652847036843,
+        2.94
+      ],
+      "force_saturation_steps": 1045,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "half",
+      "grip": "dry"
+    },
+    "case": "holdout-c",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.041320720859477106,
+      "relative_motion_m": 0.00565772261059223,
+      "max_tilt_deg": 18.600491567155732,
+      "placement_error_m": 0.034210903755767526,
+      "actions": 76,
+      "movement_rad": 2.65213275234131,
+      "sim_s": 8.099999999999866,
+      "wall_s": 3.977601175021846,
+      "compute_s": 0.008227301819715649,
+      "normal_force_peak_N": 10.974049897879917,
+      "normal_impulse_Ns": 183.7981377031382,
+      "max_joint_tracking_error_rad": 1.2976642665775886,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.05637423639723238,
+        2.94
+      ],
+      "force_saturation_steps": 903,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.041320720859477106,
+      "relative_motion_m": 0.00626269682776468,
+      "max_tilt_deg": 25.633667018325347,
+      "placement_error_m": 0.03865712240056499,
+      "actions": 83,
+      "movement_rad": 2.59859459444131,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.8812825289787725,
+      "compute_s": 0.008215799811296165,
+      "normal_force_peak_N": 10.974049897879917,
+      "normal_impulse_Ns": 242.60291148633144,
+      "max_joint_tracking_error_rad": 1.3721972665775886,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.05637423639723238,
+        2.94
+      ],
+      "force_saturation_steps": 1048,
+      "command_saturation_actions": 12,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        1.0
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "half",
+      "grip": "wet"
+    },
+    "case": "holdout-a",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.0418778552804599,
+      "relative_motion_m": 0.0046902649065422315,
+      "max_tilt_deg": 5.5572110037592095,
+      "placement_error_m": 0.02355190960272781,
+      "actions": 74,
+      "movement_rad": 2.5212432749642115,
+      "sim_s": 7.899999999999854,
+      "wall_s": 3.969128916040063,
+      "compute_s": 0.008858192944899201,
+      "normal_force_peak_N": 10.801359073096965,
+      "normal_impulse_Ns": 196.06449540410802,
+      "max_joint_tracking_error_rad": 1.2976665406387702,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.00476270937724621,
+        2.94
+      ],
+      "force_saturation_steps": 858,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.0418778552804599,
+      "relative_motion_m": 0.003219986562131119,
+      "max_tilt_deg": 2.181988636669408,
+      "placement_error_m": 0.014470945812666948,
+      "actions": 82,
+      "movement_rad": 2.4806897271190325,
+      "sim_s": 8.69999999999996,
+      "wall_s": 4.29551269300282,
+      "compute_s": 0.008307701908051968,
+      "normal_force_peak_N": 10.801359073096965,
+      "normal_impulse_Ns": 260.5940541285126,
+      "max_joint_tracking_error_rad": 1.3721995406387701,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.005643728193035713,
+        2.94
+      ],
+      "force_saturation_steps": 1015,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "half",
+      "grip": "wet"
+    },
+    "case": "holdout-b",
+    "baseline": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.0417457608606794,
+      "relative_motion_m": 0.003164585425816529,
+      "max_tilt_deg": 6.239388384173633,
+      "placement_error_m": 0.016800647843003152,
+      "actions": 75,
+      "movement_rad": 2.5804064128248125,
+      "sim_s": 7.999999999999852,
+      "wall_s": 3.6384325710241683,
+      "compute_s": 0.0067263018572703,
+      "normal_force_peak_N": 10.841390481285643,
+      "normal_impulse_Ns": 188.40845148576926,
+      "max_joint_tracking_error_rad": 1.2976652251421488,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.005182629007094874,
+        2.94
+      ],
+      "force_saturation_steps": 877,
+      "command_saturation_actions": 19,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": true,
+      "failure": null,
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.0417457608606794,
+      "relative_motion_m": 0.011784459440370333,
+      "max_tilt_deg": 7.501623158506785,
+      "placement_error_m": 0.029756028137228628,
+      "actions": 83,
+      "movement_rad": 2.5395545208530277,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.8795695640146732,
+      "compute_s": 0.007964294927660376,
+      "normal_force_peak_N": 10.841390481285643,
+      "normal_impulse_Ns": 249.8428360720944,
+      "max_joint_tracking_error_rad": 1.3721982251421487,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.005182629007094874,
+        2.94
+      ],
+      "force_saturation_steps": 1045,
+      "command_saturation_actions": 11,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  },
+  {
+    "condition": {
+      "fill": "half",
+      "grip": "wet"
+    },
+    "case": "holdout-c",
+    "baseline": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": false,
+      "transport_table_contact_physics_steps": 0,
+      "closure_push_m": 0.04082870882884615,
+      "relative_motion_m": 0.037305407477875197,
+      "max_tilt_deg": 25.959239469885294,
+      "placement_error_m": 0.04603279456688479,
+      "actions": 76,
+      "movement_rad": 2.6549359153813525,
+      "sim_s": 8.099999999999866,
+      "wall_s": 3.6387728130212054,
+      "compute_s": 0.007383499993011355,
+      "normal_force_peak_N": 11.035905444457063,
+      "normal_impulse_Ns": 168.54888812995844,
+      "max_joint_tracking_error_rad": 1.2976795334147906,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.004779774306825857,
+        2.94
+      ],
+      "force_saturation_steps": 902,
+      "command_saturation_actions": 20,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 0,
+      "observed_friction": [
+        0.3
+      ]
+    },
+    "conservative": {
+      "success": false,
+      "failure": "placement",
+      "acquired": true,
+      "lifted": true,
+      "held_at_lift_end": true,
+      "dropped_during_transport": true,
+      "transport_table_contact_physics_steps": 2,
+      "closure_push_m": 0.04082870882884615,
+      "relative_motion_m": 0.10708501608082574,
+      "max_tilt_deg": 96.53516991369494,
+      "placement_error_m": 0.11291188827726142,
+      "actions": 83,
+      "movement_rad": 2.6014999655788076,
+      "sim_s": 8.799999999999976,
+      "wall_s": 3.834740759979468,
+      "compute_s": 0.007623699202667922,
+      "normal_force_peak_N": 11.035905444457063,
+      "normal_impulse_Ns": 185.27251292897353,
+      "max_joint_tracking_error_rad": 1.3722007887536742,
+      "actuator_peak_Nm": [
+        2.94,
+        2.94,
+        2.94,
+        2.94,
+        0.004779774306825857,
+        2.94
+      ],
+      "force_saturation_steps": 1039,
+      "command_saturation_actions": 12,
+      "self_collision_steps": 0,
+      "joint_limit_steps": 9,
+      "observed_friction": [
+        0.3
+      ]
+    }
+  }
+]

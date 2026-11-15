@@ -4,7 +4,9 @@ import numpy as np
 from environment import cartesian_step, locate_green, locate_cyan, pixel_to_plane, recalibrate_translation, OnlineJacobian, GlobalCorrection
 
 
-def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, diagnostics=False):
+def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, diagnostics=False, grasp_offset=None, close_ramp_actions=0, transport_speed=1., grip_closed=-.1):
+    if grasp_offset is None:grasp_offset=np.array([-.01161,-.01240])
+    grasp_offset=np.asarray(grasp_offset,dtype=float)
     obs = env.reset(object_xy, q, seed=seed)
     start = time.perf_counter()
     pixel = locate_green(obs['image'])
@@ -69,7 +71,7 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
     elif intervention=='oracle_target':
         obj[:2]=env.data.xpos[env.object_id,:2]  # diagnostic evaluator truth only
     global_model = GlobalCorrection(gp=(method=='gp')) if method in ('global','gp') else None
-    grasp_xy = obj[:2] + np.array([-.01161,-.01240])
+    grasp_xy = obj[:2] + grasp_offset
     result['localization']={'object_pixel':pixel.tolist(),'offset_xy':offset.tolist(),
                             'object_estimate_xyz':obj.tolist(),'grasp_target_xy':grasp_xy.tolist(),
                             'intervention':intervention}
@@ -86,6 +88,7 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
 
     def move(name, target, grip, budget=70):
         nonlocal obs
+        if hasattr(env,'record_phase'):env.record_phase(name)
         for _ in range(budget):
             start = time.perf_counter()
             pos,_ = env.controller_fk(obs['joint_rad'])
@@ -96,7 +99,10 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
             if err < .003:
                 result['stages'][name] = True
                 return True
-            obs = cartesian_step(env,obs,target-pos,grip,online,global_model)
+            delta=target-pos
+            if name in ('lift','transport','lower'):
+                delta=delta*min(1.,.015*transport_speed/max(np.linalg.norm(delta),1e-12))
+            obs = cartesian_step(env,obs,delta,grip,online,global_model)
             env.trace[-1]['stage']=name
             env.trace[-1]['target_xyz']=target.tolist()
             env.trace[-1]['predicted_before_xyz']=pos.tolist()
@@ -121,7 +127,10 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
           'object_pixel':None if objpx is None else objpx.tolist(),'site_xyz':env.data.site_xpos[env.site].tolist(),
           'object_xyz':env.data.xpos[env.object_id].tolist()})
     env.mark_evaluation('before_close')
-    for _ in range(15): obs = env.step(np.zeros(5), -.1)
+    if hasattr(env,'record_phase'):env.record_phase('closing')
+    for i in range(15+close_ramp_actions):
+        grip=1.2+(grip_closed-1.2)*min((i+1)/close_ramp_actions,1.) if close_ramp_actions else grip_closed
+        obs = env.step(np.zeros(5), grip)
     env.mark_evaluation('after_close')
     if diagnostics:
         pic=env.observe()['image']; marker=locate_cyan(pic); objpx=locate_green(pic)
@@ -129,15 +138,16 @@ def run(env, object_xy, q=None, method='nominal', seed=0, intervention=None, dia
           'target_xyz':np.r_[grasp_xy,.014].tolist(),'gripper_pixel':None if marker is None else marker.tolist(),
           'object_pixel':None if objpx is None else objpx.tolist(),'site_xyz':env.data.site_xpos[env.site].tolist(),
           'object_xyz':env.data.xpos[env.object_id].tolist()})
-    if not move('lift', np.r_[grasp_xy,.06], -.1):
+    if not move('lift', np.r_[grasp_xy,.06], grip_closed):
         result.update(success=False, failure='lift_command', evaluation=env.evaluate())
         return result
     env.mark_evaluation('after_lift')
-    destination = (np.r_[dest_xy+[-.01161+.01,-.0124+.02],.06] if integrated_family else
-                   np.array([.22-.01161+.01,-.05-.0124+.02,.06]))
-    if not move('transport', destination, -.1) or not move('lower', destination + [0,0,-.046], -.1):
+    destination = (np.r_[dest_xy+grasp_offset+[.01,.02],.06] if integrated_family else
+                   np.r_[np.array([.22,-.05])+grasp_offset+[.01,.02],.06])
+    if not move('transport', destination, grip_closed) or not move('lower', destination + [0,0,-.046], grip_closed):
         result.update(success=False, failure='transport', evaluation=env.evaluate())
         return result
+    if hasattr(env,'record_phase'):env.record_phase('release')
     for _ in range(35): obs=env.step(np.zeros(5),1.2)
     env.mark_evaluation('after_settle')
     score = env.evaluate()

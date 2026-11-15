@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360">
+<rect width="760" height="360" fill="white"/>
+<text x="50" y="27" font-size="18">Settled bottle placement, three paired starts</text>
+<path d="M55 285 H735 M55 65 V285" stroke="black" fill="none"/>
+<rect x="75" y="220" width="24" height="65" fill="#2360ac"/><text x="82" y="213" font-size="12">1</text>
+<rect x="105" y="285" width="24" height="0" fill="#ce7a18"/><text x="112" y="278" font-size="12">0</text>
+<text x="73" y="305" font-size="11">empty dry</text>
+<rect x="183" y="285" width="24" height="0" fill="#2360ac"/><text x="190" y="278" font-size="12">0</text>
+<rect x="213" y="285" width="24" height="0" fill="#ce7a18"/><text x="220" y="278" font-size="12">0</text>
+<text x="181" y="305" font-size="11">empty wet</text>
+<rect x="291" y="90" width="24" height="195" fill="#2360ac"/><text x="298" y="83" font-size="12">3</text>
+<rect x="321" y="220" width="24" height="65" fill="#ce7a18"/><text x="328" y="213" font-size="12">1</text>
+<text x="289" y="305" font-size="11">half dry</text>
+<rect x="399" y="155" width="24" height="130" fill="#2360ac"/><text x="406" y="148" font-size="12">2</text>
+<rect x="429" y="155" width="24" height="130" fill="#ce7a18"/><text x="436" y="148" font-size="12">2</text>
+<text x="397" y="305" font-size="11">half wet</text>
+<rect x="507" y="90" width="24" height="195" fill="#2360ac"/><text x="514" y="83" font-size="12">3</text>
+<rect x="537" y="90" width="24" height="195" fill="#ce7a18"/><text x="544" y="83" font-size="12">3</text>
+<text x="505" y="305" font-size="11">full dry</text>
+<rect x="615" y="220" width="24" height="65" fill="#2360ac"/><text x="622" y="213" font-size="12">1</text>
+<rect x="645" y="220" width="24" height="65" fill="#ce7a18"/><text x="652" y="213" font-size="12">1</text>
+<text x="613" y="305" font-size="11">full wet</text>
+<text x="35" y="290" font-size="12">0</text>
+<text x="35" y="225" font-size="12">1</text>
+<text x="35" y="160" font-size="12">2</text>
+<text x="35" y="95" font-size="12">3</text>
+<text x="400" y="48" font-size="12" fill="#2360ac">■ baseline</text><text x="505" y="48" font-size="12" fill="#ce7a18">■ max closure + slow</text>
+<text x="55" y="338" font-size="12">Counts are paired, not a general ranking; 18 episodes per method.</text>
+</svg>

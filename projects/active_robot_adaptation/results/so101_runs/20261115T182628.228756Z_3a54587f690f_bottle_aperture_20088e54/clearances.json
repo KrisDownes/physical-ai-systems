@@ -1,0 +1,290 @@
+[
+  {
+    "case": "holdout-a",
+    "condition": {
+      "fill": "empty",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.03593535585701477,
+      "moving_jaw_so101_v1": 0.02470120481606745
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-b",
+    "condition": {
+      "fill": "empty",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.03495915077276477,
+      "moving_jaw_so101_v1": 0.023898648590285648
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-c",
+    "condition": {
+      "fill": "empty",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.03445002735786961,
+      "moving_jaw_so101_v1": 0.02396906357251826
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-a",
+    "condition": {
+      "fill": "empty",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.03593535585701477,
+      "moving_jaw_so101_v1": 0.02470120481606745
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-b",
+    "condition": {
+      "fill": "empty",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.03495915077276477,
+      "moving_jaw_so101_v1": 0.023898648590285648
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-c",
+    "condition": {
+      "fill": "empty",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.03445002735786961,
+      "moving_jaw_so101_v1": 0.02396906357251826
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-a",
+    "condition": {
+      "fill": "full",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.03593533692618183,
+      "moving_jaw_so101_v1": 0.024701271080698525
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-b",
+    "condition": {
+      "fill": "full",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.03495915077540443,
+      "moving_jaw_so101_v1": 0.02389864859275574
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-c",
+    "condition": {
+      "fill": "full",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.034450023660221436,
+      "moving_jaw_so101_v1": 0.023969076615326667
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-a",
+    "condition": {
+      "fill": "full",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.03593533692618183,
+      "moving_jaw_so101_v1": 0.024701271080698525
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-b",
+    "condition": {
+      "fill": "full",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.03495915077540443,
+      "moving_jaw_so101_v1": 0.02389864859275574
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-c",
+    "condition": {
+      "fill": "full",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.034450023660221436,
+      "moving_jaw_so101_v1": 0.023969076615326667
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-a",
+    "condition": {
+      "fill": "half",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.0359353452420629,
+      "moving_jaw_so101_v1": 0.02470124197223275
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-b",
+    "condition": {
+      "fill": "half",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.03495915077545942,
+      "moving_jaw_so101_v1": 0.023898648592807194
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-c",
+    "condition": {
+      "fill": "half",
+      "grip": "dry"
+    },
+    "clearance_m": {
+      "gripper": 0.034450023916333186,
+      "moving_jaw_so101_v1": 0.023969075713129184
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-a",
+    "condition": {
+      "fill": "half",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.0359353452420629,
+      "moving_jaw_so101_v1": 0.02470124197223275
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-b",
+    "condition": {
+      "fill": "half",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.03495915077545942,
+      "moving_jaw_so101_v1": 0.023898648592807194
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  },
+  {
+    "case": "holdout-c",
+    "condition": {
+      "fill": "half",
+      "grip": "wet"
+    },
+    "clearance_m": {
+      "gripper": 0.034450023916333186,
+      "moving_jaw_so101_v1": 0.023969075713129184
+    },
+    "preclose_contacts": [
+      "table",
+      "table",
+      "table"
+    ]
+  }
+]

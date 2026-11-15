@@ -1,0 +1,49 @@
+{
+  "purpose": "Development feasibility: common closure ramp and half-speed lift/transport, no force-limit change.",
+  "conditions": [
+    {
+      "fill": "empty",
+      "grip": "dry"
+    },
+    {
+      "fill": "empty",
+      "grip": "wet"
+    },
+    {
+      "fill": "half",
+      "grip": "dry"
+    },
+    {
+      "fill": "half",
+      "grip": "wet"
+    },
+    {
+      "fill": "full",
+      "grip": "dry"
+    },
+    {
+      "fill": "full",
+      "grip": "wet"
+    }
+  ],
+  "cases": [
+    {
+      "id": "dev",
+      "object_xy": [
+        0.217,
+        0.03
+      ],
+      "initial_pan": -0.5,
+      "seed": 2111
+    }
+  ],
+  "action_budget": 200,
+  "movement_budget_rad": 8,
+  "record_videos": true,
+  "grasp_offset": [
+    -0.008,
+    -0.03
+  ],
+  "close_ramp_actions": 15,
+  "transport_speed": 0.5
+}

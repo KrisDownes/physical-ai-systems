@@ -85,7 +85,7 @@ class Environment:
         self._evaluation = {'initial_z': float(self.data.xpos[self.object_id,2])}
         self.trace, self.limit_violations, self.saturated_actions = [], 0, 0
         self.physics_collision_steps,self.physics_limit_steps,self.physics_collision_pairs,self.events=0,0,{},[]
-        for _ in range(100):
+        for _ in range(round(.5/self.model.opt.timestep)):
             mujoco.mj_step(self.model, self.data)
             self._audit_physics_contacts()
         return self.observe()

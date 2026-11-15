@@ -1,0 +1,72 @@
+{
+  "purpose": "Frozen matched conventional maximum-closure-position plus half-speed lift/transport comparator; no force sensor, no learning",
+  "conditions": [
+    {
+      "fill": "empty",
+      "grip": "dry"
+    },
+    {
+      "fill": "empty",
+      "grip": "wet"
+    },
+    {
+      "fill": "half",
+      "grip": "dry"
+    },
+    {
+      "fill": "half",
+      "grip": "wet"
+    },
+    {
+      "fill": "full",
+      "grip": "dry"
+    },
+    {
+      "fill": "full",
+      "grip": "wet"
+    }
+  ],
+  "cases": [
+    {
+      "id": "holdout-a",
+      "object_xy": [
+        0.216,
+        0.028
+      ],
+      "initial_pan": -0.53,
+      "seed": 2301
+    },
+    {
+      "id": "holdout-b",
+      "object_xy": [
+        0.229,
+        0.022
+      ],
+      "initial_pan": -0.61,
+      "seed": 2302
+    },
+    {
+      "id": "holdout-c",
+      "object_xy": [
+        0.234,
+        0.014
+      ],
+      "initial_pan": -0.67,
+      "seed": 2303
+    }
+  ],
+  "action_budget": 200,
+  "movement_budget_rad": 8,
+  "record_videos": true,
+  "grasp_offset": [
+    -0.008,
+    -0.03
+  ],
+  "grip_closed": -0.174533,
+  "transport_speed": 0.5,
+  "close_ramp_actions": 0,
+  "physics_timestep": 0.005,
+  "trial_count": 18,
+  "success_criteria": "two jaw contact at closure, lift >35 mm, destination xy error <35 mm, height within 5 mm of upright resting center, tilt <15 degrees, linear speed <0.015 m/s and angular speed <0.2 rad/s after 3.5 s release settling",
+  "budget": "200 actions and 8 rad arm movement per independent episode; 18 episodes; 0 retries; baseline and comparison paired"
+}

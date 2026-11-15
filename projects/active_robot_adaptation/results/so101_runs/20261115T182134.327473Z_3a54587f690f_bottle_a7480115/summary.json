@@ -1,0 +1,116 @@
+{
+  "empty_dry": {
+    "successes": 0,
+    "trials": 1,
+    "failures": [
+      "stability_or_tilt"
+    ],
+    "grasp_acquired": 1,
+    "lifted": 1,
+    "median_actions": 98.0,
+    "median_sim_s": 10.30000000000021,
+    "median_wall_s": 4.6324595749611035,
+    "median_movement_rad": 2.471586445592536,
+    "median_compute_s": 0.008213203051127493,
+    "max_slip_m": 0.007455990588052093,
+    "max_tilt_deg": 41.82754146248814,
+    "max_contact_normal_N": 7.24840168445418,
+    "physics_self_collision_steps": 0,
+    "physics_joint_limit_steps": 0
+  },
+  "empty_wet": {
+    "successes": 0,
+    "trials": 1,
+    "failures": [
+      "grasp"
+    ],
+    "grasp_acquired": 0,
+    "lifted": 0,
+    "median_actions": 98.0,
+    "median_sim_s": 10.30000000000021,
+    "median_wall_s": 4.583184130024165,
+    "median_movement_rad": 2.4699498268495677,
+    "median_compute_s": 0.00922390108462423,
+    "max_slip_m": 0.09734007672123025,
+    "max_tilt_deg": 90.00000000597569,
+    "max_contact_normal_N": 7.338340155818758,
+    "physics_self_collision_steps": 0,
+    "physics_joint_limit_steps": 0
+  },
+  "half_dry": {
+    "successes": 0,
+    "trials": 1,
+    "failures": [
+      "placement"
+    ],
+    "grasp_acquired": 1,
+    "lifted": 1,
+    "median_actions": 98.0,
+    "median_sim_s": 10.30000000000021,
+    "median_wall_s": 4.695221680973191,
+    "median_movement_rad": 2.4707750888537556,
+    "median_compute_s": 0.008308997086714953,
+    "max_slip_m": 0.010676650632697888,
+    "max_tilt_deg": 35.68939415851713,
+    "max_contact_normal_N": 9.455327473726728,
+    "physics_self_collision_steps": 0,
+    "physics_joint_limit_steps": 0
+  },
+  "half_wet": {
+    "successes": 0,
+    "trials": 1,
+    "failures": [
+      "grasp"
+    ],
+    "grasp_acquired": 0,
+    "lifted": 0,
+    "median_actions": 98.0,
+    "median_sim_s": 10.30000000000021,
+    "median_wall_s": 4.5131704160012305,
+    "median_movement_rad": 2.4705249916998233,
+    "median_compute_s": 0.007979303074534982,
+    "max_slip_m": 0.09032548627466366,
+    "max_tilt_deg": 5.460815264305563e-05,
+    "max_contact_normal_N": 11.04713010232513,
+    "physics_self_collision_steps": 0,
+    "physics_joint_limit_steps": 0
+  },
+  "full_dry": {
+    "successes": 0,
+    "trials": 1,
+    "failures": [
+      "placement"
+    ],
+    "grasp_acquired": 1,
+    "lifted": 1,
+    "median_actions": 98.0,
+    "median_sim_s": 10.30000000000021,
+    "median_wall_s": 4.709329942998011,
+    "median_movement_rad": 2.4635413969544664,
+    "median_compute_s": 0.008352891076356173,
+    "max_slip_m": 0.007968061501194768,
+    "max_tilt_deg": 27.950923155868715,
+    "max_contact_normal_N": 12.915898563588975,
+    "physics_self_collision_steps": 0,
+    "physics_joint_limit_steps": 0
+  },
+  "full_wet": {
+    "successes": 0,
+    "trials": 1,
+    "failures": [
+      "grasp"
+    ],
+    "grasp_acquired": 0,
+    "lifted": 0,
+    "median_actions": 98.0,
+    "median_sim_s": 10.30000000000021,
+    "median_wall_s": 4.537630124948919,
+    "median_movement_rad": 2.469098404443919,
+    "median_compute_s": 0.007912296161521226,
+    "max_slip_m": 0.08945021826308663,
+    "max_tilt_deg": 0.00021199218548049962,
+    "max_contact_normal_N": 14.49067578565763,
+    "physics_self_collision_steps": 0,
+    "physics_joint_limit_steps": 0
+  }
+}
