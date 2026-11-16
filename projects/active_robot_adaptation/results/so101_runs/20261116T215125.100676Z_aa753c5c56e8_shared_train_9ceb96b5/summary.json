@@ -1,0 +1,38 @@
+[
+  {
+    "model": "current_seed1",
+    "train_samples": 145,
+    "validation_samples": 0,
+    "test_samples": 0,
+    "params": 578,
+    "updates": 60,
+    "batch": 8,
+    "elapsed_s": 0.004432449990417808,
+    "examples_per_second": 108292.25395383527,
+    "peak_rss_kib": 37344,
+    "gradient_abs_error": 2.2561289370059967e-07,
+    "loss_first": 0.016135595738887787,
+    "loss_last": 0.0026948275044560432,
+    "train_mse_scaled": 7.082915306091309,
+    "validation_mse_scaled": null,
+    "test_mse_scaled": null
+  },
+  {
+    "model": "history_seed1",
+    "train_samples": 145,
+    "validation_samples": 0,
+    "test_samples": 0,
+    "params": 2018,
+    "updates": 60,
+    "batch": 8,
+    "elapsed_s": 0.004797832982148975,
+    "examples_per_second": 100045.16659623392,
+    "peak_rss_kib": 37472,
+    "gradient_abs_error": 8.302740752696991e-07,
+    "loss_first": 0.044346004724502563,
+    "loss_last": 0.0019664177671074867,
+    "train_mse_scaled": 7.198283672332764,
+    "validation_mse_scaled": null,
+    "test_mse_scaled": null
+  }
+]

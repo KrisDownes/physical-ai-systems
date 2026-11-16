@@ -1,0 +1,101 @@
+{
+  "purpose": "Frozen fresh paired pilot after fixing derived body-mass constants; previous test cases are development data.",
+  "tasks": [
+    "push",
+    "pull"
+  ],
+  "task_family_holdout": "Bottle lift deferred: known enclosure error and unresolved empty/wet feasibility. No task-family transfer claim.",
+  "train_conditions": [
+    {
+      "friction": 0.25,
+      "mass_scale": 0.65,
+      "resistance": 0.01
+    },
+    {
+      "friction": 0.55,
+      "mass_scale": 1.05,
+      "resistance": 0.02
+    },
+    {
+      "friction": 0.95,
+      "mass_scale": 1.55,
+      "resistance": 0.04
+    }
+  ],
+  "validation_conditions": [
+    {
+      "friction": 0.4,
+      "mass_scale": 0.85,
+      "resistance": 0.015
+    }
+  ],
+  "test_conditions": [
+    {
+      "friction": 0.75,
+      "mass_scale": 1.25,
+      "resistance": 0.025
+    }
+  ],
+  "train_starts": [
+    {
+      "xy": [
+        0.216,
+        0.03
+      ],
+      "pan": -0.53
+    },
+    {
+      "xy": [
+        0.225,
+        0.024
+      ],
+      "pan": -0.6
+    },
+    {
+      "xy": [
+        0.231,
+        0.017
+      ],
+      "pan": -0.66
+    }
+  ],
+  "validation_starts": [
+    {
+      "xy": [
+        0.221,
+        0.029
+      ],
+      "pan": -0.57
+    }
+  ],
+  "test_starts": [
+    {
+      "xy": [
+        0.217,
+        0.027
+      ],
+      "pan": -0.54
+    },
+    {
+      "xy": [
+        0.23,
+        0.02
+      ],
+      "pan": -0.63
+    }
+  ],
+  "train_repeats": 1,
+  "validation_repeats": 1,
+  "seed_base": 5100,
+  "steps_per_collection_episode": 10,
+  "eval_steps": 10,
+  "goal_distance_m": 0.04,
+  "goal_tolerance_m": 0.012,
+  "normalization": "fixed physically chosen units; never fit on heldout episodes",
+  "budget": "maximum 250 total actions and 10 rad joint movement including setup; no retries; task action 0.1 s; 5 candidates, horizon 1; CPU only",
+  "physics_timestep_s": 0.0025,
+  "numerical_validity": "Reject and retain all episodes with MuJoCo warnings, nonmonotonic simulation time, |slider displacement| >0.2 m or |slider velocity| >20 m/s; these are numeric-integrity checks, not success criteria.",
+  "model": "Two-layer tanh dynamics predictor, current-only vs same current features with 3 previous observation-action vectors; CPU NumPy backprop gradient checked; no privileged targets.",
+  "history_ablation": "Use same history model, freeze history after first three task actions; report distribution shift.",
+  "tasks_note": "After two free-object numerical-instability checks, push simplified to guided sliding object. Pull uses a separate handled slider and vision fiducial; narrower transfer evidence."
+}

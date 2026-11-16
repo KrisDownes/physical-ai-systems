@@ -1,0 +1,50 @@
+[
+  {
+    "task": "push",
+    "contact_bodies": [
+      "world"
+    ],
+    "displacement_evaluator_m": [
+      0.0,
+      -0.031019942060160087,
+      0.0
+    ],
+    "numerical_invalid": false,
+    "warnings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  },
+  {
+    "task": "pull",
+    "contact_bodies": [
+      "world",
+      "gripper",
+      "moving_jaw_so101_v1"
+    ],
+    "displacement_evaluator_m": [
+      0.0,
+      -0.030600103529542615,
+      0.0
+    ],
+    "numerical_invalid": false,
+    "warnings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "self_collision_physics_steps": 0,
+    "joint_limit_physics_steps": 0
+  }
+]
