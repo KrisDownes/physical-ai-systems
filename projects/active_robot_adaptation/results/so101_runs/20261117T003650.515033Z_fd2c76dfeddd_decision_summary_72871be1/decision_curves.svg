@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="410">
+<rect width="820" height="410" fill="white"/>
+<text x="30" y="26" font-size="17">Prediction-to-action audit: fixed one-step candidates</text>
+<text x="65" y="60" font-size="14">Push step 1: one-step score (mm)</text>
+<path d="M65 320 H400 M65 95 V320" stroke="black" fill="none"/>
+<text x="53" y="340" font-size="10">-12</text>
+<text x="128" y="340" font-size="10">-6</text>
+<text x="203" y="340" font-size="10">0</text>
+<text x="278" y="340" font-size="10">6</text>
+<text x="353" y="340" font-size="10">12</text>
+<text x="31" y="324.0" font-size="10">0.0</text><path d="M65 320.0 H400" stroke="#ddd"/>
+<text x="31" y="267.75" font-size="10">6.2</text><path d="M65 263.75 H400" stroke="#ddd"/>
+<text x="31" y="211.5" font-size="10">12.5</text><path d="M65 207.5 H400" stroke="#ddd"/>
+<text x="31" y="155.25" font-size="10">18.8</text><path d="M65 151.25 H400" stroke="#ddd"/>
+<text x="31" y="99.0" font-size="10">25.0</text><path d="M65 95.0 H400" stroke="#ddd"/>
+<polyline points="65,253.4 140,223.4 215,190.9 290,156.3 365,119.6" fill="none" stroke="#2360ac" stroke-width="2"/><text x="70" y="77" fill="#2360ac" font-size="11">history prediction</text>
+<polyline points="65,196.9 140,197.0 215,197.0 290,197.0 365,196.9" fill="none" stroke="#cc6e00" stroke-width="2"/><text x="70" y="91" fill="#cc6e00" font-size="11">cloned simulator</text>
+<text x="120" y="368" font-size="11">candidate y displacement (mm)</text>
+<text x="465" y="60" font-size="14">Matched pull: true displacement (mm)</text>
+<path d="M465 320 H800 M465 95 V320" stroke="black" fill="none"/>
+<text x="453" y="340" font-size="10">-12</text>
+<text x="528" y="340" font-size="10">-6</text>
+<text x="603" y="340" font-size="10">0</text>
+<text x="678" y="340" font-size="10">6</text>
+<text x="753" y="340" font-size="10">12</text>
+<text x="431" y="324.0" font-size="10">-15.0</text><path d="M465 320.0 H800" stroke="#ddd"/>
+<text x="431" y="267.75" font-size="10">-7.5</text><path d="M465 263.75 H800" stroke="#ddd"/>
+<text x="431" y="211.5" font-size="10">0.0</text><path d="M465 207.5 H800" stroke="#ddd"/>
+<text x="431" y="155.25" font-size="10">7.5</text><path d="M465 151.25 H800" stroke="#ddd"/>
+<text x="431" y="99.0" font-size="10">15.0</text><path d="M465 95.0 H800" stroke="#ddd"/>
+<polyline points="465,304.9 540,253.2 615,208.6 690,162.0 765,111.8" fill="none" stroke="#2360ac" stroke-width="2"/><text x="470" y="77" fill="#2360ac" font-size="11">resistance 0.01 N</text>
+<polyline points="465,303.1 540,253.2 615,208.6 690,162.0 765,111.8" fill="none" stroke="#cc6e00" stroke-width="2"/><text x="470" y="91" fill="#cc6e00" font-size="11">resistance 0.04 N</text>
+<text x="520" y="368" font-size="11">candidate y displacement (mm)</text>
+<text x="30" y="395" font-size="10">Simulator curves use evaluator-only truth; candidate scores are image-derived.</text></svg>

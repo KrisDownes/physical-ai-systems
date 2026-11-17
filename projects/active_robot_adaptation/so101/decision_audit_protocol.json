@@ -1,0 +1,13 @@
+{
+  "purpose":"Two focused sessions: first audit recorded one-step decisions and exact-state paired slider responses; second only if the first demonstrates consequential ambiguity.",
+  "evaluation_run":"results/so101_runs/20261116T220056.557593Z_aa753c5c56e8_shared_evaluation_39707661",
+  "training_run":"results/so101_runs/20261116T220051.143395Z_aa753c5c56e8_shared_train_58a691af",
+  "recorded_tasks":["push","pull"],"recorded_seed":1,"recorded_start_index":0,"decision_steps":[0,1,3],
+  "condition_pair":[{"friction":0.75,"mass_scale":1.25,"resistance":0.01},{"friction":0.75,"mass_scale":1.25,"resistance":0.04}],
+  "paired_start":{"xy":[0.217,0.027],"pan":-0.54},"paired_seed":5401,"paired_actions":[-0.006,-0.006],
+  "candidate_y_m":[-0.012,-0.006,0.0,0.006,0.012],"action_duration_s":0.1,"horizon":1,"goal_distance_m":0.04,"goal_gate_m":0.012,
+  "score":"absolute predicted image-derived y error after one action plus 0.001 times absolute y action, in meters; argmin chooses first candidate on exact tie",
+  "nominal_predictor":"predicted object y displacement equals requested y displacement",
+  "oracle":"separate MjData and environment; mj_copyData copies full state including actuator, warmstart, solver and time; diagnostic only",
+  "decision_rule":"Proceed only if a feasible matched state shows different uniquely preferred candidate actions with oracle score gap >= one image pixel (0.0023 m) and the distinction persists under independent natural histories; otherwise close this guided-task investigation without sequential-policy tuning."
+}
