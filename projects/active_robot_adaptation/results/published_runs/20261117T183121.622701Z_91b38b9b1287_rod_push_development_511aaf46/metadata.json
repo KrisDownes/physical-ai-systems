@@ -1,0 +1,86 @@
+{
+  "revision": "91b38b9b128766c2126f2d6f918350d3c4e858e5",
+  "created_utc": "20261117T183121.622701Z",
+  "label": "rod_push_development",
+  "config": {
+    "scope": "development interaction data; hidden theta for evaluator/training only",
+    "set": "development",
+    "cases": [
+      [
+        -0.1,
+        4101
+      ],
+      [
+        -0.1,
+        4102
+      ],
+      [
+        -0.07,
+        4101
+      ],
+      [
+        -0.07,
+        4102
+      ],
+      [
+        -0.04,
+        4101
+      ],
+      [
+        -0.04,
+        4102
+      ],
+      [
+        0,
+        4101
+      ],
+      [
+        0,
+        4102
+      ],
+      [
+        0.04,
+        4101
+      ],
+      [
+        0.04,
+        4102
+      ],
+      [
+        0.07,
+        4101
+      ],
+      [
+        0.07,
+        4102
+      ],
+      [
+        0.1,
+        4101
+      ],
+      [
+        0.1,
+        4102
+      ]
+    ],
+    "20_actions": true,
+    "push": "move to observed rod center minus 0.09m world x for 6 steps; move toward center plus 0.10m for 14 steps; each delta clipped \u00b10.07m",
+    "seeds": [
+      4101,
+      4102
+    ],
+    "sensor": "author noisy 18d robot/rod pose, no images; no hidden theta or forces in deployment features",
+    "reward": false
+  },
+  "python": "3.9.25 (main, Oct 31 2025, 23:00:23) \n[Clang 21.1.4 ]",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "upstream_revision": "cf2cb670fb983f67cf2af156d4e17b4a690787e2",
+  "upstream_archive_sha256": "caa46b6e0925370d4b005eb7d574a7169cb7ef27eb615eb4f43c50470a35b826",
+  "source_sha256": {
+    "published_manipulation/asid_evaluate.py": "7c234dd69b6b97d9773947f3ea3cbe875ce4021633d33a18b644f3fbf4f6ed21",
+    "published_manipulation/asid_train.py": "9b31810f55a2c9499c7262ad52001b50d050c9a0bb6bb9cbe0af08d217d212f2",
+    "published_manipulation/run_store.py": "3ee18e56eda80241f490b5803dc1133182c3e9c889d91a8a0c3b010c142c2325",
+    "published_manipulation/asid_protocol.json": "e03e3310e18a5bac69e47427f6fe0927e8075b91e8776325cf3caff1c4da7ff4"
+  },
+  "git_status_project": ""
+}

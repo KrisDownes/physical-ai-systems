@@ -1,0 +1,36 @@
+{
+  "scope": "frozen held-out idealized placement after observed fixed push",
+  "train_run": "20261117T183441.744535Z_91b38b9b1287_rod_push_development_aa07c4fe",
+  "evaluation_offsets_m": [
+    -0.085,
+    -0.055,
+    -0.025,
+    0.025,
+    0.055,
+    0.085
+  ],
+  "evaluation_seeds": "5101 through 5118, one distinct seed per physical episode",
+  "runs": 18,
+  "models": [
+    "center_prior",
+    "fitted_prior",
+    "start_only",
+    "current_state",
+    "interaction_history",
+    "mismatched_history"
+  ],
+  "regression": "ridge alpha 1, 0.02 feature scale floor, labels from simulation COM",
+  "actions": 20,
+  "maximum_push_action_m": 0.07,
+  "push_sim_s": 2,
+  "placement_sim_s": 2,
+  "settled_dwell_s": 0.5,
+  "placement_support_half_width_m": 0.012,
+  "success": "continuous support contact, tilt <0.1 rad, linear speed <0.05 m/s, angular speed <0.5 rad/s over final 0.5 s",
+  "retries": 0,
+  "source_sha256": {
+    "balance.py": "7561e30f4b63f6b855d0c06741255b436afcf857c514377059a88467ffffb10b",
+    "collect.py": "f3b9426672f2e30436053342af7a026d07e348dd7d406c76ed5073392528d1ed",
+    "compare.py": "5cf5adc6083d021bcc77433f4b44ab05ad08a1bd08f4cebcd24e9b28c1bb7a46"
+  }
+}

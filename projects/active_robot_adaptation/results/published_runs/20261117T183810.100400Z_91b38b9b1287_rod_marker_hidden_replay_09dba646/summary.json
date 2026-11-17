@@ -1,0 +1,278 @@
+{
+  "input": "/home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/published_runs/20261117T183600.677617Z_91b38b9b1287_rod_push_evaluation_3024b01b/summary.json",
+  "rows": [
+    {
+      "case": 0,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 1,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 2,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 3,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 4,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 5,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 6,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 7,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 8,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 9,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 10,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 11,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 12,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 13,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 14,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 15,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 16,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": 17,
+      "observation_max_abs_difference": 0.0,
+      "pose_max_abs_difference": 0.0,
+      "physics_warnings": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "max_observation_difference": 0.0,
+  "max_pose_difference": 0.0,
+  "wall_s": 27.149670881044585
+}
