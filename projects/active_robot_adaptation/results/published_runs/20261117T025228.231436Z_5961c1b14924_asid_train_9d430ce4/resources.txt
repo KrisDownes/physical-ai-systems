@@ -1,0 +1,23 @@
+	Command being timed: "/tmp/active-asid39/bin/python /tmp/active-asid-src/train.py num_workers=1 num_workers_eval=1 train.total_timesteps=560 seed=17 log=stdout log.eval_interval=100000 log.save_interval=100000 log.dir=/home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/published_runs/20261117T025228.231436Z_5961c1b14924_asid_train_9d430ce4/author_log"
+	User time (seconds): 3.36
+	System time (seconds): 0.42
+	Percent of CPU this job got: 2%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:00.73
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 467796
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 154656
+	Voluntary context switches: 3916
+	Involuntary context switches: 16
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 9144
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

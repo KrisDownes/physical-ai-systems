@@ -1,0 +1,85 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+------------------------
+| eval/     |          |
+|    return | 0.199    |
+------------------------
+-------------------------------------------
+| eval/                        |          |
+|    current_policy_value      | 0.198    |
+|    total_obj_displacement_l2 | 0.161    |
+| time/                        |          |
+|    episodes                  | 4        |
+|    fps                       | 2        |
+|    time_elapsed              | 32       |
+|    total_timesteps           | 80       |
+| train/                       |          |
+|    return                    | 0.199    |
+-------------------------------------------
+---------------------------------
+| time/              |          |
+|    episodes        | 8        |
+|    fps             | 2        |
+|    time_elapsed    | 55       |
+|    total_timesteps | 160      |
+| train/             |          |
+|    return          | 0.0861   |
+---------------------------------
+---------------------------------
+| time/              |          |
+|    episodes        | 12       |
+|    fps             | 3        |
+|    time_elapsed    | 77       |
+|    total_timesteps | 240      |
+| train/             |          |
+|    return          | 0.199    |
+---------------------------------
+---------------------------------
+| time/              |          |
+|    episodes        | 16       |
+|    fps             | 3        |
+|    time_elapsed    | 98       |
+|    total_timesteps | 320      |
+| train/             |          |
+|    return          | 0.2      |
+---------------------------------
+---------------------------------
+| time/              |          |
+|    episodes        | 20       |
+|    fps             | 3        |
+|    time_elapsed    | 120      |
+|    total_timesteps | 400      |
+| train/             |          |
+|    return          | 0.199    |
+---------------------------------
+---------------------------------
+| time/              |          |
+|    episodes        | 24       |
+|    fps             | 3        |
+|    time_elapsed    | 141      |
+|    total_timesteps | 480      |
+| train/             |          |
+|    return          | 0.199    |
+---------------------------------
+---------------------------------
+| time/              |          |
+|    episodes        | 28       |
+|    fps             | 3        |
+|    time_elapsed    | 163      |
+|    total_timesteps | 560      |
+| train/             |          |
+|    actor_loss      | -0.119   |
+|    critic_loss     | 0.00601  |
+|    ent_coef        | 0.0001   |
+|    learning_rate   | 0.0003   |
+|    n_updates       | 2        |
+|    return          | 0.199    |
+---------------------------------
+ 100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 576/560  [ 0:02:43 < 0:00:00 , 4 it/s ]

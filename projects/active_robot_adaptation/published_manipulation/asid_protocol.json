@@ -1,0 +1,12 @@
+{
+ "scope":"Exploration-only diagnostic on author rod environment; this cannot reproduce downstream rod-balancing Table 1 because the released repository has no SysID/CEM evaluation pipeline or trained policies.",
+ "upstream_revision":"cf2cb670fb983f67cf2af156d4e17b4a690787e2",
+ "task":"rod inertia exploration; 2D end-effector position deltas at 10 Hz; fixed 20-action episode",
+ "cases":[{"id":"left-a","inertia_m":-0.07,"seed":2601},{"id":"left-b","inertia_m":-0.07,"seed":2602},{"id":"right-a","inertia_m":0.07,"seed":2601},{"id":"right-b","inertia_m":0.07,"seed":2602}],
+ "methods":["random","author_short_trained"],
+ "observations":"authors' 18-dimensional flattened end-effector position, robot qpos/gripper and rod pose, with author observation noise; hidden inertia not provided to policy",
+ "metric":"author ASID finite-difference Fisher information proxy accumulated across 20 steps and rod displacement; neither is downstream task success",
+ "pairing":"same fixed inertia and same initial random seed/observation noise draws per pair, separate action-generator RNG; independently reset episodes",
+ "video_note":"renderer shows blue visual marker attached to hidden mass, but policy receives no RGB images",
+ "compute_budget":"4 cases x 2 policies x 20 author env steps; CPU; no paid API; keep all failures"
+}

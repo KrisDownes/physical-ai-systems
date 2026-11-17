@@ -1,0 +1,23 @@
+{
+  "exit_code": 0,
+  "censored": false,
+  "wall_s": 181.01513674599119,
+  "command": [
+    "/tmp/active-asid39/bin/python",
+    "/tmp/active-asid-src/train.py",
+    "num_workers=1",
+    "num_workers_eval=1",
+    "train.total_timesteps=560",
+    "seed=17",
+    "log=stdout",
+    "log.eval_interval=100000",
+    "log.save_interval=100000",
+    "log.dir=/home/krisd/physical-ai-systems/projects/active_robot_adaptation/results/published_runs/20261117T025228.231436Z_5961c1b14924_asid_train_9d430ce4/author_log"
+  ],
+  "max_summed_process_tree_rss_bytes": 2192584704,
+  "rss_note": "sampled sum of RSS across processes; may double-count shared pages",
+  "checkpoints": [
+    "author_log/asid_rod/17/explore/policy.zip",
+    "author_log/asid_rod/17/explore/policy_step_1.zip"
+  ]
+}

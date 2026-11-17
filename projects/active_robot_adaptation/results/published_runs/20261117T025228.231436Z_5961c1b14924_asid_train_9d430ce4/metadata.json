@@ -1,0 +1,28 @@
+{
+  "revision": "5961c1b1492447f84191dce5736d0cde0ad0dd40",
+  "created_utc": "20261117T025228.231436Z",
+  "label": "asid_train",
+  "config": {
+    "scope": "unmodified author SAC training on author rod-inertia information reward; CPU; finite-budget feasibility only",
+    "steps": 560,
+    "max_seconds": 480,
+    "seed": 17,
+    "workers": 1,
+    "eval_workers": 1,
+    "learning_starts": 500,
+    "train_freq": 32,
+    "gradient_steps": 1,
+    "author_default_total_timesteps": 250000,
+    "paper_downstream_sysid_cem_released": false,
+    "pretrained_policy_released": false
+  },
+  "python": "3.9.25 (main, Oct 31 2025, 23:00:23) \n[Clang 21.1.4 ]",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "upstream_revision": "cf2cb670fb983f67cf2af156d4e17b4a690787e2",
+  "upstream_archive_sha256": "caa46b6e0925370d4b005eb7d574a7169cb7ef27eb615eb4f43c50470a35b826",
+  "source_sha256": {
+    "published_manipulation/asid_train.py": "031d6f36087aa64fd36ad3a2b80c8e0602d5ca26feac008504680c9a1a6eb063",
+    "published_manipulation/run_store.py": "3ee18e56eda80241f490b5803dc1133182c3e9c889d91a8a0c3b010c142c2325"
+  },
+  "git_status_project": "?? published_manipulation/\n"
+}

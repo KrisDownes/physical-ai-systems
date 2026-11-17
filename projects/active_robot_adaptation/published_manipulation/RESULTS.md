@@ -1,0 +1,29 @@
+# Bounded ASID feasibility: 2026-11-16
+
+**Decision:** the released ASID exploration environment is locally runnable, but the reported manipulation comparison is not reproducible from the inspected release. Keep this branch at feasibility; do not train or evaluate our history predictor against this information score as if it were a manipulation outcome. The fallback RMA² tree also lacks released weights, requires unpinned fork states and reports a per-model compute budget beyond this local bounded pilot. No reported manipulation result has been reproduced.
+
+## What ran
+
+On Ryzen 5 5600X, 12 logical CPUs, 23 GiB RAM reported in this environment, RTX 2060 with 6,144 MiB GPU memory (5,149 MiB free at measurement), author code was run in isolated Python 3.9.25 with MuJoCo 3.0.0, PyTorch 1.13.1+cpu, Stable Baselines3 2.1.0, dm-robotics-moma 0.6.0 and dependency lock in this directory. The CPU run did not allocate GPU memory. Existing project environments were not replaced. Headless EGL rendering, author model creation, reset, 18-feature observation, bounded 2-D actions, 10 Hz stepping and video export worked. The source's built-in FIM reward uses privileged parameterized shadow simulators. Simulator pose is part of the author's simulation observation; RGB is not.
+
+A requested 560-step/480-second cap, one worker, seed 17 SAC smoke completed in **181.0 seconds**, with 576 steps actually reported because the author's collector finishes a 32-step training block. Its log reports **two gradient updates** after 500 warmup steps. Maximum sampled sum of process-tree RSS was 2.19 GB (this sum can double-count shared memory); `/usr/bin/time` records separate process resource numbers. This is not a converged model. The author's config requests 250,000 steps and 32 workers, so the 576-step CPU measurement neither certifies the default configuration's resource fit nor extrapolates reliably to it. The checkpoint was saved and reloaded.
+
+Frozen feasibility protocol: four paired cases, lumped-mass positions -0.07/+0.07 m crossed with seeds 2601/2602, each episode independently reset. Compare an action sampled uniformly in the author's bounds with our locally trained two-update checkpoint; same state/noise seed, same action bounds, 20 actions, no adaptation memory across episodes. These are two physical parameter values and two start seeds, **not** four independent training seeds. This is a test of the released exploration interface, not the paper's random-versus-ASID balancing protocol.
+
+| Cases | Random: author information sum | Short-trained: author information sum | Rod displacement |
+| --- | ---: | ---: | ---: |
+| all four paired cases | 0.198866233 each | 0.198866233 each | all below 1e-15 m, evaluator state |
+
+Numbers agree to nine decimal places despite different actions. Initial paired observations were exactly equal in the stored traces. All 8 episodes completed 20 commands with no MuJoCo warning counters; episode wall time was 8.14–8.78 seconds including setup and, for the first pair, rendering. Twenty action periods contribute 2.0 seconds of simulation; the data clock also contains initialization/settling. Exploration movement, step timing, noisy observations, and evaluator-only rod pose are in the JSON traces. Two GIFs show the first matched pair; the blue hidden-mass marker in those visualizations is not a policy observation. GIFs are sampled every four actions and are not continuous contact evidence.
+
+This outcome does not establish that the learned policy gathers informative observations. Across saved post-step poses, every rod position/quaternion component differs from its first saved value by less than 1.1e-16; the near-identical positive proxy without detectable rod motion is a warning that the proxy needs diagnosis, not evidence that the paper's trained method fails: the policy had only two updates and the released downstream estimator and task metric are unavailable. We have not established whether numerical effects, source shadow-model details or other causes explain the score; the traces save the full rod quaternion for further inspection. There is no manipulation success or balancing measurement in this run.
+
+## Artifacts and limits
+
+The train run is `results/published_runs/20261117T025228.231436Z_5961c1b14924_asid_train_9d430ce4/`; the eight-episode run is `results/published_runs/20261117T025557.361851Z_5961c1b14924_asid_explore_c22ad2b3/`. Each contains protocol and revision metadata, dependency freeze and a compressed snapshot of our source; the train run includes checkpoint, log and sampled process resources. An earlier socket-blocked launch, 32-step launch, and development rollout remain on disk as separate runs. Current source modifications were uncommitted at execution and captured in each source snapshot; the Git revision alone is therefore insufficient to identify them.
+
+This does not test published rod balance, a properly trained author policy, our predictors, a conventional online estimator, task transfer, physical hardware, or novelty. The setup did not alter the SO-101 simulator or revisit the camera/tool calibration branch.
+
+## Next executable step
+
+Find a published manipulation benchmark in an available ecosystem with **both** a releasable task evaluation and an author checkpoint or small verified training budget, and check the hidden-dynamics action-decision comparison before integrating our model. Within ASID specifically, a further audit can decompose the finite-difference reward by observation component at no-contact states and verify the shadow simulations; it cannot restore the missing Table 1 estimator and CEM runner. Do not present a reimplementation of those unreleased components as an author-code reproduction. Once a credible task comparison exists, port current-only/history models and a simple estimator under matched deployment observations and interaction budgets.
