@@ -17,3 +17,5 @@
 - [Poke and Strike](https://arxiv.org/html/2509.00178): a poke supports system identification for a later task. Assumes the exploratory action is feasible and its information affects the downstream action. Do not claim novelty merely for combining history and probing.
 
 The near-term decision is whether interaction-derived observations improve support placement enough to justify their cost, relative to prior/current-state estimators. Only after an effect survives independent starts and negative controls should a reusable estimator be frozen and tested on a second interaction. Transfer of an estimator is not whole-task transfer. No physical robot, paid services or purchases are authorized.
+
+**2026-11-22 rod decision:** [one 48-case matched iteration](rod_balance/ITERATION_RESULTS.md) found lower average error from history, but did not establish a stable-release improvement over complete current-state feedback. The finite-difference joint-velocity comparator correction is explicitly post hoc. A same-push yaw-observation precision check is the single next proposed test; close the branch if its prediction fails. Prior cases remain development data.

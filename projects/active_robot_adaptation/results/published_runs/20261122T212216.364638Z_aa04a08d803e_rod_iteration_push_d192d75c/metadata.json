@@ -1,0 +1,242 @@
+{
+  "revision": "aa04a08d803e31a4def3b116aa5e5155a584531b",
+  "created_utc": "20261122T212216.364638Z",
+  "label": "rod_iteration_push",
+  "config": {
+    "protocol": {
+      "title": "48 independent rod cases: final state, whole history and calibrated response",
+      "count": 48,
+      "cases": [
+        {
+          "theta": 0.0997904495705173,
+          "seed": 449711
+        },
+        {
+          "theta": -0.07134449976768074,
+          "seed": 912799
+        },
+        {
+          "theta": -0.03924888135283151,
+          "seed": 221933
+        },
+        {
+          "theta": -0.008302270644484716,
+          "seed": 319174
+        },
+        {
+          "theta": 0.08608831309639697,
+          "seed": 517114
+        },
+        {
+          "theta": -0.09229794717050893,
+          "seed": 126889
+        },
+        {
+          "theta": -0.08868199221802127,
+          "seed": 259722
+        },
+        {
+          "theta": -0.05430720222411627,
+          "seed": 524150
+        },
+        {
+          "theta": 0.09016577750474403,
+          "seed": 269269
+        },
+        {
+          "theta": 0.09319893538659776,
+          "seed": 605866
+        },
+        {
+          "theta": 0.09952482445500832,
+          "seed": 340015
+        },
+        {
+          "theta": 0.0786696855292423,
+          "seed": 773316
+        },
+        {
+          "theta": 0.006256420642668209,
+          "seed": 280587
+        },
+        {
+          "theta": -0.07517966248381916,
+          "seed": 275858
+        },
+        {
+          "theta": 0.059629702892014386,
+          "seed": 208041
+        },
+        {
+          "theta": 0.03321963614800438,
+          "seed": 848993
+        },
+        {
+          "theta": -0.0559020389654517,
+          "seed": 779149
+        },
+        {
+          "theta": 0.07812263718916579,
+          "seed": 201436
+        },
+        {
+          "theta": 0.08182705000807669,
+          "seed": 208402
+        },
+        {
+          "theta": -0.07843955937617478,
+          "seed": 348991
+        },
+        {
+          "theta": -0.01893797627797804,
+          "seed": 707795
+        },
+        {
+          "theta": 0.09134902211092835,
+          "seed": 736106
+        },
+        {
+          "theta": -0.07295472520869582,
+          "seed": 526851
+        },
+        {
+          "theta": -0.003316229209537641,
+          "seed": 288343
+        },
+        {
+          "theta": 0.03372995714010879,
+          "seed": 800980
+        },
+        {
+          "theta": -0.06493980376441116,
+          "seed": 419393
+        },
+        {
+          "theta": -0.012863845674501759,
+          "seed": 845444
+        },
+        {
+          "theta": -0.03700962519594252,
+          "seed": 915380
+        },
+        {
+          "theta": -0.04441679324771528,
+          "seed": 650264
+        },
+        {
+          "theta": 0.02068632772026857,
+          "seed": 400401
+        },
+        {
+          "theta": -0.046290301997082284,
+          "seed": 315473
+        },
+        {
+          "theta": -0.009259657019150838,
+          "seed": 132659
+        },
+        {
+          "theta": 0.06126274384152566,
+          "seed": 878051
+        },
+        {
+          "theta": 0.08006759069597,
+          "seed": 229246
+        },
+        {
+          "theta": 0.016944740351403656,
+          "seed": 948730
+        },
+        {
+          "theta": -0.02275206562655467,
+          "seed": 893543
+        },
+        {
+          "theta": -0.08996584919893158,
+          "seed": 841238
+        },
+        {
+          "theta": -0.07109425199802176,
+          "seed": 989461
+        },
+        {
+          "theta": 0.050651733679400346,
+          "seed": 958132
+        },
+        {
+          "theta": -0.010326487175021451,
+          "seed": 482432
+        },
+        {
+          "theta": -0.01605133744159508,
+          "seed": 189758
+        },
+        {
+          "theta": -0.09636834512845804,
+          "seed": 825331
+        },
+        {
+          "theta": 0.03813439445858385,
+          "seed": 154243
+        },
+        {
+          "theta": -0.07866225706173602,
+          "seed": 830434
+        },
+        {
+          "theta": -0.04687641453702432,
+          "seed": 513804
+        },
+        {
+          "theta": 0.09915677141430701,
+          "seed": 955864
+        },
+        {
+          "theta": 0.028903336329452772,
+          "seed": 992420
+        },
+        {
+          "theta": -0.04413748244262439,
+          "seed": 786659
+        }
+      ],
+      "sampling": "independent PCG64 streams: theta uniform [-0.1,0.1] m seed 73015, pose/noise seed sampled without replacement seed 83124",
+      "training": "39 previously inspected push episodes (21+18); leave-offset-out development selects A=start_only, 5 successes vs center 3 and fitted 0",
+      "methods": {
+        "A": "ridge on full initial 18 features, 0 push actions",
+        "B": "ridge on final 18 features plus observed final linear/yaw velocities, 20 push actions",
+        "C": "ridge on recipient current state, initial geometry, 4 intermediate yaw changes, observed displacement and summed commands, 20 push actions",
+        "D": "ridge on initial yaw, initial lateral separation and final-minus-initial yaw, 20 push actions"
+      },
+      "ridge": "alpha 1, feature SD floor 0.02; trained on privileged simulator COM labels, no physical parameters at deployment",
+      "push": "20 commands, 10Hz, +/- 0.07m, observe 18 values; marker hidden; physics-step audit during push",
+      "placement": "idealized rest-state placement; 24mm wide support; 2 second release; continuous 0.5s stability dwell as original",
+      "audit": "post-step limit excursion >1e-5 (m for fingers, rad for arm), self contact excluding same/parent-child bodies and finger siblings; robot-object contact included separately; reset not audited",
+      "shuffle": "10 draws per recipient from 8 nearest initial-geometry donors; recorded endpoint inconsistency; donor histories intact, not a bijective permutation",
+      "compatible_donors": 8,
+      "shuffle_draws": 10,
+      "shuffle_seed": 18891,
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 22901,
+      "source_sha256": {
+        "iteration.py": "5dc8507dd1c7995a5a7d3dc622a751d50750ae853f71c33ac2d4917665171f9f",
+        "compare.py": "76b31b006d9bef149b3b577e8552d8edcff33a36b81739544f746548d9aae0cb",
+        "balance.py": "7561e30f4b63f6b855d0c06741255b436afcf857c514377059a88467ffffb10b"
+      },
+      "benchmark": "two previously inspected cases: 1000 audited physics steps each, 4.37 s total wall; instrumentation replay matched all observations bit-for-bit; 130/75 steps small joint excursions, zero self collision"
+    },
+    "actual_case_count": 48,
+    "source_commit_at_execution": "aa04a08d803e31a4def3b116aa5e5155a584531b"
+  },
+  "python": "3.9.25 (main, Oct 31 2025, 23:00:23) \n[Clang 21.1.4 ]",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "upstream_revision": "cf2cb670fb983f67cf2af156d4e17b4a690787e2",
+  "upstream_archive_sha256": "caa46b6e0925370d4b005eb7d574a7169cb7ef27eb615eb4f43c50470a35b826",
+  "source_sha256": {
+    "published_manipulation/asid_evaluate.py": "7c234dd69b6b97d9773947f3ea3cbe875ce4021633d33a18b644f3fbf4f6ed21",
+    "published_manipulation/asid_train.py": "9b31810f55a2c9499c7262ad52001b50d050c9a0bb6bb9cbe0af08d217d212f2",
+    "published_manipulation/run_store.py": "3ee18e56eda80241f490b5803dc1133182c3e9c889d91a8a0c3b010c142c2325",
+    "published_manipulation/asid_protocol.json": "e03e3310e18a5bac69e47427f6fe0927e8075b91e8776325cf3caff1c4da7ff4"
+  },
+  "git_status_project": ""
+}
