@@ -1,0 +1,757 @@
+{
+  "encoder_12bit_count_rad": 0.001534,
+  "two_counts_rad": 0.003068,
+  "by_suite": {
+    "split_a_bolted": {
+      "stiff_1.0": {
+        "success_rate": 0.7333,
+        "by_class_l2": {
+          "free": {
+            "n": 63,
+            "mean_rad": 0.008217,
+            "median_rad": 0.002168,
+            "mean_counts": 5.357,
+            "median_counts": 1.413,
+            "p90_counts": 14.831,
+            "frac_gt_2counts": 0.381,
+            "frac_gt_5counts": 0.3175
+          },
+          "plate_contact": {
+            "n": 1914,
+            "mean_rad": 0.007924,
+            "median_rad": 0.007737,
+            "mean_counts": 5.166,
+            "median_counts": 5.044,
+            "p90_counts": 6.269,
+            "frac_gt_2counts": 0.9922,
+            "frac_gt_5counts": 0.5235
+          },
+          "rim_contact": {
+            "n": 1646,
+            "mean_rad": 0.009358,
+            "median_rad": 0.007884,
+            "mean_counts": 6.101,
+            "median_counts": 5.14,
+            "p90_counts": 10.301,
+            "frac_gt_2counts": 0.9897,
+            "frac_gt_5counts": 0.5456
+          },
+          "entering": {
+            "n": 118,
+            "mean_rad": 0.00759,
+            "median_rad": 0.00427,
+            "mean_counts": 4.948,
+            "median_counts": 2.783,
+            "p90_counts": 13.878,
+            "frac_gt_2counts": 0.7627,
+            "frac_gt_5counts": 0.2881
+          }
+        },
+        "by_class_max_j": {
+          "free": {
+            "n": 63,
+            "mean_rad": 0.007133,
+            "median_rad": 0.00177,
+            "mean_counts": 4.65,
+            "median_counts": 1.154,
+            "p90_counts": 13.924,
+            "frac_gt_2counts": 0.3333,
+            "frac_gt_5counts": 0.2857
+          },
+          "plate_contact": {
+            "n": 1914,
+            "mean_rad": 0.006681,
+            "median_rad": 0.006447,
+            "mean_counts": 4.355,
+            "median_counts": 4.203,
+            "p90_counts": 5.868,
+            "frac_gt_2counts": 0.9681,
+            "frac_gt_5counts": 0.2685
+          },
+          "rim_contact": {
+            "n": 1646,
+            "mean_rad": 0.007924,
+            "median_rad": 0.006686,
+            "mean_counts": 5.165,
+            "median_counts": 4.358,
+            "p90_counts": 9.225,
+            "frac_gt_2counts": 0.9714,
+            "frac_gt_5counts": 0.3603
+          },
+          "entering": {
+            "n": 118,
+            "mean_rad": 0.005928,
+            "median_rad": 0.003326,
+            "mean_counts": 3.865,
+            "median_counts": 2.168,
+            "p90_counts": 10.797,
+            "frac_gt_2counts": 0.5169,
+            "frac_gt_5counts": 0.2203
+          }
+        },
+        "auroc_rim_vs_plate_l2": 0.5461,
+        "auroc_rim_vs_plate_max_j": 0.5517,
+        "auroc_rim_vs_free_l2": 0.7058
+      },
+      "gravcomp_0.35": {
+        "success_rate": 0.7,
+        "by_class_l2": {
+          "free": {
+            "n": 42,
+            "mean_rad": 0.013209,
+            "median_rad": 0.006014,
+            "mean_counts": 8.611,
+            "median_counts": 3.921,
+            "p90_counts": 25.178,
+            "frac_gt_2counts": 0.9762,
+            "frac_gt_5counts": 0.2619
+          },
+          "plate_contact": {
+            "n": 2058,
+            "mean_rad": 0.029892,
+            "median_rad": 0.030615,
+            "mean_counts": 19.486,
+            "median_counts": 19.958,
+            "p90_counts": 29.668,
+            "frac_gt_2counts": 0.9995,
+            "frac_gt_5counts": 0.9961
+          },
+          "rim_contact": {
+            "n": 2208,
+            "mean_rad": 0.028461,
+            "median_rad": 0.027345,
+            "mean_counts": 18.553,
+            "median_counts": 17.826,
+            "p90_counts": 30.999,
+            "frac_gt_2counts": 0.9973,
+            "frac_gt_5counts": 0.9905
+          },
+          "entering": {
+            "n": 135,
+            "mean_rad": 0.017538,
+            "median_rad": 0.013016,
+            "mean_counts": 11.433,
+            "median_counts": 8.485,
+            "p90_counts": 26.293,
+            "frac_gt_2counts": 0.8222,
+            "frac_gt_5counts": 0.5926
+          }
+        },
+        "by_class_max_j": {
+          "free": {
+            "n": 42,
+            "mean_rad": 0.010367,
+            "median_rad": 0.005615,
+            "mean_counts": 6.758,
+            "median_counts": 3.661,
+            "p90_counts": 16.738,
+            "frac_gt_2counts": 0.9762,
+            "frac_gt_5counts": 0.2619
+          },
+          "plate_contact": {
+            "n": 2058,
+            "mean_rad": 0.02229,
+            "median_rad": 0.021409,
+            "mean_counts": 14.531,
+            "median_counts": 13.956,
+            "p90_counts": 23.06,
+            "frac_gt_2counts": 0.9995,
+            "frac_gt_5counts": 0.9917
+          },
+          "rim_contact": {
+            "n": 2208,
+            "mean_rad": 0.020611,
+            "median_rad": 0.019151,
+            "mean_counts": 13.436,
+            "median_counts": 12.485,
+            "p90_counts": 22.612,
+            "frac_gt_2counts": 0.9973,
+            "frac_gt_5counts": 0.9828
+          },
+          "entering": {
+            "n": 135,
+            "mean_rad": 0.012022,
+            "median_rad": 0.009374,
+            "mean_counts": 7.837,
+            "median_counts": 6.111,
+            "p90_counts": 17.826,
+            "frac_gt_2counts": 0.6889,
+            "frac_gt_5counts": 0.5407
+          }
+        },
+        "auroc_rim_vs_plate_l2": 0.4585,
+        "auroc_rim_vs_plate_max_j": 0.4421,
+        "auroc_rim_vs_free_l2": 0.8277
+      }
+    },
+    "split_b_unbolted": {
+      "stiff_1.0": {
+        "success_rate": 0.8,
+        "by_class_l2": {
+          "free": {
+            "n": 59,
+            "mean_rad": 0.005754,
+            "median_rad": 0.0021,
+            "mean_counts": 3.751,
+            "median_counts": 1.369,
+            "p90_counts": 12.027,
+            "frac_gt_2counts": 0.3051,
+            "frac_gt_5counts": 0.1864
+          },
+          "plate_contact": {
+            "n": 1388,
+            "mean_rad": 0.007921,
+            "median_rad": 0.007393,
+            "mean_counts": 5.164,
+            "median_counts": 4.82,
+            "p90_counts": 6.209,
+            "frac_gt_2counts": 0.9971,
+            "frac_gt_5counts": 0.4258
+          },
+          "rim_contact": {
+            "n": 1353,
+            "mean_rad": 0.008507,
+            "median_rad": 0.007522,
+            "mean_counts": 5.546,
+            "median_counts": 4.903,
+            "p90_counts": 8.911,
+            "frac_gt_2counts": 0.9616,
+            "frac_gt_5counts": 0.4708
+          },
+          "entering": {
+            "n": 146,
+            "mean_rad": 0.00449,
+            "median_rad": 0.002708,
+            "mean_counts": 2.927,
+            "median_counts": 1.765,
+            "p90_counts": 5.937,
+            "frac_gt_2counts": 0.4863,
+            "frac_gt_5counts": 0.1712
+          }
+        },
+        "by_class_max_j": {
+          "free": {
+            "n": 59,
+            "mean_rad": 0.004908,
+            "median_rad": 0.001769,
+            "mean_counts": 3.199,
+            "median_counts": 1.153,
+            "p90_counts": 11.092,
+            "frac_gt_2counts": 0.2203,
+            "frac_gt_5counts": 0.1525
+          },
+          "plate_contact": {
+            "n": 1388,
+            "mean_rad": 0.006664,
+            "median_rad": 0.006139,
+            "mean_counts": 4.344,
+            "median_counts": 4.002,
+            "p90_counts": 5.797,
+            "frac_gt_2counts": 0.9914,
+            "frac_gt_5counts": 0.2053
+          },
+          "rim_contact": {
+            "n": 1353,
+            "mean_rad": 0.007091,
+            "median_rad": 0.00625,
+            "mean_counts": 4.623,
+            "median_counts": 4.074,
+            "p90_counts": 7.637,
+            "frac_gt_2counts": 0.9239,
+            "frac_gt_5counts": 0.3016
+          },
+          "entering": {
+            "n": 146,
+            "mean_rad": 0.003775,
+            "median_rad": 0.002283,
+            "mean_counts": 2.461,
+            "median_counts": 1.488,
+            "p90_counts": 5.399,
+            "frac_gt_2counts": 0.411,
+            "frac_gt_5counts": 0.1438
+          }
+        },
+        "auroc_rim_vs_plate_l2": 0.5195,
+        "auroc_rim_vs_plate_max_j": 0.5136,
+        "auroc_rim_vs_free_l2": 0.815
+      },
+      "gravcomp_0.35": {
+        "success_rate": 0.7333,
+        "by_class_l2": {
+          "free": {
+            "n": 35,
+            "mean_rad": 0.009247,
+            "median_rad": 0.006034,
+            "mean_counts": 6.028,
+            "median_counts": 3.934,
+            "p90_counts": 12.612,
+            "frac_gt_2counts": 1.0,
+            "frac_gt_5counts": 0.1429
+          },
+          "plate_contact": {
+            "n": 1710,
+            "mean_rad": 0.030108,
+            "median_rad": 0.029737,
+            "mean_counts": 19.627,
+            "median_counts": 19.386,
+            "p90_counts": 31.007,
+            "frac_gt_2counts": 0.9994,
+            "frac_gt_5counts": 0.9971
+          },
+          "rim_contact": {
+            "n": 2205,
+            "mean_rad": 0.029585,
+            "median_rad": 0.028124,
+            "mean_counts": 19.286,
+            "median_counts": 18.334,
+            "p90_counts": 32.048,
+            "frac_gt_2counts": 0.9964,
+            "frac_gt_5counts": 0.9887
+          },
+          "entering": {
+            "n": 123,
+            "mean_rad": 0.01733,
+            "median_rad": 0.014642,
+            "mean_counts": 11.297,
+            "median_counts": 9.545,
+            "p90_counts": 22.664,
+            "frac_gt_2counts": 0.9837,
+            "frac_gt_5counts": 0.7805
+          }
+        },
+        "by_class_max_j": {
+          "free": {
+            "n": 35,
+            "mean_rad": 0.00772,
+            "median_rad": 0.005656,
+            "mean_counts": 5.032,
+            "median_counts": 3.687,
+            "p90_counts": 9.935,
+            "frac_gt_2counts": 1.0,
+            "frac_gt_5counts": 0.1429
+          },
+          "plate_contact": {
+            "n": 1710,
+            "mean_rad": 0.022513,
+            "median_rad": 0.020846,
+            "mean_counts": 14.676,
+            "median_counts": 13.589,
+            "p90_counts": 24.123,
+            "frac_gt_2counts": 0.9994,
+            "frac_gt_5counts": 0.9959
+          },
+          "rim_contact": {
+            "n": 2205,
+            "mean_rad": 0.021408,
+            "median_rad": 0.019454,
+            "mean_counts": 13.956,
+            "median_counts": 12.682,
+            "p90_counts": 23.151,
+            "frac_gt_2counts": 0.9964,
+            "frac_gt_5counts": 0.9823
+          },
+          "entering": {
+            "n": 123,
+            "mean_rad": 0.012509,
+            "median_rad": 0.011579,
+            "mean_counts": 8.155,
+            "median_counts": 7.548,
+            "p90_counts": 16.397,
+            "frac_gt_2counts": 0.9187,
+            "frac_gt_5counts": 0.6992
+          }
+        },
+        "auroc_rim_vs_plate_l2": 0.4877,
+        "auroc_rim_vs_plate_max_j": 0.4707,
+        "auroc_rim_vs_free_l2": 0.9198
+      }
+    },
+    "split_c_tight_0.5mm": {
+      "stiff_1.0": {
+        "success_rate": 0.3333,
+        "by_class_l2": {
+          "free": {
+            "n": 54,
+            "mean_rad": 0.008517,
+            "median_rad": 0.00207,
+            "mean_counts": 5.552,
+            "median_counts": 1.349,
+            "p90_counts": 22.184,
+            "frac_gt_2counts": 0.3148,
+            "frac_gt_5counts": 0.2593
+          },
+          "plate_contact": {
+            "n": 3016,
+            "mean_rad": 0.00795,
+            "median_rad": 0.007597,
+            "mean_counts": 5.183,
+            "median_counts": 4.952,
+            "p90_counts": 6.263,
+            "frac_gt_2counts": 0.9987,
+            "frac_gt_5counts": 0.4841
+          },
+          "rim_contact": {
+            "n": 2356,
+            "mean_rad": 0.008252,
+            "median_rad": 0.007545,
+            "mean_counts": 5.38,
+            "median_counts": 4.919,
+            "p90_counts": 7.073,
+            "frac_gt_2counts": 0.9911,
+            "frac_gt_5counts": 0.4622
+          },
+          "entering": {
+            "n": 54,
+            "mean_rad": 0.005938,
+            "median_rad": 0.003777,
+            "mean_counts": 3.871,
+            "median_counts": 2.462,
+            "p90_counts": 7.382,
+            "frac_gt_2counts": 0.6296,
+            "frac_gt_5counts": 0.2593
+          }
+        },
+        "by_class_max_j": {
+          "free": {
+            "n": 54,
+            "mean_rad": 0.007232,
+            "median_rad": 0.001649,
+            "mean_counts": 4.714,
+            "median_counts": 1.075,
+            "p90_counts": 19.239,
+            "frac_gt_2counts": 0.2963,
+            "frac_gt_5counts": 0.2222
+          },
+          "plate_contact": {
+            "n": 3016,
+            "mean_rad": 0.006836,
+            "median_rad": 0.006504,
+            "mean_counts": 4.456,
+            "median_counts": 4.24,
+            "p90_counts": 5.843,
+            "frac_gt_2counts": 0.9964,
+            "frac_gt_5counts": 0.2861
+          },
+          "rim_contact": {
+            "n": 2356,
+            "mean_rad": 0.006997,
+            "median_rad": 0.00634,
+            "mean_counts": 4.562,
+            "median_counts": 4.133,
+            "p90_counts": 6.332,
+            "frac_gt_2counts": 0.9788,
+            "frac_gt_5counts": 0.2687
+          },
+          "entering": {
+            "n": 54,
+            "mean_rad": 0.004492,
+            "median_rad": 0.002798,
+            "mean_counts": 2.928,
+            "median_counts": 1.824,
+            "p90_counts": 6.492,
+            "frac_gt_2counts": 0.4444,
+            "frac_gt_5counts": 0.1481
+          }
+        },
+        "auroc_rim_vs_plate_l2": 0.5019,
+        "auroc_rim_vs_plate_max_j": 0.4902,
+        "auroc_rim_vs_free_l2": 0.7454
+      },
+      "gravcomp_0.35": {
+        "success_rate": 0.3333,
+        "by_class_l2": {
+          "free": {
+            "n": 33,
+            "mean_rad": 0.007937,
+            "median_rad": 0.005835,
+            "mean_counts": 5.174,
+            "median_counts": 3.804,
+            "p90_counts": 4.577,
+            "frac_gt_2counts": 1.0,
+            "frac_gt_5counts": 0.0909
+          },
+          "plate_contact": {
+            "n": 3140,
+            "mean_rad": 0.02644,
+            "median_rad": 0.024543,
+            "mean_counts": 17.236,
+            "median_counts": 16.0,
+            "p90_counts": 28.256,
+            "frac_gt_2counts": 0.9994,
+            "frac_gt_5counts": 0.9981
+          },
+          "rim_contact": {
+            "n": 3144,
+            "mean_rad": 0.028876,
+            "median_rad": 0.028233,
+            "mean_counts": 18.824,
+            "median_counts": 18.405,
+            "p90_counts": 30.256,
+            "frac_gt_2counts": 0.9968,
+            "frac_gt_5counts": 0.992
+          },
+          "entering": {
+            "n": 60,
+            "mean_rad": 0.015493,
+            "median_rad": 0.010861,
+            "mean_counts": 10.1,
+            "median_counts": 7.08,
+            "p90_counts": 22.949,
+            "frac_gt_2counts": 0.8667,
+            "frac_gt_5counts": 0.6
+          }
+        },
+        "by_class_max_j": {
+          "free": {
+            "n": 33,
+            "mean_rad": 0.007013,
+            "median_rad": 0.005492,
+            "mean_counts": 4.572,
+            "median_counts": 3.58,
+            "p90_counts": 4.228,
+            "frac_gt_2counts": 1.0,
+            "frac_gt_5counts": 0.0909
+          },
+          "plate_contact": {
+            "n": 3140,
+            "mean_rad": 0.019606,
+            "median_rad": 0.017475,
+            "mean_counts": 12.781,
+            "median_counts": 11.392,
+            "p90_counts": 21.032,
+            "frac_gt_2counts": 0.9994,
+            "frac_gt_5counts": 0.9927
+          },
+          "rim_contact": {
+            "n": 3144,
+            "mean_rad": 0.021029,
+            "median_rad": 0.019935,
+            "mean_counts": 13.709,
+            "median_counts": 12.995,
+            "p90_counts": 22.085,
+            "frac_gt_2counts": 0.9965,
+            "frac_gt_5counts": 0.9863
+          },
+          "entering": {
+            "n": 60,
+            "mean_rad": 0.011182,
+            "median_rad": 0.008875,
+            "mean_counts": 7.29,
+            "median_counts": 5.786,
+            "p90_counts": 15.59,
+            "frac_gt_2counts": 0.75,
+            "frac_gt_5counts": 0.5667
+          }
+        },
+        "auroc_rim_vs_plate_l2": 0.5542,
+        "auroc_rim_vs_plate_max_j": 0.5478,
+        "auroc_rim_vs_free_l2": 0.9479
+      }
+    }
+  },
+  "pooled_abc": {
+    "stiff_1.0": {
+      "by_class_l2": {
+        "free": {
+          "n": 176,
+          "mean_rad": 0.007483,
+          "median_rad": 0.00211,
+          "mean_counts": 4.878,
+          "median_counts": 1.375,
+          "p90_counts": 15.006,
+          "frac_gt_2counts": 0.3352,
+          "frac_gt_5counts": 0.2557
+        },
+        "plate_contact": {
+          "n": 6318,
+          "mean_rad": 0.007936,
+          "median_rad": 0.007597,
+          "mean_counts": 5.173,
+          "median_counts": 4.952,
+          "p90_counts": 6.259,
+          "frac_gt_2counts": 0.9964,
+          "frac_gt_5counts": 0.4832
+        },
+        "rim_contact": {
+          "n": 5355,
+          "mean_rad": 0.008657,
+          "median_rad": 0.007634,
+          "mean_counts": 5.643,
+          "median_counts": 4.977,
+          "p90_counts": 8.498,
+          "frac_gt_2counts": 0.9832,
+          "frac_gt_5counts": 0.49
+        },
+        "entering": {
+          "n": 318,
+          "mean_rad": 0.005886,
+          "median_rad": 0.003806,
+          "mean_counts": 3.837,
+          "median_counts": 2.481,
+          "p90_counts": 7.49,
+          "frac_gt_2counts": 0.6132,
+          "frac_gt_5counts": 0.2296
+        }
+      },
+      "by_class_max_j": {
+        "free": {
+          "n": 176,
+          "mean_rad": 0.006417,
+          "median_rad": 0.001759,
+          "mean_counts": 4.183,
+          "median_counts": 1.146,
+          "p90_counts": 13.791,
+          "frac_gt_2counts": 0.2841,
+          "frac_gt_5counts": 0.2216
+        },
+        "plate_contact": {
+          "n": 6318,
+          "mean_rad": 0.006751,
+          "median_rad": 0.006408,
+          "mean_counts": 4.401,
+          "median_counts": 4.177,
+          "p90_counts": 5.84,
+          "frac_gt_2counts": 0.9867,
+          "frac_gt_5counts": 0.2631
+        },
+        "rim_contact": {
+          "n": 5355,
+          "mean_rad": 0.007306,
+          "median_rad": 0.006417,
+          "mean_counts": 4.763,
+          "median_counts": 4.183,
+          "p90_counts": 7.289,
+          "frac_gt_2counts": 0.9627,
+          "frac_gt_5counts": 0.3051
+        },
+        "entering": {
+          "n": 318,
+          "mean_rad": 0.004696,
+          "median_rad": 0.002913,
+          "mean_counts": 3.061,
+          "median_counts": 1.899,
+          "p90_counts": 6.626,
+          "frac_gt_2counts": 0.456,
+          "frac_gt_5counts": 0.173
+        }
+      },
+      "auroc_rim_vs_plate_l2": 0.5195,
+      "auroc_rim_vs_plate_max_j": 0.515,
+      "auroc_rim_vs_free_l2": 0.7538,
+      "auroc_entering_vs_plate_l2": 0.2367
+    },
+    "gravcomp_0.35": {
+      "by_class_l2": {
+        "free": {
+          "n": 110,
+          "mean_rad": 0.010367,
+          "median_rad": 0.005955,
+          "mean_counts": 6.758,
+          "median_counts": 3.882,
+          "p90_counts": 17.621,
+          "frac_gt_2counts": 0.9909,
+          "frac_gt_5counts": 0.1727
+        },
+        "plate_contact": {
+          "n": 6908,
+          "mean_rad": 0.028376,
+          "median_rad": 0.027603,
+          "mean_counts": 18.498,
+          "median_counts": 17.994,
+          "p90_counts": 29.478,
+          "frac_gt_2counts": 0.9994,
+          "frac_gt_5counts": 0.9972
+        },
+        "rim_contact": {
+          "n": 7557,
+          "mean_rad": 0.028961,
+          "median_rad": 0.027857,
+          "mean_counts": 18.88,
+          "median_counts": 18.16,
+          "p90_counts": 30.984,
+          "frac_gt_2counts": 0.9968,
+          "frac_gt_5counts": 0.9906
+        },
+        "entering": {
+          "n": 318,
+          "mean_rad": 0.017072,
+          "median_rad": 0.01344,
+          "mean_counts": 11.129,
+          "median_counts": 8.762,
+          "p90_counts": 25.185,
+          "frac_gt_2counts": 0.8931,
+          "frac_gt_5counts": 0.6667
+        }
+      },
+      "by_class_max_j": {
+        "free": {
+          "n": 110,
+          "mean_rad": 0.008518,
+          "median_rad": 0.005585,
+          "mean_counts": 5.553,
+          "median_counts": 3.641,
+          "p90_counts": 13.252,
+          "frac_gt_2counts": 0.9909,
+          "frac_gt_5counts": 0.1727
+        },
+        "plate_contact": {
+          "n": 6908,
+          "mean_rad": 0.021125,
+          "median_rad": 0.019647,
+          "mean_counts": 13.771,
+          "median_counts": 12.808,
+          "p90_counts": 22.751,
+          "frac_gt_2counts": 0.9994,
+          "frac_gt_5counts": 0.9932
+        },
+        "rim_contact": {
+          "n": 7557,
+          "mean_rad": 0.021017,
+          "median_rad": 0.019629,
+          "mean_counts": 13.701,
+          "median_counts": 12.796,
+          "p90_counts": 22.43,
+          "frac_gt_2counts": 0.9967,
+          "frac_gt_5counts": 0.9841
+        },
+        "entering": {
+          "n": 318,
+          "mean_rad": 0.012052,
+          "median_rad": 0.010073,
+          "mean_counts": 7.857,
+          "median_counts": 6.567,
+          "p90_counts": 17.728,
+          "frac_gt_2counts": 0.7893,
+          "frac_gt_5counts": 0.6069
+        }
+      },
+      "auroc_rim_vs_plate_l2": 0.5095,
+      "auroc_rim_vs_plate_max_j": 0.4978,
+      "auroc_rim_vs_free_l2": 0.8934,
+      "auroc_entering_vs_plate_l2": 0.2537
+    }
+  },
+  "amplification_ratios_pooled": {
+    "free": {
+      "median_l2_ratio": 2.822,
+      "mean_l2_ratio": 1.385,
+      "median_max_j_ratio": 3.175
+    },
+    "plate_contact": {
+      "median_l2_ratio": 3.633,
+      "mean_l2_ratio": 3.576,
+      "median_max_j_ratio": 3.066
+    },
+    "rim_contact": {
+      "median_l2_ratio": 3.649,
+      "mean_l2_ratio": 3.345,
+      "median_max_j_ratio": 3.059
+    },
+    "entering": {
+      "median_l2_ratio": 3.531,
+      "mean_l2_ratio": 2.9,
+      "median_max_j_ratio": 3.458
+    }
+  },
+  "wall_s": 19.66
+}

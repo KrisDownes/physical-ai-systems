@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gravcomp-tl"
+version = "0.1.0"
+description = "Gravity-Compensated Servo Torque Limiting (GravComp-TL) as a zero-hardware tactile amplifier for low-cost SO-101 / Feetech STS3215 arms."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "mujoco>=3.0",
+]
+
+[project.optional-dependencies]
+hardware = ["feetech-servo-sdk>=1.0"]
+
+[project.scripts]
+gravcomp-calibrate-so101 = "gravcomp_tl.calibrate_so101:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gravcomp_tl*"]
